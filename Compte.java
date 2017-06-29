@@ -14,21 +14,21 @@ public class Compte {
 	
 public Properties	fichierProperties = loadConfig();
 
+private String server;
+private String userName;
+private String passWord;
+private String tribut = "romains";
 
 
 
-
-		private String server = fichierProperties.getProperty("server");
-		private String userName = fichierProperties.getProperty("login"); 
-		private String passWord = fichierProperties.getProperty("password");
-		private String tribut = "romains";
+		
 
 	//private WebDriver driver = new FirefoxDriver();
 	//////////////////////////////////////////////
 
 
 
-
+//charger les configs précédentes
 public Properties loadConfig(){
 	
 String path = System.getProperty("user.home")+"\\travianfx.properties";		
@@ -59,7 +59,6 @@ return fichierProperties;
 public void setFichierProperties(Properties fichierProperties) {
 this.fichierProperties = fichierProperties;
 }      
-
 
 	
 	public String getTribut() {
@@ -108,7 +107,15 @@ this.fichierProperties = fichierProperties;
 		
 	}
 	public Compte() {
-	
+		//server = fichierProperties.getProperty("server");
+	//	userName = fichierProperties.getProperty("login"); 
+	//	passWord = fichierProperties.getProperty("password");
+
+				/*if(true){
+				server = fichierProperties.getProperty("server");
+				userName = fichierProperties.getProperty("login"); 
+				passWord = fichierProperties.getProperty("password");
+				}*/
 	}
 	
 }

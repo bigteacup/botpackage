@@ -370,7 +370,11 @@ public class FxFenetreController extends ScrollPane {
 	private void boutonOn() {
 		// System.out.println("on");
 		bot.setfxFenetreController(this);
-		bot.lancerTravian(serveur.getText(), nomDeCompte.getText(), motDePasse.getText());
+		String s = serveur.getText();
+		String n = nomDeCompte.getText();
+		String m = motDePasse.getText();
+		//if(bot.travian.getCompte() != null){}
+		bot.lancerTravian(s, n, m);
 	}
 
 	@FXML

@@ -74,14 +74,25 @@ public class Travian extends Thread {
 
 
 
-
+		//TODO faire un gestionnaire de compte por simplifier et fiabiliser l'enssemble dy systeme de connexion 
 	public Travian(Lancerbot bot, String serveur, String nomDeCompte, String motDePasse) {
 		//super();
 		this.bot = bot;
 		compte = new Compte();
+		if(serveur == null || nomDeCompte== null || motDePasse == null ||serveur.length()==0 || nomDeCompte.length()==0 || motDePasse.length()==0){
+			
+			compte.setServer( compte.fichierProperties.getProperty("server"));
+			compte.setUserName(compte.fichierProperties.getProperty("login")); 
+			compte.setPassWord(compte.fichierProperties.getProperty("password"));	
+				
+			
+		}
+		else{
 		compte.setServer(serveur);
 		compte.setUserName(nomDeCompte);
 		compte.setPassWord(motDePasse);
+		
+		}
 		calculs.setTravian(t);
 
 
