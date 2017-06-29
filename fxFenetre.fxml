@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<ScrollPane fx:id="rootScrollpane" fitToHeight="true" fitToWidth="true" prefHeight="450" prefWidth="700" styleClass="b" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <BorderPane fx:id="borderPane" styleClass="b">
+         <top>
+            <GridPane styleClass="b">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="NEVER" minWidth="50.0" />
+                  <ColumnConstraints hgrow="NEVER" minWidth="100.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <VBox styleClass="b">
+                     <children>
+                        <Button fx:id="boutonOn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#boutonOn" text="on" />
+                        <Button fx:id="boutonOff" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#boutonOff" text="off">
+                           <effect>
+                              <Glow />
+                           </effect></Button>
+                        <Button fx:id="bypassPause" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bypassPause" text="Passer pause" />
+                     </children>
+                  </VBox>
+                  <VBox styleClass="b" GridPane.columnIndex="1">
+                     <children>
+                        <TextField fx:id="nomDeCompte" text="" />
+                        <PasswordField fx:id="motDePasse" prefHeight="25.0" prefWidth="96.0" text="" />
+                        <TextField fx:id="serveur" text="" />
+                     </children>
+                  </VBox>
+                  <FlowPane fx:id="lesCheckBoxs" columnHalignment="CENTER" hgap="15.0" rowValignment="TOP" styleClass="lesCheckBoxs" GridPane.columnIndex="2">
+                     <children>
+                        <CheckBox fx:id="casePillage" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#casePillage" selected="true" text="Auto Pillage">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseFetes" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseFetes" selected="true" text="Auto Fetes">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseConstruireBatiment" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseConstruireBatiment" selected="true" text="construire bat">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseEvacuerRessGrosVillages" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseEvacuerRessGrosVillages" selected="true" text="EvacuerRessGrosVillages">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseApproPetitsVillages" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseApproPetitsVillages" selected="true" text="Appro petits villges">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseNpc" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseNpc" selected="true" text="Auto NPC">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseOptimiserProdHero" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseOptimiserProdHero" selected="true" text="OptiProd Hero">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseRotationVillage" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseRotationVillage" selected="true" text="RotationVillage">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="monterChampCapitale" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseMonterChampCapitale" selected="true" text="MonterChampsCapitale">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" selected="true" text="CheckBox">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </FlowPane>
+               </children>
+            </GridPane>
+         </top>
+         <center>
+            <TabPane fx:id="tabbedPane" styleClass="b" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+               
+                <Tab closable="false" text="Console"  >
+                     <content>
+                        <ScrollPane fx:id="fxConsolescrollpane" fitToHeight="true" fitToWidth="true" styleClass="b">
+                           <content>
+                          <!--    <VBox fx:id="vbox" prefWidth="100.0" styleClass="consoleVBox" />  -->
+                           </content>
+                           </ScrollPane>
+                     </content>
+                  </Tab>
+                
+                <Tab closable="false" text="Parametres">
+               		 <content>
+						<ScrollPane styleClass="c">
+						<content>
+               		     	<!--   <fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/>  -->
+               		     	<!--   <fx:include fx:id="fxOngletParametres" source="fxOngletParametres.fxml"/>   	pour dev  --> 
+               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/> 
+                			
+                			</content>
+                           </ScrollPane>
+
+               		 </content>
+                </Tab>
+              
+                <Tab closable="false" text="Xpath perso">
+                     <content>
+                        <ToggleButton mnemonicParsing="false" text="ToggleButton">
+                           <graphic>
+                              <Label text="Label" />
+                           </graphic>
+                        </ToggleButton>
+                     </content></Tab>
+                <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                           <content>
+                              <VBox fx:id="villageAnchorPane" prefHeight="200.0" prefWidth="100.0" />
+                           </content>
+                        </ScrollPane>
+                     </content></Tab>
+              </tabs>
+            </TabPane>
+         </center>
+         <bottom>
+            <CheckBox fx:id="caseFaireDefiler" mnemonicParsing="false" onAction="#caseFaireDefiler" selected="true" text="Faire Défiler" BorderPane.alignment="BOTTOM_RIGHT" />
+         </bottom>
+      </BorderPane>
+   </content>
+</ScrollPane>

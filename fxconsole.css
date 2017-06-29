@@ -224,6 +224,7 @@ b.scroll-bar:horizontal b.track-background {
 	-fx-border-color: white;
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 }
+
  .v3{
 	-fx-background-color: rgb(102,0,204);
 	-fx-border-style: solid ; 
@@ -311,6 +312,7 @@ b.scroll-bar:horizontal b.track-background {
 
  -fx-background-color: none;
  }
+
  .vLabel{
 	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );
 	 -fx-border-radius: 10 0 10 0;
@@ -356,6 +358,7 @@ b.scroll-bar:horizontal b.track-background {
 	-fx-background-color: #9AAEB5;
 	
 }
+
  .dparam{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
 	-fx-background-image: url("file:///C:/travimage/default_paper.png");
@@ -369,6 +372,7 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-image-source:url("file:///C:/travimage/default_border.png");
 	
 }
+
  .e{
 	-fx-font-smoothing-type: lcd;
 	-fx-fill:red;
