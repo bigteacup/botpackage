@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 
 public class Compte {
 	
-public Properties	fichierProperties = loadConfig();
+public Properties	fichierProperties = loadConfigComptes();
 
 private String server;
 private String userName;
@@ -29,7 +29,7 @@ private String tribut = "romains";
 
 
 //charger les configs précédentes
-public Properties loadConfig(){
+public Properties loadConfigComptes(){
 	
 String path = System.getProperty("user.home")+"\\travianfx.properties";		
 Properties properties = new Properties();

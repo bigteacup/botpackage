@@ -69,6 +69,7 @@ public class FxFenetreController extends ScrollPane {
 	// FxConsoleSimple console;
 	fxConsoleExperimentale console;
 	VirtualizedScrollPane<StyleClassedTextArea> vtScroll;
+	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
 
 	@FXML
 	private URL location;
@@ -400,6 +401,10 @@ public class FxFenetreController extends ScrollPane {
 	 @FXML
 	 private void fxChargerComptes(){
 		 //TODO charger les fichiers de configurations s'ils existent.
+		 /*
+		  * 
+		 loadComptes();
+		 listeDeComptes = comptes.getListeDeComptes;
 	//	 for(){}
 		 
 		 
@@ -410,7 +415,7 @@ public class FxFenetreController extends ScrollPane {
 		 
 		 
 		 
-		 
+		 */
 		 
 	 }
 
@@ -480,7 +485,7 @@ public class FxFenetreController extends ScrollPane {
 	private void peupleractif() {
 		
 		if(ipeupler == 0){
-			ipeupler=1; // mode reconsctruction sur le chargement de l'onglet, pour devellper tranquille
+			ipeupler=1; // mode reconsctruction sur le chargement de l'onglet, pour develloper tranquille
 		Platform.runLater(new Runnable() {
 			
 			public void run() {
