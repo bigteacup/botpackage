@@ -17,7 +17,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
 
 <ScrollPane fx:id="rootScrollpane" fitToHeight="true" fitToWidth="true" prefHeight="450" prefWidth="700" styleClass="b" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <content>
@@ -113,8 +112,13 @@
          <center>
             <TabPane fx:id="tabbedPane" styleClass="b" tabClosingPolicy="UNAVAILABLE">
               <tabs>
+                  <Tab fx:id="comptes" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
+                     <content>
+                        <VBox fx:id="comptesVBox" prefHeight="200.0" prefWidth="100.0" />
+                     </content>
+                  </Tab>
                
-                <Tab closable="false" text="Console"  >
+                <Tab closable="false" text="Console">
                      <content>
                         <ScrollPane fx:id="fxConsolescrollpane" fitToHeight="true" fitToWidth="true" styleClass="b">
                            <content>
@@ -130,7 +134,7 @@
 						<content>
                		     	<!--   <fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/>  -->
                		     	<!--   <fx:include fx:id="fxOngletParametres" source="fxOngletParametres.fxml"/>   	pour dev  --> 
-               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/> 
+               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml" /> 
                 			
                 			</content>
                            </ScrollPane>

@@ -394,6 +394,25 @@ public class FxFenetreController extends ScrollPane {
 		}
 
 	}
+	
+	
+	
+	 @FXML
+	 private void fxChargerComptes(){
+		 //TODO charger les fichiers de configurations s'ils existent.
+	//	 for(){}
+		 
+		 
+		 //TODO creer une ligne/tuile par compte trouvé.
+		 
+		 
+		 //TODO afficher la ligne/tuile de création de compte
+		 
+		 
+		 
+		 
+		 
+	 }
 
 	/*
 	 * public void ecrire(String flux, int c, int from, int to, String css ){
@@ -405,6 +424,8 @@ public class FxFenetreController extends ScrollPane {
 	 * 
 	 * }
 	 */
+	
+
 
 	@FXML
 	private void fxConsolescrollpane() throws IOException {

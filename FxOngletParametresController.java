@@ -49,8 +49,9 @@ public class FxOngletParametresController {
     
     @FXML 
     private TextField motCleListeDesPertes;
-    
-
+   
+    //@FXML
+ //   comptesVBox ;
 
     @FXML
     void initialize() {
@@ -111,8 +112,7 @@ public class FxOngletParametresController {
     }
     
     //motCleListeDesPertes
-    
-    
+   
     
     
     public void setBot(Lancerbot bot){
@@ -121,3 +121,6 @@ public class FxOngletParametresController {
     
     
 }
+
+
+
