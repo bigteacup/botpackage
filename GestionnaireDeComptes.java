@@ -27,30 +27,31 @@ public class GestionnaireDeComptes {
 		File dossierComptes = new File(userPath);
 		boolean isCreated = dossierComptes.mkdirs();
 		System.out.println(" Création du dossier"+ userPath +" : " + isCreated);
-		listerComptes();
+		//pour test
+		listerFichiers("\\comptes", "properties");
 		
 
-		//établir le dossier 
+		
 	
 	
 	}
 
-public ArrayList<File> listerComptes(){
-	String userPath = System.getProperty("user.home")+"\\botpackage\\comptes";
-	 File dossierComptes = new File(userPath);
-	 File[] list = dossierComptes.listFiles();
-	 ArrayList<File> listComptes = new ArrayList<>();
-	 listComptes.clear();
+public ArrayList<File> listerFichiers(String dossier, String extention){
+	String userPath = System.getProperty("user.home")+"\\botpackage"+dossier; //\\comptes
+	 File chemin = new File(userPath);
+	 File[] list = chemin.listFiles();
+	 ArrayList<File> listeFichiers = new ArrayList<>();
+	 listeFichiers.clear();
 	  for(File t : list ){
-		        if (t.getName().toLowerCase().endsWith("properties"))
+		        if (t.getName().toLowerCase().endsWith(extention)) //properties
 		        {
-		        listComptes.add(t);
+		        listeFichiers.add(t);
 		        System.out.println(t.toString());
 		        }
 	
 	 
 }
-	return listComptes;
+	return listeFichiers;
 
 
 	 }
