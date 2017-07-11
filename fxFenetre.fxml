@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
 <ScrollPane fx:id="rootScrollpane" fitToHeight="true" fitToWidth="true" prefHeight="450" prefWidth="700" styleClass="b" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
@@ -114,7 +115,7 @@
               <tabs>
                   <Tab fx:id="comptes" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
                      <content>
-                        <VBox fx:id="comptesVBox" prefHeight="200.0" prefWidth="100.0" />
+                        <TilePane fx:id="comptesTilePane" prefHeight="200.0" prefWidth="200.0" />
                      </content>
                   </Tab>
                

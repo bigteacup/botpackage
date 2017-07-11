@@ -1,5 +1,6 @@
 package botpackage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -73,6 +75,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private URL location;
+	
+	@FXML
+	private TilePane comptesTilePane;
 
 	@FXML
 	private ScrollPane rootScrollpane;
@@ -171,6 +176,7 @@ public class FxFenetreController extends ScrollPane {
 		assert fxConsolescrollpane != null : "fx:id=\"fxConsolescrollpane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert vbox != null : "fx:id=\"vbox\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert caseFaireDefiler != null : "fx:id=\"caseFaireDefiler\" was not injected: check your FXML file 'fxFenetre.fxml'.";
+		assert comptesTilePane != null : "fx:id=\"comptesTilePane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 
 		bot = new Lancerbot();
 		console = new fxConsoleExperimentale(fxFenetreController); // console.start();
@@ -400,6 +406,46 @@ public class FxFenetreController extends ScrollPane {
 	
 	 @FXML
 	 private void fxChargerComptes(){
+		ArrayList<File> listeFichiers = gestionnaireDeComptes.getListeFichiers(); 
+		 
+			 Platform.runLater(new Runnable() {
+				 
+				 public void run() {
+					 
+					try { 
+					comptesTilePane.getChildren().clear();
+					 for (File compte : listeFichiers){
+					
+					 StackPane  vpane = new StackPane();
+				       
+					 Button button1 = new Button("Connexion");
+					 Label titre = new Label("titre");
+
+				        vpane.getChildren().add(button1);
+				        vpane.getChildren().add(titre);
+				        titre.getStyleClass().add("clabel");
+				        //comptesTilePane.getChildren().add(button1);
+				        comptesTilePane.getChildren().add(vpane);
+						
+				        comptesTilePane.setPadding(new Insets(10, 10, 10, 10));
+						comptesTilePane.setVgap(5);
+						comptesTilePane.setHgap(5);
+						comptesTilePane.setPrefColumns(13);
+					 	vpane.getStyleClass().add("v3");
+						vpane.setMinHeight(150);
+						vpane.setMinWidth(150);
+					//	ObservableList list = comptesTilePane.getChildren(); 
+						
+						//TilePane.setAlignment(vpane, Pos.BOTTOM_RIGHT);
+					//
+						
+					//	list.addAll(vpane);
+					
+				 }
+					 }catch (Exception e){}
+				 
+			 }
+		 });
 		 //TODO charger les fichiers de configurations s'ils existent.
 		 /*
 		  * 

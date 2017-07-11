@@ -11,49 +11,50 @@ import java.util.Properties;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GestionnaireDeComptes {
+	//les variables 
+	ArrayList<File> listeFichiers = new ArrayList<File>();
 
-
-
+	 //constructeur
 	public GestionnaireDeComptes() {
 		
 		 creerDossier();
+		 listeFichiers = listerFichiers("\\comptes", "properties");
+		 
 	}
+	public ArrayList<File> getListeFichiers(){
+		return listeFichiers;
+		
+		
+	}
+	//methodes
 
 	//TODO develloper le chargeur de compte
-	//TODO creer un dossier sil n'existe pas 
+	
 	//charger les configs des comptes
 	public void creerDossier(){
 		String userPath = System.getProperty("user.home")+"\\botpackage\\comptes";
 		File dossierComptes = new File(userPath);
 		boolean isCreated = dossierComptes.mkdirs();
 		System.out.println(" Création du dossier"+ userPath +" : " + isCreated);
-		//pour test
-		listerFichiers("\\comptes", "properties");
-		
 
-		
-	
-	
 	}
 
 public ArrayList<File> listerFichiers(String dossier, String extention){
 	String userPath = System.getProperty("user.home")+"\\botpackage"+dossier; //\\comptes
 	 File chemin = new File(userPath);
 	 File[] list = chemin.listFiles();
-	 ArrayList<File> listeFichiers = new ArrayList<>();
-	 listeFichiers.clear();
+	 try{
+	 listeFichiers.clear(); }catch (Exception e){
+		 
+	 }
 	  for(File t : list ){
 		        if (t.getName().toLowerCase().endsWith(extention)) //properties
 		        {
 		        listeFichiers.add(t);
 		        System.out.println(t.toString());
 		        }
-	
-	 
 }
 	return listeFichiers;
-
-
 	 }
 	
 public void creerFichierCompte(){
