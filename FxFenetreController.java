@@ -402,50 +402,56 @@ public class FxFenetreController extends ScrollPane {
 
 	}
 	
-	
+	public void faireTuileDeCompte(){
+		
+		 Platform.runLater(new Runnable() {
+			 
+			 public void run() {
+				 
+				 
+		 StackPane  vpane = new StackPane();
+	       
+		 Button button1 = new Button("Connexion");
+		 Label titre = new Label("titre");
+
+	        vpane.getChildren().add(button1);
+	        vpane.getChildren().add(titre);
+	        titre.getStyleClass().add("clabel");
+	        //comptesTilePane.getChildren().add(button1);
+	        comptesTilePane.getChildren().add(vpane);
+			
+	        comptesTilePane.setPadding(new Insets(10, 10, 10, 10));
+			comptesTilePane.setVgap(5);
+			comptesTilePane.setHgap(5);
+			comptesTilePane.setPrefColumns(13);
+		 	vpane.getStyleClass().add("v3");
+			vpane.setMinHeight(150);
+			vpane.setMinWidth(150);
+		//	ObservableList list = comptesTilePane.getChildren(); 
+			//TilePane.setAlignment(vpane, Pos.BOTTOM_RIGHT);
+			//	list.addAll(vpane);
+			
+			 }
+		 });
+		
+	}
 	
 	 @FXML
 	 private void fxChargerComptes(){
 		ArrayList<File> listeFichiers = gestionnaireDeComptes.getListeFichiers(); 
 		 
-			 Platform.runLater(new Runnable() {
-				 
-				 public void run() {
+
 					 
 					try { 
 					comptesTilePane.getChildren().clear();
 					 for (File compte : listeFichiers){
+					faireTuileDeCompte();
 					
-					 StackPane  vpane = new StackPane();
-				       
-					 Button button1 = new Button("Connexion");
-					 Label titre = new Label("titre");
-
-				        vpane.getChildren().add(button1);
-				        vpane.getChildren().add(titre);
-				        titre.getStyleClass().add("clabel");
-				        //comptesTilePane.getChildren().add(button1);
-				        comptesTilePane.getChildren().add(vpane);
-						
-				        comptesTilePane.setPadding(new Insets(10, 10, 10, 10));
-						comptesTilePane.setVgap(5);
-						comptesTilePane.setHgap(5);
-						comptesTilePane.setPrefColumns(13);
-					 	vpane.getStyleClass().add("v3");
-						vpane.setMinHeight(150);
-						vpane.setMinWidth(150);
-					//	ObservableList list = comptesTilePane.getChildren(); 
-						
-						//TilePane.setAlignment(vpane, Pos.BOTTOM_RIGHT);
-					//
-						
-					//	list.addAll(vpane);
 					
 				 }
 					 }catch (Exception e){}
 				 
-			 }
-		 });
+
 		 //TODO charger les fichiers de configurations s'ils existent.
 		 /*
 		  * 
