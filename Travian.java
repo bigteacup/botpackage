@@ -242,7 +242,7 @@ public class Travian extends Thread {
 				try {
 					if (t.bot.rotationVillage == true){
 						rotationVillage();			
-					}else {t.ecrireDansConsole("Rotation dÈsactivÈe");}
+					}else {t.ecrireDansConsole("Rotation d√©sactiv√©e");}
 				} catch (Exception e) {ecrireDansConsole("Echec rotation");
 				echecDeBoot++;
 				restartSurErreure();
@@ -257,7 +257,7 @@ public class Travian extends Thread {
 				try {
 					if(t.bot.optimiserProdHero == true){
 						gestionHero();			
-					}else {t.ecrireDansConsole("Optimisation Hero desactivÈe");}
+					}else {t.ecrireDansConsole("Optimisation Hero desactiv√©e");}
 				} catch (Exception e) {ecrireDansConsole("Echec gestionHero()");
 				}
 				randomsleep.court();
@@ -289,7 +289,7 @@ public class Travian extends Thread {
 
 
 				//Reset des memoires de rotation"
-				// on suprime la liste des ordre du village a chaque tour de bot, //TODO verifier si cest bien placÈ en cas d'echec
+				// on suprime la liste des ordre du village a chaque tour de bot, //TODO verifier si cest bien plac√© en cas d'echec
 				t.viderMemoireRotation();
 
 				// Reglage de l'attente entre deux boucles
@@ -299,7 +299,7 @@ public class Travian extends Thread {
 				Date lastDate = randomsleep.date(true);
 				long milliEcartDate = lastDate.getTime() - memDate.getTime();
 				
-				t.ecrireDansConsole("DurÈe de la session :" + milliEcartDate / 1000 / 60 + "minutes "
+				t.ecrireDansConsole("Dur√©e de la session :" + milliEcartDate / 1000 / 60 + "minutes "
 						+ (milliEcartDate / 1000 - (milliEcartDate / 1000 / 60) * 60)
 						+ "sec. et le chiffre de base en milliseconde " + milliEcartDate);
 				
@@ -335,7 +335,7 @@ public class Travian extends Thread {
 			village.memoireMarcheDeLaRotation[3] = 0;
 			nI++;
 		}
-		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidÈes");
+		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vid√©es");
 
 	}
 
@@ -501,7 +501,7 @@ public class Travian extends Thread {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	//	TODO mettre par coordonnÈes
+	//	TODO mettre par coordonn√©es
 	// lister village par la liste de droite.
 	private void listerVillages() {
 		//	compte.getDriver().get(compte.getServer()+"dorf1.php"); //a virer apres correction de monter village echec
@@ -515,8 +515,8 @@ public class Travian extends Thread {
 
 			String stringUrl = url.getAttribute("href");
 
-			//chargement des coordonnÈes
-			//TODO derouler l element coordonnÈe sinon cest invisible ou passer par un autre site ou page
+			//chargement des coordonn√©es
+			//TODO derouler l element coordonn√©e sinon cest invisible ou passer par un autre site ou page
 			String stringUrl2 ;
 			try{
 				stringUrl2 = url.findElement(By.xpath("span")).getText();//getText();  url.findElement(By.xpath("span")).getText();
@@ -542,7 +542,7 @@ public class Travian extends Thread {
 				String vUrl = village.getUrl();
 				if (vUrl.split("\\?")[1].split("&")[0].equals(stringUrl.split("\\?")[1].split("&")[0])) {
 					trouver = true;
-					//si le nom a changÈ on le met a jour
+					//si le nom a chang√© on le met a jour
 					if(!village.getNom().equals(url.findElement(By.className("name")).getText())){
 						village.setNom(url.findElement(By.className("name")).getText());	
 					}
@@ -601,7 +601,7 @@ public class Travian extends Thread {
 				return village;
 			}
 		}
-		//systeme doublÈ pour ne pas faire de traitement si ce nest pas necessaire
+		//systeme doubl√© pour ne pas faire de traitement si ce nest pas necessaire
 		if (trouve == false){
 			t.listerVillages();
 			for (Village village : listeDeVillages) {
@@ -659,7 +659,7 @@ public class Travian extends Thread {
 					if (village.getBesoinDeNpc() == true && village.getVillageCapitale()==true  ){
 						npcNegatif();
 					}
-				}else {t.ecrireDansConsole("NPC dÈsactivÈ");}
+				}else {t.ecrireDansConsole("NPC d√©sactiv√©");}
 
 				if (allume == false){break;}
 				if ( bot.construireBatiments == true ) {
@@ -696,7 +696,7 @@ public class Travian extends Thread {
 				}catch(Exception e){ecrireDansConsole("echec fete ");}
 				
 				//test
-				marche.acheterAuMarchÈ(t, village);
+				marche.acheterAuMarch√©(t, village);
 
 			}//fin for
 		}
@@ -863,7 +863,7 @@ public class Travian extends Thread {
 			ecrireDansConsole("[Aventure] Pas de quetes :( -code 0");} //deprecated
 		try {
 			heroStatus = compte.getDriver().findElement(By.xpath("//*[@id=\"sidebarBoxHero\"]/div[2]/div[2]/div[1]"));
-			if (heroStatus.getText().contains("dÈplacement")){
+			if (heroStatus.getText().contains("d√©placement")){
 				heroEnDeplacement = true;
 			}
 		}catch  (Exception e) {
@@ -1013,7 +1013,7 @@ public class Travian extends Thread {
 					randomsleep.court();
 					List<WebElement> listeDoptions = frigo.findElements(By.xpath("//*[@id=\"lid\"]/option"));
 					for (WebElement option : listeDoptions) {
-						if (option.getText().contains(t.bot.motCleListeDesPertes)) { //Mot clÈe pour la liste des pertes
+						if (option.getText().contains(t.bot.motCleListeDesPertes)) { //Mot cl√©e pour la liste des pertes
 							option.click();
 						}
 					}
@@ -1083,7 +1083,7 @@ public class Travian extends Thread {
 					randomsleep.court();
 					List<WebElement> listeDoptions = frigo.findElements(By.xpath("//*[@id=\"lid\"]/option"));
 					for (WebElement option : listeDoptions) {
-						if (option.getText().contains(t.bot.motCleListeDePillage1)) { //Mot clÈe pour la liste des pertes
+						if (option.getText().contains(t.bot.motCleListeDePillage1)) { //Mot cl√©e pour la liste des pertes
 							option.click();
 						}
 					}
@@ -1383,7 +1383,7 @@ public class Travian extends Thread {
 				
 					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
 						try {
-						if (donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[3]/a/span")).getText().equals("ï") ){
+						if (donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[3]/a/span")).getText().equals("√©") ){
 						besoinDeFete = 1;
 						village.setBesoinDeFete(besoinDeFete);
 
@@ -1537,7 +1537,7 @@ public class Travian extends Thread {
 		int besoin = 0;
 		int besoin2 = 0;
 	
-		//TODO Important! -> gerer si le village a besoin du marchÈ pour evacuer	(apparement deja fait pour cereales)  
+		//TODO Important! -> gerer si le village a besoin du march√© pour evacuer	(apparement deja fait pour cereales)  
 		if (village.getChampsFinis() == false && village.getTokenconstruction() < 2 
 				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true
 				|| village.getVillageCapitale() == true 
@@ -1642,7 +1642,7 @@ public class Travian extends Thread {
 				
 			for(String strCroix : lststrCroix){
 				if(v.getNom().contains( strCroix )){ 
-					//traitement pour v attaquÈ 
+					//traitement pour v attaqu√© 
 					t.ecrireDansConsole("Attaque sur "+ strCroix ); 
 				}
 				else{
@@ -1671,7 +1671,7 @@ public class Travian extends Thread {
 					
 								
 				
-				//t.ecrireDansConsole("Attaques detectÈes  : " + croixRouges.size() +" Villages attaquÈs");
+				//t.ecrireDansConsole("Attaques detect√©es  : " + croixRouges.size() +" Villages attaqu√©s");
 			//for(WebElement croix : croixRouges){
 			//t.ecrireDansConsole("Attaque sur "+croix.findElement(By.xpath("./a/div")).getText());  ///a/div
 			//analyseAttaque();

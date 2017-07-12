@@ -128,7 +128,7 @@ public class Marche {
 
 	////////dans la page marche
 	public int updateNombreDeMarchandsDispo(Travian t, Village village){ 
-		//TODO gerer la quantité en cas d'echec de prise de la valeur
+		//TODO gerer la quantitÃ© en cas d'echec de prise de la valeur
 		WebElement webElementmarchandDispo;
 		String nombreMarchandDispoString;
 		int nombreMarchandDispoInteger = 20;
@@ -144,7 +144,7 @@ public class Marche {
 	}
 
 	public int updateQuantiteMaxTransporteParMarchand(Travian t, Village village){
-		//TODO gerer la quantité en cas d'echec de prise de la valeur
+		//TODO gerer la quantitÃ© en cas d'echec de prise de la valeur
 		String quantiteMaxParMarchandString;
 		int quantiteMaxParMarchandInteger = 750;
 
@@ -196,9 +196,9 @@ public class Marche {
 				pourcentageArgileMin = village.getRegimeMarcheArgileMin();
 				pourcentageFerMin = village.getRegimeMarcheFerMin();
 				pourcentageCerealesMin = village.getRegimeMarcheCerealesMin();
-				t.ecrireDansConsole("[Marché] Prise des valeurs personnalisées");
+				t.ecrireDansConsole("[MarchÃ©] Prise des valeurs personnalisÃ©es");
 			}
-			t.ecrireDansConsole(" Pourcentage de Vidage Marché en cours --> Regime General (par default) : "+pourcentageRegimeGeneral+" |Bois : "+pourcentageBois+" | Argile : "+pourcentageArgile+" |Fer : "+pourcentageFer+" |Cereales : "+pourcentageCereales+"");
+			t.ecrireDansConsole(" Pourcentage de Vidage MarchÃ© en cours --> Regime General (par default) : "+pourcentageRegimeGeneral+" |Bois : "+pourcentageBois+" | Argile : "+pourcentageArgile+" |Fer : "+pourcentageFer+" |Cereales : "+pourcentageCereales+"");
 			int pourcentageNePasLaisserLeVillageSourceEnDessousDe = t.bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe;
 			t.ecrireDansConsole("pourcentageNePasLaisserLeVillageSourceEnDessousDe en cours --> Regime General (par default) : "+pourcentageNePasLaisserLeVillageSourceEnDessousDe +" |Bois : "+pourcentageBoisMin+" | Argile : "+pourcentageArgileMin+" |Fer : "+pourcentageFerMin+" |Cereales : "+pourcentageCerealesMin+"");
 			boolean tropBois = village.getBois() >= village.getMaxStockDepot()/100*pourcentageBois;
@@ -213,7 +213,7 @@ public class Marche {
 			if (tropCereales){nombreDeBesoin++;}
 
 			if(nombreDeBesoin >= 1 ){
-				allerDansLeMarché(t);
+				allerDansLeMarchÃ©(t);
 				//maj
 				int marchandsDisponibles = updateNombreDeMarchandsDispo(t, village);
 				int quantite = updateQuantiteMaxTransporteParMarchand(t, village);
@@ -352,7 +352,7 @@ public class Marche {
 
 
 
-							// TODO  premier tour -> ca ne prends pas de villages -> manquederessource basé sur silo par default = 800 
+							// TODO  premier tour -> ca ne prends pas de villages -> manquederessource basÃ© sur silo par default = 800 
 							if (!villageCible.getNom().equals(village.getNom())){
 
 								//on selctionne l'ordre et on rempli en consequence les variables
@@ -397,7 +397,7 @@ public class Marche {
 
 								if (pourcentage == 100){
 									continuer=false;	
-									t.ecrireDansConsole("[Marché]Pas de villages ayant la capacitée pour evacuer cette ressource : " +ordre.getNomOrdre());
+									t.ecrireDansConsole("[MarchÃ©]Pas de villages ayant la capacitÃ©e pour evacuer cette ressource : " +ordre.getNomOrdre());
 									break;}
 
 
@@ -407,21 +407,21 @@ public class Marche {
 
 						}else {
 							//	nbrVillageTropLoin++;
-							t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " est trop eloigné. Pourcentage actuel : " + pourcentage);
+							t.ecrireDansConsole("[MarchÃ©] " + villageCible.getNom() + " est trop eloignÃ©. Pourcentage actuel : " + pourcentage);
 							if (pourcentage >= 100){
 								continuer=false;	
-								t.ecrireDansConsole("[Marché]Pas de villages à portée pour evacuer cette ressource : " +ordre.getNomOrdre());
+								t.ecrireDansConsole("[MarchÃ©]Pas de villages Ã© portÃ©e pour evacuer cette ressource : " +ordre.getNomOrdre());
 								break;
 								}
 							//	if (nbrVillageTropLoin >= listeDeVillages.size() && pourcentage >= 100 ){
 							//		continuer = false;
-							//		t.ecrireDansConsole("[Marché] Pas de village a proximité suffisante");
+							//		t.ecrireDansConsole("[MarchÃ©] Pas de village a proximitÃ© suffisante");
 							//		nbrVillageTropLoin=0;	
 							//	}
 						}
 
 					}
-					//apres avoir parcouru tous les village avec une valur donnée, on incremente pour recommencer avec une valeur plus elevée
+					//apres avoir parcouru tous les village avec une valur donnÃ©e, on incremente pour recommencer avec une valeur plus elevÃ©e
 					pourcentage = pourcentage+10;
 				}
 			}
@@ -454,7 +454,7 @@ public class Marche {
 						if (ordre.getNomOrdre().equals("Argile")){ typeDeRessource = 2; }
 						if (ordre.getNomOrdre().equals("Fer")){ typeDeRessource = 3; }
 						if (ordre.getNomOrdre().equals("Cereales")){ typeDeRessource = 4; }
-						//on clic autant de fois que de marchands attribués
+						//on clic autant de fois que de marchands attribuÃ©s
 						int i = 0;
 						while( i < ordre.getNombreDeClic()){
 							t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink"+typeDeRessource +"\"]")).click();
@@ -491,8 +491,8 @@ public class Marche {
 								if (ordreEnvoyes.getNomOrdre().equals("Cereales")){ typeDeRessource = 4;
 								villageCiblebis.memoireMarcheDeLaRotation[3] = villageCiblebis.memoireMarcheDeLaRotation[3]+ ressourcesEnvoyees;  }
 
-								t.ecrireDansConsole("[Marché] " +village.getNom()+ " envoi " + ressourcesEnvoyees +  " de " +ordreEnvoyes.getNomOrdre()+" sur " + cible);
-								// On supprime l'élément courant de la liste
+								t.ecrireDansConsole("[MarchÃ©] " +village.getNom()+ " envoi " + ressourcesEnvoyees +  " de " +ordreEnvoyes.getNomOrdre()+" sur " + cible);
+								// On supprime l'Ã©lÃ©ment courant de la liste
 								ordreEnvoyesIter.remove(); // 
 							}
 						}
@@ -505,7 +505,7 @@ public class Marche {
 								if (ordreEnvoyes.getNomOrdre().equals("Argile")){ typeDeRessource = 2; villageCiblebis.memoireMarcheDeLaRotation[1] = villageCiblebis.memoireMarcheDeLaRotation[0]+ ressourcesEnvoyees;  }
 								if (ordreEnvoyes.getNomOrdre().equals("Fer")){ typeDeRessource = 3; villageCiblebis.memoireMarcheDeLaRotation[2] = villageCiblebis.memoireMarcheDeLaRotation[0]+ ressourcesEnvoyees;  }
 								if (ordreEnvoyes.getNomOrdre().equals("Cereales")){ typeDeRessource = 4; villageCiblebis.memoireMarcheDeLaRotation[3] = villageCiblebis.memoireMarcheDeLaRotation[0]+ ressourcesEnvoyees;  }
-							t.ecrireDansConsole("[Marché] " +village.getNom()+ " envoi " + ressourcesEnvoyees +  " de " +ordreEnvoyes.getNomOrdre()+" sur " + cible);
+							t.ecrireDansConsole("[MarchÃ©] " +village.getNom()+ " envoi " + ressourcesEnvoyees +  " de " +ordreEnvoyes.getNomOrdre()+" sur " + cible);
 							village.listeOrdresMarcheDeLaRotation.remove(ordreEnvoyes); // ou modifer cette fonction pour juste ne pas repeter les anciens ordres
 							}
 						}*/
@@ -547,7 +547,7 @@ public class Marche {
 				t.randomsleep.court();
 				Village village = t.villageEnCours();
 				updateNombreDeMarchandsDispo(t, village);
-				//	t.ecrireDansConsole("[Marché]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +villageCibleNom);
+				//	t.ecrireDansConsole("[MarchÃ©]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +villageCibleNom);
 				ok = true;
 
 			} catch (Exception e) {
@@ -693,9 +693,9 @@ public class Marche {
 								t.randomsleep.tcourt();
 								t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).click();
 								t.randomsleep.tcourt();
-								t.ecrireDansConsole("[Marché] ApproPetitVillage");
+								t.ecrireDansConsole("[MarchÃ©] ApproPetitVillage");
 								if(envoyerMarchands(t, village.getNom())){
-									t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +village.getNom());
+									t.ecrireDansConsole("[MarchÃ©][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +village.getNom());
 								}
 								t.randomsleep.court();
 								t.getCompte().getDriver().get(village.getUrl());
@@ -713,29 +713,29 @@ public class Marche {
 
 	 */
 
-	public void allerDansLeMarché(Travian t){
-		try {// on vas sur le marché
+	public void allerDansLeMarchÃ©(Travian t){
+		try {// on vas sur le marchÃ©
 			t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
 			t.randomsleep.court();
 		} catch (Exception e) {
-			t.ecrireDansConsole("Pas de compte + ou pas de marché Passage en force");
+			t.ecrireDansConsole("Pas de compte + ou pas de marchÃ© Passage en force");
 
 			try{
 				t.getCompte().getDriver().findElement(By.xpath("//*[@id='dialogCancelButton']")).click();	//*[@id="dialogCancelButton"]
 
 			}catch (Exception e1) {t.ecrireDansConsole("echec evitement de la pub Travian+ ---> normal code mort  mais laisser pour garder le code pour autre chose");}
 
-			try {//bon bah on vas sur une page contenant le marché
+			try {//bon bah on vas sur une page contenant le marchÃ©
 				if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 					t.randomsleep.court();
 					t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 					t.randomsleep.court();
 				}
-				WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'marché')]]"));
+				WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'marchÃ©')]]"));
 				boutton.click();
 				t.randomsleep.court();
 			}catch (Exception e3){
-				t.ecrireDansConsole("Pas de marché :(");
+				t.ecrireDansConsole("Pas de marchÃ© :(");
 			}
 		}	
 
@@ -746,7 +746,7 @@ public class Marche {
 	}
 	//TODO Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que 1 marchands de chaque et corriger "totalRessourcesEnvoyees"
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
-		t.ecrireDansConsole("[Marché] ApproPetitVillage");
+		t.ecrireDansConsole("[MarchÃ©] ApproPetitVillage");
 		try {
 			if (village.getChampMin() <= t.bot.champMinFx){
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
@@ -831,8 +831,8 @@ public class Marche {
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(villageCandidat.getUrl());
 									t.randomsleep.court();
-									//on va sur le marché
-									allerDansLeMarché(t);
+									//on va sur le marchÃ©
+									allerDansLeMarchÃ©(t);
 									t.randomsleep.court();
 
 									//bois
@@ -859,9 +859,9 @@ public class Marche {
 											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).click();
 											t.randomsleep.tcourt();
 										}}
-								//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
+								//	t.ecrireDansConsole("[MarchÃ©] ApproPetitVillage");
 									if(envoyerMarchands(t, village.getNom())){
-										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +village.getNom());
+										t.ecrireDansConsole("[MarchÃ©][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +village.getNom());
 									}
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(village.getUrl());
@@ -876,7 +876,7 @@ public class Marche {
 
 						}else {
 							
-							t.ecrireDansConsole("[Marché] " + villageCandidat.getNom() + " est trop eloigné. " );
+							t.ecrireDansConsole("[MarchÃ©] " + villageCandidat.getNom() + " est trop eloignÃ©. " );
 						}
 
 
@@ -894,11 +894,11 @@ public class Marche {
 
 
 
-	public void acheterAuMarché(Travian t, Village village){
+	public void acheterAuMarchÃ©(Travian t, Village village){
 		int tempsMax = 2; // temps en heure
 		//int marchandsMinPourAcheter = 10;
 		int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
-		int marchandsAllouésPourAchat = 10;
+		int marchandsAllouÃ©sPourAchat = 10;
 		int pourcentageDeclenchementAcheter = 50; // 50% de la moyenne du total des ressources
 
 		int totalBois = 0;
@@ -911,7 +911,7 @@ public class Marche {
 		boolean acheterFer = false;
 		boolean acheterCereales = false;
 
-		int besoinMarché= 0;
+		int besoinMarchÃ©= 0;
 
 		long milliEcartDate = 0;
 
@@ -928,28 +928,28 @@ public class Marche {
 
 		if(totalBois < (moyenne/100*pourcentageDeclenchementAcheter)){
 			//	acheterBois = true;
-			besoinMarché = 1;
+			besoinMarchÃ© = 1;
 		}
 		if(totalArgile < (moyenne/100*pourcentageDeclenchementAcheter)){
 			//acheterArgile = true;
-			besoinMarché = 2;
+			besoinMarchÃ© = 2;
 		}
 		if(totalFer < (moyenne/100*pourcentageDeclenchementAcheter)){
 			//	acheterFer = true;
-			besoinMarché = 3;
+			besoinMarchÃ© = 3;
 		}
 		if(totalCereales < (moyenne/100*pourcentageDeclenchementAcheter)){
 			//acheterCereales = true;
-			besoinMarché = 4;
+			besoinMarchÃ© = 4;
 		}
 
-		if(besoinMarché > 0 && village.getNombreDeMarchands() > 1 ){
+		if(besoinMarchÃ© > 0 && village.getNombreDeMarchands() > 1 ){
 			// on verifie que les marchands soient revenu du dernier envoi
 			boolean autorisationAchat = false;
 			Date dateActuelle =  t.randomsleep.date(true);
 			try{
-				milliEcartDate = dateActuelle.getTime() - village.getMarchéLastDate().getTime();
-				if (milliEcartDate > village.marchédureeDuDernierAchat){ 
+				milliEcartDate = dateActuelle.getTime() - village.getMarchÃ©LastDate().getTime();
+				if (milliEcartDate > village.marchÃ©dureeDuDernierAchat){ 
 					autorisationAchat = true;
 				}
 			}catch (Exception e){
@@ -959,24 +959,24 @@ public class Marche {
 
 			if(autorisationAchat == true){
 				//on continue
-				allerDansLeMarché(t);
+				allerDansLeMarchÃ©(t);
 				t.getCompte().getDriver().findElement(By.xpath("//*[@class='tabItem' and contains(., 'Acheter')]")).click(); //onlget acheter
 				t.randomsleep.court();
 				List<WebElement> ratio = t.getCompte().getDriver().findElements(By.xpath("//*[@id='ratio_select']//button")); 
 				ratio.get(0).click(); // ratio 1:1
 				t.randomsleep.court();
 				List<WebElement> ressources = t.getCompte().getDriver().findElements(By.xpath("//*[@id='search_select']/tbody/tr/td"));
-				ressources.get(besoinMarché-1).click(); 
+				ressources.get(besoinMarchÃ©-1).click(); 
 				t.randomsleep.court();
 
 				boolean continuer = true;
 				int marchandsD = updateNombreDeMarchandsDispo(t, village); //9
-				int marchandsConsomés = 0;
+				int marchandsConsomÃ©s = 0;
 				while(continuer == true){
-					marchandsConsomés = 0;
+					marchandsConsomÃ©s = 0;
 					updateNombreDeMarchandsDispo(t, village); //6
-					marchandsConsomés = marchandsConsomés + (marchandsD - village.getNombreDeMarchands());
-					if(marchandsConsomés <= marchandsAllouésPourAchat){
+					marchandsConsomÃ©s = marchandsConsomÃ©s + (marchandsD - village.getNombreDeMarchands());
+					if(marchandsConsomÃ©s <= marchandsAllouÃ©sPourAchat){
 						if(village.getNombreDeMarchands() >= marchandsMinPourFonctionner){ 
 							try {
 								List<WebElement> offres = null;
@@ -989,23 +989,23 @@ public class Marche {
 								int secondes = Integer.parseInt(decoupage[2]);
 								int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
 								if(durationEnMilli <= (tempsMax*3600)*1000 ){
-									village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
+									village.setMarchÃ©dureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 									offres.get(0).click(); // on aceepte loffre !
-									t.ecrireDansConsole("1 achat effectué au marché");
+									t.ecrireDansConsole("1 achat effectuÃ© au marchÃ©");
 									Date lastDate = t.randomsleep.date(true);
-									village.setMarchéLastDate(lastDate);
+									village.setMarchÃ©LastDate(lastDate);
 
 									t.randomsleep.court();
 								}else {
 									continuer = false;
-									t.ecrireDansConsole("offre trop eloigné : + de :" + tempsMax +" heure" );
+									t.ecrireDansConsole("offre trop eloignÃ© : + de :" + tempsMax +" heure" );
 
 
 
 								}
 							}catch (Exception e) {
 								continuer = false;
-								t.ecrireDansConsole("pas d'offre trouvée");
+								t.ecrireDansConsole("pas d'offre trouvÃ©e");
 							}
 
 						}else {
@@ -1014,13 +1014,13 @@ public class Marche {
 						}
 					}else {
 						continuer = false;
-						t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés");
+						t.ecrireDansConsole("Tout les marchands allouÃ©s pour la tache ont Ã©tÃ© consommÃ©s");
 					}
 				}
 			}else {
-				//milliEcartDate > village.marchédureeDuDernierAchat
+				//milliEcartDate > village.marchÃ©dureeDuDernierAchat
 
-				t.ecrireDansConsole("Attente du retour de tout les anciens marchands envoyé par cette fonction : "+(milliEcartDate/1000)/60 +" minutes écoulé sur : " + (village.marchédureeDuDernierAchat/1000)/60 + "minutes aproximativement" );}
+				t.ecrireDansConsole("Attente du retour de tout les anciens marchands envoyÃ© par cette fonction : "+(milliEcartDate/1000)/60 +" minutes Ã©coulÃ© sur : " + (village.marchÃ©dureeDuDernierAchat/1000)/60 + "minutes aproximativement" );}
 		}else {
 			t.ecrireDansConsole("Pas de besoin ou pas de marchands : on ne vas pas sur l'onglet");
 		}
@@ -1038,7 +1038,7 @@ public class Marche {
 
 	}
 		 */
-	}//fin methode acheter au marché
+	}//fin methode acheter au marchÃ©
 
 
 

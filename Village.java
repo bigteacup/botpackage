@@ -414,8 +414,8 @@ public class Village {
 	public int regimeMarcheArgileMin = 20;
 	public int regimeMarcheFerMin = 20;
 	public int regimeMarcheCerealesMin = 20;
-	public Date marchÈLastDate;
-	public int marchÈdureeDuDernierAchat=0;
+	public Date march√©LastDate;
+	public int march√©dureeDuDernierAchat=0;
 	public Date heureDeGuet;
 	public List<AttaqueEntrante> attaquesSubies = new ArrayList<AttaqueEntrante>();
 	
@@ -452,20 +452,20 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public int getMarchÈdureeDuDernierAchat() {
-		return marchÈdureeDuDernierAchat;
+	public int getMarch√©dureeDuDernierAchat() {
+		return march√©dureeDuDernierAchat;
 	}
 
-	public void setMarchÈdureeDuDernierAchat(int marchÈdureeDuDernierAchat) {
-		this.marchÈdureeDuDernierAchat = marchÈdureeDuDernierAchat;
+	public void setMarch√©dureeDuDernierAchat(int march√©dureeDuDernierAchat) {
+		this.march√©dureeDuDernierAchat = march√©dureeDuDernierAchat;
 	}
 
-	public Date getMarchÈLastDate() {
-		return marchÈLastDate;
+	public Date getMarch√©LastDate() {
+		return march√©LastDate;
 	}
 
-	public void setMarchÈLastDate(Date marchÈLastDate) {
-		this.marchÈLastDate = marchÈLastDate;
+	public void setMarch√©LastDate(Date march√©LastDate) {
+		this.march√©LastDate = march√©LastDate;
 	}
 
 	public boolean getRegimeGeneral() {
@@ -654,12 +654,12 @@ public class Village {
 		// compte.getDriver().get("http://ts4.travian.fr/dorf1.php?newdid=6681&");
 		Village village = t.villageEnCours();
 		boolean troupesAQuai = false;
-		//// *[@contains, "…clairs de Toutatis"]
+		//// *[@contains, "√©clairs de Toutatis"]
 		try {
 			List<WebElement> troupesDuVillage = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
 			for (WebElement typeTroupe : troupesDuVillage) {
 				boolean troupesPresentes = false; 
-				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "…clairs de Toutatis", "Combattants ‡ l'ÈpÈe"   };
+				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "√©clairs de Toutatis", "Combattants √© l'√©p√©e"   };
 
 				for (int i = 0; i < tableauTroupes.length; i++){
 					if ( typeTroupe.findElement(By.className("un")).getText().contains(tableauTroupes[i])){
@@ -790,8 +790,8 @@ public class Village {
 				nomBatiment = webBatiment.getAttribute("alt").split(" <span")[0];
 				levelBatiment = Integer.parseInt(webBatiment.getAttribute("alt").split("<span class=\"level\">Niveau ")[1].split("</span>")[0]);
 				// reperer conctructions en cours
-				if (webBatiment.getAttribute("alt").contains("AmÈlioration en cours")) {
-					int enCoursVersLevel = Integer.parseInt(webBatiment.getAttribute("alt").split("AmÈlioration en cours vers le niveau ")[1].split("</span>")[0]);
+				if (webBatiment.getAttribute("alt").contains("Am√©lioration en cours")) {
+					int enCoursVersLevel = Integer.parseInt(webBatiment.getAttribute("alt").split("Am√©lioration en cours vers le niveau ")[1].split("</span>")[0]);
 					levelBatiment = enCoursVersLevel;
 
 				}
@@ -1042,9 +1042,9 @@ public class Village {
 				// on corrige le level si un level est en cour de consrtuction
 				try {
 					int levelSuivantDispo = 0;
-					levelSuivantDispo = Integer.parseInt(webBatiment.getAttribute("alt").split("Co˚t pour le niveau ")[1].split(":<br")[0]);
+					levelSuivantDispo = Integer.parseInt(webBatiment.getAttribute("alt").split("Co√©t pour le niveau ")[1].split(":<br")[0]);
 					level = (levelSuivantDispo - 1); //level en cours
-				}catch(Exception e){/* t.ecrireDansConsole("Echec levelSuivantDispo de construire batiment");*/} //Co˚t pour le niveau 8:
+				}catch(Exception e){/* t.ecrireDansConsole("Echec levelSuivantDispo de construire batiment");*/} //Co√©t pour le niveau 8:
 				
 				String slot = webBatiment.getAttribute("href").split("id=")[1];
 
@@ -1199,7 +1199,7 @@ public class Village {
 			int hotelNonPresent = 1;
 
 			for (WebElement batiment : listeDesBatiments) {
-				if (batiment.getAttribute("alt").contains("HÙtel de Ville")) {
+				if (batiment.getAttribute("alt").contains("H√©tel de Ville")) {
 					hotelNonPresent = 0;
 					batiment.click();
 
@@ -1279,7 +1279,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void EssayerConstruireBatiments(Travian t, Village village) {
-		if (t.bot.monterChampsCapitale == false){t.ecrireDansConsole("Monter champs Capitale > 10 dÈsactivÈ... ");}
+		if (t.bot.monterChampsCapitale == false){t.ecrireDansConsole("Monter champs Capitale > 10 d√©sactiv√©... ");}
 		if (champMin < 10 || village.getVillageCapitale() && t.bot.monterChampsCapitale == true) {
 			monterChamps(t);
 		}
@@ -1342,7 +1342,7 @@ public class Village {
 	private void creationBatiment(Travian t, Village village) {
 		int tokenDeChangement = 0;
 		if(village.getTokenconstruction() < 2){
-			t.ecrireDansConsole("Essai de crÈation de batiments :");
+			t.ecrireDansConsole("Essai de cr√©ation de batiments :");
 			boolean trouver = false;
 			boolean slotDispo = false;
 			String nomBat = null;
@@ -1376,7 +1376,7 @@ public class Village {
 
 
 				if(trouver == true){
-					t.ecrireDansConsole(nomBat+" trouvÈ dans le village.");
+					t.ecrireDansConsole(nomBat+" trouv√© dans le village.");
 					batimentDuTemplate.setPresent(true);
 				}
 
@@ -1385,14 +1385,14 @@ public class Village {
 
 
 
-			// on regarde la necessitÈ d'essayer de contruire un nouveau batiment
+			// on regarde la necessit√© d'essayer de contruire un nouveau batiment
 			trouver = true;
 			for(Batiment batimentDuTemplate :  batimentsDuTemplateDuVillage){
 
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
-				if(nomBat.equals("RÈsidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de cÈrÈales") || nomBat.contains("Grand dÈpÙt de ressources") || nomBat.contains("Chambre aux trÈsors")){
-					t.ecrireDansConsole(nomBat+" trouvÈ dans le template. -> ne rien faire");				
+				if(nomBat.equals("R√©sidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de c√©r√©ales") || nomBat.contains("Grand d√©p√©t de ressources") || nomBat.contains("Chambre aux tr√©sors")){
+					t.ecrireDansConsole(nomBat+" trouv√© dans le template. -> ne rien faire");				
 				}else {
 					if(batimentDuTemplate.getPresent() == false ){
 						trouver = false;
@@ -1402,7 +1402,7 @@ public class Village {
 
 
 
-			// onconfirme la necessitÈ et on continue
+			// onconfirme la necessit√© et on continue
 			if (trouver == false && slotDispo == true){
 				// on se place sur le village si on a un slot dispo
 				if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
@@ -1450,8 +1450,8 @@ public class Village {
 
 							for(Batiment batimentDuTemplate : village.getBatimentsDuTemplateDuVillage()){
 								nomBat = batimentDuTemplate.getNomBatiment();
-								if(nomBat.equals("RÈsidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de cÈrÈales") || nomBat.contains("Grand dÈpÙt de ressources") || nomBat.contains("Chambre aux trÈsors")){
-									t.ecrireDansConsole(nomBat+" trouvÈ dans le template. -> ne rien faire 2 "); 
+								if(nomBat.equals("R√©sidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de c√©r√©ales") || nomBat.contains("Grand d√©p√©t de ressources") || nomBat.contains("Chambre aux tr√©sors")){
+									t.ecrireDansConsole(nomBat+" trouv√© dans le template. -> ne rien faire 2 "); 
 
 								}else {
 
@@ -1468,30 +1468,30 @@ public class Village {
 											if (titre.toLowerCase().contains(nomBat.toLowerCase())) {
 												t.ecrireDansConsole(nomBat+" ////////// tentative pour contruction"); 
 												try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le b‚timent.') and contains(., '"+ titre +"')]//div[@class='button-content']"));
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le b√©timent.') and contains(., '"+ titre +"')]//div[@class='button-content']"));
 
-													if (boutton.getText().contains("Construire le b‚timent.")) {
+													if (boutton.getText().contains("Construire le b√©timent.")) {
 														t.randomsleep.court();
 														boutton.click();
 														trouver = true;
-														t.ecrireDansConsole(nomBat +" lancÈ. Debug : Par titre");
+														t.ecrireDansConsole(nomBat +" lanc√©. Debug : Par titre");
 														break;
 													}
 
 												}catch (Exception e) {
 													t.ecrireDansConsole("Echec par Titre");
 													try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le b‚timent.') and contains(., '"+ nomBat +"')]//div[@class='button-content']"));
-													if (boutton.getText().contains("Construire le b‚timent.")) {
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le b√©timent.') and contains(., '"+ nomBat +"')]//div[@class='button-content']"));
+													if (boutton.getText().contains("Construire le b√©timent.")) {
 														t.randomsleep.court();
 														boutton.click();
 														trouver = true;
-														t.ecrireDansConsole(nomBat +" lancÈ. Debug : Par nomBat");
+														t.ecrireDansConsole(nomBat +" lanc√©. Debug : Par nomBat");
 														break;
 													}
 													}catch (Exception e1) {
 													t.ecrireDansConsole("Echec par nomBat");
-													t.ecrireDansConsole(nomBat + " --> echec Pas dispo ‡ la construction sur page manque ressources ou prerequis "+ i2 +" Debug info : "+" nomBat ="+nomBat+" Titre.toLowerCase ="+ titre.toLowerCase() +" Titre normal ="+ titre );
+													t.ecrireDansConsole(nomBat + " --> echec Pas dispo √© la construction sur page manque ressources ou prerequis "+ i2 +" Debug info : "+" nomBat ="+nomBat+" Titre.toLowerCase ="+ titre.toLowerCase() +" Titre normal ="+ titre );
 													}
 												}//fin catch
 											}else {t.ecrireDansConsole(nomBat +" pas dispo sur ce webB ");} //fin if
@@ -1523,7 +1523,7 @@ public class Village {
 						try {
 							t.getCompte().getDriver().findElement(By.xpath("//*[@id='closeContentButton']")).click();//*[@id="closeContentButton"]
 						}catch (Exception e){ t.ecrireDansConsole("Echec //*[@id='closeContentButton'] ");}
-					} else {t.ecrireDansConsole("TerminÈ");}
+					} else {t.ecrireDansConsole("Termin√©");}
 				}//fin if  trouver == false
 				//on reset le trouver pour les autre batiments du template
 				trouver = false;
@@ -1541,7 +1541,7 @@ public class Village {
 	/*
 	t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> boucle CreationBatiment");// PAS
 	// TROUVE);
-	// if (batimentDuteamplate.getNomBatiment().equals("RÈsidence") &&
+	// if (batimentDuteamplate.getNomBatiment().equals("R√©sidence") &&
 	// village.getVillageCapitale() == true){}
 	for (Batiment bat : village.getBatiments()) {
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
@@ -1580,9 +1580,9 @@ public class Village {
 								.findElements(By.xpath("//*[@class=\"buildingWrapper\"]"));
 
 						// *[@class="buildingWrapper" and contains(.,
-						// 'construire le b‚timent.') and contains(., 'Silo')]
+						// 'construire le b√©timent.') and contains(., 'Silo')]
 						// // // //*[@class="buildingWrapper" and contains(.,
-						// 'construire le b‚timent.') and contains(., 'Silo')]
+						// 'construire le b√©timent.') and contains(., 'Silo')]
 						String titre = webBat.getText(); // t.getCompte().getDriver().findElement(By.xpath(""));
 						// //*[@class="buildingWrapper"]//div[@class="button-content"]
 						if (titre.contains(batimentDuTemplate.getNomBatiment())) {
@@ -1601,7 +1601,7 @@ public class Village {
 							// du
 							// boutton
 							for (WebElement boutton : listDeBoutton) {
-								if (boutton.getText().contains("construire le b‚timent.")) {
+								if (boutton.getText().contains("construire le b√©timent.")) {
 									t.randomsleep.court();
 									boutton.click();
 									trouver = true;
@@ -1626,7 +1626,7 @@ public class Village {
 
 					}
 
-					// *[@value="construire le b‚timent."]
+					// *[@value="construire le b√©timent."]
 
 				}
 			}

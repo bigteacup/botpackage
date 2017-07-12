@@ -5,10 +5,10 @@ import java.util.Date;
 public class AttaqueEntrante {
 
 	Village villageAttaquant;
-	Village villageAttaqué;
+	Village villageAttaquÃ©;
 	Date heureImpact;
 	Date heureDeDetection;
 	double distance;
-	boolean cataDétéctées;
+	boolean cataDÃ©tÃ©ctÃ©es;
 	
 }
