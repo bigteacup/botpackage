@@ -75,7 +75,8 @@ public class FxFenetre extends Application {
 	       
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	      //TODO investiguer les possibilit�es :  fenetre de question type etesvoussur? ou autre 
+
+	      //TODO investiguer les possibilitées :  fenetre de question type etesvoussur? ou autre 
 
 	        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -84,6 +85,7 @@ public class FxFenetre extends Application {
 	            			controller.bot.eteindreTravian();
 	            			
 	                    //	 event.consume();  //genial mais pas utile ici
+
 
 	                        System.out.println("Application fermée par croix rouge (X)");
 

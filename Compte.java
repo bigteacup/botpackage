@@ -28,7 +28,7 @@ private String tribut = "romains";
 
 
 
-//charger les configs précédentes
+//charger les configs prÃ©cÃ©dentes
 public Properties loadConfigComptes(){
 	
 String path = System.getProperty("user.home")+"\\travianfx.properties";		

@@ -23,7 +23,7 @@ import org.openqa.selenium.WebDriver;
 	Travian travian;
 	FxFenetreController fxFenetreController;
 	
-	/// reglages recupérés par le bot et l'interface
+	/// reglages recupÃ©rÃ©s par le bot et l'interface
 	boolean faireDefiler = true;
 	boolean pillage = true;
 	boolean faireFete = true;
@@ -342,7 +342,7 @@ public static void copyFullRecursive(File source, File dest) throws IOException
 }
 
 	/** copie le fichier source dans le fichier resultat
-	 * retourne vrai si cela réussit
+	 * retourne vrai si cela rÃ©ussit
 	 */
 	public static boolean copyFile(File source, File dest){
 		try{
@@ -373,7 +373,7 @@ public static void copyFullRecursive(File source, File dest) throws IOException
 			return false; // Erreur
 		}
 
-		return true; // Résultat OK
+		return true; // RÃ©sultat OK
 
 }
 

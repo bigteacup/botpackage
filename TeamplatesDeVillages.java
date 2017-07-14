@@ -7,24 +7,24 @@ import java.util.List;
 public  class   TeamplatesDeVillages {
 	
 	/*
-	batimentsALancer.add("Bï¿½timent Principal");
-	batimentsALancer.add("Dï¿½pï¿½t de ressources");
-	batimentsALancer.add("Silo de cï¿½rï¿½ales");
-	batimentsALancer.add("Place du marchï¿½");
+	batimentsALancer.add("BÃ©timent Principal");
+	batimentsALancer.add("DÃ©pÃ©t de ressources");
+	batimentsALancer.add("Silo de cÃ©rÃ©ales");
+	batimentsALancer.add("Place du marchÃ©");
 	batimentsALancer.add("Moulin");
 	batimentsALancer.add("Boulangerie");
-	batimentsALancer.add("Acadï¿½mie");
-	batimentsALancer.add("Caserne");Bûcheron Écurie
+	batimentsALancer.add("AcadÃ©mie");
+	batimentsALancer.add("Caserne");BÃ©cheron Ã©curie
 	*///
 	
 	
 	//correspondances de noms
-	static	 String bois ="Bûcheron";
+	static	 String bois ="BÃ©cheron";
 	static String cereale = "Ferme";
 	static String fer= "fer";
 	static String terre= "argile";
-	static String grande_ecurie = "Grande écurie";
-	static String ecurie = "Écurie";
+	static String grande_ecurie = "Grande Ã©curie";
+	static String ecurie = "Ã©curie";
 	static String comptoir = "Comptoir de commerce";
 	static String grande_caserne= "Grande caserne";
 	static String place_tournoi= "Place du tournoi";
@@ -35,25 +35,25 @@ public  class   TeamplatesDeVillages {
 	static String poterie= "Usine de Poteries"; 
 	static String fonderie= "Fonderie";
 	static String cachette= "Cachette";
-	static String pieges = "Fabricant de pièges";
-	static String residence = "Résidence";
+	static String pieges = "Fabricant de piÃ©ges";
+	static String residence = "RÃ©sidence";
 	static String atelier= "Atelier";
-	static String hotel_de_ville= "Hôtel de Ville";//Hôtel de Ville
+	static String hotel_de_ville= "HÃ©tel de Ville";//HÃ©tel de Ville
 	static String ambassade = "Ambassade";
 	static String mur = "Palissade";
 	static String palais = "Palais";
-	static String silo ="Silo de céréales";
-	static String depot ="Dépôt de ressources";
-	static String batiment_principal ="Bâtiment Principal";
+	static String silo ="Silo de cÃ©rÃ©ales";
+	static String depot ="DÃ©pÃ©t de ressources";
+	static String batiment_principal ="BÃ©timent Principal";
 	static String empty = "Site de construction";
-	static String marche = "Place du marché";
-	static String academie = "Académie";	
+	static String marche = "Place du marchÃ©";
+	static String academie = "AcadÃ©mie";	
 	static String caserne = "Caserne";
 	static String tailleur = "Tailleur de Pierres";
-	static String grandSilo = "Grand silo de céréales";
-	static String grandDepot = "Grand dépôt de ressources";
+	static String grandSilo = "Grand silo de cÃ©rÃ©ales";
+	static String grandDepot = "Grand dÃ©pÃ©t de ressources";
 	static String forge = "Forge";
-	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
+	static String cdt = "Chambre aux trÃ©sors"; //Chambre aux trÃ©sors
  
  
 	 List<Batiment> listeDeBatimentsDuTeamplate1 = new ArrayList<Batiment>();
@@ -109,7 +109,7 @@ public  class   TeamplatesDeVillages {
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(tailleur, 20));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(place_rassemblement, 10));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(boulangerie, 5));
-		 // listeDeBatimentsDuTeamplate3.add(new Batiment(cachette, 10)); Chambre aux trésors
+		 // listeDeBatimentsDuTeamplate3.add(new Batiment(cachette, 10)); Chambre aux trÃ©sors
 		 		 
 
 		 listeDeBatimentsDuTeamplate4.add(new Batiment(poterie, 5));

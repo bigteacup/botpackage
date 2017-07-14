@@ -55,7 +55,7 @@ public class CalculsTravian {
 	public double arrondirADeuxChiffres(double x,boolean verbose) throws ParseException{
 		DecimalFormat df = new DecimalFormat();
 		df.setRoundingMode(RoundingMode.HALF_EVEN);
-		df.setMaximumFractionDigits (2); //arrondi à 2 chiffres apres la virgules
+		df.setMaximumFractionDigits (2); //arrondi Ã© 2 chiffres apres la virgules
 		df.setMinimumFractionDigits (2);
 		String y = df.format(x); //Le nombre sera arrondi
 
@@ -214,7 +214,7 @@ String dure = a1 + a5; //ici soucis XD
 	//double t = (a/100)*60;
     DecimalFormat df = new DecimalFormat();
     df.setRoundingMode(RoundingMode.HALF_EVEN);
-    df.setMaximumFractionDigits (0); //arrondi à 2 chiffres apres la virgules
+    df.setMaximumFractionDigits (0); //arrondi Ã© 2 chiffres apres la virgules
     df.setMinimumFractionDigits (0);
     String t = df.format(a2); //Le nombre sera arrondi
 	int t1 = Integer.parseInt(t)*60;

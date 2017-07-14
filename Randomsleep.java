@@ -128,7 +128,7 @@ public class Randomsleep {
 	}
 
 	// treslent
-	private int MIN_VALUE4 = 60000 * 19;  // anciennes valeurs : 25 min à 50 minutes ici 19 et 38 // 16/07/2016
+	private int MIN_VALUE4 = 60000 * 19;  // anciennes valeurs : 25 min Ã© 50 minutes ici 19 et 38 // 16/07/2016
 	private int MAX_VALUE4 = 60000 * 38;
 
 	public void treslent() {

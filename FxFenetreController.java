@@ -460,10 +460,10 @@ public class FxFenetreController extends ScrollPane {
 	//	 for(){}
 		 
 		 
-		 //TODO creer une ligne/tuile par compte trouvé.
+		 //TODO creer une ligne/tuile par compte trouvÃ©.
 		 
 		 
-		 //TODO afficher la ligne/tuile de création de compte
+		 //TODO afficher la ligne/tuile de crÃ©ation de compte
 		 
 		 
 		 
@@ -509,7 +509,7 @@ public class FxFenetreController extends ScrollPane {
 	int ia = 0;
 
 	@FXML
-	private void zzzpeupler(){ //debranché
+	private void zzzpeupler(){ //debranchÃ©
 
 
 		if(ia == 0){
@@ -586,7 +586,7 @@ public class FxFenetreController extends ScrollPane {
 
 				} catch (Exception e) {
 					try {
-						console.flux.envoyer(fxFenetreController, "pas de village chargés");
+						console.flux.envoyer(fxFenetreController, "pas de village chargÃ©s");
 						   ipeupler = 0;   
 						
 					} catch (IOException e1) {
@@ -624,7 +624,7 @@ public class FxFenetreController extends ScrollPane {
 	
 	
 	
-	//raffraichit un vpane avec les instrcution donnée
+	//raffraichit un vpane avec les instrcution donnÃ©e
 	private StackPane raffraichirVpane(Village village, StackPane vpane) {
 		
 		vpane.getChildren().clear();	
@@ -704,7 +704,7 @@ public class FxFenetreController extends ScrollPane {
 		tb.setOnAction((event) -> { 
 			
 			village.switchRegimeGeneral();
-			raffraichirVpane(village, vpane); //rafraichit uniquement le vpane concerné par l'event handler
+			raffraichirVpane(village, vpane); //rafraichit uniquement le vpane concernÃ© par l'event handler
 		
 		
 		
@@ -929,7 +929,7 @@ public class FxFenetreController extends ScrollPane {
  * //	p.setStyle("-fx-background-color:rgba(0, 100, 100, 0.2); -fx-background-radius: 1;");// -fx-background-radius: 10; rgba(0, 100, 100, 0.5)
  * 
  * 		//	a.getChildren().remove(p);
-			//vm.getStyleClass().add("fake3"); //PANNEAU MARCHé
+			//vm.getStyleClass().add("fake3"); //PANNEAU MARCHÃ©
 			//vm.setStyle("-fx-border-color: white; -fx-border-style: solid ;-fx-border-width: 0 1 0 1;");
 			  
 			  
@@ -1099,7 +1099,7 @@ private void peupleractif() {
 					flowPaneMarche.setMaxWidth(120);
 					
 
-					//les event handler du marché
+					//les event handler du marchÃ©
 			//	    @FXML
 				//    private void cc(ActionEvent event) {
 				//    	bot.rythmePillage = Integer.parseInt(rythmePillage.getText()) ; 
@@ -1158,7 +1158,7 @@ private void peupleractif() {
 
 			} catch (Exception e) {
 				try {
-					fxFenetreController.console.flux.envoyer(fxFenetreController, "pas de village chargés");
+					fxFenetreController.console.flux.envoyer(fxFenetreController, "pas de village chargÃ©s");
 					      
 					
 				} catch (IOException e1) {
@@ -1250,7 +1250,7 @@ if(ipeupler == 0){
 
 			} catch (Exception e) {
 				try {
-					fxFenetreController.console.flux.envoyer(fxFenetreController, "pas de village chargés");
+					fxFenetreController.console.flux.envoyer(fxFenetreController, "pas de village chargÃ©s");
 					      
 					
 				} catch (IOException e1) {

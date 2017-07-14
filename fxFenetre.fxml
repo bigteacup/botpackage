@@ -135,7 +135,7 @@
 						<content>
                		     	<!--   <fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/>  -->
                		     	<!--   <fx:include fx:id="fxOngletParametres" source="fxOngletParametres.fxml"/>   	pour dev  --> 
-               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml" /> 
+               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml" />
                 			
                 			</content>
                            </ScrollPane>
