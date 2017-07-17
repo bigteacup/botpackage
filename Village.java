@@ -564,14 +564,12 @@ public class Village {
 		village.setBois(stockBois);
 		village.setArgile(stockArgile);
 		village.setFer(stockFer);
-		village.setCereales(stockCereales);
+		village.setCereales(stockCereales);  
 
-		String maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText()
-				.replace(" ", "");
-		int maxStockDepot = Integer.parseInt(maxDepot);
+		String maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(" ", "");
+		int maxStockDepot = Integer.parseInt(maxDepot);//bug surement le point
 
-		String maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText()
-				.replace(" ", "");
+		String maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
 		int maxStockSilo = Integer.parseInt(maxSilo);
 
 		village.setMaxStockDepot(maxStockDepot);

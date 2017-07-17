@@ -35,7 +35,7 @@ public class GestionnaireDeComptes {
 		String userPath = System.getProperty("user.home") + "\\botpackage\\comptes";
 		File dossierComptes = new File(userPath);
 		boolean isCreated = dossierComptes.mkdirs();
-		System.out.println(" Création du dossier" + userPath + " : " + isCreated);
+		System.out.println(" CrÃ©ation du dossier" + userPath + " : " + isCreated);
 
 	}
 

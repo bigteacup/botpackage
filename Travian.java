@@ -641,7 +641,7 @@ public class Travian extends Thread {
 					randomsleep.classic();
 				}
 				//TODO Remonter chargerchamp pour rendre le NPC effectif des la premiere co
-				village.updateRessources(t);
+				village.updateRessources(t); 
 				if (allume == false){break;}
 				village.voirListeDeConstruction(t);
 				if (allume == false){break;}
