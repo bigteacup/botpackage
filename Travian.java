@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.Cookie;
 
 
@@ -226,7 +225,6 @@ public class Travian extends Thread {
 				try {
 					majVillagesPlus();
 				} catch (Exception e) {ecrireDansConsole("Echec MajVillagePlus et NPC");
-				fermerFenetre();
 				}
 
 				randomsleep.court();
@@ -1222,7 +1220,7 @@ public class Travian extends Thread {
 		randomsleep.court();
 		donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody/tr"));
 		randomsleep.court();
-		 try {updateRessourcesPlus(t);} catch (Exception e) {t.ecrireDansConsole("erreure update compte plus");}
+		updateRessourcesPlus(t);
 
 		// 	compte.getDriver().get("http://ts4.travian.fr/dorf3.php?s=2");
 		//	donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody"));
@@ -1705,13 +1703,6 @@ public class Travian extends Thread {
 	}
 
 
-	public void fermerFenetre() {
-		try {
-			t.driver.findElement(By.xpath("//*[@id=\"dialogCancelButton\"]")).click();
-			ecrireDansConsole("fenetre fermée");
-			randomsleep.court();
-		}catch(Exception e ) {ecrireDansConsole("echec fermer fenetre");}
-		}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
 	///////////////////////////////////////////////////////////////////////////////////////////////////	

@@ -551,72 +551,26 @@ public class Village {
 	void updateRessources(Travian t) {
 
 		Village village = t.villageEnCours();
-		
-		String bois;
-		int stockBois;
-		String argile ;
-		int stockArgile ;
-		String fer;
-		int stockFer;
-		String cereales;
-		int stockCereales;
-		
-		try {
-			
-		 bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replace(".", "");
-		 stockBois = Integer.parseInt(bois);
-		 argile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l2\"]")).getText().replace(".", "");
-		 stockArgile = Integer.parseInt(argile);
-		 fer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l3\"]")).getText().replace(".", "");
-		 stockFer = Integer.parseInt(fer);
-		 cereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l4\"]")).getText().replace(".", "");
-		 stockCereales = Integer.parseInt(cereales);
-			
-		}catch(Exception e) {
-			
-			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
-			 bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replace(" ", "");
-			 stockBois = Integer.parseInt(bois);
-			 argile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l2\"]")).getText().replace(" ", "");
-			 stockArgile = Integer.parseInt(argile);
-			 fer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l3\"]")).getText().replace(" ", "");
-			 stockFer = Integer.parseInt(fer);
-			 cereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l4\"]")).getText().replace(" ", "");
-			 stockCereales = Integer.parseInt(cereales);
-		}
+
+		String bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replace(" ", "");
+		int stockBois = Integer.parseInt(bois);
+		String argile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l2\"]")).getText().replace(" ", "");
+		int stockArgile = Integer.parseInt(argile);
+		String fer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l3\"]")).getText().replace(" ", "");
+		int stockFer = Integer.parseInt(fer);
+		String cereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l4\"]")).getText().replace(" ", "");
+		int stockCereales = Integer.parseInt(cereales);
 
 		village.setBois(stockBois);
 		village.setArgile(stockArgile);
 		village.setFer(stockFer);
 		village.setCereales(stockCereales);  
 
-		
-		
-		
-		
-		String maxDepot;
-		int maxStockDepot;
-		try {
-		 maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(".", "");
-		 maxStockDepot = Integer.parseInt(maxDepot);
-		}catch(Exception e) {
-			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
-			maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(" ", "");
-			maxStockDepot = Integer.parseInt(maxDepot);
-			}
-		 
+		String maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(" ", "");
+		int maxStockDepot = Integer.parseInt(maxDepot);//bug surement le point
 
-		String maxSilo;
-		int maxStockSilo;
-		try {
-		 maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(".", "");
-		 maxStockSilo = Integer.parseInt(maxSilo);
-		}catch (Exception e) {
-			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
-			maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
-			maxStockSilo = Integer.parseInt(maxSilo);
-		}
-		 
+		String maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
+		int maxStockSilo = Integer.parseInt(maxSilo);
 
 		village.setMaxStockDepot(maxStockDepot);
 		village.setMaxStockSilo(maxStockSilo);

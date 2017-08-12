@@ -7,19 +7,19 @@ import java.util.List;
 public  class   TeamplatesDeVillages {
 	
 	/*
-	batimentsALancer.add("Bâtiment principal");
-	batimentsALancer.add("Dépôt de ressources");
+	batimentsALancer.add("Bétiment Principal");
+	batimentsALancer.add("Dépét de ressources");
 	batimentsALancer.add("Silo de céréales");
 	batimentsALancer.add("Place du marché");
 	batimentsALancer.add("Moulin");
 	batimentsALancer.add("Boulangerie");
 	batimentsALancer.add("Académie");
-	batimentsALancer.add("Caserne");Bûcheron écurie
+	batimentsALancer.add("Caserne");Bécheron écurie
 	*///
 	
 	
 	//correspondances de noms
-	static	 String bois ="Bûcheron";
+	static	 String bois ="Bécheron";
 	static String cereale = "Ferme";
 	static String fer= "fer";
 	static String terre= "argile";
@@ -38,20 +38,20 @@ public  class   TeamplatesDeVillages {
 	static String pieges = "Fabricant de piéges";
 	static String residence = "Résidence";
 	static String atelier= "Atelier";
-	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville
+	static String hotel_de_ville= "Hétel de Ville";//Hétel de Ville
 	static String ambassade = "Ambassade";
 	static String mur = "Palissade";
 	static String palais = "Palais";
 	static String silo ="Silo de céréales";
-	static String depot ="Dépôt de ressources";
-	static String batiment_principal ="Bâtiment principal";
+	static String depot ="Dépét de ressources";
+	static String batiment_principal ="Bétiment Principal";
 	static String empty = "Site de construction";
 	static String marche = "Place du marché";
 	static String academie = "Académie";	
 	static String caserne = "Caserne";
 	static String tailleur = "Tailleur de Pierres";
 	static String grandSilo = "Grand silo de céréales";
-	static String grandDepot = "Grand Dépôt de ressources";
+	static String grandDepot = "Grand dépét de ressources";
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
  
