@@ -44,7 +44,7 @@ public  class   TeamplatesDeVillages {
 	static String palais = "Palais";
 	static String silo ="Silo de céréales";
 	static String depot ="Dépôt de ressources";
-	static String batiment_principal ="Bâtiment principal";
+	static String batiment_principal ="Bâtiment Principal"; //Bâtiment principal
 	static String empty = "Site de construction";
 	static String marche = "Place du marché";
 	static String academie = "Académie";	

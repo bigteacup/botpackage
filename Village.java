@@ -1514,7 +1514,7 @@ public class Village {
 												try {
 													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., '"+ titre +"')]//div[@class='button-content']"));
 
-													if (boutton.getText().contains("Construire le bétiment.")) {
+													if (boutton.getText().contains("Construire le bâtiment.")) {
 														t.randomsleep.court();
 														boutton.click();
 														trouver = true;
@@ -1526,7 +1526,7 @@ public class Village {
 													t.ecrireDansConsole("Echec par Titre");
 													try {
 													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., '"+ nomBat +"')]//div[@class='button-content']"));
-													if (boutton.getText().contains("Construire le batiment.")) {
+													if (boutton.getText().contains("Construire le bâtiment.")) {
 														t.randomsleep.court();
 														boutton.click();
 														trouver = true;
@@ -1624,9 +1624,9 @@ public class Village {
 								.findElements(By.xpath("//*[@class=\"buildingWrapper\"]"));
 
 						// *[@class="buildingWrapper" and contains(.,
-						// 'construire le bétiment.') and contains(., 'Silo')]
+						// 'construire le bâtiment.') and contains(., 'Silo')]
 						// // // //*[@class="buildingWrapper" and contains(.,
-						// 'construire le bétiment.') and contains(., 'Silo')]
+						// 'construire le bâtiment.') and contains(., 'Silo')]
 						String titre = webBat.getText(); // t.getCompte().getDriver().findElement(By.xpath(""));
 						// //*[@class="buildingWrapper"]//div[@class="button-content"]
 						if (titre.contains(batimentDuTemplate.getNomBatiment())) {
@@ -1645,7 +1645,7 @@ public class Village {
 							// du
 							// boutton
 							for (WebElement boutton : listDeBoutton) {
-								if (boutton.getText().contains("construire le bétiment.")) {
+								if (boutton.getText().contains("construire le bâtiment.")) {
 									t.randomsleep.court();
 									boutton.click();
 									trouver = true;
