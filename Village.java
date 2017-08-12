@@ -703,7 +703,7 @@ public class Village {
 			List<WebElement> troupesDuVillage = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
 			for (WebElement typeTroupe : troupesDuVillage) {
 				boolean troupesPresentes = false; 
-				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "éclairs de Toutatis", "Combattants é l'épée"   };
+				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "éclairs de Toutatis", "Combattants à l'épée"   };
 
 				for (int i = 0; i < tableauTroupes.length; i++){
 					if ( typeTroupe.findElement(By.className("un")).getText().contains(tableauTroupes[i])){
@@ -1086,7 +1086,7 @@ public class Village {
 				// on corrige le level si un level est en cour de consrtuction
 				try {
 					int levelSuivantDispo = 0;
-					levelSuivantDispo = Integer.parseInt(webBatiment.getAttribute("alt").split("Coét pour le niveau ")[1].split(":<br")[0]);
+					levelSuivantDispo = Integer.parseInt(webBatiment.getAttribute("alt").split("Coût pour le niveau ")[1].split(":<br")[0]);
 					level = (levelSuivantDispo - 1); //level en cours
 				}catch(Exception e){/* t.ecrireDansConsole("Echec levelSuivantDispo de construire batiment");*/} //Coét pour le niveau 8:
 				
@@ -1243,7 +1243,7 @@ public class Village {
 			int hotelNonPresent = 1;
 
 			for (WebElement batiment : listeDesBatiments) {
-				if (batiment.getAttribute("alt").contains("Hétel de Ville")) {
+				if (batiment.getAttribute("alt").contains("Hôtel de Ville")) {
 					hotelNonPresent = 0;
 					batiment.click();
 
@@ -1435,7 +1435,7 @@ public class Village {
 
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
-				if(nomBat.equals("Résidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépét de ressources") || nomBat.contains("Chambre aux trésors")){
+				if(nomBat.equals("Résidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){
 					t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire");				
 				}else {
 					if(batimentDuTemplate.getPresent() == false ){
@@ -1494,7 +1494,7 @@ public class Village {
 
 							for(Batiment batimentDuTemplate : village.getBatimentsDuTemplateDuVillage()){
 								nomBat = batimentDuTemplate.getNomBatiment();
-								if(nomBat.equals("Résidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépét de ressources") || nomBat.contains("Chambre aux trésors")){
+								if(nomBat.equals("Résidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){
 									t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire 2 "); 
 
 								}else {
@@ -1512,7 +1512,7 @@ public class Village {
 											if (titre.toLowerCase().contains(nomBat.toLowerCase())) {
 												t.ecrireDansConsole(nomBat+" ////////// tentative pour contruction"); 
 												try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bétiment.') and contains(., '"+ titre +"')]//div[@class='button-content']"));
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., '"+ titre +"')]//div[@class='button-content']"));
 
 													if (boutton.getText().contains("Construire le bétiment.")) {
 														t.randomsleep.court();
@@ -1525,8 +1525,8 @@ public class Village {
 												}catch (Exception e) {
 													t.ecrireDansConsole("Echec par Titre");
 													try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bétiment.') and contains(., '"+ nomBat +"')]//div[@class='button-content']"));
-													if (boutton.getText().contains("Construire le bétiment.")) {
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., '"+ nomBat +"')]//div[@class='button-content']"));
+													if (boutton.getText().contains("Construire le batiment.")) {
 														t.randomsleep.court();
 														boutton.click();
 														trouver = true;
@@ -1535,7 +1535,7 @@ public class Village {
 													}
 													}catch (Exception e1) {
 													t.ecrireDansConsole("Echec par nomBat");
-													t.ecrireDansConsole(nomBat + " --> echec Pas dispo é la construction sur page manque ressources ou prerequis "+ i2 +" Debug info : "+" nomBat ="+nomBat+" Titre.toLowerCase ="+ titre.toLowerCase() +" Titre normal ="+ titre );
+													t.ecrireDansConsole(nomBat + " --> echec Pas dispo a la construction sur page manque ressources ou prerequis "+ i2 +" Debug info : "+" nomBat ="+nomBat+" Titre.toLowerCase ="+ titre.toLowerCase() +" Titre normal ="+ titre );
 													}
 												}//fin catch
 											}else {t.ecrireDansConsole(nomBat +" pas dispo sur ce webB ");} //fin if
