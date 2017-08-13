@@ -60,7 +60,7 @@ public class Travian extends Thread {
 	Lancerbot bot;	
 	FxFenetreController fxFenetreController;
 	private  AtomicReference<Thread> currentThread = new AtomicReference<Thread>();
-
+	public int tokenPasDeComptePlusPourMarcheDeLaRotation = 0;
 
 	private WebDriver driver;
 
@@ -227,6 +227,8 @@ public class Travian extends Thread {
 					majVillagesPlus();
 				} catch (Exception e) {ecrireDansConsole("Echec MajVillagePlus et NPC");
 				fermerFenetre();
+				t.ecrireDansConsole("Conclusion pas de compte +  : estimation des marchands dispo par le level du marche au moment du passage sur le village");
+				t.tokenPasDeComptePlusPourMarcheDeLaRotation = 1;
 				}
 
 				randomsleep.court();
@@ -293,6 +295,7 @@ public class Travian extends Thread {
 				//Reset des memoires de rotation"
 				// on suprime la liste des ordre du village a chaque tour de bot, //TODO verifier si cest bien placé en cas d'echec
 				t.viderMemoireRotation();
+			
 
 				// Reglage de l'attente entre deux boucles
 				//	randomsleep.lent();	
@@ -337,7 +340,9 @@ public class Travian extends Thread {
 			village.memoireMarcheDeLaRotation[3] = 0;
 			nI++;
 		}
-		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées");
+		t.tokenPasDeComptePlusPourMarcheDeLaRotation = 0;
+		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenPasDeComptePlusPourMarcheDeLaRotation);
+	
 
 	}
 
@@ -669,6 +674,19 @@ public class Travian extends Thread {
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja 2 construction en cours");}
 				}else {t.ecrireDansConsole("construction Desactivees...");}
+				
+				try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur
+				if(tokenPasDeComptePlusPourMarcheDeLaRotation == 1) {
+					village.chargerBatiments(t);
+					for (Batiment bat : village.getBatiments()) { 
+						if(bat.getNomBatiment().toLowerCase().contains("march")) {
+						village.setNombreDeMarchands(bat.getLevelBatiment());
+						t.ecrireDansConsole("Forcage estimation nombre de marchand par level marché : "+ bat.getLevelBatiment());
+						break;
+						}
+					}	
+				}
+				}catch(Exception e) {t.ecrireDansConsole("Echec Forcage estimation nombre de marchand par level marché");}
 
 
 				if (allume == false){break;}

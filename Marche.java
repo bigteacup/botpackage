@@ -774,7 +774,7 @@ public class Marche {
 						double	distanceMax = t.bot.distanceMaxPourMarchands; //en cases
 						if(distance < distanceMax ){
 
-							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4){
+							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4){ //TODO verifier de ne pas prendre le meme village 
 								if(villageCandidat.getBois() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getArgile() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getFer() > ressourcesMiniSurVillageSource 
