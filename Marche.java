@@ -725,7 +725,7 @@ public class Marche {
 
 			}catch (Exception e1) {t.ecrireDansConsole("echec evitement de la pub Travian+ ---> normal code mort  mais laisser pour garder le code pour autre chose");}
 
-			try {//bon bah on vas sur une page contenant le marché
+			try {//bon bah on va sur une page contenant le marché
 				if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 					t.randomsleep.court();
 					t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
@@ -746,7 +746,7 @@ public class Marche {
 	}
 	//TODO Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que 1 marchands de chaque et corriger "totalRessourcesEnvoyees"
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
-		t.ecrireDansConsole("[Marché] ApproPetitVillage");
+		t.ecrireDansConsole("[Marché] ApproPetitVillage Début");
 		try {
 			if (village.getChampMin() <= t.bot.champMinFx){
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
@@ -885,6 +885,7 @@ public class Marche {
 				}
 			}
 		}catch (Exception e){t.ecrireDansConsole("echec approPetitVillage");}
+		t.ecrireDansConsole("[Marché] ApproPetitVillage Fin");
 
 	}
 
@@ -895,6 +896,7 @@ public class Marche {
 
 
 	public void acheterAuMarché(Travian t, Village village){
+		t.ecrireDansConsole("[Marché] acheterAuMarché Début ");
 		int tempsMax = 2; // temps en heure
 		//int marchandsMinPourAcheter = 10;
 		int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
@@ -984,6 +986,7 @@ public class Marche {
 								String tempstrajet =	offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
 								if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
 								String[] decoupage = tempstrajet.split(":");
+								t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage);
 								int heures = Integer.parseInt(decoupage[0]);
 								int minutes = Integer.parseInt(decoupage[1]);
 								int secondes = Integer.parseInt(decoupage[2]);
@@ -1038,10 +1041,11 @@ public class Marche {
 
 	}
 		 */
+		t.ecrireDansConsole("[Marché] acheterAuMarché Fin ");
 	}//fin methode acheter au marché
 
 
-
+	
 
 
 
