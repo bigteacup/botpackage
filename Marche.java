@@ -894,13 +894,14 @@ public class Marche {
 
 
 
-
+//TODO limiter les achats afin de ne pas causer un manque sur une autre ressource, bref pas compatible avec les petits villages
+	// faire un limiteur par la taille du village, ou des depot, ou le calcul complet
 	public void acheterAuMarché(Travian t, Village village){
 		t.ecrireDansConsole("[Marché] acheterAuMarché Début ");
 		int tempsMax = 2; // temps en heure
 		//int marchandsMinPourAcheter = 10;
 		int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
-		int marchandsAllouésPourAchat = 10;
+		int marchandsAllouésPourAchat = 1; // faire varier pour s'adapter a la tailler du village //10
 		int pourcentageDeclenchementAcheter = 50; // 50% de la moyenne du total des ressources
 
 		int totalBois = 0;
@@ -993,7 +994,7 @@ public class Marche {
 								int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
 								if(durationEnMilli <= (tempsMax*3600)*1000 ){
 									village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
-									offres.get(0).click(); // on aceepte loffre !
+									offres.get(0).click(); // on accepte loffre !
 									t.ecrireDansConsole("1 achat effectué au marché");
 									Date lastDate = t.randomsleep.date(true);
 									village.setMarchéLastDate(lastDate);
