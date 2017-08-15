@@ -44,7 +44,7 @@ public class fxConsoleExperimentale  { //extends Thread
 
 		ArrayList<String> motsaTester = new ArrayList<String>();
 		String l1 [] = {"Attente", "echec", "Template Non Fini","Template Fini","Bois","Argile","Fer","Cereales","construireBatiment", "Fete","En Negatif = true",
-						"Echec", "En Negatif = false", "Marché", "Marchands Dispos", "Ordre", "En Debordement"};
+						"Echec", "En Negatif = false", "Marché", "Marchands Dispos", "Ordre", "En Debordement" , "Debug", "gestionHeroProd", "Aventure"};
 		
 		volatile	StyleClassedTextArea ligne = new StyleClassedTextArea();
 		volatile	 TextArea ligne2 = new  TextArea ();
@@ -350,7 +350,7 @@ public class fxConsoleExperimentale  { //extends Thread
 		private String coloration(String str){
 
 
-			if(str.contains("echec") || str.contains("En Negatif = true") || str.contains("Echec")){
+			if(str.contains("echec") || str.contains("En Negatif = true") || str.contains("Echec") || str.contains("Debug")){
 				String classeCss = "console0";
 					return classeCss;}
 
@@ -412,6 +412,10 @@ public class fxConsoleExperimentale  { //extends Thread
 			
 			if( str.contains("En Debordement")){
 				String classeCss = "console12";
+				return classeCss;}
+			
+			if( str.contains("gestionHeroProd")||str.contains("Aventure")){
+				String classeCss = "console1";
 				return classeCss;}
 
 			// ici la boucle pour le noms de villages   

@@ -986,7 +986,7 @@ public class Marche {
 								String tempstrajet =	offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
 								if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
 								String[] decoupage = tempstrajet.split(":");
-								t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage);
+								t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage[0]+" "+decoupage[1]+" "+decoupage[2]);
 								int heures = Integer.parseInt(decoupage[0]);
 								int minutes = Integer.parseInt(decoupage[1]);
 								int secondes = Integer.parseInt(decoupage[2]);
