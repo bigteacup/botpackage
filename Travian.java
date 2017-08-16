@@ -60,7 +60,7 @@ public class Travian extends Thread {
 	Lancerbot bot;	
 	FxFenetreController fxFenetreController;
 	private  AtomicReference<Thread> currentThread = new AtomicReference<Thread>();
-	public int tokenPasDeComptePlusPourMarcheDeLaRotation = 0;
+	public int tokenForcerMarcheDeLaRotation = 0;
 
 	private WebDriver driver;
 
@@ -227,8 +227,8 @@ public class Travian extends Thread {
 					majVillagesPlus();
 				} catch (Exception e) {ecrireDansConsole("Echec MajVillagePlus et NPC");
 				fermerFenetre();
-				t.ecrireDansConsole("Conclusion pas de compte +  : estimation des marchands dispo par le level du marche au moment du passage sur le village");
-				t.tokenPasDeComptePlusPourMarcheDeLaRotation = 1;
+				t.ecrireDansConsole("Conclusion pas de compte + ou bug");
+			   
 				}
 
 				randomsleep.court();
@@ -340,8 +340,8 @@ public class Travian extends Thread {
 			village.memoireMarcheDeLaRotation[3] = 0;
 			nI++;
 		}
-		t.tokenPasDeComptePlusPourMarcheDeLaRotation = 0;
-		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenPasDeComptePlusPourMarcheDeLaRotation);
+		t.tokenForcerMarcheDeLaRotation = 0;
+		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenForcerMarcheDeLaRotation);
 	
 
 	}
@@ -676,7 +676,7 @@ public class Travian extends Thread {
 				}else {t.ecrireDansConsole("construction Desactivees...");}
 				
 				try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur
-				if(tokenPasDeComptePlusPourMarcheDeLaRotation == 1) {
+				if(tokenForcerMarcheDeLaRotation == 1) {
 					village.chargerBatiments(t);
 					for (Batiment bat : village.getBatiments()) { 
 						if(bat.getNomBatiment().toLowerCase().contains("march")) {
@@ -1227,7 +1227,13 @@ public class Travian extends Thread {
 		randomsleep.court();
 		donneesGlobales = compte.getDriver().findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr"));
 		randomsleep.court();
-		determinerBesoinDeConstructions();
+		try{determinerBesoinDeConstructions();}catch(Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeConstructions");}
+		try{updateMarchandSansComptePlus(t);//pour redonder en fonction de la possession du compte + ou non
+		}catch(Exception e){
+			t.ecrireDansConsole("Echec updateMarchandSansComptePlus => Estimation nombre Marchands par level de marche"); 
+			t.tokenForcerMarcheDeLaRotation = 1;}
+		
+		
 		// 	compte.getDriver().get("http://ts4.travian.fr/dorf3.php?s=2");
 		//	donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody"));
 
@@ -1236,11 +1242,13 @@ public class Travian extends Thread {
 
 		//donnees ressources
 		// compte.getDriver().get("http://ts4.travian.fr/dorf3.php");
+		 try {
 		compte.getDriver().findElement(By.xpath("//a[contains(@id, 'villageOverViewTab2')]")).click();
 		randomsleep.court();
 		donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody/tr"));
 		randomsleep.court();
-		 try {updateRessourcesPlus(t);} catch (Exception e) {t.ecrireDansConsole("erreure update compte plus");}
+		updateRessourcesPlus(t);} catch (Exception e) {t.ecrireDansConsole("Echec update ressources compte plus");
+		 }
 
 		// 	compte.getDriver().get("http://ts4.travian.fr/dorf3.php?s=2");
 		//	donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody"));
@@ -1252,17 +1260,20 @@ public class Travian extends Thread {
 		//donnees pourcentage
 
 		//	compte.getDriver().get("http://ts4.travian.fr/dorf3.php?s=3");
+		try {
 		compte.getDriver().findElement(By.xpath("//a[contains(@id, 'villageOverViewTab3')]")).click();
 		randomsleep.court();
 		donneesRessourcesPourcentage = compte.getDriver().findElements(By.xpath("//*[@id=\"warehouse\"]/tbody/tr"));
 		randomsleep.court();
 		determinerBesoinDeNpc();
+		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeNpc");}
 
 		randomsleep.court();
 
 		//donnees culturepoint
 
 		//compte.getDriver().findElement(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green  ')]")).click();
+		try {
 		randomsleep.court();
 		compte.getDriver().findElement(By.xpath("//*[@id=\"villageOverViewTab4\"]")).click();
 		randomsleep.court();
@@ -1270,13 +1281,40 @@ public class Travian extends Thread {
 
 		randomsleep.court();
 
-		determinerBesoinDeFetes();
+		determinerBesoinDeFetes();} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeFetes");
+		//pour finir, fermer la fenetre de pub travian
+		fermerFenetre();
+		t.ecrireDansConsole("Conclusion pas de compte + ou bug");
+		}
 
 
 
 
 	}
+	void  updateMarchandSansComptePlus(Travian t) {
+		int i = 0;
 
+		for (Village village	: listeDeVillages){
+			boolean trouver = false;
+			while(trouver == false){
+				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
+					village.setNombreDeMarchands(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[0].replaceAll("\\W", "")));
+
+					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands());
+
+					trouver = true;
+					i = 0;
+
+				}
+				else {i++;}
+			}
+		}
+
+
+
+	}
+
+		
 
 	void updateRessourcesPlus(Travian t) {
 		int i = 0;

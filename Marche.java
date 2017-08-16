@@ -901,7 +901,7 @@ public class Marche {
 		int tempsMax = 2; // temps en heure
 		//int marchandsMinPourAcheter = 10;
 		int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
-		int marchandsAllouésPourAchat = 1; // faire varier pour s'adapter a la tailler du village //10
+		int marchandsAllouésPourAchat = 1; // faire varier pour s'adapter a la taille du village //10 sur  gros compte
 		int pourcentageDeclenchementAcheter = 50; // 50% de la moyenne du total des ressources
 
 		int totalBois = 0;
@@ -1002,7 +1002,7 @@ public class Marche {
 									t.randomsleep.court();
 								}else {
 									continuer = false;
-									t.ecrireDansConsole("offre trop eloigné : + de :" + tempsMax +" heure" );
+									t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure" );
 
 
 
