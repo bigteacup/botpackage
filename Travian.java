@@ -255,7 +255,7 @@ public class Travian extends Thread {
 				if (allume == false){break;}
 
 
-				// 
+
 
 
 				try {
@@ -270,7 +270,10 @@ public class Travian extends Thread {
 
 
 				try {
-					aventureHero();			
+					if (t.bot.faireAventures	 == true){
+						aventureHero();			
+					}else {t.ecrireDansConsole("Aventures désactivées");}
+							
 				} catch (Exception e) {ecrireDansConsole("Echec gestionHero2");
 				}
 				randomsleep.court();

@@ -25,11 +25,7 @@ import org.openqa.selenium.WebDriver;
 	
 	/// reglages recupérés par le bot et l'interface
 	boolean faireDefiler = true;
-	boolean pillage = true;
-	boolean faireFete = true;
-	boolean evacuerSurplusRessources = true;
-	boolean approPetitsVillages = true;
-	boolean construireBatiments = true;
+
 	public int delaisAventures = 150;
 	public int rythmePillage = 1;
 	public int evacuerAPartirDe = 80;
@@ -39,15 +35,26 @@ import org.openqa.selenium.WebDriver;
 	public int ressourcesMiniSurVillageSourceFx = 5000;
 	public int distanceMaxPourMarchands = 24; 
 	public int vitesseMarchands = 24; //gaulois = 24 romains = 16 germains = 12
+	public int DepotMiniPourAiderFx = 9600;
+	
+	boolean pillage = true;
+	boolean faireFete = true;
+	boolean evacuerSurplusRessources = true;
+	boolean approPetitsVillages = true;
+	boolean construireBatiments = true;
 	public boolean optimiserProdHero = true;
-	public boolean afficherAttente = false;
-	public boolean rotationVillage = true;
+	public boolean faireAventures = true;
+	public boolean monterChampsCapitale = true;
 	public boolean npc = true;
+	public boolean rotationVillage = true;
+	public boolean afficherAttente = false;
+
+	
 	public String idDeLaListeDePillage = "1592";
 	public String motCleListeDePillage1 = "inactif";
 	public String motCleListeDesPertes = "perte";
-	public int DepotMiniPourAiderFx = 9600;
-	public boolean monterChampsCapitale = true;
+	
+	
 
 
 

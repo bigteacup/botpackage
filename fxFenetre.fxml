@@ -97,7 +97,27 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
-                        <CheckBox contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" selected="true" text="CheckBox">
+                        <CheckBox  fx:id="caseFaireAventures" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseFaireAventures" selected="true" text="Aventures">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                                                <CheckBox  contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false"  selected="true" text="">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                                                <CheckBox   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false"  selected="true" text="">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                                                <CheckBox  contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" selected="true" text="">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                                                <CheckBox   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false"  selected="true" text="">
                            <FlowPane.margin>
                               <Insets />
                            </FlowPane.margin>

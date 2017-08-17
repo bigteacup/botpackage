@@ -129,6 +129,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private CheckBox caseOptimiserProdHero;
+	
+	@FXML
+	private CheckBox caseFaireAventures;
 
 	@FXML
 	private TabPane tabbedPane;
@@ -244,10 +247,16 @@ public class FxFenetreController extends ScrollPane {
 		} else
 			monterChampCapitale.setSelected(false);
 		
+		if (bot.faireAventures == true) {
+			// casePillage.isSelected();
+			caseFaireAventures.setSelected(true);
+		} else
+			caseFaireAventures.setSelected(false);
+		
 	}
 	
 	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////LOGIN SERVER  ETC
+	/////////////////////////////////////////////////////////////////////////////////////////////////////LOGIN SERVER  ETC 
 	@FXML
 	private void nomDeCompte() {
 		nomDeCompte.setText("login");
@@ -367,6 +376,16 @@ public class FxFenetreController extends ScrollPane {
 			bot.pillage = true;
 		}
 	}
+	
+	@FXML
+	private void caseFaireAventures(){
+		if (bot.faireAventures == true) {
+			bot.faireAventures = false;
+		}else
+			bot.faireAventures = true;
+	}
+	
+	
 
 	@FXML
 	private void bypassPause() {
