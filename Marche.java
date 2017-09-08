@@ -346,7 +346,7 @@ public class Marche {
 						temps = t.calculs.tempsDeTrajet(distance, vitesseMarchands, 0, 0, 0, false);
 						int memRot = 0;
 
-						if(distance < distanceMax  ){ //&& pourcentage < 100
+						if(distance < distanceMax && distance > 0.0  ){ //&& pourcentage < 100
 
 
 
@@ -406,7 +406,17 @@ public class Marche {
 
 
 						}else {
+							if(distance == 0.0) {
+								t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " ne peut pas s'envoyer a lui meme. Pourcentage actuel : " + pourcentage);
+							if (pourcentage >= 100){
+								continuer=false;	
+								t.ecrireDansConsole("[Marché]Pas de villages é portée pour evacuer cette ressource : " +ordre.getNomOrdre());
+								break;
+								}
+							
+							}
 							//	nbrVillageTropLoin++;
+							if(distance > 0.0) {
 							t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " est trop eloigné. Pourcentage actuel : " + pourcentage);
 							if (pourcentage >= 100){
 								continuer=false;	
@@ -418,11 +428,13 @@ public class Marche {
 							//		t.ecrireDansConsole("[Marché] Pas de village a proximité suffisante");
 							//		nbrVillageTropLoin=0;	
 							//	}
+							}
 						}
 
 					}
 					//apres avoir parcouru tous les village avec une valur donnée, on incremente pour recommencer avec une valeur plus elevée
 					pourcentage = pourcentage+10;
+					
 				}
 			}
 
