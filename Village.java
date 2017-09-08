@@ -598,7 +598,7 @@ public class Village {
 		String maxDepot;
 		int maxStockDepot;
 		try {
-		 maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(".", "");
+		 maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replaceAll("[\\u202D\\u202C.]", ""); // code correspondant au whitespace causé par left to right \\u202D \\u202C
 		 maxStockDepot = Integer.parseInt(maxDepot);
 		}catch(Exception e) {
 			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
@@ -610,7 +610,7 @@ public class Village {
 		String maxSilo;
 		int maxStockSilo;
 		try {
-		 maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(".", "");
+		 maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replaceAll("[\\u202D\\u202C.]", "");
 		 maxStockSilo = Integer.parseInt(maxSilo);
 		}catch (Exception e) {
 			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
