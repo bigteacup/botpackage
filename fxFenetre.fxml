@@ -45,7 +45,7 @@
                   </VBox>
                   <VBox styleClass="b" GridPane.columnIndex="1">
                      <children>
-                        <TextField fx:id="nomDeCompte" text="" />
+                        <TextField fx:id="userName" text="" />
                         <PasswordField fx:id="motDePasse" prefHeight="25.0" prefWidth="96.0" text="" />
                         <TextField fx:id="serveur" text="" />
                      </children>

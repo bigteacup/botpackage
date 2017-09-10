@@ -129,6 +129,7 @@ public class FxFenetre extends Application {
 			if (bot.travian.allume == false){
 				String serveur = serveurj.getText();
 
+
 				String userName = userNamej.getText();
 				String motDePasse = motDePassej.getText();
 				bot.lancerTravian(serveur, userName, motDePasse );
@@ -141,13 +142,14 @@ public class FxFenetre extends Application {
 
 				String nomDeCompte = nomDeComptej.getText();
 				String motDePasse = motDePassej.getText();
-				bot.lancerTravian(serveur, nomDeCompte, motDePasse );
+				bot.lancerTravian(serveur, userName, motDePasse );
 			}
 		}catch (Exception e1){
 			String serveur = serveurj.getText();
-			String nomDeCompte = nomDeComptej.getText();
+			String userName = userNamej.getText();
 			String motDePasse = motDePassej.getText();
-			bot.lancerTravian(serveur, nomDeCompte, motDePasse );}
+
+			bot.lancerTravian(serveur, userName, motDePasse );}
 
 		//	System.out.println(bot.getName());
 		//    System.out.println(bot.getState());

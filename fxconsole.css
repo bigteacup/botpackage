@@ -234,6 +234,7 @@ b.scroll-bar:horizontal b.track-background {
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 }
 
+
  .lesCheckBoxs{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
 	-fx-background-image: url("file:///C:/travimage/default_paper.png");
@@ -317,13 +318,29 @@ b.scroll-bar:horizontal b.track-background {
 
  .clabel{
 	-fx-background-color: rgb(102,0,204);
+
+ .ctuile{
+	-fx-background-color: #4caf50;
+
 	-fx-border-style: solid ;
-	
-	
-	
 	-fx-border-color: white;
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 }
+
+ .clabel{
+ 
+ }
+  .ctitre{
+ -fx-text-fill: white; 
+ -fx-font-size: 16px;
+ -fx-font-weight:bold;
+    -fx-padding: 0px 12px 0px 12px;
+
+ -fx-font-smoothing-type: lcd;
+ }
+  .cbutton1{
+ 
+ }
 
  .vLabel{
 	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );

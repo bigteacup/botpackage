@@ -12,7 +12,14 @@ import org.openqa.selenium.WebDriver;
 
 public class Compte {
 	
-public Properties	fichierProperties = loadConfigComptes();
+	
+	public Compte(String nomDeCompte) {
+		
+		fichierProperties = loadConfigComptes(nomDeCompte);
+	}
+	
+public String nomDeCompte;	
+public Properties	fichierProperties ;
 
 private String server;
 private String userName;
@@ -29,9 +36,9 @@ private String tribut = "romains";
 
 
 //charger les configs précédentes
-public Properties loadConfigComptes(){
-	
-String path = System.getProperty("user.home")+"\\travianfx.properties";		
+public Properties loadConfigComptes(String nomDeCompte){
+this.nomDeCompte = nomDeCompte;
+String path = System.getProperty("user.home")+"\\botpackage\\comptes\\"+ nomDeCompte ;		//System.getProperty("user.home") + "\\botpackage\\comptes"; +\".properties"
 Properties properties = new Properties();
 FileInputStream input = null;
 
@@ -106,16 +113,6 @@ this.fichierProperties = fichierProperties;
 	
 		
 	}
-	public Compte() {
-		//server = fichierProperties.getProperty("server");
-	//	userName = fichierProperties.getProperty("login"); 
-	//	passWord = fichierProperties.getProperty("password");
 
-				/*if(true){
-				server = fichierProperties.getProperty("server");
-				userName = fichierProperties.getProperty("login"); 
-				passWord = fichierProperties.getProperty("password");
-				}*/
-	}
 	
 }

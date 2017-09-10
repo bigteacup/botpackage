@@ -72,6 +72,8 @@ public class FxFenetreController extends ScrollPane {
 	fxConsoleExperimentale console;
 	VirtualizedScrollPane<StyleClassedTextArea> vtScroll;
 	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
+	
+	String compteSelectionne = null;
 
 	@FXML
 	private URL location;
@@ -95,7 +97,7 @@ public class FxFenetreController extends ScrollPane {
 	private Button bypassPause;
 
 	@FXML
-	private TextField nomDeCompte;
+	private TextField userName;
 
 	@FXML
 	private PasswordField motDePasse;
@@ -166,7 +168,7 @@ public class FxFenetreController extends ScrollPane {
 		assert boutonOn != null : "fx:id=\"boutonOn\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert boutonOff != null : "fx:id=\"boutonOff\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert bypassPause != null : "fx:id=\"bypassPause\" was not injected: check your FXML file 'fxFenetre.fxml'.";
-		assert nomDeCompte != null : "fx:id=\"nomDeCompte\" was not injected: check your FXML file 'fxFenetre.fxml'.";
+		assert userName != null : "fx:id=\"userName\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert motDePasse != null : "fx:id=\"motDePasse\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert serveur != null : "fx:id=\"serveur\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert lesCheckBoxs != null : "fx:id=\"lesCheckBoxs\" was not injected: check your FXML file 'fxFenetre.fxml'.";
@@ -258,8 +260,8 @@ public class FxFenetreController extends ScrollPane {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////LOGIN SERVER  ETC 
 	@FXML
-	private void nomDeCompte() {
-		nomDeCompte.setText("login");
+	private void userName() {
+		userName.setText("login");
 		if (bot.pillage == true) {
 			bot.pillage = false;
 		} else {
@@ -395,12 +397,19 @@ public class FxFenetreController extends ScrollPane {
 	@FXML
 	private void boutonOn() {
 		// System.out.println("on");
+		String nomDeCompte = compteSelectionne;
 		bot.setfxFenetreController(this);
 		String s = serveur.getText();
-		String n = nomDeCompte.getText();
+		String n = userName.getText();
 		String m = motDePasse.getText();
-		//if(bot.travian.getCompte() != null){}
-		bot.lancerTravian(s, n, m);
+		if(compteSelectionne != null){
+		bot.lancerTravian(nomDeCompte, s, n, m);
+		}else {try {
+			console.flux.envoyer(fxFenetreController, "Pas de compte selectionne... Veuillez selectionner un compte.");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}}
 	}
 
 	@FXML
@@ -421,21 +430,43 @@ public class FxFenetreController extends ScrollPane {
 
 	}
 	
-	public void faireTuileDeCompte(){
+	public void faireTuileDeCompte(File compte){
 		
 		 Platform.runLater(new Runnable() {
 			 
 			 public void run() {
+				
 				 
+				 String textDeBoutton = "Selectionner";
+				 try {
+				 if(compteSelectionne.equals(compte.getName())) {
+					 textDeBoutton = "En cours...";
+					 
+				 } 
+				 }catch (Exception e) {}
 				 
-		 StackPane  vpane = new StackPane();
+		 BorderPane  vpane = new BorderPane();
 	       
-		 Button button1 = new Button("Connexion");
-		 Label titre = new Label("titre");
+		 Button button1 = new Button(textDeBoutton); //compteSelectionne=compte.getName()
+		 button1.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			        button1.setText("En cours");
+			        compteSelectionne = compte.getName();
+			        //update de cochon
+			        fxChargerComptes();
+			    }
+			});
+		 
+		 Label titre = new Label(compte.getName());
 
-	        vpane.getChildren().add(button1);
-	        vpane.getChildren().add(titre);
-	        titre.getStyleClass().add("clabel");
+	       // vpane.getChildren().add(button1);
+	       // vpane.getChildren().add(titre);
+	        titre.getStyleClass().add("ctitre");
+	      //  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
+	        vpane.setTop(titre);
+	        vpane.setCenter(button1);
+	        
+	        
 	        //comptesTilePane.getChildren().add(button1);
 	        comptesTilePane.getChildren().add(vpane);
 			
@@ -443,7 +474,7 @@ public class FxFenetreController extends ScrollPane {
 			comptesTilePane.setVgap(5);
 			comptesTilePane.setHgap(5);
 			comptesTilePane.setPrefColumns(13);
-		 	vpane.getStyleClass().add("v3");
+		 	vpane.getStyleClass().add("ctuile");
 			vpane.setMinHeight(150);
 			vpane.setMinWidth(150);
 		//	ObservableList list = comptesTilePane.getChildren(); 
@@ -464,7 +495,7 @@ public class FxFenetreController extends ScrollPane {
 					try { 
 					comptesTilePane.getChildren().clear();
 					 for (File compte : listeFichiers){
-					faireTuileDeCompte();
+					faireTuileDeCompte(compte);
 					
 					
 				 }
