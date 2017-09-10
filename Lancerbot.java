@@ -130,7 +130,7 @@ public void setfxFenetreController(FxFenetreController fxFenetreController){
 }
 
 
-public void lancerTravian(String serveur, String nomDeCompte, String motDePasse){
+public void lancerTravian(String nomDeCompte, String serveur, String userName, String motDePasse){
 	
 /*	try {
 		Thread.sleep(30000);
@@ -139,7 +139,7 @@ public void lancerTravian(String serveur, String nomDeCompte, String motDePasse)
 */	
 	if (travian == null){
 	//if (!travian.isAlive()){
-		travian = new Travian(this, serveur, nomDeCompte, motDePasse);
+		travian = new Travian(this, nomDeCompte , serveur, userName, motDePasse);
 		travian.setFxFenetreController(fxFenetreController);
 		travian.start();
 		travian.allume = true;
@@ -151,7 +151,8 @@ public void lancerTravian(String serveur, String nomDeCompte, String motDePasse)
 	}
 	else {
 		if (!travian.isAlive() ){
-		travian = new Travian(this, serveur, nomDeCompte, motDePasse);
+		travian = new Travian(this, nomDeCompte, serveur, userName, motDePasse);
+		travian.setFxFenetreController(fxFenetreController);
 		travian.start();
 		travian.allume = true;
 		travian.ecrireDansConsole(travian.getName());
@@ -199,41 +200,15 @@ public void annulerPause(){
 }
 
 public void eteindreTravian(){
-	if (travian != null){
-	if (travian.isAlive()){
-	//	travian.stop();
+//	if (travian != null){
+//	if (travian.isAlive()){
+try {
 		travian.allume = false;
-		//bot.tfenetre.console.destroy();
-	//	if(travian.randomsleep.enPause == false){
-	//	bot.travian.interrupt();
-	//	}
-		//bot.travian.arreter();
 		travian.ecrireDansConsole("********* Arret Demande ************ Arret Demande ************** Arret Demande *************");
-
-		//bot.travian.getCompte().getDriver().close();
-		//bot.travian.interrupt();
-
-		//travian.notify();
-
-		//travian.stop();
-		//try {travian.getCompte().getDriver().close();}catch (Exception e) {}
-	//	try {travian.getCompte().getDriver().quit();}catch (Exception e) {}
-
-	//travian.ecrireDansConsole(travian.getName());
-    //travian.ecrireDansConsole(travian.getState());
+}catch(Exception e) {System.out.println("Travian non lancé");}		
 
 
-
-
-/*	// Attente de la fin du thread
-	try {
-		travian.join();
-	} catch (InterruptedException e) {
-		
-		e.printStackTrace();
-	}
-	//travian.getThreadGroup().destroy();*/
-	}}
+//	}}
 
 
 
