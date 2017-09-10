@@ -76,11 +76,11 @@ public class Travian extends Thread {
 
 
 		//TODO faire un gestionnaire de compte por simplifier et fiabiliser l'enssemble dy systeme de connexion 
-	public Travian(Lancerbot bot, String serveur, String nomDeCompte, String motDePasse) {
+	public Travian(Lancerbot bot, String nomDeCompte, String serveur, String userName, String motDePasse) {
 		//super();
 		this.bot = bot;
-		compte = new Compte();
-		if(serveur == null || nomDeCompte== null || motDePasse == null ||serveur.length()==0 || nomDeCompte.length()==0 || motDePasse.length()==0){
+		compte = new Compte(nomDeCompte);
+		if(serveur == null || userName== null || motDePasse == null ||serveur.length()==0 || userName.length()==0 || motDePasse.length()==0){
 			
 			compte.setServer( compte.fichierProperties.getProperty("server"));
 			compte.setUserName(compte.fichierProperties.getProperty("login")); 
@@ -90,7 +90,7 @@ public class Travian extends Thread {
 		}
 		else{
 		compte.setServer(serveur);
-		compte.setUserName(nomDeCompte);
+		compte.setUserName(userName);
 		compte.setPassWord(motDePasse);
 		
 		}
@@ -115,10 +115,16 @@ public class Travian extends Thread {
 		try {t.getCompte().getDriver().close();}catch (Exception e) {}
 		try {t.getCompte().getDriver().quit();}catch (Exception e) {}
 
-		ecrireDansConsole(getName());
+		ecrireDansConsole(t.getName());
 		ecrireDansConsole(t.getState().toString());
 		ecrireDansConsole("********* Bot eteind ************");
 		System.out.println("********* Bot eteind ************");
+		
+        
+			
+		
+
+		
 		//  ecrireDansConsole("********* Bot eteind ************");
 
 	}
@@ -400,7 +406,8 @@ public class Travian extends Thread {
 		// compte.getDriver().get(compte.getServer());
 		// Open
 
-
+		t.ecrireDansConsole(t.getName());
+	    t.ecrireDansConsole(t.getState().toString());
 		driver.get(compte.getServer()+"dorf1.php");
 		randomsleep.court();
 		try {
@@ -449,7 +456,9 @@ public class Travian extends Thread {
 			ecrireDansConsole("***************   BUG erreur 404 : REDEMARRAGE   *************************");
 			ecrireDansConsole("**************  (Ou un boulet joue en meme temps que le bot) *************");
 			ecrireDansConsole("**************************************************************************");
-
+			t.ecrireDansConsole(t.getName());
+		    t.ecrireDansConsole(t.getState().toString());
+		    
 			if(echecDeBoot <= 4){
 				randomsleep.lent();}
 			else {ecrireDansConsole("Ca merde trop --> Attente longue");randomsleep.treslent();}
@@ -465,7 +474,9 @@ public class Travian extends Thread {
 			ecrireDansConsole("**************************************************************************");
 			ecrireDansConsole("***************   BUG navigateur ferme ! : REDEMARRAGE   *****************");
 			ecrireDansConsole("**************************************************************************");
-
+			t.ecrireDansConsole(t.getName());
+		    t.ecrireDansConsole(t.getState().toString());
+		    
 			if(echecDeBoot <= 4){
 				randomsleep.court();}
 			else {ecrireDansConsole("BUG navigateur ferme  --> Attente courte");randomsleep.court();}
