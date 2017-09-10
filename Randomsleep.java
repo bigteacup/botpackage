@@ -89,7 +89,7 @@ public class Randomsleep {
 
 		Random random = new Random();
 		int myRandomNumber = random.nextInt(MAX_VALUE2 - MIN_VALUE2) + MIN_VALUE2;
-			t.detectionAttaqueSimple(false);
+			try{t.detectionAttaqueSimple(false);}catch(Exception e) {t.ecrireDansConsole("echec detection attaquesimple");}
 		if (t.bot.afficherAttente == true) {
 			t.ecrireDansConsole("[Attente :" + myRandomNumber + "]");
 		}
