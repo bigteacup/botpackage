@@ -57,6 +57,10 @@ public class FxFenetre extends Application {
 	        
 	
 
+
+	        	primaryStage.setTitle("TimTools lite");
+	        controller = new FxFenetreController();
+
 	     
 	        
 

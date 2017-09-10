@@ -23,6 +23,16 @@ import org.openqa.selenium.WebDriver;
 	Travian travian;
 	FxFenetreController fxFenetreController;
 	
+	
+	//console
+	fxConsoleExperimentale console;
+	public void setConsole(fxConsoleExperimentale console) {
+		this.console = console;
+	}
+
+	
+	
+	
 	/// reglages recupérés par le bot et l'interface
 	boolean faireDefiler = true;
 
@@ -204,8 +214,12 @@ public void eteindreTravian(){
 //	if (travian.isAlive()){
 try {
 		travian.allume = false;
-		travian.ecrireDansConsole("********* Arret Demande ************ Arret Demande ************** Arret Demande *************");
-}catch(Exception e) {System.out.println("Travian non lancé");}		
+	if (travian.isAlive() == true) {console.flux.envoyer(fxFenetreController, "********* Arret Demande ************ Arret Demande ************** Arret Demande *************");}
+	else {console.flux.envoyer(fxFenetreController, "Rien n'est lancé...");}
+	
+}catch(Exception e) {
+	try {console.flux.envoyer(fxFenetreController, "Travian non lancé");}catch(Exception e1) {}
+	System.out.println("Travian non lancé");}		
 
 
 //	}}

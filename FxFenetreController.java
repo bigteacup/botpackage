@@ -183,11 +183,15 @@ public class FxFenetreController extends ScrollPane {
 		assert caseFaireDefiler != null : "fx:id=\"caseFaireDefiler\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert comptesTilePane != null : "fx:id=\"comptesTilePane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 
-		bot = new Lancerbot();
+		
 		console = new fxConsoleExperimentale(fxFenetreController); // console.start();
+		bot = new Lancerbot();
+		bot.setConsole(console);
+		bot.setfxFenetreController(this);
 		fxConsolescrollpane();
 		casesInit();
 		fxOngletParametresController.setBot(bot);
+		
 
 	}
 
@@ -398,7 +402,7 @@ public class FxFenetreController extends ScrollPane {
 	private void boutonOn() {
 		// System.out.println("on");
 		String nomDeCompte = compteSelectionne;
-		bot.setfxFenetreController(this);
+	//	bot.setfxFenetreController(this); // redondant ? utile ?
 		String s = serveur.getText();
 		String n = userName.getText();
 		String m = motDePasse.getText();
