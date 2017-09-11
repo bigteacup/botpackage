@@ -564,13 +564,13 @@ public class Village {
 		
 		try {
 			
-		 bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replace(".", "");
+		 bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
 		 stockBois = Integer.parseInt(bois);
-		 argile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l2\"]")).getText().replace(".", "");
+		 argile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l2\"]")).getText().replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
 		 stockArgile = Integer.parseInt(argile);
-		 fer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l3\"]")).getText().replace(".", "");
+		 fer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l3\"]")).getText().replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
 		 stockFer = Integer.parseInt(fer);
-		 cereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l4\"]")).getText().replace(".", "");
+		 cereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l4\"]")).getText().replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
 		 stockCereales = Integer.parseInt(cereales);
 			
 		}catch(Exception e) {

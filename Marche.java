@@ -119,15 +119,36 @@ public class Marche {
 
 
 
+//ne pas utiliser code faux
+//definir longlet favori  //*[contains(@class, 'favorActive')] https://ts4.travian.fr/build.php?t=5&id=37 //*[not(contains(@class,'Active'))] //*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]
+	public void allerSurPageEnvoi(Travian t) {
+	try {
+		if (!t.getCompte().getDriver().getCurrentUrl().contains("t=5") || !t.getCompte().getDriver().getCurrentUrl().contains("t=1") || !t.getCompte().getDriver().getCurrentUrl().contains("t=2") ) {
+
+	
+		
+		
+		List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
+		for (WebElement tabGestion : listeDesTabs) {
+
+			if (tabGestion.getText().contains("Envoi")) {      
+				tabGestion.click();
+				t.randomsleep.court();
+				break;
+			}
+
+		}
+		}
+	} catch (Exception e) {
+		t.ecrireDansConsole("bug :)");
+	}
+	}
 
 
 
-
-
-
-
-	////////dans la page marche
+	////////dans la page marche  try{ allerSurPageEnvoi(t);}catch(Exception e) {t.ecrireDansConsole("Echec aller sur la page envoi du marché  :)");}
 	public int updateNombreDeMarchandsDispo(Travian t, Village village){ 
+		
 		//TODO gerer la quantité en cas d'echec de prise de la valeur
 		WebElement webElementmarchandDispo;
 		String nombreMarchandDispoString;
@@ -138,7 +159,15 @@ public class Marche {
 			nombreMarchandDispoInteger = Integer.valueOf(nombreMarchandDispoString); 
 			village.setNombreDeMarchands(nombreMarchandDispoInteger);
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec updateNombreDeMarchandsDispo valeur par default : " + nombreMarchandDispoInteger );
+			try {
+				webElementmarchandDispo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"build\"]/div[4]")); //*[@id="build"]/div[4]/text()[1]
+				nombreMarchandDispoString = webElementmarchandDispo.getText().split("\n")[0].split("/")[0].split(": ‭")[1];
+				nombreMarchandDispoString = nombreMarchandDispoString.replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
+				nombreMarchandDispoInteger = Integer.valueOf(nombreMarchandDispoString); 
+				village.setNombreDeMarchands(nombreMarchandDispoInteger);
+			}catch(Exception e1) {
+				t.ecrireDansConsole("echec updateNombreDeMarchandsDispo valeur par default : " + nombreMarchandDispoInteger );}
+			
 		}
 		return nombreMarchandDispoInteger;
 	}
