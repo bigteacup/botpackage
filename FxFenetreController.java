@@ -4,29 +4,21 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.StyleClassedTextArea;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
@@ -38,29 +30,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.Effect;
+
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
+
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.Text;
-import javafx.scene.transform.Rotate;
-import javafx.util.Duration;
+
 
 //fx:controller="botpackage.FxFenetreController"
 public class FxFenetreController extends ScrollPane {
@@ -442,11 +424,14 @@ public class FxFenetreController extends ScrollPane {
 				
 				 
 				 String textDeBoutton = "Selectionner";
+				 boolean s = false;
 				 try {
 				 if(compteSelectionne.equals(compte.getName())) {
 					 textDeBoutton = "En cours...";
-					 
-				 } 
+					 s = true;
+					 } 
+				 
+				 
 				 }catch (Exception e) {}
 				 
 		 BorderPane  vpane = new BorderPane();
@@ -455,9 +440,12 @@ public class FxFenetreController extends ScrollPane {
 		 button1.setOnAction(new EventHandler<ActionEvent>() {
 			    @Override public void handle(ActionEvent e) {
 			        button1.setText("En cours");
+			        
+			        
 			        compteSelectionne = compte.getName();
 			        //update de cochon
 			        fxChargerComptes();
+			        
 			    }
 			});
 		 
@@ -466,10 +454,12 @@ public class FxFenetreController extends ScrollPane {
 	       // vpane.getChildren().add(button1);
 	       // vpane.getChildren().add(titre);
 	        titre.getStyleClass().add("ctitre");
+	        button1.getStyleClass().add("cbutton1");
 	      //  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
 	        vpane.setTop(titre);
-	        vpane.setCenter(button1);
-	        
+	        vpane.setBottom(button1);
+	        button1.setPadding(new Insets(5, 5, 5, 5));
+	        BorderPane.setMargin(button1, new Insets(2, 2, 2, 2));
 	        
 	        //comptesTilePane.getChildren().add(button1);
 	        comptesTilePane.getChildren().add(vpane);
@@ -478,8 +468,14 @@ public class FxFenetreController extends ScrollPane {
 			comptesTilePane.setVgap(5);
 			comptesTilePane.setHgap(5);
 			comptesTilePane.setPrefColumns(13);
-		 	vpane.getStyleClass().add("ctuile");
-			vpane.setMinHeight(150);
+			
+			vpane.getStyleClass().clear();
+	        if (s == true) {vpane.getStyleClass().add("ctuile");
+		 	}else {vpane.getStyleClass().add("ctuileb");}
+	        
+
+			
+	        vpane.setMinHeight(100);
 			vpane.setMinWidth(150);
 		//	ObservableList list = comptesTilePane.getChildren(); 
 			//TilePane.setAlignment(vpane, Pos.BOTTOM_RIGHT);
