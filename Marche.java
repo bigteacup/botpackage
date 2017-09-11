@@ -181,9 +181,25 @@ public class Marche {
 			quantiteMaxParMarchandString = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).getText().replaceAll("\\W", "");
 			quantiteMaxParMarchandInteger = Integer.valueOf(quantiteMaxParMarchandString);
 			village.setQuantiteMaxTransporteeParMarchands(quantiteMaxParMarchandInteger);
+			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger );
-		}
+			t.ecrireDansConsole("echec On change d'onglet" );
+			try {
+			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
+			for (WebElement tabGestion : listeDesTabs) {
+
+				if (tabGestion.getText().contains("Envoi")) {      
+					tabGestion.click();
+					t.randomsleep.court();
+					break;
+				}
+
+			}
+			updateQuantiteMaxTransporteParMarchand(t, village);
+		}catch (Exception e1) {
+			t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
+			}
+			}
 		return quantiteMaxParMarchandInteger;
 
 	}
