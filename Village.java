@@ -908,6 +908,7 @@ public class Village {
 					if (token < 2) {
 						// On recharge la liste apres un eventuel rechargement
 						listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
+						listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
 						int lien = Integer.parseInt(listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[1]); // bug
 						// ici
 						// au
@@ -936,7 +937,7 @@ public class Village {
 							// survol souris du champs = a champMin
 							Actions builder = new Actions(t.getCompte().getDriver());
 							try {
-							builder.moveToElement(listeWebelementChampsBis.get(g+1));
+							builder.moveToElement(listeWebelementChampsBis.get(g)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
 							}catch (Exception e1){
 								builder.moveToElement(listeWebelementChamps.get(g+1));}
 
@@ -956,7 +957,7 @@ public class Village {
 							// t.ecrireDansConsole("valeur ressourcesnecessaire
 							// "+ ressourcesNecessaires.get(3).getText());
 
-							// correction bug de MouseHover
+							// correction bug de MouseHover REVISION 2017 deconne, à surveiller
 							if (ressourcesNecessaires.size()==0) {   // if (ressourcesNecessaires.get(0).getText().isEmpty())
 								retrytoken = true;
 							}
