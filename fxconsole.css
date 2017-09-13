@@ -1,6 +1,7 @@
 .root{
 	-fx-font-smoothing-type: lcd;
-	/*-fx-background-color: transparent;*/
+	-fx-background-color: null;
+	-fx-background-color: transparent;
 }
 .sbr2{
   -fx-font-size: 12px;
