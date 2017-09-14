@@ -810,7 +810,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void chargerBatiments(Travian t) {
-
+		t.ecrireDansConsole("Debut chargerBatiment");
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 			t.randomsleep.court();
 			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
@@ -819,18 +819,17 @@ public class Village {
 
 		Village village = t.villageEnCours();
 		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
-		// on cree une lsite temporaire poure lenvoyer au village une fois la
-		// liste complete.
+		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
 		List<Batiment> listeDesBatimentsVillage = new ArrayList();
 
 		for (WebElement webBatiment : listeDesBatiments) {
-			// on intialise les varible
+			// on intialise les variables
 			String nomBatiment = null;
 			int levelBatiment = 0;
 			String slotBatiment = null;
 			boolean trouver = false;
 
-			// on les remplis
+			// on les rempli
 			try {
 				nomBatiment = webBatiment.getAttribute("alt").split(" <span")[0];
 				levelBatiment = Integer.parseInt(webBatiment.getAttribute("alt").split("<span class=\"level\">Niveau ")[1].split("</span>")[0]);
@@ -878,6 +877,7 @@ public class Village {
 
 			}
 		}
+		t.ecrireDansConsole("Fin chargerBatiment");
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -886,7 +886,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void monterChamps(Travian t) {
-
+		t.ecrireDansConsole("Debut monterChamps");
 		Village village = t.villageEnCours();
 
 		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
@@ -937,7 +937,9 @@ public class Village {
 							// survol souris du champs = a champMin
 							Actions builder = new Actions(t.getCompte().getDriver());
 							try {
+							//builder.moveToElement(listeWebelementChampsBis.get(g+1));
 							builder.moveToElement(listeWebelementChampsBis.get(g)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+							
 							}catch (Exception e1){
 								builder.moveToElement(listeWebelementChamps.get(g+1));}
 
@@ -1015,7 +1017,7 @@ public class Village {
 									t.ecrireDansConsole("Bouton vert non present => Batiment en cour probable ou pas de cereales dispo pour la construction");
 									t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf1.php");
 									t.randomsleep.classic();
-									int cropSlot = Integer.parseInt(t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarFreeCrop\"]")).getText().trim());
+									int cropSlot = Integer.parseInt(t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarFreeCrop\"]")).getText().replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "").trim());
 									if (cropSlot > 3) {
 										break;// non teste
 									}
@@ -1024,7 +1026,7 @@ public class Village {
 								t.randomsleep.classic();
 								if (bouttonvert != null) {
 									bouttonvert.click();
-									t.ecrireDansConsole("Lancement d'un Champs de (valeur g) " + g + " (g-1) sur le Slot " + (g + 1) + "");
+									t.ecrireDansConsole("Lancement d'un Champ de (valeur g) " + g + " (g-1) sur le Slot " + (g + 1) + "");
 									t.randomsleep.court();
 								}
 
@@ -1035,16 +1037,16 @@ public class Village {
 						g++;
 					} // fin if token de verification
 					else {
-						t.ecrireDansConsole("2 Champs lance");
+						t.ecrireDansConsole("2 Champs lances");
 						break;
 					}
 				} // fin while g <18
 			} catch (Exception e) {
-				t.ecrireDansConsole("Les Retours Pillage cause un echec");
+				t.ecrireDansConsole("echec monterChamps");
 			}
 		} // fin if token <2
 		village.voirListeDeConstruction(t);
-
+		t.ecrireDansConsole("fin monterChamps");
 	}// fin monterchamps
 
 	/* } */
@@ -1061,6 +1063,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t) {
+		t.ecrireDansConsole("debut construireBatiments");
 		t.randomsleep.court();
 
 		// if (!compte.getDriver().getCurrentUrl().contains("dorf2.php"))
@@ -1222,6 +1225,7 @@ public class Village {
 
 		}
 		voirListeDeConstruction(t);
+		t.ecrireDansConsole("fin construireBatiments");
 		return possibleOuPas;
 
 	}

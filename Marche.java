@@ -214,7 +214,7 @@ public class Marche {
 	///////////////////////////////////////////////efficace en serveur vitesse 1, pour village sources dont les depots sont superieurs a 4000 en germain, 3100 en gaulois, 2000 en romains sans comptoir du commerce.   
 	public void evacuerSurplusRessources(Travian t, Village village, ArrayList<Village> listeDeVillages ) {
 
-
+		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Début");
 
 
 		try {
@@ -347,6 +347,7 @@ public class Marche {
 			}
 
 		}catch(Exception e){t.ecrireDansConsole("Echec evacuation cereales marche, Pas de marche ?  Ou pas de compte + ? Bug general");}
+		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Fin");
 	}
 
 
