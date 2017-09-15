@@ -1,4 +1,4 @@
-﻿package botpackage;
+package botpackage;
 
 import java.io.IOException;
 
@@ -24,9 +24,6 @@ public class FxFenetre extends Application {
     					//	}
   //  public FxFenetre() {
 
-    //    this.bot = Lancerbot.getBot();
-      //  bot.lancerTravian("http://ts2.travian.fr/", "Drap-housse", "6dst5rhx");
-
   //  }
  
 
@@ -46,23 +43,9 @@ public class FxFenetre extends Application {
 
 	  @Override
 	  public void start(Stage primaryStage) {
-
 		//  primaryStage.initStyle(StageStyle.TRANSPARENT);
-
 	        	primaryStage.setTitle("TimTools lite");
 	        	controller = new FxFenetreController();
-
-		  
-
-		
-
-	        
-	
-
-
-	        	primaryStage.setTitle("TimTools lite");
-	        controller = new FxFenetreController();
-
 	     
 	        
 
@@ -82,9 +65,7 @@ public class FxFenetre extends Application {
 	        myPane.setOpacity(1.0);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 	      //TODO investiguer les possibilitées :  fenetre de question type etesvoussur? ou autre 
-
 	        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
 	            @Override
@@ -92,10 +73,7 @@ public class FxFenetre extends Application {
 	            			controller.bot.eteindreTravian();
 	            			
 	                    //	 event.consume();  //genial mais pas utile ici
-
-
 	                        System.out.println("Application fermée par croix rouge (X)");
-
 	                       // System.exit(5000);
 	                    }
 	                });
@@ -141,8 +119,6 @@ public class FxFenetre extends Application {
     	try {
 			if (bot.travian.allume == false){
 				String serveur = serveurj.getText();
-
-
 				String userName = userNamej.getText();
 				String motDePasse = motDePassej.getText();
 				bot.lancerTravian(serveur, userName, motDePasse );
@@ -152,18 +128,6 @@ public class FxFenetre extends Application {
 			String userName = userNamej.getText();
 			String motDePasse = motDePassej.getText();
 			bot.lancerTravian(serveur, userName, motDePasse );}
-
-				String nomDeCompte = nomDeComptej.getText();
-				String motDePasse = motDePassej.getText();
-				bot.lancerTravian(serveur, userName, motDePasse );
-			}
-		}catch (Exception e1){
-			String serveur = serveurj.getText();
-			String userName = userNamej.getText();
-			String motDePasse = motDePassej.getText();
-
-			bot.lancerTravian(serveur, userName, motDePasse );}
-
 		//	System.out.println(bot.getName());
 		//    System.out.println(bot.getState());
     	}
