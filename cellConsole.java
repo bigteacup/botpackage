@@ -1,4 +1,4 @@
-package botpackage;
+/*package botpackage;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,15 +7,16 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.StackPane;
+import javafx.util.Callback;
 
 public class cellConsole {
 
-/*
+
 
 public cellConsole(){
 	
 }
-
+/*
 public void creerCell(String string){
 		ObservableList<String> names = FXCollections.observableArrayList();
 		names.add(string);
@@ -24,10 +25,10 @@ public void creerCell(String string){
 }
 }
 
-*/
-final ListView<Integer> list = new ListView<>();
+
+final ListView<Integer> list = new ListView<>() ;
 for (int index = 0; index < 3000; index++) {
-    list.getItems().add(index);
+//    list.getItems().add(index);
 }
 list.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
     private int created;
@@ -59,4 +60,4 @@ primaryStage.setHeight(500);
 primaryStage.setScene(scene);
 primaryStage.show();
 }
-
+*/
