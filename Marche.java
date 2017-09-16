@@ -172,10 +172,11 @@ public class Marche {
 		return nombreMarchandDispoInteger;
 	}
 
-	public int updateQuantiteMaxTransporteParMarchand(Travian t, Village village){
+	public int updateQuantiteMaxTransporteParMarchand(Travian t, Village village, int token){
 		//TODO gerer la quantité en cas d'echec de prise de la valeur
 		String quantiteMaxParMarchandString;
 		int quantiteMaxParMarchandInteger = 750;
+		token = token + 1;
 
 		try {
 			quantiteMaxParMarchandString = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).getText().replaceAll("\\W", "");
@@ -183,21 +184,12 @@ public class Marche {
 			village.setQuantiteMaxTransporteeParMarchands(quantiteMaxParMarchandInteger);
 			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec On change d'onglet" );
-			try {
-			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
-			for (WebElement tabGestion : listeDesTabs) {
-
-				if (tabGestion.getText().contains("Envoi")) {      
-					tabGestion.click();
-					t.randomsleep.court();
-					break;
-				}
-
-			}
-			updateQuantiteMaxTransporteParMarchand(t, village);
-		}catch (Exception e1) {
-			t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
+			if(token <= 6) {
+			t.ecrireDansConsole("On change d'onglet " + token );
+			changementOngletMarche(t, village, quantiteMaxParMarchandInteger, token);
+			}else {
+				t.ecrireDansConsole("echec [On change d'onglet] " + token );
+				
 			}
 			}
 		return quantiteMaxParMarchandInteger;
@@ -206,7 +198,25 @@ public class Marche {
 
 
 
+public void changementOngletMarche(Travian t,Village village, int quantiteMaxParMarchandInteger, int token) {
+	try {
+		
+	List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
+	for (WebElement tabGestion : listeDesTabs) {
 
+		if (tabGestion.getText().contains("Envoi")) {      
+			tabGestion.click();
+			t.randomsleep.court();
+			break;
+		}
+
+	}
+	updateQuantiteMaxTransporteParMarchand(t, village, token);
+}catch (Exception e1) {
+	t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger +" " + token); 
+	}
+	
+}
 
 
 
@@ -261,7 +271,7 @@ public class Marche {
 				allerDansLeMarché(t);
 				//maj
 				int marchandsDisponibles = updateNombreDeMarchandsDispo(t, village);
-				int quantite = updateQuantiteMaxTransporteParMarchand(t, village);
+				int quantite = updateQuantiteMaxTransporteParMarchand(t, village, 0);
 				//	village.setQuantiteMaxTransporteParMarchand
 
 				if (marchandsDisponibles > 0 ){

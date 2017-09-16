@@ -933,7 +933,14 @@ public class Village {
 							int ferNecessaire = 0;
 							int cerealesNecessaire = 0;
 							t.ecrireDansConsole("try lien==chamPmin : " + lien + " et : " + champMin);
-
+/*
+							//deplacer le curseur au loin
+							Actions ecartCurseur = new Actions(t.getCompte().getDriver());
+							try {ecartCurseur.moveByOffset(-2, -2);}catch(Exception e) {}
+							ecartCurseur.perform();
+							t.randomsleep.tcourt();
+*/
+							
 							// survol souris du champs = a champMin
 							Actions builder = new Actions(t.getCompte().getDriver());
 							try {
@@ -944,12 +951,16 @@ public class Village {
 								builder.moveToElement(listeWebelementChamps.get(g+1));}
 
 							builder.perform();
+							
+					
 							t.randomsleep.court();
 
 							// choper le tableau des ressources necessaires pour
 							// le champs en cours
 							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")); ////*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span
-
+						//	String test = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")).get(0).getText();
+							
+							
 							// t.ecrireDansConsole("valeur ressourcesnecessaire
 							// "+ ressourcesNecessaires.get(0).getText());
 							// t.ecrireDansConsole("valeur ressourcesnecessaire
@@ -970,6 +981,7 @@ public class Village {
 								retry.perform();
 								t.randomsleep.court();
 								ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
+								
 								// t.ecrireDansConsole("valeur
 								// ressourcesnecessaire "+
 								// ressourcesNecessaires.get(0).getText());
@@ -1043,6 +1055,7 @@ public class Village {
 				} // fin while g <18
 			} catch (Exception e) {
 				t.ecrireDansConsole("echec monterChamps");
+			//	monterChamps(t);
 			}
 		} // fin if token <2
 		village.voirListeDeConstruction(t);
