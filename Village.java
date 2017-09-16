@@ -959,7 +959,7 @@ public class Village {
 							// le champs en cours
 							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")); ////*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span
 						//	String test = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")).get(0).getText();
-							
+							//ressourcesNecessaires.get(0).getText(); //a delete
 							
 							// t.ecrireDansConsole("valeur ressourcesnecessaire
 							// "+ ressourcesNecessaires.get(0).getText());
@@ -971,17 +971,19 @@ public class Village {
 							// "+ ressourcesNecessaires.get(3).getText());
 
 							// correction bug de MouseHover REVISION 2017 deconne, à surveiller
-							if (ressourcesNecessaires.size()==0) {   // if (ressourcesNecessaires.get(0).getText().isEmpty())
+							if (ressourcesNecessaires.get(0).getText().isEmpty() || ressourcesNecessaires.size()==0) {   // if (ressourcesNecessaires.size()==0)
 								retrytoken = true;
 							}
 							if (retrytoken == true) {
 								t.ecrireDansConsole("Retry hover");
-								Actions retry = new Actions(t.getCompte().getDriver());
-								retry.moveToElement(listeWebelementChamps.get(g));
-								retry.perform();
-								t.randomsleep.court();
-								ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
 								
+								Actions retry = new Actions(t.getCompte().getDriver());
+								retry.moveToElement(listeWebelementChampsBis.get(g), 0, 0); //retry.moveToElement(listeWebelementChamps.get(g+1), 0, 0);
+								retry.perform();
+								
+								t.randomsleep.court();
+								
+								ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
 								// t.ecrireDansConsole("valeur
 								// ressourcesnecessaire "+
 								// ressourcesNecessaires.get(0).getText());
