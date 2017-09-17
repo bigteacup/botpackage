@@ -185,8 +185,7 @@ public class Marche {
 			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
 		} catch (Exception e) {
 			if(token <= 6) {
-			t.ecrireDansConsole("On change d'onglet " + token );
-			changementOngletMarche(t, village, quantiteMaxParMarchandInteger, token);
+			changementOngletMarche(t, village, quantiteMaxParMarchandInteger, token, "Envoi");
 			}else {
 				t.ecrireDansConsole("echec [On change d'onglet] " + token );
 				
@@ -198,13 +197,13 @@ public class Marche {
 
 
 
-public void changementOngletMarche(Travian t,Village village, int quantiteMaxParMarchandInteger, int token) {
+public void changementOngletMarche(Travian t,Village village, int quantiteMaxParMarchandInteger, int token, String titreOnglet) {
 	try {
-		
+		t.ecrireDansConsole("ChangementOnglet " + token );
 	List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
 	for (WebElement tabGestion : listeDesTabs) {
 
-		if (tabGestion.getText().contains("Envoi")) {      
+		if (tabGestion.getText().contains(titreOnglet)) {      
 			tabGestion.click();
 			t.randomsleep.court();
 			break;
@@ -901,6 +900,7 @@ public void changementOngletMarche(Travian t,Village village, int quantiteMaxPar
 									t.randomsleep.court();
 									//on va sur le marché
 									allerDansLeMarché(t);
+									changementOngletMarche(t, villageCandidat, villageCandidat.getQuantiteMaxTransporteeParMarchands(), 0, "Envoi");
 									t.randomsleep.court();
 
 									//bois
