@@ -185,11 +185,13 @@ public class Marche {
 			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
 		} catch (Exception e) {
 			if(token <= 6) {
-			changementOngletMarche(t, village, quantiteMaxParMarchandInteger, token, "Envoi");
+			changementOngletMarche(t, village, token, "Envoi");
+			quantiteMaxParMarchandInteger = updateQuantiteMaxTransporteParMarchand(t, village, token);
 			}else {
 				t.ecrireDansConsole("echec [On change d'onglet] " + token );
 				
-			}
+				
+			}//t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger +" " + token); 
 			}
 		return quantiteMaxParMarchandInteger;
 
@@ -197,7 +199,7 @@ public class Marche {
 
 
 
-public void changementOngletMarche(Travian t,Village village, int quantiteMaxParMarchandInteger, int token, String titreOnglet) {
+public void changementOngletMarche(Travian t,Village village, int token, String titreOnglet) {
 	try {
 		t.ecrireDansConsole("ChangementOnglet " + token );
 	List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
@@ -210,9 +212,9 @@ public void changementOngletMarche(Travian t,Village village, int quantiteMaxPar
 		}
 
 	}
-	updateQuantiteMaxTransporteParMarchand(t, village, token);
+	
 }catch (Exception e1) {
-	t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger +" " + token); 
+	t.ecrireDansConsole("echec changementOngletMarche  "  + token); 
 	}
 	
 }
@@ -475,7 +477,7 @@ public void changementOngletMarche(Travian t,Village village, int quantiteMaxPar
 							t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " est trop eloigné. Pourcentage actuel : " + pourcentage);
 							if (pourcentage >= 100){
 								continuer=false;	
-								t.ecrireDansConsole("[Marché]Pas de villages é portée pour evacuer cette ressource : " +ordre.getNomOrdre());
+								t.ecrireDansConsole("[Marché]Pas de villages à portée pour evacuer cette ressource : " +ordre.getNomOrdre());
 								break;
 								}
 							//	if (nbrVillageTropLoin >= listeDeVillages.size() && pourcentage >= 100 ){
@@ -811,7 +813,7 @@ public void changementOngletMarche(Travian t,Village village, int quantiteMaxPar
 
 
 	}
-	//TODO Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que 1 marchands de chaque et corriger "totalRessourcesEnvoyees"
+	//TODO REafctorer pour utiliser le systeme d'ordre plutot que cela // Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que tant de marchands de chaque par ressource
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
 		t.ecrireDansConsole("[Marché] ApproPetitVillage Début");
 		try {
@@ -900,36 +902,43 @@ public void changementOngletMarche(Travian t,Village village, int quantiteMaxPar
 									t.randomsleep.court();
 									//on va sur le marché
 									allerDansLeMarché(t);
-									changementOngletMarche(t, villageCandidat, villageCandidat.getQuantiteMaxTransporteeParMarchands(), 0, "Envoi");
+									changementOngletMarche(t, villageCandidat, 0, "Envoi");
 									t.randomsleep.court();
-
+									int compteurBois = 0;
+									int compteurArgile = 0;
+									int compteurFer = 0;
+									int compteurCereales = 0;
 									//bois
 									if(manqueB){
 										for( int clic=0; clic < mB; clic++){
 											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink1\"]")).click();
+											compteurBois =  mB*villageCandidat.getQuantiteMaxTransporteeParMarchands();
 											t.randomsleep.tcourt();
 										}}
 									//argile
 									if(manqueA){
 										for( int clic=0; clic < mA; clic++){
 											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink2\"]")).click();
+											compteurArgile =  mA*villageCandidat.getQuantiteMaxTransporteeParMarchands();
 											t.randomsleep.tcourt();
 										}}
 									//Fer
 									if(manqueF){
 										for( int clic=0; clic < mF; clic++){
 											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink3\"]")).click();
+											compteurFer =  mF *villageCandidat.getQuantiteMaxTransporteeParMarchands();
 											t.randomsleep.tcourt();
 										}}
 									//Cereales
 									if(manqueC){
 										for(int clic=0; clic < mC; clic++){
 											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).click();
+											compteurCereales =  mC*villageCandidat.getQuantiteMaxTransporteeParMarchands();
 											t.randomsleep.tcourt();
 										}}
 								//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
 									if(envoyerMarchands(t, village.getNom())){
-										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +village.getNom());
+										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom());
 									}
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(village.getUrl());
