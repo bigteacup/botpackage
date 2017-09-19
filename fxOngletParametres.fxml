@@ -75,7 +75,7 @@
             <Label text="Ne pas envoyer de marchands à plus de tant de cases" GridPane.rowIndex="3" />
             <TextField fx:id="distanceMaxPourMarchands" onAction="#distanceMaxPourMarchands" promptText=" vitesse" text="24" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Forcer le reglage de la vitesse des marchands (gaulois = 24 romains = 16 germains = 12)" GridPane.rowIndex="4" />
-            <TextField fx:id="vitesseMarchands" onAction="#vitesseMarchands" promptText="Bypass ?" text="24" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="vitesseMarchands" onAction="#vitesseMarchands" promptText="Bypass ?" text="16" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <GridPane maxWidth="540.0">
