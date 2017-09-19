@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
+import java.util.ResourceBundle;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.StyleClassedTextArea;
@@ -15,10 +15,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContentDisplay;
@@ -42,6 +43,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 //fx:controller="botpackage.FxFenetreController"
@@ -56,6 +59,11 @@ public class FxFenetreController extends ScrollPane {
 	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
 	
 	String compteSelectionne = null;
+
+
+
+    @FXML
+    private ResourceBundle resources;
 
 	@FXML
 	private URL location;
@@ -78,14 +86,7 @@ public class FxFenetreController extends ScrollPane {
 	@FXML
 	private Button bypassPause;
 
-	@FXML
-	private TextField userName;
 
-	@FXML
-	private PasswordField motDePasse;
-
-	@FXML
-	private TextField serveur;
 
 	@FXML
 	private FlowPane lesCheckBoxs;
@@ -140,6 +141,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private FxOngletParametresController fxOngletParametresController;
+	
+	@FXML
+	private TroisChampsDeSaisieController troisChampsDeSaisieController;
 
 	/////
 	@FXML
@@ -150,9 +154,7 @@ public class FxFenetreController extends ScrollPane {
 		assert boutonOn != null : "fx:id=\"boutonOn\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert boutonOff != null : "fx:id=\"boutonOff\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert bypassPause != null : "fx:id=\"bypassPause\" was not injected: check your FXML file 'fxFenetre.fxml'.";
-		assert userName != null : "fx:id=\"userName\" was not injected: check your FXML file 'fxFenetre.fxml'.";
-		assert motDePasse != null : "fx:id=\"motDePasse\" was not injected: check your FXML file 'fxFenetre.fxml'.";
-		assert serveur != null : "fx:id=\"serveur\" was not injected: check your FXML file 'fxFenetre.fxml'.";
+		
 		assert lesCheckBoxs != null : "fx:id=\"lesCheckBoxs\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert casePillage != null : "fx:id=\"casePillage\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert caseFetes != null : "fx:id=\"caseFetes\" was not injected: check your FXML file 'fxFenetre.fxml'.";
@@ -173,6 +175,8 @@ public class FxFenetreController extends ScrollPane {
 		fxConsolescrollpane();
 		casesInit();
 		fxOngletParametresController.setBot(bot);
+		
+
 		
 
 	}
@@ -245,33 +249,7 @@ public class FxFenetreController extends ScrollPane {
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////LOGIN SERVER  ETC 
-	@FXML
-	private void userName() {
-		userName.setText("login");
-		if (bot.pillage == true) {
-			bot.pillage = false;
-		} else {
-			bot.pillage = true;
-		}
-	}
-	@FXML
-	private void server() {
-		serveur.setText("serveur");
-		if (bot.pillage == true) {
-			bot.pillage = false;
-		} else {
-			bot.pillage = true;
-		}
-	}
-	@FXML
-	private void motDePasse() {
-		motDePasse.setText("mdp");
-		if (bot.pillage == true) {
-			bot.pillage = false;
-		} else {
-			bot.pillage = true;
-		}
-	}
+	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////// caseRotationVillage  
 	@FXML
@@ -385,9 +363,9 @@ public class FxFenetreController extends ScrollPane {
 		// System.out.println("on");
 		String nomDeCompte = compteSelectionne;
 	//	bot.setfxFenetreController(this); // redondant ? utile ?
-		String s = serveur.getText();
-		String n = userName.getText();
-		String m = motDePasse.getText();
+		String s = troisChampsDeSaisieController.serveur.getText();
+		String n = troisChampsDeSaisieController.userName.getText();
+		String m = troisChampsDeSaisieController.motDePasse.getText();
 		if(compteSelectionne != null){
 		bot.lancerTravian(nomDeCompte, s, n, m);
 		}else {try {
@@ -415,7 +393,7 @@ public class FxFenetreController extends ScrollPane {
 		}
 
 	}
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void faireTuileDeCompte(File compte){
 		
 		 Platform.runLater(new Runnable() {
@@ -485,7 +463,86 @@ public class FxFenetreController extends ScrollPane {
 		 });
 		
 	}
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public VBox stc() throws IOException {
+		  FXMLLoader loader = new FXMLLoader(
+		    getClass().getResource(
+		      "troisChampsDeSaisie.fxml"
+		    )
+		  );  
+		  //loader.setController(troisChampsDeSaisieController);
+		     VBox p = loader.load();
+		     troisChampsDeSaisieController = loader.getController();//setBot(bot);
+			return p;
+		}
+		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@FXML
+	private void fxFaireTuileDeCreation() {
+		 Platform.runLater(new Runnable() {
+			 
+			 public void run() {
+				
+		
+
+				 
+		 BorderPane  vpane = new BorderPane();       
+		 Button button1 = new Button("Ajouter"); 
+		 button1.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override public void handle(ActionEvent e) {
+			        button1.setText("En cours");
+			        gestionnaireDeComptes.creerFichierCompte(troisChampsDeSaisieController.userName.getText(), "\\comptes\\",".comptetravian");
+			        gestionnaireDeComptes.ecrireDansFichier(
+			        		"comptes",
+			        		troisChampsDeSaisieController.userName.getText()+".comptetravian",
+			        		troisChampsDeSaisieController.userName.getText(),
+			        		troisChampsDeSaisieController.serveur.getText(),
+			        		troisChampsDeSaisieController.motDePasse.getText(),
+			        		"racedefault"
+			        		);
+			        //update de cochon
+			        fxChargerComptes();
+			        
+			    }
+			});
+		 
+		 
+		 
+		 
+		 Label titre = new Label("Nouveau Compte");
+	        titre.getStyleClass().add("ctitre");
+	        button1.getStyleClass().add("cbutton1");
+	      //  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
+	        vpane.setTop(titre);
+	        try {
+				vpane.getChildren().add(stc());
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        vpane.setBottom(button1);
+	        button1.setPadding(new Insets(5, 5, 5, 5));
+	        BorderPane.setMargin(button1, new Insets(2, 2, 2, 2));
+	        
+	        //comptesTilePane.getChildren().add(button1);
+	        comptesTilePane.getChildren().add(vpane);
+	        comptesTilePane.setPadding(new Insets(10, 10, 10, 10));
+			comptesTilePane.setVgap(5);
+			comptesTilePane.setHgap(5);
+			comptesTilePane.setPrefColumns(13);
+			
+			vpane.getStyleClass().clear();
+	        if ( true) {vpane.getStyleClass().add("ctuile");
+		 	}else {vpane.getStyleClass().add("ctuileb");}
+		
+	        vpane.setMinHeight(100);
+			vpane.setMinWidth(150);
+			 }
+		 });
+		
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	 @FXML
 	 private void fxChargerComptes(){
 		ArrayList<File> listeFichiers = gestionnaireDeComptes.getListeFichiers(); 
@@ -494,6 +551,7 @@ public class FxFenetreController extends ScrollPane {
 					 
 					try { 
 					comptesTilePane.getChildren().clear();
+					fxFaireTuileDeCreation();
 					 for (File compte : listeFichiers){
 					faireTuileDeCompte(compte);
 					
