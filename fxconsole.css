@@ -2,6 +2,71 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-background-color: null;
 	-fx-background-color: transparent;
+		-fx-opacity:1;
+		
+}
+.bb1{
+	-fx-font-smoothing-type: lcd;
+	-fx-background-color: null;
+	-fx-background-color: null  ;
+		-fx-opacity: 1;
+
+}
+.bb2{
+	-fx-font-smoothing-type: lcd;
+	-fx-background-color: null;
+	-fx-background-color: blue ;
+		-fx-opacity: 0.0;
+
+}
+.scrollpane, .borderpane, *.tab-header-background{
+
+}
+.tab-pane:top, *.tab-header-area, .tab-header-background{
+		-fx-effect: null;
+			-fx-background-color: null;
+	-fx-background-color: transparent ;
+
+	-fx-opacity: 1.0;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.tab-pane, .tab-header-area {
+		-fx-padding: 0 0 0 0;
+
+}
+
+.troischamps{
+	
+	-fx-padding: 40 0 0 72;
+
+	
+}
+.troischamps1{
+	-fx-opacity: 0.7;
+		-fx-min-width: 133px;
+	-fx-font-size: 12px; 
+-fx-padding: 0 0 0 0;
+
+}
+
+.troischamps2{
+	-fx-opacity: 0.7;
+		-fx-min-width: 133px;
+	-fx-font-size: 12px; 
+-fx-padding: 0 0 0 0;
+	
+}
+.troischamps3{
+	-fx-opacity: 0.7;
+		-fx-min-width: 133px;
+	-fx-font-size: 12px; 
+-fx-padding: 0 0 0 0;
+	
+}
+.troischamps1:focused, .troischamps2:focused, .troischamps3:focused{
+-fx-border-color: rgb(0,199,0) ;
+-fx-border-radius: 3px;
+
 }
 .sbr2{
   -fx-font-size: 12px;
@@ -27,9 +92,12 @@
  .b{
 	-fx-font-smoothing-type: lcd;
 	-fx-vbar-policy: always;
+	-fx-background-color: null;
+	-fx-background-color: transparent;
+		
+		 -fx-padding: 0 0 0 0;
 
-
-	/*-fx-border-color: white;*/
+	/* ;  -fx-border-color: white;*/
 	/*-fx-fill:red;*/
 	/*-fx-background-color: black;*/
 	
@@ -249,7 +317,7 @@ b.scroll-bar:horizontal b.track-background {
 	/*-fx-border-color: white;*/
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+	-fx-background-image: url("file:///C:/travimage/c1.jpg");
 -fx-background-size: 100% 100%;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
@@ -275,7 +343,7 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-style:solid;
      -fx-border-width:32px;
 */
--fx-background-image: url("file:///C:/travimage/default_paper.png");
+-fx-background-image: url("file:///C:/travimage/c1.jpg");
 -fx-background-size: 100% 100%;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
@@ -285,7 +353,34 @@ b.scroll-bar:horizontal b.track-background {
 
 }
 
-
+.compteStyle{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+	
+}
+.compteStyle1{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+-fx-background-size: 150% 150%;
+-fx-background-position: -150px, -150px;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+	
+}
+.compteStyle2{
+	-fx-background-color: null;
+	-fx-background-color: transparent;
+	
+}
  .clabel{
  
  }

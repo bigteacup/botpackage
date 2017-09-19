@@ -17,6 +17,10 @@ public class Compte {
 		
 		fichierProperties = loadConfigComptes(nomDeCompte);
 	}
+	public Compte() {
+		
+		
+	}
 	
 public String nomDeCompte;	
 public Properties	fichierProperties ;
@@ -33,6 +37,29 @@ private String tribut = "romains";
 	//private WebDriver driver = new FirefoxDriver();
 	//////////////////////////////////////////////
 
+
+
+//comptePourCreation
+public void comptePourCreation() {
+	nomDeCompte= "Nouveau Compte";	
+	server = "";
+	userName ="";
+	passWord="";
+	tribut = "";
+	
+}
+
+
+public void creerCompteManuellement() {
+	 nomDeCompte= "Nouveau Compte";	
+	//fichierProperties= ;
+
+	server = "";
+	userName ="";
+	passWord="";
+	tribut = "";
+	
+}
 
 
 //charger les configs précédentes

@@ -19,11 +19,11 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="rootScrollpane" fitToHeight="true" fitToWidth="true" prefHeight="450" prefWidth="700" styleClass="b" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
-   <content>
-      <BorderPane fx:id="borderPane" styleClass="b">
+<ScrollPane fx:id="rootScrollpane"  fitToHeight="true" fitToWidth="true" prefHeight="450" prefWidth="700"  xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <content  >
+      <BorderPane fx:id="borderPane" styleClass="compteStyle1">
          <top>
-            <GridPane styleClass="b">
+            <GridPane styleClass="">
                <columnConstraints>
                   <ColumnConstraints hgrow="NEVER" minWidth="50.0" />
                   <ColumnConstraints hgrow="NEVER" minWidth="100.0" prefWidth="150.0" />
@@ -43,13 +43,7 @@
                         <Button fx:id="bypassPause" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bypassPause" text="Passer pause" />
                      </children>
                   </VBox>
-                  <VBox styleClass="b" GridPane.columnIndex="1">
-                     <children>
-                        <TextField fx:id="userName" text="" />
-                        <PasswordField fx:id="motDePasse" prefHeight="25.0" prefWidth="96.0" text="" />
-                        <TextField fx:id="serveur" text="" />
-                     </children>
-                  </VBox>
+                 
                   <FlowPane fx:id="lesCheckBoxs" columnHalignment="CENTER" hgap="15.0" rowValignment="TOP" styleClass="lesCheckBoxs" GridPane.columnIndex="2">
                      <children>
                         <CheckBox fx:id="casePillage" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#casePillage" selected="true" text="Auto Pillage">
@@ -133,13 +127,13 @@
          <center>
             <TabPane fx:id="tabbedPane" styleClass="b" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                  <Tab fx:id="comptes" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
+                  <Tab fx:id="comptes" styleClass="compteStyle" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
                      <content>
-                        <TilePane fx:id="comptesTilePane" prefHeight="200.0" prefWidth="200.0" />
+                        <TilePane fx:id="comptesTilePane" styleClass="compteStyle2" prefHeight="200.0" prefWidth="200.0" />
                      </content>
                   </Tab>
                
-                <Tab closable="false" text="Console">
+                <Tab closable="false" text="Console" styleClass="compteStyle">
                      <content>
                         <ScrollPane fx:id="fxConsolescrollpane" fitToHeight="true" fitToWidth="true" styleClass="b">
                            <content>
@@ -149,7 +143,7 @@
                      </content>
                   </Tab>
                 
-                <Tab closable="false" text="Parametres">
+                <Tab closable="false" text="Parametres" styleClass="compteStyle">
                		 <content>
 						<ScrollPane styleClass="c">
 						<content>
@@ -163,7 +157,7 @@
                		 </content>
                 </Tab>
               
-                <Tab closable="false" text="Xpath perso">
+                <Tab closable="false" text="Xpath perso" styleClass="compteStyle">
                      <content>
                         <ToggleButton mnemonicParsing="false" text="ToggleButton">
                            <graphic>
@@ -171,7 +165,7 @@
                            </graphic>
                         </ToggleButton>
                      </content></Tab>
-                <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages">
+                <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages" styleClass="compteStyle">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>
