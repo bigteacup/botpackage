@@ -11,8 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.Bloom;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 //import javafx.stage.StageStyle;
 
@@ -43,7 +45,6 @@ public class FxFenetre extends Application {
 
 	  @Override
 	  public void start(Stage primaryStage) {
-		//  primaryStage.initStyle(StageStyle.TRANSPARENT);
 	        	primaryStage.setTitle("TimTools lite");
 	        	controller = new FxFenetreController();
 	     
@@ -58,11 +59,11 @@ public class FxFenetre extends Application {
 			} catch (IOException e) {e.printStackTrace();
 			}
 	        Scene myScene = new Scene(myPane);
-	        myScene.setFill(Color.TRANSPARENT);
+	       
 	        myScene.getStylesheets().add(FxFenetre.class.getResource("fxconsole.css").toExternalForm());
+	       
 	        
-	       // myPane.setStyle("-fx-background-color: null;");
-	        myPane.setOpacity(1.0);
+	       
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	      //TODO investiguer les possibilitées :  fenetre de question type etesvoussur? ou autre 
@@ -81,15 +82,21 @@ public class FxFenetre extends Application {
 	   
 	         
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	        
-	        myPane.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+	      
+	        myPane.setOpacity(1.0);
+	        myPane.setStyle("-fx-background-color: rgba(0, 100, 100, 0.5)"); //	-fx-background-color: transparent;
             //(ii) set the scene fill to transparent
             myScene.setFill(null);
+            myScene.setFill(Color.TRANSPARENT);
             //(iii) set the stage background to transparent
-          //  primaryStage.initStyle(StageStyle.TRANSPARENT);
-	        //stage.initStyle(StageStyle.TRANSPARENT);
+          // primaryStage.initStyle(StageStyle.TRANSPARENT);
+	       // myPane.initStyle(StageStyle.TRANSPARENT);
 	      //  primaryStage.
           //  this.initStyle(StageStyle.TRANSPARENT);
 	       // myScene.getStylesheets()("-fx-background-color: null;");
+	     // myPane.setStyle("-fx-background-color: null;");
+		      
+		       // myPane.setBackground(Background.EMPTY);
 	        
 	        primaryStage.setScene(myScene);
 	        //this.initStyle(StageStyle.TRANSPARENT);
