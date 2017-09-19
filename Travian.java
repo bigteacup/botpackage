@@ -584,7 +584,7 @@ public class Travian extends Thread {
 				listeDeVillages.add(newVillage);
 				//TODO important --> gerer les comptes speed etc X2 X3 etc
 				if (compte.getTribut().equals("Gaulois")) {newVillage.setQuantiteMaxTransporteeParMarchands(750);}
-				if (compte.getTribut().equals("Romains")) {newVillage.setQuantiteMaxTransporteeParMarchands(1000);}
+				if (compte.getTribut().equals("Romains")) {newVillage.setQuantiteMaxTransporteeParMarchands(500);}
 				if (compte.getTribut().equals("Teutons")) {newVillage.setQuantiteMaxTransporteeParMarchands(1000);}
 
 			}
