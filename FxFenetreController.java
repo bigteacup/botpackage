@@ -427,7 +427,17 @@ public class FxFenetreController extends ScrollPane {
 			    }
 			});
 		 
-		 Label titre = new Label(compte.getName());
+		 Button buttonDelete = new Button("Supr'");
+		 buttonDelete.setOnAction(new EventHandler<ActionEvent>() {
+			 @Override public void handle(ActionEvent e) {
+				 gestionnaireDeComptes.suprimerFichierCompte(compte.getName(), "\\comptes\\", "");
+				 fxChargerComptes();
+			 }
+			 
+		 });
+		 
+		
+		 Label titre = new Label(compte.getName().split(".compte")[0]);
 
 	       // vpane.getChildren().add(button1);
 	       // vpane.getChildren().add(titre);
@@ -438,6 +448,13 @@ public class FxFenetreController extends ScrollPane {
 	        vpane.setBottom(button1);
 	        button1.setPadding(new Insets(5, 5, 5, 5));
 	        BorderPane.setMargin(button1, new Insets(2, 2, 2, 2));
+	        
+	        buttonDelete.getStyleClass().add("buttonDelete");
+	      //  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
+	        vpane.setTop(titre);
+	        vpane.setRight(buttonDelete);
+	       // buttonDelete.setPadding(new Insets(5, 5, 5, 5));
+	        BorderPane.setMargin(buttonDelete, new Insets(2, 2, 2, 2));
 	        
 	        //comptesTilePane.getChildren().add(button1);
 	        comptesTilePane.getChildren().add(vpane);

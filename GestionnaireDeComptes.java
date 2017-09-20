@@ -86,6 +86,16 @@ public class GestionnaireDeComptes {
 		
 
 	}
+	public void suprimerFichierCompte(String nomDeCompte, String dossier, String extention) {
+		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier + nomDeCompte + extention;
+		File newFichierCompte = new File(userPath);
+
+		boolean isCreated = newFichierCompte.delete();
+		System.out.println("Supression d'un fichier compte " + userPath + " : " + isCreated);
+
+		
+
+	}
 	public void ecrireDansFichier(String dossier, String nomFichier, String userName, String server , String motDePasse, String race ) {
 		
 		PrintWriter writer;
