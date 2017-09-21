@@ -637,7 +637,7 @@ public class Village {
 
 		
 		//////////////////////////////////////////////////////
-		// se replacer sur la bonne page si un module est rester ailleur
+		// se replacer sur la bonne page si un module est reste ailleur
 		String urlTest = null;
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
@@ -894,7 +894,7 @@ public class Village {
 		//*[@id="village_map"]/div
 		int token = village.getTokenconstruction();
 
-		if (token < 2) {
+		if (token < t.limiteDeConstruction) {
 			try { // secu anti rechargement
 				// Lancer construction champs
 				// trouver lien du premier plus petit
@@ -905,7 +905,7 @@ public class Village {
 					token = village.getTokenconstruction();
 					// on reverifie le token pour pas boucler plus que
 					// necessaire
-					if (token < 2) {
+					if (token < t.limiteDeConstruction ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
 						// On recharge la liste apres un eventuel rechargement
 						listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 						listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
@@ -1134,7 +1134,7 @@ public class Village {
 			if (construire1.getNomBatiment().contains(batimentAConstruire)) {
 				int level = construire1.getLevelBatiment();
 
-				if (level < levelVoulu && village.getTokenconstruction() < 2) {
+				if (level < levelVoulu && village.getTokenconstruction() < t.limiteDeConstruction) {
 
 					// Parse
 					try {
@@ -1153,7 +1153,7 @@ public class Village {
 
 							if (as.getAttribute("alt").contains(construire1.getNomBatiment())
 									&& as.getAttribute("href").split("id=")[1].contains(construire1.getSlotBatiment())
-									&& village.getTokenconstruction() < 2) {
+									&& village.getTokenconstruction() < t.limiteDeConstruction) {
 								boisNecessaire = Integer.parseInt(
 										as.getAttribute("alt").split("r1\" src=\"img/x.gif\" />")[1].split("</span>")[0]
 												.trim());
@@ -1349,11 +1349,11 @@ public class Village {
 			monterChamps(t);
 		}
 
-		if (village.getTokenconstruction() < 2 && village.getChampMin() <= 10
-				|| village.getTokenconstruction() < 2 && village.getVillageCapitale() == true) {
+		if (village.getTokenconstruction() < t.limiteDeConstruction && village.getChampMin() <= 10
+				|| village.getTokenconstruction() < t.limiteDeConstruction && village.getVillageCapitale() == true) {
 			chargerBatiments(t);
 			// try {
-			for (int i = 0; i <= 1 && village.getTokenconstruction() < 2; i++) {
+			for (int i = 0; i <= 1 && village.getTokenconstruction() < t.limiteDeConstruction; i++) {
 
 				// chargerBatiments(t);
 				for (Batiment batimentDuTemplate : village.getTemplateDuVillage()) {
@@ -1366,7 +1366,7 @@ public class Village {
 						t.randomsleep.court();
 					}
 					for (Batiment batimentDuVillage : village.getBatiments()) {
-						if (village.getTokenconstruction() < 2) {
+						if (village.getTokenconstruction() < t.limiteDeConstruction) {
 							if (batimentDuVillage.getNomBatiment().equals(batimentDuTemplate.getNomBatiment())) {
 								trouver = true;
 								if (batimentDuVillage.getLevelBatiment() < batimentDuTemplate.getLevelBatiment()) {
@@ -1406,7 +1406,7 @@ public class Village {
 
 	private void creationBatiment(Travian t, Village village) {
 		int tokenDeChangement = 0;
-		if(village.getTokenconstruction() < 2){
+		if(village.getTokenconstruction() < t.limiteDeConstruction){
 			t.ecrireDansConsole("Essai de création de batiments :");
 			boolean trouver = false;
 			boolean slotDispo = false;

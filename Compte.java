@@ -22,14 +22,15 @@ public class Compte {
 		
 	}
 	
+	
 public String nomDeCompte;	
 public Properties	fichierProperties ;
+public int limiteDeConstructionSimultanees;
 
 private String server;
 private String userName;
 private String passWord;
-private String tribut = "romains";
-
+private String tribut = "";
 
 
 		
@@ -37,7 +38,17 @@ private String tribut = "romains";
 	//private WebDriver driver = new FirefoxDriver();
 	//////////////////////////////////////////////
 
-
+public int etablirLimiteDeConstructionSimultanees() {
+	
+	
+	if (tribut.equals("Romains")) {
+		limiteDeConstructionSimultanees = 3;
+		
+	}else {
+		limiteDeConstructionSimultanees = 2;
+	}
+	return limiteDeConstructionSimultanees;
+}
 
 //comptePourCreation
 public void comptePourCreation() {

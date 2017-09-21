@@ -61,7 +61,7 @@ public class Travian extends Thread {
 	FxFenetreController fxFenetreController;
 	private  AtomicReference<Thread> currentThread = new AtomicReference<Thread>();
 	public int tokenForcerMarcheDeLaRotation = 0;
-
+	int limiteDeConstruction = 2;
 	private WebDriver driver;
 
 	Hero hero = new Hero();
@@ -209,6 +209,7 @@ public class Travian extends Thread {
 
 				if (allume == false){break;}
 				detectionTribut(); //ici pour le moment
+				limiteDeConstruction = t.getCompte().etablirLimiteDeConstructionSimultanees();
 				try {
 					listerVillages();
 				} catch (Exception e) {
@@ -684,9 +685,9 @@ public class Travian extends Thread {
 
 				if (allume == false){break;}
 				if ( bot.construireBatiments == true ) {
-					if (village.getTokenconstruction() < 2 ){ 
+					if (village.getTokenconstruction() < limiteDeConstruction ){ 
 						gestionBatiments();
-					}else{ecrireDansConsole("Deja 2 construction en cours");}
+					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours");}
 				}else {t.ecrireDansConsole("construction Desactivees...");}
 				
 				try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur
@@ -1608,14 +1609,15 @@ public class Travian extends Thread {
 	private int besoinDePasserSurLeVillage(Village village) {
 		int besoin = 0;
 		int besoin2 = 0;
+		
 	
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
-		if (village.getChampsFinis() == false && village.getTokenconstruction() < 2 
+		if (village.getChampsFinis() == false && village.getTokenconstruction() < limiteDeConstruction 
 				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true
 				|| village.getVillageCapitale() == true 
 				|| village.getVillagePillage() == true 
 				|| village.getCropDeath() == true 
-				|| village.getTokenconstruction() < 2 && village.getBesoinDeConstruction() == true
+				|| village.getTokenconstruction() < limiteDeConstruction && village.getBesoinDeConstruction() == true
 				|| village.getBois() >= village.getMaxStockDepot()*90/100 	
 				|| village.getArgile() >= village.getMaxStockDepot()*90/100
 				|| village.getFer() >= village.getMaxStockDepot()*90/100
