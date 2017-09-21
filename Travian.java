@@ -102,7 +102,7 @@ public class Travian extends Thread {
 	}
 
 	public void run() {
-		System.setProperty("webdriver.chrome.driver", "\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
 		driver = new ChromeDriver();
 		compte.setDriver(driver);
 		while (allume) {
@@ -1658,9 +1658,14 @@ public class Travian extends Thread {
 
 	private void prendrePhoto(String nom) {
 		numeroDePhoto++;
-
-		String[] repertoire = new java.io.File("\\test").list();
+		
+		String userPath = System.getProperty("user.home") + "\\botpackage\\photos";
+		File dossierPhotos = new File(userPath);
+		boolean isCreated = dossierPhotos.mkdirs();
+		try {
+		String[] repertoire = new java.io.File(System.getProperty(userPath)).list();
 		//////////////
+	
 		for (int i=0; i<repertoire.length; i++)
 		{
 			// Afficher le nom de chaque élément
@@ -1685,12 +1690,14 @@ public class Travian extends Thread {
 	   		  		}*/
 			}
 		}
-
+	}catch (Exception e) {
+		ecrireDansConsole("Dossier vide.");
+	}
 
 		////////////
 		try {
 			File scrFile = ((TakesScreenshot)compte.getDriver()).getScreenshotAs(OutputType.FILE); 
-			FileUtils.copyFile(scrFile, new File("\\test\\"+nom+"-"+numeroDePhoto+".jpg"));
+			FileUtils.copyFile(scrFile, new File(userPath + "\\"  +nom+"-"+numeroDePhoto+".jpg"));
 		}catch (Exception e) {
 			ecrireDansConsole("Photo ratee");
 		}

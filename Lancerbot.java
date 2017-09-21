@@ -77,6 +77,18 @@ import org.openqa.selenium.WebDriver;
 
 
 		public  Lancerbot() {
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			//this.bot = bot;
 			//console = new fxConsoleExperimentale(bot); console.start();
 		//	this.bot = bot;
