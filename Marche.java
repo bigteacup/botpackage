@@ -975,7 +975,7 @@ public void changementOngletMarche(Travian t,Village village, int token, String 
 	// faire un limiteur par la taille du village, ou des depot, ou le calcul complet
 	public void acheterAuMarché(Travian t, Village village){
 		t.ecrireDansConsole("[Marché] acheterAuMarché Début ");
-		int tempsMax = 2; // temps en heure
+		int tempsMax = 3; // temps en heure
 		//int marchandsMinPourAcheter = 10;
 		int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
 		int marchandsAllouésPourAchat = 1; // faire varier pour s'adapter a la taille du village //10 sur  gros compte
