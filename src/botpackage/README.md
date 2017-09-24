@@ -1,9 +1,9 @@
 # botpackage
 ## Bot Travian
 
--basé sur selenium
+-Basé sur selenium
 
--interface graphique sous JavaFX
+-Interface graphique sous JavaFX
 
 -En developement mais parfaitement fonctionnel
 
