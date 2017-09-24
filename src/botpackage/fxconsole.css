@@ -1,0 +1,529 @@
+.root{
+	-fx-font-smoothing-type: lcd;
+	-fx-background-color: null;
+	-fx-background-color: transparent;
+		-fx-opacity:1;
+		
+}
+.bb1{
+	-fx-font-smoothing-type: lcd;
+	-fx-background-color: null;
+	-fx-background-color: null  ;
+		-fx-opacity: 1;
+
+}
+.bb2{
+	-fx-font-smoothing-type: lcd;
+	-fx-background-color: null;
+	-fx-background-color: blue ;
+		-fx-opacity: 0.0;
+
+}
+.scrollpane, .borderpane, *.tab-header-background{
+
+}
+.tab-pane:top, *.tab-header-area, .tab-header-background{
+		-fx-effect: null;
+			-fx-background-color: null;
+	-fx-background-color: transparent ;
+
+	-fx-opacity: 1.0;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.tab-pane, .tab-header-area {
+		-fx-padding: 0 0 0 0;
+
+}
+
+.troischamps{
+	
+	-fx-padding: 40 0 0 72;
+
+	
+}
+.troischamps1{
+	-fx-opacity: 0.7;
+		-fx-min-width: 133px;
+	-fx-font-size: 12px; 
+-fx-padding: 0 0 0 0;
+
+}
+.buttonDelete{
+	   -fx-background-color: none;
+	   -fx-alignment: center-right ;
+      -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+-fx-background-image: url("file:///C:/travimage/wooden_plate.png");
+-fx-background-size: 100% 100%;
+-fx-padding: 0 0 0 0;
+	
+}
+.troischamps2{
+	-fx-opacity: 0.7;
+		-fx-min-width: 133px;
+	-fx-font-size: 12px; 
+-fx-padding: 0 0 0 0;
+	
+}
+.troischamps3{
+	-fx-opacity: 0.7;
+		-fx-min-width: 133px;
+	-fx-font-size: 12px; 
+-fx-padding: 0 0 0 0;
+	
+}
+.troischamps1:focused, .troischamps2:focused, .troischamps3:focused{
+-fx-border-color: rgb(0,199,0) ;
+-fx-border-radius: 3px;
+
+}
+.sbr2{
+  -fx-font-size: 12px;
+    -fx-fill: rgb(192,192,192);
+    }
+.sbr3{
+  -fx-font-size: 12px;
+    -fx-fill: rgb(192,192,192);
+    -fx-overflow-x: hidden;
+    -fx-background-color: black;
+    }
+.sbrfinal{
+  -fx-font-size: 12px;
+    -fx-fill: red;
+}
+.mot{
+  -fx-font-size: 12px;
+  -fx-font-weight:bold;
+  -fx-font-family:monospaced;
+  -fx-color:red;
+   -fx-fill: orange;
+    }
+ .b{
+	-fx-font-smoothing-type: lcd;
+	-fx-vbar-policy: always;
+	-fx-background-color: null;
+	-fx-background-color: transparent;
+		
+		 -fx-padding: 0 0 0 0;
+
+	/* ;  -fx-border-color: white;*/
+	/*-fx-fill:red;*/
+	/*-fx-background-color: black;*/
+	
+}
+/****************************************************************
+ 
+  ScrollBar Skin  
+ 
+****************************************************************/
+
+/*
+ *  .b > .scroll-bar{
+ -fx-background-color: rgb(96,96,96);
+ -fx-background-radius: 2em;
+}
+b.scroll-bar:horizontal b.track,
+b.scroll-bar:vertical b.track {
+ -fx-background-color: transparent;
+ -fx-border-color:transparent;
+ -fx-background-radius: 2em;
+}
+b.scroll-bar:vertical b.track-background,
+b.scroll-bar:horizontal b.track-background {
+ -fx-background-color: transparent;
+ -fx-background-insets: 0;
+ -fx-background-radius: 2em;
+}
+.b scroll-bar:horizontal .b thumb {
+ -fx-background-color: rgb(211,211,211);
+ -fx-background-insets: 4 0 4 0;
+ -fx-background-radius: 2em;
+}
+.b scroll-bar:vertical .b thumb {
+ -fx-background-color: rgb(211,211,211);
+ -fx-background-insets: 0 4 0 4;
+ -fx-background-radius: 2em;
+}
+.b scroll-bar:horizontal .b thumb:hover,
+.b scroll-bar:vertical .b thumb:hover {
+ -fx-background-color: rgb(231,231,231);
+}
+.b scroll-bar:horizontal .b thumb:pressed,
+.b scroll-bar:vertical .b thumb:pressed {
+ -fx-background-color: rgb(255,255,255);
+}
+.b scroll-bar:vertical .b increment-button, .b scroll-bar:vertical .b decrement-button {
+ -fx-background-color:transparent;
+ -fx-background-radius: 2em;
+ -fx-padding: 5;
+}
+.b scroll-bar:horizontal .b increment-button, .b scroll-bar:horizontal .b decrement-button {
+ -fx-background-color:transparent;
+ -fx-background-radius: 2em;
+ -fx-padding: 5;
+}
+.b scroll-bar:horizontal .b increment-arrow {
+ -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+ -fx-background-color: rgb(211,211,211);
+ -fx-padding: 0.25em;
+ -fx-rotate: -90;
+}
+.b scroll-bar:vertical .b increment-arrow {
+ -fx-background-color: rgb(211,211,211);
+ -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+ -fx-padding: 0.25em;
+ -fx-rotate: 0;
+}
+.b scroll-bar:horizontal .b decrement-arrow {
+ -fx-background-color: rgb(211,211,211);
+ -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+ -fx-padding: 0.25em;
+ -fx-rotate: 90;
+}
+.b scroll-bar:vertical .b decrement-arrow {
+ -fx-background-color: rgb(211,211,211);
+ -fx-shape: "M 0 0 L 4 8 L 8 0 Z";
+ -fx-padding: 0.25em;
+ -fx-rotate: -180;
+}
+.b scroll-bar:vertical:focused,
+.b scroll-bar:horizontal:focused {
+ -fx-background-color: transparent,rgb(96,96,96),rgb(96,96,96);
+}*/
+ .c{
+	-fx-background-color: red;
+	-fx-fill:pink;
+	-fx-border-style: solid ;
+	-fx-border-color: white;
+	
+}
+
+ .pink{
+	-fx-background-color: pink;
+	-fx-fill:pink;
+	-fx-border-style: solid ;
+	-fx-border-color: white;
+	
+}
+.marcheflow{
+	-fx-background-color:rgb(240,224,28);
+	
+}
+ .cyan{
+	-fx-background-color: cyan;
+	-fx-fill:pink;
+	-fx-border-style: solid ;
+	-fx-border-color: white;
+	
+}
+ .fake3{	 
+	-fx-background-color:radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(102,153,102) 0.0, rgb(26,77,26) 100.0 ) radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(87,222,14) 0.0, rgb(24,149,6) 100.0 ) rgb(128,255,0);
+	-fx-fill:pink;
+	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+	
+}
+ .off{
+	-fx-background-color:radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,102,102) 0.0, rgb(153,0,0) 100.0 ) radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(246,143,143) 0.0, rgb(218,22,22) 100.0 ) ;
+	-fx-fill:pink;
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+	
+}
+ .m1{
+	-fx-background-color:radial-gradient( focus-angle 270.0deg, focus-distance 50.0%, center 50.0% 50.0%, radius 50.0%, rgb(255,204,102) 0.0, rgb(179,102,26) 100.0 ) ;
+	-fx-fill:blueviolet ;
+ 	-fx-border-style: solid ;
+	-fx-border-color: white;
+	
+}
+ .m2{
+	-fx-background-color:rgb(204,128,51) ;
+	-fx-fill:pink;
+/* 	-fx-border-style: solid ;*/
+/* 	-fx-border-color: white;*/
+
+	 
+	}
+
+
+ .mt0{
+ 	-fx-border-width: 0 0 0 0;
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt1{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt2{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt3{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt4{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt5{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt6{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt7{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+ .mt8{
+ 	-fx-border-style: solid ;
+ 	-fx-border-color: white;
+}	
+	
+ .v1{
+	-fx-background-color: rgb(128,128,128);
+	-fx-border-style: solid ; 
+	-fx-background-radius: 10;
+	-fx-border-radius: 10,10,10,10;
+	-fx-border-color: white;
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+ .v2{
+	-fx-background-color: rgb(192,192,192);
+	-fx-fill:pink;
+	-fx-border-style: solid ;
+	-fx-background-radius: 10, 0, 0, 0;
+	-fx-border-radius: 10,10,10,10;
+	-fx-border-color: white;
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+ .v3{
+	-fx-background-color: rgb(102,0,204);
+	-fx-border-style: solid ; 
+	
+	
+	-fx-border-color: white;
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+}
+ .lesCheckBoxs{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+ }
+ .ctuile {
+	-fx-background-color: #4caf50;
+	/*-fx-border-style: solid ;*/
+	/*-fx-border-color: white;*/
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/c1.jpg");
+-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+/*	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  */
+
+     
+
+}
+ .ctuileb {
+	-fx-background-color: #4caf50;
+	
+	/*-fx-border-style: solid ;*/
+	/*-fx-border-color: white;*/
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.0) , 0, 0.0 , 0 , 0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 3, 0.3 , 0 , 1 );
+/*	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  
+-fx-background-image: url("file:///C:/travimage/default_border.png");
+-fx-background-size: 100% 100%;
+     -fx-border-style:solid;
+     -fx-border-width:32px;
+*/
+-fx-background-image: url("file:///C:/travimage/c1.jpg");
+-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+
+}
+
+.compteStyle{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+	
+}
+.compteStyle1{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+-fx-background-size: 150% 150%;
+-fx-background-position: -150px, -150px;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+	
+}
+.compteStyle2{
+	-fx-background-color: null;
+	-fx-background-color: transparent;
+	
+}
+ .clabel{
+ 
+ }
+  .ctitre{
+ -fx-text-fill: white; 
+ -fx-font-size: 24px;
+ -fx-font-weight:bold;
+    -fx-padding: 0px 12px 0px 12px;
+-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 1, 0.6 , 0 , 1 );
+ -fx-font-smoothing-type: lcd;
+ }
+  .cbutton1{
+   -fx-background-color: none;
+      -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/
+   /* -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );*/
+/*-fx-background-color: radial-gradient(center 50% 50% , radius 12% , repeat, #fffaf0, #008080, #90ee90);*/
+-fx-background-image: url("file:///C:/travimage/wooden_plate.png");
+-fx-background-size: 100% 100%;
+ }
+  .cbutton1:hover{
+
+ -fx-background-color: none;
+ }
+ .vLabel{
+	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );
+	 -fx-border-radius: 10 0 10 0;
+	 -fx-background-radius: 10 0 10 0;
+ 	-fx-border-style: solid ;
+	-fx-border-color: white;
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 0,0,0,0;*/
+  -fx-font-weight:bold;
+
+
+  
+
+	
+}
+ .vLabelcap{
+	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,255,102) 0.0, rgb(77,128,77) 100.0 );
+	 -fx-border-radius: 10 0 10 0;
+	 -fx-background-radius: 10 0 10 0;
+	-fx-border-style: solid ;
+	-fx-border-color: white;
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 0,0,0,0;*/
+	
+
+
+	
+}
+.vLabelpillage{
+	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,100,100) 0.0, rgb(150,150,180) 100.0 );
+	 -fx-border-radius: 10 0 10 0;
+	 -fx-background-radius: 10 0 10 0;
+	-fx-border-style: solid ;
+	-fx-border-color: white;	
+}
+.wt {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+ .d{
+	-fx-font-smoothing-type: lcd;
+	-fx-fill:red;
+	-fx-background-color: #9AAEB5;
+	
+}
+ .dparam{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+	-fx-background-size: 150% 150%;
+	-fx-background-position:75% 75%;
+	-fx-background-origin: content-box;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:33;
+     -fx-border-image-width:33;
+     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+	
+}
+ .e{
+	-fx-font-smoothing-type: lcd;
+	-fx-fill:red;
+	-fx-background-color: cyan;
+	
+}
+ .f{
+	-fx-font-smoothing-type: lcd;
+	-fx-fill:red;
+	-fx-background-color: purple;
+	
+}
+.lesCheckBoxs{
+	
+	-fx-background-color: grey;
+	
+}
+.sbrfinal {
+	-fx-fill:red;
+	
+}
+/* 
+.ligne .scroll-bar:vertical:disabled {
+    -fx-opacity: 0;
+}*/
+
+.consoleVBox {-fx-fill:red; -fx-background-color: black; -fx-vbar-policy: always;    }
+.x > .scroll-bar{
+ -fx-background-color: rgb(96,96,96);
+ -fx-background-radius: 2em;
+ -fx-vbar-policy: always;
+}
+.console0 {-fx-fill:red;}
+.console1 {-fx-fill:green;}
+.console2 {-fx-fill:orange;overflow-x: hidden}
+.console3 {-fx-fill:orange;}
+.console4 {-fx-fill:green}
+.console5 {-fx-fill:#cc6600;}
+.console6 {-fx-fill:yellow;}
+.console7 {-fx-fill:purple;}
+.console8 {-fx-fill:cyan;}
+.console9 {-fx-fill:#CCFF00;}
+.console10 {-fx-fill:#ffcc00;}
+.console11 {-fx-fill:pink;}
+.console12 {-fx-fill:#FF6A00;}
+.console14 {-fx-fill:red;}
+.console15 {-fx-fill:red;}
+.console16 {-fx-fill:red;}
+.console17 {-fx-fill:red;}
+.console18 {-fx-fill:red;}
+.console19 {-fx-fill:red;}
+.console20 {-fx-fill:red;}
