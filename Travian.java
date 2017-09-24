@@ -1368,9 +1368,7 @@ public class Travian extends Thread {
 
 					//choper le tableau des ressources necessaires pour le champs en cours
 					List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g+1).findElements(By.xpath("//*[@class='showCosts']/span"));
-
-					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(0).getText());
-					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(1).getText());
+esnecessaire "+ ressourcesNecessaires.get(1).getText());
 					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(2).getText());
 					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(3).getText());*/
 					////////////////////////////////////
@@ -1380,7 +1378,9 @@ public class Travian extends Thread {
 					String maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(" ", "");
 					int maxStockDepot = Integer.parseInt(maxDepot);
 
-					String maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
+					String maxSilo = t.getCompte().getDriver().findElement(By.xpath("
+					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(0).getText());
+					//	ecrireDansConsole("valeur ressourc//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
 					int maxStockSilo = Integer.parseInt(maxSilo);
 
 					village.setMaxStockDepot(maxStockDepot);
