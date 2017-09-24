@@ -429,10 +429,10 @@ public class Travian extends Thread {
 
 		}
 	}
-	//////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////// 
 
 	public void redemarrerNavigateur(){
-		System.setProperty("webdriver.chrome.driver", "\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
 		driver = new ChromeDriver();
 		compte.setDriver(driver);
 		ecrireDansConsole("Rallumage du navigateur");
@@ -1663,16 +1663,19 @@ public class Travian extends Thread {
 		File dossierPhotos = new File(userPath);
 		boolean isCreated = dossierPhotos.mkdirs();
 		try {
-		String[] repertoire = new java.io.File(System.getProperty(userPath)).list();
-		//////////////
-	
+		String[] repertoire = new java.io.File(userPath).list();
+		
+		ecrireDansConsole(String.valueOf(repertoire.length)+ " Photos dans le dossier");
+		
+		////////////// desactivé
+	/*
 		for (int i=0; i<repertoire.length; i++)
 		{
 			// Afficher le nom de chaque élément
 			ecrireDansConsole(repertoire[i]);
 		}
 		///////////
-
+*/
 		//trouver nom equivalent et incrementer
 		for (int i=0; i<repertoire.length; i++)
 		{
