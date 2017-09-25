@@ -1039,21 +1039,25 @@ public void changementOngletMarche(Travian t,Village village, int token, String 
 
 			
 		if(totalBois < totalArgile && totalBois < totalFer && totalBois < totalCereales){
-			if(village.getBois() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
-			besoinMarché = 1;}else {t.ecrireDansConsole("totalBois");}
+			if(village.getMaxStockDepot() - village.getBois() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
+			besoinMarché = 1;}else {
+				t.ecrireDansConsole("totalBois impossible");}
 		}
 		
 		if(totalArgile < totalBois && totalArgile < totalFer && totalArgile < totalCereales){
-			if(village.getArgile() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {	
-		besoinMarché = 2;}else {t.ecrireDansConsole("totalArgiles");}
+			if(village.getMaxStockDepot() - village.getArgile() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {	
+		besoinMarché = 2;}else {
+			t.ecrireDansConsole("totalArgiles impossible");}
 	}
 		if(totalFer < totalBois && totalFer < totalArgile   && totalFer < totalCereales){
-			if(village.getFer() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
-		besoinMarché = 3;}else {t.ecrireDansConsole("totalFer");}
+			if(village.getMaxStockDepot() - village.getFer() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
+		besoinMarché = 3;}else {
+			t.ecrireDansConsole("totalFer impossible");}
 	}
 		if(totalCereales <  totalBois && totalCereales < totalArgile  && totalCereales < totalFer){
-			if(village.getCereales() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
-		besoinMarché = 4;}else {t.ecrireDansConsole("totalCereales");}
+			if(village.getMaxStockSilo() - village.getCereales() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
+		besoinMarché = 4;}else {
+			t.ecrireDansConsole("totalCereales impossible");}
 	}
 			
 			
