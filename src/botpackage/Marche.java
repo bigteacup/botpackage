@@ -1007,23 +1007,63 @@ public void changementOngletMarche(Travian t,Village village, int token, String 
 		int moyenne = (totalBois + totalArgile + totalFer + totalCereales) / 4;
 
 		if(totalBois < (moyenne/100*pourcentageDeclenchementAcheter)){
-			//	acheterBois = true;
+				acheterBois = true;
 			besoinMarché = 1;
 		}
 		if(totalArgile < (moyenne/100*pourcentageDeclenchementAcheter)){
-			//acheterArgile = true;
+			acheterArgile = true;
 			besoinMarché = 2;
 		}
 		if(totalFer < (moyenne/100*pourcentageDeclenchementAcheter)){
-			//	acheterFer = true;
+				acheterFer = true;
 			besoinMarché = 3;
 		}
 		if(totalCereales < (moyenne/100*pourcentageDeclenchementAcheter)){
-			//acheterCereales = true;
+			acheterCereales = true;
 			besoinMarché = 4;
 		}
 
+	
+		
+		
+		
+		
+		
 		if(besoinMarché > 0 && village.getNombreDeMarchands() > 1 ){
+			
+			
+			
+			
+			// TODO temporaire nobrain à refaire demain on refait un passage pour prendre le plus petit
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			
+		if(totalBois < totalArgile && totalBois < totalFer && totalBois < totalCereales){
+			if(village.getBois() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
+			besoinMarché = 1;}else {t.ecrireDansConsole("totalBois");}
+		}
+		
+		if(totalArgile < totalBois && totalArgile < totalFer && totalArgile < totalCereales){
+			if(village.getArgile() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {	
+		besoinMarché = 2;}else {t.ecrireDansConsole("totalArgiles");}
+	}
+		if(totalFer < totalBois && totalFer < totalArgile   && totalFer < totalCereales){
+			if(village.getFer() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
+		besoinMarché = 3;}else {t.ecrireDansConsole("totalFer");}
+	}
+		if(totalCereales <  totalBois && totalCereales < totalArgile  && totalCereales < totalFer){
+			if(village.getCereales() < (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
+		besoinMarché = 4;}else {t.ecrireDansConsole("totalCereales");}
+	}
+			
+			
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+			
+					
+			
+			
+			
+			
 			// on verifie que les marchands soient revenu du dernier envoi
 			boolean autorisationAchat = false;
 			Date dateActuelle =  t.randomsleep.date(true);
