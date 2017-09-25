@@ -296,6 +296,14 @@ public class Village {
 	public void setNombreDeMarchands(int nombreDeMarchands) {
 		NombreDeMarchands = nombreDeMarchands;
 	}
+	
+	public int getNombreDeMarchandsMax() {
+		return NombreDeMarchandsMax;
+	}
+
+	public void setNombreDeMarchandsMax(int nombreDeMarchandsMax) {
+		NombreDeMarchandsMax = nombreDeMarchandsMax;
+	}
 
 	public int getPhalanges() {
 		return phalanges;
@@ -392,6 +400,7 @@ public class Village {
 	private boolean besoinDeNpc;
 	private boolean besoinMarche;
 	private int NombreDeMarchands;
+	private int NombreDeMarchandsMax;
 	public int QuantiteMaxTransporteeParMarchands;
 	private int phalanges;
 	private int epees;

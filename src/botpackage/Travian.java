@@ -696,6 +696,7 @@ public class Travian extends Thread {
 					for (Batiment bat : village.getBatiments()) { 
 						if(bat.getNomBatiment().toLowerCase().contains("march")) {
 						village.setNombreDeMarchands(bat.getLevelBatiment());
+						village.setNombreDeMarchandsMax(bat.getLevelBatiment());
 						t.ecrireDansConsole("Forcage estimation nombre de marchand par level marché : "+ bat.getLevelBatiment());
 						break;
 						}
@@ -1314,8 +1315,9 @@ public class Travian extends Thread {
 			while(trouver == false){
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
 					village.setNombreDeMarchands(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[0].replaceAll("\\W", "")));
+					village.setNombreDeMarchandsMax(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[1].replaceAll("\\W", "")));
 
-					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands());
+					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchands());
 
 					trouver = true;
 					i = 0;
@@ -1344,6 +1346,8 @@ public class Travian extends Thread {
 					village.setFer(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[4]")).getText().replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
 					village.setCereales(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[5]")).getText().replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
 					village.setNombreDeMarchands(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().split("/")[0].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
+					village.setNombreDeMarchands(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().split("/")[1].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
+					
 					//String pageSource = compte.getDriver().findElement(By.id("lum")).getAttribute("innerHTML");
 					//	String elemHtml = driver.findElement(By.className("clay")).getAttribute("innerHTML");
 					//String pageSource = compte.getDriver().getPageSource() ;
@@ -1352,7 +1356,7 @@ public class Travian extends Thread {
 					//	JavascriptExecutor executor = (JavascriptExecutor)compte.getDriver();
 					//	 String text= (String) executor.executeScript("document.getElementById('versionInfo').innerHTML");
 					//village.setMaxStockDepot(Integer.parseInt(pageSource.split("80000")[0].toString()));
-					ecrireDansConsole("Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands());
+					ecrireDansConsole("Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax());
 
 					trouver = true;
 					i = 0;
