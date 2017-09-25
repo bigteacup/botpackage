@@ -54,7 +54,7 @@
       -fx-text-fill: white;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
--fx-background-image: url("file:///C:/travimage/wooden_plate.png");
+-fx-background-image: url("image/wooden_plate.png");
 -fx-background-size: 100% 100%;
 -fx-padding: 0 0 0 0;
 	
@@ -313,13 +313,13 @@ b.scroll-bar:horizontal b.track-background {
 }
  .lesCheckBoxs{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+	-fx-background-image: url("image/default_paper.png");
 -fx-background-size: 100% 100%;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
      -fx-border-image-width:10;
-     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+     -fx-border-image-source:url("image/default_border.png");
  }
  .ctuile {
 	-fx-background-color: #4caf50;
@@ -327,13 +327,13 @@ b.scroll-bar:horizontal b.track-background {
 	/*-fx-border-color: white;*/
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("file:///C:/travimage/c1.jpg");
+	-fx-background-image: url("image/c1.jpg");
 -fx-background-size: 100% 100%;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
      -fx-border-image-width:10;
-     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+     -fx-border-image-source:url("image/default_border.png");
 /*	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  */
 
      
@@ -353,37 +353,37 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-style:solid;
      -fx-border-width:32px;
 */
--fx-background-image: url("file:///C:/travimage/c1.jpg");
+-fx-background-image: url("image/c1.jpg");
 -fx-background-size: 100% 100%;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
      -fx-border-image-width:10;
-     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+     -fx-border-image-source:url("image/default_border.png");
 
 }
 
 .compteStyle{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+	-fx-background-image: url("image/default_paper.png");
 -fx-background-size: 100% 100%;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
      -fx-border-image-width:10;
-     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+     -fx-border-image-source:url("image/default_border.png");
 	
 }
 .compteStyle1{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+	-fx-background-image: url("image/default_paper.png");
 -fx-background-size: 150% 150%;
 -fx-background-position: -150px, -150px;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
      -fx-border-image-width:10;
-     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+     -fx-border-image-source:url("image/default_border.png");
 	
 }
 .compteStyle2{
@@ -410,7 +410,7 @@ b.scroll-bar:horizontal b.track-background {
     /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/
    /* -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );*/
 /*-fx-background-color: radial-gradient(center 50% 50% , radius 12% , repeat, #fffaf0, #008080, #90ee90);*/
--fx-background-image: url("file:///C:/travimage/wooden_plate.png");
+-fx-background-image: url("image/wooden_plate.png");
 -fx-background-size: 100% 100%;
  }
   .cbutton1:hover{
@@ -464,7 +464,7 @@ b.scroll-bar:horizontal b.track-background {
 }
  .dparam{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("file:///C:/travimage/default_paper.png");
+	-fx-background-image: url("image/default_paper.png");
 	-fx-background-size: 150% 150%;
 	-fx-background-position:75% 75%;
 	-fx-background-origin: content-box;
@@ -472,7 +472,7 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:33;
      -fx-border-image-width:33;
-     -fx-border-image-source:url("file:///C:/travimage/default_border.png");
+     -fx-border-image-source:url("image/default_border.png");
 	
 }
  .e{

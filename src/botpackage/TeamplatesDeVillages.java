@@ -32,7 +32,7 @@ public  class   TeamplatesDeVillages {
 	static String boulangerie= "Boulangerie";
 	static String moulin= "Moulin";
 	static String scierie= "Scierie";
-	static String poterie= "Usine de Poteries"; 
+	static String poterie= "Usine de poterie"; 
 	static String fonderie= "Fonderie";
 	static String cachette= "Cachette";
 	static String pieges = "Fabricant de piéges";
@@ -49,7 +49,7 @@ public  class   TeamplatesDeVillages {
 	static String marche = "Place du marché";
 	static String academie = "Académie";	
 	static String caserne = "Caserne";
-	static String tailleur = "Tailleur de Pierres";
+	static String tailleur = "Tailleur de pierre";
 	static String grandSilo = "Grand silo de céréales";
 	static String grandDepot = "Grand Dépôt de ressources";
 	static String forge = "Forge";
