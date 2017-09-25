@@ -2,10 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/selenium3.5.3/selenium-server-standalone-3.5.3.jar"/>
 	<classpathentry kind="lib" path="src/botpackage/richtextfx-0.7-M5-javadoc.jar"/>
 	<classpathentry kind="lib" path="src/botpackage/richtextfx-fat-0.7-M5.jar"/>
-	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/selenium353/client-combined-3.5.3-nodeps.jar"/>
-	<classpathentry kind="lib" path="C:/selenium353/selenium-server-standalone-3.5.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
