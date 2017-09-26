@@ -1317,7 +1317,7 @@ public class Travian extends Thread {
 					village.setNombreDeMarchands(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[0].replaceAll("\\W", "")));
 					village.setNombreDeMarchandsMax(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[1].replaceAll("\\W", "")));
 
-					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchands());
+					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax());
 
 					trouver = true;
 					i = 0;
