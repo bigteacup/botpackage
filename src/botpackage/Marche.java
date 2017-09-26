@@ -1009,8 +1009,18 @@ public class Marche {
 			totalCereales = totalCereales +v.getCereales();
 
 		}
+		
+		
+		
+		/* 
+		int moyenneB = (totalBois ) / t.getListeDeVillages().size();
+		int moyenneA = (totalArgile) / t.getListeDeVillages().size();
+		int moyenneF = (totalFer ) / t.getListeDeVillages().size();
+		int moyenneC = (+ totalCereales) / t.getListeDeVillages().size();
+		 */
 		//on deteremine une mediane et on declare les besoins
 		int moyenne = (totalBois + totalArgile + totalFer + totalCereales) / 4;
+		
 
 		if(totalBois < (moyenne/100*pourcentageDeclenchementAcheter)){
 			acheterBois = true;
@@ -1134,24 +1144,27 @@ public class Marche {
 
 				int marchandsD = updateNombreDeMarchandsDispo(t, village); //9
 				marchandsConsomés = 0;
+				///////////////
 				for(int b : tableauBesoin) { // selection du besoin
 					if(marchandsConsomés >= marchandsAllouésPourAchat) {
-						break;
+						t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 1");	
+					}else { 
+						List<WebElement> ressources = t.getCompte().getDriver().findElements(By.xpath("//*[@id='search_select']/tbody/tr/td"));
+						ressources.get(b-1).click(); 
 					}
-					List<WebElement> ressources = t.getCompte().getDriver().findElements(By.xpath("//*[@id='search_select']/tbody/tr/td"));
-					ressources.get(b-1).click(); 
-
+					/////////////////////////
 					for(int p : tableauAcheterContre) { // acheter contre
 						if(marchandsConsomés >= marchandsAllouésPourAchat ) {
-							break;
-						}
-						if( b != p ) { // on ne vend pas la meme ressource que l'on cherche
-						t.randomsleep.court();
-						List<WebElement> ressourcesDemandees = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"bid_select\"]/tbody/tr/td"));
-						ressourcesDemandees.get(p-1).click();
-						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-						marchandsConsomés = accepterOffre(t, village, marchandsAllouésPourAchat, marchandsMinPourFonctionner, tempsMax, marchandsConsomés, marchandsD );
-						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+							t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 2");	
+						}else {
+							if( b != p ) { // on ne vend pas la meme ressource que l'on cherche
+								t.randomsleep.court();
+								List<WebElement> ressourcesDemandees = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"bid_select\"]/tbody/tr/td"));
+								ressourcesDemandees.get(p-1).click();
+								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+								marchandsConsomés = marchandsConsomés + accepterOffre(t, village, marchandsAllouésPourAchat, marchandsMinPourFonctionner, tempsMax, marchandsConsomés, marchandsD );
+								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+							}
 						}
 					}
 				}
