@@ -1142,15 +1142,17 @@ public class Marche {
 					ressources.get(b-1).click(); 
 
 					for(int p : tableauAcheterContre) { // acheter contre
-						if(marchandsConsomés >= marchandsAllouésPourAchat) {
+						if(marchandsConsomés >= marchandsAllouésPourAchat ) {
 							break;
 						}
+						if( b != p ) { // on ne vend pas la meme ressource que l'on cherche
 						t.randomsleep.court();
 						List<WebElement> ressourcesDemandees = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"bid_select\"]/tbody/tr/td"));
 						ressourcesDemandees.get(p-1).click();
 						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 						marchandsConsomés = accepterOffre(t, village, marchandsAllouésPourAchat, marchandsMinPourFonctionner, tempsMax, marchandsConsomés, marchandsD );
 						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						}
 					}
 				}
 			}else {
