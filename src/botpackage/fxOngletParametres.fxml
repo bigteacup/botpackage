@@ -160,10 +160,10 @@
             <Label text="pourcentageDeclenchementAcheterContreVillage selectionner les ressources dont le remplissage du depot sur le village est superieur a %" GridPane.rowIndex="7" />
             <TextField promptText="Temps en heure" text="5" fx:id="idTempsMax" onAction="#idTempsMax" GridPane.columnIndex="1" GridPane.rowIndex="1"  />
             <TextField promptText="1" text="1" fx:id="idMarchandsMinPourFonctionner" onAction="#idMarchandsMinPourFonctionner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField promptText="4" text="4" fx:id="idMarchandsAllouésPourAchat" onAction="#idMarchandsAllouésPourAchat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField promptText="4" text="2" fx:id="idMarchandsAllouésPourAchat" onAction="#idMarchandsAllouésPourAchat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField promptText="75" text="75" fx:id="idPourcentageDeclenchementAcheter" onAction="#idPourcentageDeclenchementAcheter" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField promptText="50" text="50" fx:id="idPourcentageDeclenchementAcheterContre" onAction="#idPourcentageDeclenchementAcheterContre" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField promptText="25" text="25" fx:id="idPourcentageDeclenchementAcheterContreMoyenne" onAction="#idPourcentageDeclenchementAcheterContreMoyenne" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField promptText="50" text="50" fx:id="idPourcentageDeclenchementAcheterContreMoyenne" onAction="#idPourcentageDeclenchementAcheterContreMoyenne" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField promptText="25" text="25" fx:id="idPourcentageDeclenchementAcheterContreVillage" onAction="#idPourcentageDeclenchementAcheterContreVillage" GridPane.columnIndex="1" GridPane.rowIndex="7" />
              </children>
       </GridPane>

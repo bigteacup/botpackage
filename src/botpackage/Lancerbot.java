@@ -51,10 +51,10 @@ import org.openqa.selenium.WebDriver;
 	int tempsMax = 6; // temps en heure
 	//int marchandsMinPourAcheter = 10;
 	int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
-	int marchandsAllouésPourAchat =  5;//village.getNombreDeMarchandsMax()/4; 
+	int marchandsAllouésPourAchat =  2;//village.getNombreDeMarchandsMax()/2; 
 	int pourcentageDeclenchementAcheter = 75; // 75% de la moyenne du total des ressources
 	int pourcentageDeclenchementAcheterContre = 50;
-	int pourcentageDeclenchementAcheterContreMoyenne = 25;
+	int pourcentageDeclenchementAcheterContreMoyenne = 50;
 	int pourcentageDeclenchementAcheterContreVillage = 25;
 	
 	

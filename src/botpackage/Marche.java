@@ -1038,19 +1038,19 @@ public class Marche {
 		int moyenne = (totalBois + totalArgile + totalFer + totalCereales) / 4;
 		
 
-		if((totalBois < (moyenne/100*pourcentageDeclenchementAcheter)) && (village.getBois() < (moyenne) )){ //&& (village.getMaxStockDepot() > (moyenne) )
+		if((totalBois < (moyenne/100*pourcentageDeclenchementAcheter)) ){ //&& (village.getMaxStockDepot() > (moyenne) ) // && (village.getBois() < (moyenne))
 			acheterBois = true;
 			besoinMarché = 1;
 		}
-		if((totalArgile < (moyenne/100*pourcentageDeclenchementAcheter)) && (village.getArgile() < (moyenne)   )) {  //&& (village.getMaxStockDepot() > (moyenne) )
+		if((totalArgile < (moyenne/100*pourcentageDeclenchementAcheter))    ) {  //&& (village.getMaxStockDepot() > (moyenne) ) //&& (village.getArgile() < (moyenne))
 			acheterArgile = true;
 			besoinMarché = 2;
 		}
-		if((totalFer < (moyenne/100*pourcentageDeclenchementAcheter)) && (village.getFer() < (moyenne)  )) { // && (village.getMaxStockDepot() > (moyenne) )
+		if((totalFer < (moyenne/100*pourcentageDeclenchementAcheter)) ) { // && (village.getMaxStockDepot() > (moyenne) ) // && (village.getFer() < (moyenne) )
 			acheterFer = true;
 			besoinMarché = 3;
 		}
-		if((totalCereales < (moyenne/100*pourcentageDeclenchementAcheter)) && (village.getCereales() < (moyenne)  )) { //
+		if((totalCereales < (moyenne/100*pourcentageDeclenchementAcheter))) { //  && (village.getCereales() < (moyenne)  )
 			acheterCereales = true;
 			besoinMarché = 4;
 		}
