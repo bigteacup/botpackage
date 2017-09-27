@@ -45,7 +45,7 @@ import org.openqa.selenium.WebDriver;
 	public int ressourcesMiniSurVillageSourceFx = 5000;
 	public int distanceMaxPourMarchands = 24; 
 	public int vitesseMarchands = 16; //gaulois = 24 romains = 16 germains = 12
-	public int DepotMiniPourAiderFx = 9600;
+	public int DepotMiniPourAiderFx = 5000;
 	
 	//achetermarché
 	int tempsMax = 6; // temps en heure
@@ -69,7 +69,10 @@ import org.openqa.selenium.WebDriver;
 	public boolean monterChampsCapitale = true;
 	public boolean npc = true;
 	public boolean rotationVillage = true;
+	public boolean acheterAuMarché = true;
+	
 	public boolean afficherAttente = false;
+	
 
 	
 	public String idDeLaListeDePillage = "1592";

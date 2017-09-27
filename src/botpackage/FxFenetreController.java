@@ -136,7 +136,9 @@ public class FxFenetreController extends ScrollPane {
 	// village
 	@FXML
 	public VBox villageAnchorPane;
-
+	
+	@FXML
+	private CheckBox caseAcheterAuMarché;
 	// l'include
 
 	@FXML
@@ -145,7 +147,7 @@ public class FxFenetreController extends ScrollPane {
 	@FXML
 	private TroisChampsDeSaisieController troisChampsDeSaisieController;
 
-	/////
+	///// 
 	@FXML
 	void initialize() throws IOException {
 		this.fxFenetreController = this;
@@ -154,7 +156,7 @@ public class FxFenetreController extends ScrollPane {
 		assert boutonOn != null : "fx:id=\"boutonOn\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert boutonOff != null : "fx:id=\"boutonOff\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert bypassPause != null : "fx:id=\"bypassPause\" was not injected: check your FXML file 'fxFenetre.fxml'.";
-		
+		assert caseAcheterAuMarché != null : "fx:id=\"comptesTilePane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert lesCheckBoxs != null : "fx:id=\"lesCheckBoxs\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert casePillage != null : "fx:id=\"casePillage\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert caseFetes != null : "fx:id=\"caseFetes\" was not injected: check your FXML file 'fxFenetre.fxml'.";
@@ -244,6 +246,11 @@ public class FxFenetreController extends ScrollPane {
 			caseFaireAventures.setSelected(true);
 		} else
 			caseFaireAventures.setSelected(false);
+		
+		if (bot.acheterAuMarché == true) {
+			caseAcheterAuMarché.setSelected(true);
+		} else
+			caseAcheterAuMarché.setSelected(false);
 		
 	}
 	
@@ -351,7 +358,44 @@ public class FxFenetreController extends ScrollPane {
 			bot.faireAventures = true;
 	}
 	
-	
+	@FXML
+	private void caseAcheterAuMarché(){
+		if (bot.acheterAuMarché == true) {
+			bot.acheterAuMarché = false;
+		}else
+			bot.acheterAuMarché = true;
+	}
+	//les regimes speciaux de village
+	private void switcherCaseRegimePillage(Village village){
+		if (village.getRegimePillage() == true) {
+			village.setRegimePillage(false)  ;
+		}else
+			village.setRegimePillage(true);
+	}
+	private void switcherCaseRegimeConstruction(Village village){
+		if (village.getRegimeConstruction() == true) {
+			village.setRegimeConstruction(false)  ;
+		}else
+			village.setRegimeConstruction(true);
+	}
+	private void switcherCaseRegimeFete(Village village){
+		if (village.getRegimeFete() == true) {
+			village.setRegimeFete(false)  ;
+		}else
+			village.setRegimeFete(true);
+	}
+	private void switcherCaseRegimeNPC(Village village){
+		if (village.getRegimeNPC() == true) {
+			village.setRegimeNPC(false)  ;
+		}else
+			village.setRegimeNPC(true);
+	}
+	private void switcherCaseRegimeAcheterAuMarché(Village village){
+		if (village.getRegimeAcheterAuMarché() == true) {
+			village.setRegimeAcheterAuMarché(false)  ;
+		}else
+			village.setRegimeAcheterAuMarché(true);
+	}
 
 	@FXML
 	private void bypassPause() {
@@ -891,16 +935,42 @@ public class FxFenetreController extends ScrollPane {
 		///cases a cocher
 		FlowPane flowCases = new FlowPane();
 		CheckBox c1 = new CheckBox("Pillage");
+		if(village.getRegimePillage() == true) { c1.setSelected(true);}else {c1.setSelected(false);}
+		c1.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+             switcherCaseRegimePillage(village);
+           } }); 
+		
 		CheckBox c2 = new CheckBox("Fetes");
-		CheckBox c3 = new CheckBox("Constru");
-		CheckBox c4 = new CheckBox("npc");
-		CheckBox c5 = new CheckBox("");
+		if(village.getRegimeFete() == true) { c2.setSelected(true);}else {c2.setSelected(false);}
+		c2.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+            switcherCaseRegimeFete(village);
+          } }); 
+		
+		CheckBox c3 = new CheckBox("Construction");
+		if(village.getRegimeConstruction() == true) { c3.setSelected(true);}else {c3.setSelected(false);}
+		c3.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+            switcherCaseRegimeConstruction(village);
+          } }); 
+		
+		CheckBox c4 = new CheckBox("NPC");
+		if(village.getRegimeNPC() == true) { c4.setSelected(true);}else {c4.setSelected(false);}
+		c4.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+            switcherCaseRegimeNPC(village);
+          } }); 
+		
+		CheckBox c5 = new CheckBox("AcheterAuMarché");
+		if(village.getRegimeAcheterAuMarché() == true) { c5.setSelected(true);}else {c5.setSelected(false);}
+		c5.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+            switcherCaseRegimeAcheterAuMarché(village);
+          } }); 
+		
 		CheckBox c6 = new CheckBox("");
 		ArrayList<CheckBox> cl = new ArrayList<CheckBox>();
 		cl.add(c1);cl.add(c2);cl.add(c3);cl.add(c4);cl.add(c5);cl.add(c6);
 		
 		for(CheckBox c : cl){ 
-			c.setSelected(true);
+			//c.setSelected(true);
+			
 		//	c.setPadding(new Insets(0,0,0,0));
 		//	c.setAlignment(Pos.CENTER);
 			c.setPadding(new Insets(12,12,12,12));

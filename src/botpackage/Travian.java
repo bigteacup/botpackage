@@ -670,25 +670,36 @@ public class Travian extends Thread {
 				village.chargerChamps(t);
 				if (allume == false){break;}
 				try { 
+					
 					if (allume == false){break;}
+					
 					if(bot.pillage == true){
+						if(village.getRegimePillage() == true){
 						village.voirTroupesDuVillage(t);
+						}else{ecrireDansConsole("Pillages Desactives... Par le regime du village");}
 					}else{ecrireDansConsole("Pillages Desactives...");}
 				}catch(Exception e){ecrireDansConsole("Echec pillage ");}
+				
 				if (allume == false){break;}
-				if (allume == false){break;}
-				if(t.bot.npc == true){
+				
+				if(t.bot.npc == true   ){ 
+					if(village.getRegimeNPC() == true) {
 					if (village.getBesoinDeNpc() == true && village.getVillageCapitale()==true  ){
 						npcNegatif();
 					}
+					}else {t.ecrireDansConsole("NPC désactivé par le regime du village");}
 				}else {t.ecrireDansConsole("NPC désactivé");}
 
 				if (allume == false){break;}
+				
 				if ( bot.construireBatiments == true ) {
+					if ( village.getRegimeConstruction() == true ) {
 					if (village.getTokenconstruction() < limiteDeConstruction ){ 
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours");}
+					}else {t.ecrireDansConsole("construction Desactivees... Par le regime du village");}
 				}else {t.ecrireDansConsole("construction Desactivees...");}
+				
 				
 				try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur
 				if(tokenForcerMarcheDeLaRotation == 1) {
@@ -706,14 +717,17 @@ public class Travian extends Thread {
 
 
 				if (allume == false){break;}
+				
 				marche.etablirBesoinEnRessources(t, village, listeDeVillages);
 
 				if (allume == false){break;}
+				
 				if (bot.evacuerSurplusRessources == true){
 					marche.evacuerSurplusRessources(t, village, listeDeVillages);
 				}else{ecrireDansConsole("Evacuation ressources Desactives...");}
 
 				if (allume == false){break;}
+				
 				if (bot.approPetitsVillages == true){
 					marche.approPetitVillage(t, village, listeDeVillages);
 				}else{ecrireDansConsole("Appro petits villages Desactives...");}
@@ -723,17 +737,22 @@ public class Travian extends Thread {
 				try { 
 					if (allume == false){break;}
 					if(bot.faireFete == true){
+						if(village.getRegimeFete() == true){
 						if (village.getChampMin() >= 10 && village.getBesoinDeFete() == 1){ 
 							if (village.getBois() >= 6400 && village.getArgile() >= 6650 && village.getFer() >= 5940 && village.getCereales() >= 1340 ){
 								village.lancerFete(t);
 							} else {ecrireDansConsole("[Fete] Pas assez de ressources pour faire une fete");}
 						} else {ecrireDansConsole("[Fete] Pas besoin de fete ou pas d'hotel de ville");}
+						}else {ecrireDansConsole("[Fete] fetes Desactivees... Par le regime du village.");}
 					}else {ecrireDansConsole("[Fete] fetes Desactivees...");}
 				}catch(Exception e){ecrireDansConsole("echec fete ");}
 				
 				//test
+				if(bot.acheterAuMarché == true){
+					if(village.getRegimeAcheterAuMarché() == true){
 				marche.acheterAuMarché(t, village);
-
+					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.");}
+				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...");}
 			}//fin for
 		}
 	}

@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import javafx.fxml.FXML;
+
 public class Village {
 
 	public Village(String nom, String url, int x, int y, ArrayList batiments, int bois, int argile, int fer,
@@ -414,6 +416,8 @@ public class Village {
 	private List<Batiment> batimentsDuTemplateDuVillage = new ArrayList<Batiment>();
 	private int champMin;
 	private int champMax;
+	
+	//regime
 	public boolean regimeGeneral = true;
 	public int regimeMarcheBoisMax = 80;
 	public int regimeMarcheArgileMax = 80;
@@ -423,6 +427,14 @@ public class Village {
 	public int regimeMarcheArgileMin = 20;
 	public int regimeMarcheFerMin = 20;
 	public int regimeMarcheCerealesMin = 20;
+
+	public boolean regimePillage = true;
+	public boolean regimeFete= true;
+	public boolean regimeConstruction = true;
+	public boolean regimeNPC = true;
+	public boolean regimeAcheterAuMarché = true;
+	//fin regime
+	
 	public Date marchéLastDate;
 	public int marchédureeDuDernierAchat=0;
 	public Date heureDeGuet;
@@ -442,12 +454,52 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public boolean getRegimePillage() {
+		return regimePillage;
+	}
+
+	public void setRegimePillage(boolean regimePillage) {
+		this.regimePillage = regimePillage;
+	}
+
+	public boolean getRegimeFete() {
+		return regimeFete;
+	}
+
+	public void setRegimeFete(boolean regimeFete) {
+		this.regimeFete = regimeFete;
+	}
+
+	public boolean getRegimeConstruction() {
+		return regimeConstruction;
+	}
+
+	public void setRegimeConstruction(boolean regimeConstruction) {
+		this.regimeConstruction = regimeConstruction;
+	}
+
+	public boolean getRegimeNPC() {
+		return regimeNPC;
+	}
+
+	public void setRegimeNPC(boolean regimeNPC) {
+		this.regimeNPC = regimeNPC;
+	}
+
+	public boolean getRegimeAcheterAuMarché() {
+		return regimeAcheterAuMarché;
+	}
+
+	public void setRegimeAcheterAuMarché(boolean regimeAcheterAuMarché) {
+		this.regimeAcheterAuMarché = regimeAcheterAuMarché;
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
