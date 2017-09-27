@@ -49,6 +49,27 @@ public class FxOngletParametresController {
     
     @FXML 
     private TextField motCleListeDesPertes;
+    
+    @FXML
+    private TextField idTempsMax;
+
+    @FXML 
+    private TextField idMarchandsMinPourFonctionner;
+    
+    @FXML
+    private TextField idMarchandsAllouésPourAchat; 
+    
+    @FXML
+    private TextField idPourcentageDeclenchementAcheter; 
+    
+    @FXML 
+    private TextField idPourcentageDeclenchementAcheterContre;
+    
+    @FXML 
+    private TextField idPourcentageDeclenchementAcheterContreMoyenne;
+    
+    @FXML 
+    private TextField idPourcentageDeclenchementAcheterContreVillage;
    
     //@FXML
  //   comptesVBox ;
@@ -62,6 +83,13 @@ public class FxOngletParametresController {
         assert pourcentageApproPetitVillageFx != null : "fx:id=\"pourcentageApproPetitVillageFx\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
         assert ressourcesMiniSurVillageSourceFx != null : "fx:id=\"ressourcesMiniSurVillageSourceFx\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
         assert rythmePillage != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idTempsMax != null : "fx:id=\"pourcentageNePasLaisserLeVillageSourceEnDessousDe\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idMarchandsMinPourFonctionner != null : "fx:id=\"champMinFx\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idMarchandsAllouésPourAchat != null : "fx:id=\"pourcentageApproPetitVillageFx\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idPourcentageDeclenchementAcheter != null : "fx:id=\"ressourcesMiniSurVillageSourceFx\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idPourcentageDeclenchementAcheterContre != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idPourcentageDeclenchementAcheterContreMoyenne  != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+        assert idPourcentageDeclenchementAcheterContreVillage != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
     }
     
     @FXML
@@ -109,6 +137,39 @@ public class FxOngletParametresController {
     @FXML
     private void motCleListeDesPertes(ActionEvent event) {
     	bot.motCleListeDesPertes = motCleListeDesPertes.getText() ; 
+    }
+    /////////
+    @FXML
+    private void idTempsMax(ActionEvent event) {
+    	bot.tempsMax = Integer.parseInt(idTempsMax.getText()) ; 
+    }
+    @FXML
+    private void idMarchandsMinPourFonctionner(ActionEvent event) {
+    	bot.marchandsMinPourFonctionner = Integer.parseInt(idMarchandsMinPourFonctionner.getText()) ; 
+    }
+    @FXML
+    private void idMarchandsAllouésPourAchat(ActionEvent event) {
+    	bot.marchandsAllouésPourAchat = Integer.parseInt(idMarchandsAllouésPourAchat.getText()) ; 
+    }
+    
+    @FXML
+    private void idPourcentageDeclenchementAcheter(ActionEvent event) {
+    	bot.pourcentageDeclenchementAcheter = Integer.parseInt(idPourcentageDeclenchementAcheter.getText()) ; 
+    }
+    
+    @FXML
+    private void idPourcentageDeclenchementAcheterContre(ActionEvent event) {
+    	bot.pourcentageDeclenchementAcheterContre = Integer.parseInt(idPourcentageDeclenchementAcheterContre.getText()) ; 
+    }
+    
+    @FXML
+    private void idPourcentageDeclenchementAcheterContreMoyenne(ActionEvent event) {
+    	bot.pourcentageDeclenchementAcheterContreMoyenne = Integer.parseInt(idPourcentageDeclenchementAcheterContreMoyenne.getText()) ; 
+    }
+    
+    @FXML
+    private void idPourcentageDeclenchementAcheterContreVillage(ActionEvent event) {
+    	bot.pourcentageDeclenchementAcheterContreVillage = Integer.parseInt(idPourcentageDeclenchementAcheterContreVillage.getText()) ; 
     }
     
     //motCleListeDesPertes

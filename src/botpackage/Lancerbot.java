@@ -44,8 +44,20 @@ import org.openqa.selenium.WebDriver;
 	public int pourcentageApproPetitVillageFx = 30;
 	public int ressourcesMiniSurVillageSourceFx = 5000;
 	public int distanceMaxPourMarchands = 24; 
-	public int vitesseMarchands = 24; //gaulois = 24 romains = 16 germains = 12
+	public int vitesseMarchands = 16; //gaulois = 24 romains = 16 germains = 12
 	public int DepotMiniPourAiderFx = 9600;
+	
+	//achetermarché
+	int tempsMax = 6; // temps en heure
+	//int marchandsMinPourAcheter = 10;
+	int marchandsMinPourFonctionner = 1; //dans la boucle while plus bas 
+	int marchandsAllouésPourAchat =  5;//village.getNombreDeMarchandsMax()/4; 
+	int pourcentageDeclenchementAcheter = 75; // 75% de la moyenne du total des ressources
+	int pourcentageDeclenchementAcheterContre = 50;
+	int pourcentageDeclenchementAcheterContreMoyenne = 25;
+	int pourcentageDeclenchementAcheterContreVillage = 25;
+	
+	
 	
 	boolean pillage = true;
 	boolean faireFete = true;

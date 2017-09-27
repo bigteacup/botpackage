@@ -21,7 +21,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Panneau de paramétrage" textFill="#ff7777" GridPane.halignment="CENTER">
+            <Label text="Panneau de paramétrage du Regime General" textFill="#ff7777" GridPane.halignment="CENTER">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
@@ -115,18 +115,57 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <TextField fx:id="rythmePillage" onAction="#rythmePillage" prefColumnCount="5" promptText=" rythmePillage" text="1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Lancer liste tout les (tours)" GridPane.rowIndex="1" />
-            <Label opacity="0.75" text="Pillage">
+                     <Label opacity="0.75" text="Pillage">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Label>
+            <TextField fx:id="rythmePillage" onAction="#rythmePillage" prefColumnCount="5" promptText=" rythmePillage" text="1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Lancer liste tout les (tours)" GridPane.rowIndex="1" />
+
             <Label text="ID de la liste de pillage" GridPane.rowIndex="2" />
             <TextField fx:id="idDeLaListeDePillage" onAction="#idDeLaListeDePillage" promptText="1386" text="1592" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Mot clé pour la liste on le bot transferera les frigo avec pertes" GridPane.rowIndex="3" />
             <TextField fx:id="motCleListeDesPertes" onAction="#motCleListeDesPertes" promptText="liste pertes" text="perte" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
+      </GridPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"   />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"  maxWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+        
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+                    <Label opacity="0.75" text="Acheter au marché">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" /> 
+               </font>
+            </Label>
+            <Label text="tempsMax En heure *aller*"  GridPane.rowIndex="1" />
+            <Label text="marchandsMinPourFonctionner, pour limiter les petit villages si besoin"  GridPane.rowIndex="2" />
+            <Label text="marchandsAllouésPourAchat Les marchands du vuillage divisés par : " GridPane.rowIndex="3" />
+            <Label text="pourcentageDeclenchementAcheter Moin de tant de % de la moyenne des ressources du compte"  GridPane.rowIndex="4" />
+            <Label text="pourcentageDeclenchementAcheterContre **inactif** selectionner les ressources au dessus de la moyenne de tant de %"  GridPane.rowIndex="5" />
+            <Label text="pourcentageDeclenchementAcheterContreMoyenne selectionner les ressources au dessus de la moyenne de tant de %" GridPane.rowIndex="6" />
+            <Label text="pourcentageDeclenchementAcheterContreVillage selectionner les ressources dont le remplissage du depot sur le village est superieur a %" GridPane.rowIndex="7" />
+            <TextField promptText="Temps en heure" text="5" fx:id="idTempsMax" onAction="#idTempsMax" GridPane.columnIndex="1" GridPane.rowIndex="1"  />
+            <TextField promptText="1" text="1" fx:id="idMarchandsMinPourFonctionner" onAction="#idMarchandsMinPourFonctionner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField promptText="4" text="4" fx:id="idMarchandsAllouésPourAchat" onAction="#idMarchandsAllouésPourAchat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField promptText="75" text="75" fx:id="idPourcentageDeclenchementAcheter" onAction="#idPourcentageDeclenchementAcheter" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField promptText="50" text="50" fx:id="idPourcentageDeclenchementAcheterContre" onAction="#idPourcentageDeclenchementAcheterContre" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField promptText="25" text="25" fx:id="idPourcentageDeclenchementAcheterContreMoyenne" onAction="#idPourcentageDeclenchementAcheterContreMoyenne" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField promptText="25" text="25" fx:id="idPourcentageDeclenchementAcheterContreVillage" onAction="#idPourcentageDeclenchementAcheterContreVillage" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+             </children>
       </GridPane>
    </children>
 </VBox>
