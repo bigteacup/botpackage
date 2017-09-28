@@ -724,7 +724,7 @@ public class FxFenetreController extends ScrollPane {
 						
 						vpane.setMinHeight(60);
 						v1pane.setMinHeight(vpane.getMinHeight());
-						v1pane.setMinWidth(500);
+						v1pane.setMinWidth(750);
 						
 						if (i % 2 == 0) {
 							v1pane.getStyleClass().add("v1");
@@ -933,60 +933,61 @@ public class FxFenetreController extends ScrollPane {
 		flowPaneMarche.setMaxWidth(160);
 		
 		///cases a cocher
-		FlowPane flowCases = new FlowPane();
+		
 		CheckBox c1 = new CheckBox("Pillage");
+		CheckBox c2 = new CheckBox("Fetes");
+		CheckBox c3 = new CheckBox("Construction");
+		CheckBox c4 = new CheckBox("NPC");
+		CheckBox c5 = new CheckBox("AcheterAuMarché");
+		CheckBox c6 = new CheckBox("");
+		
+		FlowPane flowCases = new FlowPane();
+		ArrayList<CheckBox> cl = new ArrayList<CheckBox>();
+		
 		if(village.getRegimePillage() == true) { c1.setSelected(true);}else {c1.setSelected(false);}
+		if(village.getRegimeFete() == true) { c2.setSelected(true);}else {c2.setSelected(false);}
+		if(village.getRegimeConstruction() == true) { c3.setSelected(true);}else {c3.setSelected(false);}
+		if(village.getRegimeNPC() == true) { c4.setSelected(true);}else {c4.setSelected(false);}
+		if(village.getRegimeAcheterAuMarché() == true) { c5.setSelected(true);}else {c5.setSelected(false);}
+		
+		
+		
+		
 		c1.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
              switcherCaseRegimePillage(village);
-           } }); 
+            
+             raffraichirCase (village, cl, flowCases);
+           } }); 	
 		
-		CheckBox c2 = new CheckBox("Fetes");
-		if(village.getRegimeFete() == true) { c2.setSelected(true);}else {c2.setSelected(false);}
 		c2.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
             switcherCaseRegimeFete(village);
-          } }); 
+            raffraichirCase (village, cl, flowCases);
+          } }); 	
 		
-		CheckBox c3 = new CheckBox("Construction");
-		if(village.getRegimeConstruction() == true) { c3.setSelected(true);}else {c3.setSelected(false);}
 		c3.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
             switcherCaseRegimeConstruction(village);
+            raffraichirCase (village, cl, flowCases);
           } }); 
 		
-		CheckBox c4 = new CheckBox("NPC");
-		if(village.getRegimeNPC() == true) { c4.setSelected(true);}else {c4.setSelected(false);}
 		c4.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
             switcherCaseRegimeNPC(village);
+            raffraichirCase (village, cl, flowCases);
           } }); 
 		
-		CheckBox c5 = new CheckBox("AcheterAuMarché");
-		if(village.getRegimeAcheterAuMarché() == true) { c5.setSelected(true);}else {c5.setSelected(false);}
 		c5.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
             switcherCaseRegimeAcheterAuMarché(village);
+            raffraichirCase (village, cl, flowCases);
           } }); 
 		
-		CheckBox c6 = new CheckBox("");
-		ArrayList<CheckBox> cl = new ArrayList<CheckBox>();
+		
+		
 		cl.add(c1);cl.add(c2);cl.add(c3);cl.add(c4);cl.add(c5);cl.add(c6);
 		
-		for(CheckBox c : cl){ 
-			//c.setSelected(true);
-			
-		//	c.setPadding(new Insets(0,0,0,0));
-		//	c.setAlignment(Pos.CENTER);
-			c.setPadding(new Insets(12,12,12,12));
-			if(c.isSelected()){
-				c.getStyleClass().add("fake3");
-				c.setStyle(
-					    "-fx-font-size: 20;"
-					/*    + "-fx-border-color: lightblue; "
-					    + "-fx-border-insets: -5; "
-					    + "-fx-border-radius: 5;"
-					    + "-fx-border-style: dotted;"
-					    + "-fx-border-width: 2;"*/
-					);
-				}
-			else {c.getStyleClass().add("off");}
-		}
+		
+		raffraichirCase (village, cl, flowCases);
+		
+		
+		
 		
 		flowCases.getChildren().addAll(c1, c2, c3, c4, c5, c6);
 		flowCases.setOrientation(Orientation.VERTICAL);
@@ -1023,7 +1024,37 @@ public class FxFenetreController extends ScrollPane {
 	}
 	
 	
-	
+	public void raffraichirCase (Village village, ArrayList<CheckBox> cl, FlowPane flowCases ){
+		
+
+		
+		for(CheckBox c : cl){ 
+			//c.setSelected(true);
+			
+		//	c.setPadding(new Insets(0,0,0,0));
+		//	c.setAlignment(Pos.CENTER);
+			c.setPadding(new Insets(12,12,12,12));
+			if(c.isSelected()){
+				c.getStyleClass().clear(); //suprime tout attention
+				c.getStyleClass().add("fake3");
+			//	c.setStyle(   "-fx-font-size: 20;"
+					/*    + "-fx-border-color: lightblue; "
+					    + "-fx-border-insets: -5; "
+					    + "-fx-border-radius: 5;"
+					    + "-fx-border-style: dotted;"
+					    + "-fx-border-width: 2;"*/
+				//	);
+				}
+			else {
+				c.getStyleClass().clear(); //suprime tout attention
+				c.getStyleClass().add("off");}
+		}
+		
+
+		
+//
+		
+	}
 	
 	
 	

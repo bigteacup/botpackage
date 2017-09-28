@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fx:id="rootScrollpane"  fitToHeight="true" fitToWidth="true" prefHeight="450" prefWidth="700"  xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="rootScrollpane"  fitToHeight="true" fitToWidth="true" prefHeight="550" prefWidth="800"  xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <content  >
       <BorderPane fx:id="borderPane" styleClass="compteStyle1">
          <top>

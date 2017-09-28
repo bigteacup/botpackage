@@ -287,6 +287,13 @@ b.scroll-bar:horizontal b.track-background {
 }	
 	
  .v1{
+ 	-fx-background-image: url("image/default_paper.png");
+ 	-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("image/default_border.png");
 	-fx-background-color: rgb(128,128,128);
 	-fx-border-style: solid ; 
 	-fx-background-radius: 10;
@@ -295,6 +302,13 @@ b.scroll-bar:horizontal b.track-background {
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
 }
  .v2{
+ 	-fx-background-image: url("image/default_paper.png");
+ 	-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("image/default_border.png");
 	-fx-background-color: rgb(192,192,192);
 	-fx-fill:pink;
 	-fx-border-style: solid ;
@@ -425,6 +439,9 @@ b.scroll-bar:horizontal b.track-background {
 	-fx-border-color: white;
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 0,0,0,0;*/
   -fx-font-weight:bold;
+  -fx-text-fill:white;
+-fx-background-image: url("image/wooden_plate.png");
+-fx-background-size: 100% 100%;
 
 
   
