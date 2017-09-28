@@ -218,18 +218,24 @@ b.scroll-bar:horizontal b.track-background {
 	
 }
  .fake3{	 
-	-fx-background-color:radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(102,153,102) 0.0, rgb(26,77,26) 100.0 ) radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(87,222,14) 0.0, rgb(24,149,6) 100.0 ) rgb(128,255,0);
+	-fx-background-color:radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgba(102,153,102, 0.7) 0.0, rgba(26,77,26, 0.7) 100.0 ) radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgba(87,222,14 , 0.7) 0.0, rgba(24,149,6, 0.7) 100.0 ) rgba(128,255,0, 0.7);
 	-fx-fill:pink;
-	-fx-border-style: solid ;
- 	-fx-border-color: white;
+
 	
 }
  .off{
-	-fx-background-color:radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(255,102,102) 0.0, rgb(153,0,0) 100.0 ) radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(246,143,143) 0.0, rgb(218,22,22) 100.0 ) ;
+	-fx-background-color:radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgba(255,102,102, 0.7) 0.0, rgba(153,0,0, 0.7) 100.0 ) radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgba(246,143,143, 0.7) 0.0, rgba(218,22,22, 0.7) 100.0 ) ;
 	-fx-fill:pink;
- 	-fx-border-style: solid ;
+
+ 	/* -fx-opacity: 50%; 
+ 	   	-fx-border-style: solid ;
  	-fx-border-color: white;
+ 	 * */
 	
+}
+ .off2{
+
+	-fx-text-fill: blue;
 }
  .m1{
 	-fx-background-color:radial-gradient( focus-angle 270.0deg, focus-distance 50.0%, center 50.0% 50.0%, radius 50.0%, rgb(255,204,102) 0.0, rgb(179,102,26) 100.0 ) ;
@@ -287,8 +293,10 @@ b.scroll-bar:horizontal b.track-background {
 }	
 	
  .v1{
- 	-fx-background-image: url("image/default_paper.png");
- 	-fx-background-size: 100% 100%;
+ 	-fx-background-image: url("image/bga.jpg");
+ 	-fx-background-position: 0% 12%; 
+ 	
+ 	-fx-background-size: 100% auto;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
@@ -299,11 +307,12 @@ b.scroll-bar:horizontal b.track-background {
 	-fx-background-radius: 10;
 	-fx-border-radius: 10,10,10,10;
 	-fx-border-color: white;
-	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  -120px*/
 }
  .v2{
- 	-fx-background-image: url("image/default_paper.png");
- 	-fx-background-size: 100% 100%;
+ 	-fx-background-image: url("image/fs1.jpg");
+ 	-fx-background-position:50% 20%;
+	-fx-background-size: 100% auto;
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
@@ -335,6 +344,17 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-image-width:10;
      -fx-border-image-source:url("image/default_border.png");
  }
+  .lesOnglets{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+	-fx-background-image: url("image/default_paper.png");
+-fx-background-size: 100% 100%;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("image/default_border.png");
+     
+     }
  .ctuile {
 	-fx-background-color: #4caf50;
 	/*-fx-border-style: solid ;*/
@@ -379,8 +399,7 @@ b.scroll-bar:horizontal b.track-background {
 
 .compteStyle{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("image/default_paper.png");
--fx-background-size: 100% 100%;
+	-fx-background-image: url("image/tret.png");
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
@@ -390,9 +409,7 @@ b.scroll-bar:horizontal b.track-background {
 }
 .compteStyle1{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
-	-fx-background-image: url("image/default_paper.png");
--fx-background-size: 150% 150%;
--fx-background-position: -150px, -150px;
+	-fx-background-image: url("image/tret.png");
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;
@@ -432,16 +449,25 @@ b.scroll-bar:horizontal b.track-background {
  -fx-background-color: none;
  }
  .vLabel{
-	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );
+	/*-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );
 	 -fx-border-radius: 10 0 10 0;
 	 -fx-background-radius: 10 0 10 0;
+	  -fx-border-color: white;
+	 
  	-fx-border-style: solid ;
-	-fx-border-color: white;
+ 	    -fx-padding: 10px;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+ 	*/
+	
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 0,0,0,0;*/
   -fx-font-weight:bold;
   -fx-text-fill:white;
+ /* -fx-margin: 10px 10px 10px 10px;*/
 -fx-background-image: url("image/wooden_plate.png");
 -fx-background-size: 100% 100%;
+-fx-alignment: top-left ;
+
 
 
   

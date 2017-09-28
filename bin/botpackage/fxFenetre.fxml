@@ -127,13 +127,13 @@
          <center>
             <TabPane fx:id="tabbedPane" styleClass="b" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                  <Tab fx:id="comptes" styleClass="compteStyle" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
+                  <Tab fx:id="comptes" styleClass="lesOnglets" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
                      <content>
                         <TilePane fx:id="comptesTilePane" styleClass="compteStyle2" prefHeight="200.0" prefWidth="200.0" />
                      </content>
                   </Tab>
                
-                <Tab closable="false" text="Console" styleClass="compteStyle">
+                <Tab closable="false" text="Console" styleClass="lesOnglets">
                      <content>
                         <ScrollPane fx:id="fxConsolescrollpane" fitToHeight="true" fitToWidth="true" styleClass="b">
                            <content>
@@ -143,7 +143,7 @@
                      </content>
                   </Tab>
                 
-                <Tab closable="false" text="Parametres" styleClass="compteStyle">
+                <Tab closable="false" text="Parametres" styleClass="lesOnglets">
                		 <content>
 						<ScrollPane styleClass="c">
 						<content>
@@ -157,7 +157,7 @@
                		 </content>
                 </Tab>
               
-                <Tab closable="false" text="Xpath perso" styleClass="compteStyle">
+                <Tab closable="false" text="Xpath perso" styleClass="lesOnglets">
                      <content>
                         <ToggleButton mnemonicParsing="false" text="ToggleButton">
                            <graphic>
@@ -165,7 +165,7 @@
                            </graphic>
                         </ToggleButton>
                      </content></Tab>
-                <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages" styleClass="compteStyle">
+                <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages" styleClass="lesOnglets">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>
@@ -177,7 +177,7 @@
             </TabPane>
          </center>
          <bottom>
-            <CheckBox fx:id="caseFaireDefiler" mnemonicParsing="false" onAction="#caseFaireDefiler" selected="true" text="Faire Défiler" BorderPane.alignment="BOTTOM_RIGHT" />
+            <CheckBox fx:id="caseFaireDefiler" mnemonicParsing="false" styleClass="lesOnglets" onAction="#caseFaireDefiler" selected="true" text="Faire Défiler" BorderPane.alignment="BOTTOM_RIGHT" />
          </bottom>
       </BorderPane>
    </content>

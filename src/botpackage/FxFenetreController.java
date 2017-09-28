@@ -43,6 +43,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -812,9 +813,13 @@ public class FxFenetreController extends ScrollPane {
 
 		String nomV = village.getNom();
 		Label nomVLabel = new Label(nomV);
-		Pane lp = new Pane(nomVLabel);
+		StackPane lp = new StackPane(nomVLabel);
+		lp.setAlignment(Pos.TOP_LEFT);
 		nomVLabel.setPrefHeight(25);
-		nomVLabel.setPadding(new Insets(5, 10, 5, 10));
+		nomVLabel.setPadding(new Insets(5, 15, 5, 10));
+		lp.setPadding(new Insets(5, 15, 5, 10));
+	//	StackPane.setMargin(nomVLabel, new Insets(0,10,0,6));
+	//	nomVLabel.setAlignment(Pos.TOP_LEFT);
 		nomVLabel.setStyle("-fx-font: bold  14 arial;");
 
 		
@@ -848,7 +853,7 @@ public class FxFenetreController extends ScrollPane {
 		
 		
 		VBox vm = new VBox(a,b);
-		vm.setPrefSize(100, 50);
+		vm.setPrefSize(92, 50);
 		vm.setPadding(new Insets(0,0,0,0));
 		vm.setAlignment(Pos.CENTER);
  		StackPane p = new StackPane();
@@ -928,9 +933,9 @@ public class FxFenetreController extends ScrollPane {
 		
 
 		flowPaneMarche.getChildren().addAll(vm,tb); //vmp pour le P su besoin
-		flowPaneMarche.setPadding(new Insets(0,20,0,20));
+		flowPaneMarche.setPadding(new Insets(0,0,0,0));
 		//flowPaneMarche.getStyleClass().add("pink");
-		flowPaneMarche.setMaxWidth(160);
+		flowPaneMarche.setMaxWidth(120);
 		
 		///cases a cocher
 		
@@ -955,7 +960,6 @@ public class FxFenetreController extends ScrollPane {
 		
 		c1.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
              switcherCaseRegimePillage(village);
-            
              raffraichirCase (village, cl, flowCases);
            } }); 	
 		
@@ -992,10 +996,11 @@ public class FxFenetreController extends ScrollPane {
 		flowCases.getChildren().addAll(c1, c2, c3, c4, c5, c6);
 		flowCases.setOrientation(Orientation.VERTICAL);
 		flowCases.setPrefSize(100, 50);
-		flowCases.setHgap(10);
-		flowCases.setVgap(10);
+		flowCases.setHgap(0);
+		flowCases.setVgap(0);
 	//	flowCases.getStyleClass().add("fake3");
 		flowCases.setAlignment(Pos.CENTER_LEFT);
+	//	flowCases.setOpacity(0.4);
 		
 
 		if (village.getVillageCapitale() == true) {
@@ -1037,6 +1042,7 @@ public class FxFenetreController extends ScrollPane {
 			if(c.isSelected()){
 				c.getStyleClass().clear(); //suprime tout attention
 				c.getStyleClass().add("fake3");
+				
 			//	c.setStyle(   "-fx-font-size: 20;"
 					/*    + "-fx-border-color: lightblue; "
 					    + "-fx-border-insets: -5; "
@@ -1047,7 +1053,9 @@ public class FxFenetreController extends ScrollPane {
 				}
 			else {
 				c.getStyleClass().clear(); //suprime tout attention
-				c.getStyleClass().add("off");}
+				c.getStyleClass().add("off");
+				
+			}
 		}
 		
 
