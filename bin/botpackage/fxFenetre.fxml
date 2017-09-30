@@ -35,7 +35,7 @@
                <children>
                   <VBox styleClass="b">
                      <children>
-                        <Button fx:id="boutonOn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#boutonOn" text="on" />
+                        <Button fx:id="boutonOn" styleClass="onc" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#boutonOn" text="on" />
                         <Button fx:id="boutonOff" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#boutonOff" text="off">
                            <effect>
                               <Glow />

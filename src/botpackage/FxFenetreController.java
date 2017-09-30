@@ -405,6 +405,7 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private void boutonOn() {
+		//boutonOn.getStyleClass().clear();
 		// System.out.println("on");
 		String nomDeCompte = compteSelectionne;
 	//	bot.setfxFenetreController(this); // redondant ? utile ?
@@ -412,13 +413,32 @@ public class FxFenetreController extends ScrollPane {
 		String n = troisChampsDeSaisieController.userName.getText();
 		String m = troisChampsDeSaisieController.motDePasse.getText();
 		if(compteSelectionne != null){
+			boutonOn.getStyleClass().removeAll("ona");
+			boutonOn.getStyleClass().removeAll("onb");
+			boutonOn.getStyleClass().removeAll("onc"); 
+			boutonOn.getStyleClass().add("onb");
 		bot.lancerTravian(nomDeCompte, s, n, m);
 		}else {try {
+			boutonOn.getStyleClass().removeAll("ona");
+			boutonOn.getStyleClass().removeAll("onb");
+			boutonOn.getStyleClass().removeAll("onc"); 
+		//	boutonOn.getStyleClass().clear();
+			boutonOn.getStyleClass().add("onc");
 			console.flux.envoyer(fxFenetreController, "Pas de compte selectionne... Veuillez selectionner un compte.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}}
+	}
+	
+	public void ona(Travian t) {
+		//t.fxFenetreController.boutonOn.getStyleClass().clear(); // bug ?
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("ona");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onb");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
+		t.fxFenetreController.boutonOn.getStyleClass().add("ona"); 
+	
+		
 	}
 
 	@FXML

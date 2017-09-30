@@ -102,6 +102,10 @@ public class Travian extends Thread {
 	}
 
 	public void run() {
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("ona");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onb");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
+		t.fxFenetreController.boutonOn.getStyleClass().add("onb");	
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
 		driver = new ChromeDriver();
 		compte.setDriver(driver);
@@ -111,16 +115,24 @@ public class Travian extends Thread {
 
 
 		}
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("ona");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onb");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
+		t.fxFenetreController.boutonOn.getStyleClass().add("onb");
 		ecrireDansConsole("sortie du run");
 		try {t.getCompte().getDriver().close();}catch (Exception e) {}
 		try {t.getCompte().getDriver().quit();}catch (Exception e) {}
 
 		ecrireDansConsole(t.getName());
 		ecrireDansConsole(t.getState().toString());
+		
 		ecrireDansConsole("********* Bot eteind ************");
 		System.out.println("********* Bot eteind ************");
 		
-        
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("ona");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onb");
+		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
+		t.fxFenetreController.boutonOn.getStyleClass().add("onc"); 
 			
 		
 
@@ -190,6 +202,7 @@ public class Travian extends Thread {
 		//		driver = new ChromeDriver();//new ChromeDriver();
 
 
+
 		if (allume){
 			try {
 				boot();
@@ -200,7 +213,7 @@ public class Travian extends Thread {
 			}
 
 			while (allume) {
-
+				t.bot.fxFenetreController.ona(t);
 				try {
 					eviterSurvey();
 				}catch (Exception e) {ecrireDansConsole("Echec eviterSurvey");
@@ -377,6 +390,7 @@ public class Travian extends Thread {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void boot() {
+
 		 memDate = randomsleep.date(true); // afficher date
 		// compte.getDriver().get(compte.getServer());
 		// Open on passe par google au passage
@@ -400,6 +414,7 @@ public class Travian extends Thread {
 		} catch (Exception e) {
 			ecrireDansConsole("deja connecte");
 
+
 		}
 
 	}
@@ -409,6 +424,7 @@ public class Travian extends Thread {
 
 		t.ecrireDansConsole(t.getName());
 	    t.ecrireDansConsole(t.getState().toString());
+	   
 		driver.get(compte.getServer()+"dorf1.php");
 		randomsleep.court();
 		try {
