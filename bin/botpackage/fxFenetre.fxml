@@ -173,6 +173,15 @@
                            </content>
                         </ScrollPane>
                      </content></Tab>
+                 <Tab closable="false"  onSelectionChanged="#faireTemplate"  text="Template" styleClass="lesOnglets">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                           <content>
+                             <VBox fx:id="fxTemplate"  />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                   </Tab>
               </tabs>
             </TabPane>
          </center>

@@ -17,7 +17,7 @@ import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebView;
 
 
-public class fxConsoleExperimentale  { //extends Thread
+public class FxConsoleExperimentale  { //extends Thread
 		
 		Lancerbot bot;
 		FxFenetreController fxFenetreController;
@@ -25,7 +25,7 @@ public class fxConsoleExperimentale  { //extends Thread
 		boolean faireDefiler = true;
 		
 
-		public fxConsoleExperimentale(FxFenetreController fxFenetreController) {
+		public FxConsoleExperimentale(FxFenetreController fxFenetreController) {
 			this.fxFenetreController = fxFenetreController;
 			flux = new FxConsoleFlux(fxFenetreController);
 			//FxConsoleFlux flux = new FxConsoleFlux(bot);

@@ -25,8 +25,8 @@ import org.openqa.selenium.WebDriver;
 	
 	
 	//console
-	fxConsoleExperimentale console;
-	public void setConsole(fxConsoleExperimentale console) {
+	FxConsoleExperimentale console;
+	public void setConsole(FxConsoleExperimentale console) {
 		this.console = console;
 	}
 

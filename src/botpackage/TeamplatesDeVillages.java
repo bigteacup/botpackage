@@ -19,7 +19,7 @@ public  class   TeamplatesDeVillages {
 	
 	
 	//correspondances de noms
-	static	 String bois ="Bûcheron";
+	static String bois ="Bûcheron";
 	static String cereale = "Ferme";
 	static String fer= "fer";
 	static String terre= "argile";
@@ -55,18 +55,22 @@ public  class   TeamplatesDeVillages {
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
  
- 
-	 List<Batiment> listeDeBatimentsDuTeamplate1 = new ArrayList<Batiment>();
-	 List<Batiment> listeDeBatimentsDuTeamplate2 = new ArrayList<Batiment>();
-	 List<Batiment> listeDeBatimentsDuTeamplate3 = new ArrayList<Batiment>();
-	 List<Batiment> listeDeBatimentsDuTeamplate4 = new ArrayList<Batiment>();
+	public ArrayList<Batiment> listeDeBatimentDuJeu = new ArrayList<Batiment>();
 	
+	public ArrayList<Batiment> listeDeBatimentsDuTeamplate1 = new ArrayList<Batiment>();
+	public ArrayList<Batiment> listeDeBatimentsDuTeamplate2 = new ArrayList<Batiment>();
+	public ArrayList<Batiment> listeDeBatimentsDuTeamplate3 = new ArrayList<Batiment>();
+	public ArrayList<Batiment> listeDeBatimentsDuTeamplate4 = new ArrayList<Batiment>();
+	
+	ArrayList<ArrayList<Batiment>> listeDesTemplates = new ArrayList<ArrayList<Batiment>>();
+
 	
 	public TeamplatesDeVillages() {
+		listerBatimentDuJeu();
 	
 		 listeDeBatimentsDuTeamplate1.add(new Batiment(batiment_principal, 5));
-		 listeDeBatimentsDuTeamplate1.add(new Batiment(depot, 5));
-		 listeDeBatimentsDuTeamplate1.add(new Batiment(silo, 5));
+		 listeDeBatimentsDuTeamplate1.add(new Batiment(depot, 6));
+		 listeDeBatimentsDuTeamplate1.add(new Batiment(silo, 6));
 		 listeDeBatimentsDuTeamplate1.add(new Batiment(caserne, 3));
 		 listeDeBatimentsDuTeamplate1.add(new Batiment(place_rassemblement, 1));
 		 listeDeBatimentsDuTeamplate1.add(new Batiment(residence, 5));
@@ -80,8 +84,8 @@ public  class   TeamplatesDeVillages {
 		 listeDeBatimentsDuTeamplate2.add(new Batiment(place_rassemblement, 1));
 		 listeDeBatimentsDuTeamplate2.add(new Batiment(moulin, 3));
 		 listeDeBatimentsDuTeamplate2.add(new Batiment(batiment_principal, 10));
-		 listeDeBatimentsDuTeamplate2.add(new Batiment(depot, 11));
-		 listeDeBatimentsDuTeamplate2.add(new Batiment(silo, 11));
+		 listeDeBatimentsDuTeamplate2.add(new Batiment(depot, 12));
+		 listeDeBatimentsDuTeamplate2.add(new Batiment(silo, 12));
 		 listeDeBatimentsDuTeamplate2.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTeamplate2.add(new Batiment(residence, 10));
 		 listeDeBatimentsDuTeamplate2.add(new Batiment(marche, 5));
@@ -96,8 +100,8 @@ public  class   TeamplatesDeVillages {
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(poterie, 5));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(scierie, 5));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(fonderie, 5));
-		 listeDeBatimentsDuTeamplate3.add(new Batiment(silo, 14));
-		 listeDeBatimentsDuTeamplate3.add(new Batiment(depot, 14));
+		 listeDeBatimentsDuTeamplate3.add(new Batiment(silo, 15));
+		 listeDeBatimentsDuTeamplate3.add(new Batiment(depot, 15));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(residence, 10));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(marche, 15));
@@ -139,14 +143,20 @@ public  class   TeamplatesDeVillages {
 		 // listeDeBatimentsDuTeamplate4.add(new Batiment(cachette, 10));
 		 
 
+			// on liste les liste par commodité pour plus tard
+			
+			listeDesTemplates.add(listeDeBatimentsDuTeamplate1);
+			listeDesTemplates.add(listeDeBatimentsDuTeamplate2);
+			listeDesTemplates.add(listeDeBatimentsDuTeamplate3);
+			listeDesTemplates.add(listeDeBatimentsDuTeamplate4);
 	}
 
 
 
-	public List<Batiment> getListeDeBatimentsDuTeamplate1() {
+	public ArrayList<Batiment> getListeDeBatimentsDuTeamplate1() {
 		return listeDeBatimentsDuTeamplate1;
 	}
-	public void setListeDeBatimentsDuTeamplate1(List<Batiment> listeDeBatimentsDuTeamplate1) {
+	public void setListeDeBatimentsDuTeamplate1(ArrayList<Batiment> listeDeBatimentsDuTeamplate1) {
 		this.listeDeBatimentsDuTeamplate1 = listeDeBatimentsDuTeamplate1;
 	}
 	
@@ -155,10 +165,10 @@ public  class   TeamplatesDeVillages {
 	
 	
 	
-	public List<Batiment> getListeDeBatimentsDuTeamplate2() {
+	public ArrayList<Batiment> getListeDeBatimentsDuTeamplate2() {
 		return listeDeBatimentsDuTeamplate2;
 	}
-	public void setListeDeBatimentsDuTeamplate2(List<Batiment> listeDeBatimentsDuTeamplate2) {
+	public void setListeDeBatimentsDuTeamplate2(ArrayList<Batiment> listeDeBatimentsDuTeamplate2) {
 		this.listeDeBatimentsDuTeamplate2 = listeDeBatimentsDuTeamplate2;
 	}
 	
@@ -167,11 +177,11 @@ public  class   TeamplatesDeVillages {
 	
 	
 	
-	public List<Batiment> getListeDeBatimentsDuTeamplate3() {
+	public ArrayList<Batiment> getListeDeBatimentsDuTeamplate3() {
 		return listeDeBatimentsDuTeamplate3;
 	}
 	public void setListeDeBatimentsDuTeamplate3(
-			List<Batiment> listeDeBatimentsDuTeamplate3) {
+			ArrayList<Batiment> listeDeBatimentsDuTeamplate3) {
 		this.listeDeBatimentsDuTeamplate3 = listeDeBatimentsDuTeamplate3;
 	}
 
@@ -180,17 +190,17 @@ public  class   TeamplatesDeVillages {
 	
 	
 	
-	public List<Batiment> getListeDeBatimentsDuTeamplate4() {
+	public ArrayList<Batiment> getListeDeBatimentsDuTeamplate4() {
 		return listeDeBatimentsDuTeamplate4;
 	}
 	public void setListeDeBatimentsDuTeamplate4(
-			List<Batiment> listeDeBatimentsDuTeamplate4) {
+			ArrayList<Batiment> listeDeBatimentsDuTeamplate4) {
 		this.listeDeBatimentsDuTeamplate4 = listeDeBatimentsDuTeamplate4;
 	}
 
 
 
-	public List<Batiment> etablirTeamplatePourUnVillage(int champMin) {
+	public ArrayList<Batiment> etablirTeamplatePourUnVillage(int champMin) {
 		if (champMin <= 4 ){return listeDeBatimentsDuTeamplate1;}
 		if (champMin <= 8 && champMin >4){return listeDeBatimentsDuTeamplate2;}
 		if (champMin < 10 && champMin > 7){return listeDeBatimentsDuTeamplate3;}
@@ -198,12 +208,44 @@ public  class   TeamplatesDeVillages {
 		if (champMin > 10){return listeDeBatimentsDuTeamplate4;}
 		return null;
 
-
+	}
 	
-	
-	
-	
-	
+	public void listerBatimentDuJeu() {
+		 listeDeBatimentDuJeu.add(new Batiment(poterie, 0));
+		 listeDeBatimentDuJeu.add(new Batiment (grande_ecurie , 0));
+		listeDeBatimentDuJeu.add(new Batiment (ecurie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (comptoir , 0));
+		listeDeBatimentDuJeu.add(new Batiment (grande_caserne, 0));
+		listeDeBatimentDuJeu.add(new Batiment (place_tournoi, 0));
+		listeDeBatimentDuJeu.add(new Batiment (place_rassemblement, 0));
+		listeDeBatimentDuJeu.add(new Batiment (boulangerie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (moulin, 0));
+		listeDeBatimentDuJeu.add(new Batiment (scierie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (poterie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (fonderie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (cachette, 0));
+		listeDeBatimentDuJeu.add(new Batiment (pieges, 0));
+		listeDeBatimentDuJeu.add(new Batiment (residence, 0));
+		listeDeBatimentDuJeu.add(new Batiment (atelier, 0));
+		listeDeBatimentDuJeu.add(new Batiment (hotel_de_ville, 0));
+		listeDeBatimentDuJeu.add(new Batiment (ambassade, 0));
+		listeDeBatimentDuJeu.add(new Batiment (mur, 0));
+		listeDeBatimentDuJeu.add(new Batiment (palais, 0));
+		listeDeBatimentDuJeu.add(new Batiment (silo, 0));
+		listeDeBatimentDuJeu.add(new Batiment (depot, 0));
+		listeDeBatimentDuJeu.add(new Batiment (batiment_principal , 0));
+		listeDeBatimentDuJeu.add(new Batiment (empty , 0));
+		listeDeBatimentDuJeu.add(new Batiment (marche , 0));
+		listeDeBatimentDuJeu.add(new Batiment (academie , 0));
+		listeDeBatimentDuJeu.add(new Batiment (caserne , 0));
+		listeDeBatimentDuJeu.add(new Batiment (tailleur , 0));
+		listeDeBatimentDuJeu.add(new Batiment (grandSilo , 0));
+		listeDeBatimentDuJeu.add(new Batiment (grandDepot , 0));
+		listeDeBatimentDuJeu.add(new Batiment (forge , 0));
+		listeDeBatimentDuJeu.add(new Batiment (cdt, 0)); //Chambre aux trésors
 	
 	}
+	
+	
+	
 }
