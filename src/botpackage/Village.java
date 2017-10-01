@@ -709,7 +709,7 @@ public class Village {
 			}
 
 			if (test.size() >= 1) { // (test != null)
-				t.ecrireDansConsole(test.size() + " Construction de  deja en cours");
+				t.ecrireDansConsole(test.size() + " Constructions deja en cours");
 				constructionEnCours = test.size();
 				village.setConstructionsEnCours(constructionEnCours);
 			}
@@ -937,9 +937,9 @@ public class Village {
 		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 		List<WebElement> listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
 		//*[@id="village_map"]/div
-		int token = village.getConstructionsEnCours();
+		int construEnCours = village.getConstructionsEnCours();
 
-		if (token < t.limiteDeConstruction) {
+		if (construEnCours < t.limiteDeConstruction) {
 			try { // secu anti rechargement
 				// Lancer construction champs
 				// trouver lien du premier plus petit
@@ -947,10 +947,10 @@ public class Village {
 				while (g < 18) {
 					// on met a jour le token apres une eventuelle construction
 					village.voirListeDeConstruction(t);
-					token = village.getConstructionsEnCours();
+					construEnCours = village.getConstructionsEnCours();
 					// on reverifie le token pour pas boucler plus que
 					// necessaire
-					if (token < t.limiteDeConstruction ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
+					if (construEnCours < t.limiteDeConstruction ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
 						// On recharge la liste apres un eventuel rechargement
 						listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 						listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
@@ -1096,7 +1096,7 @@ public class Village {
 						g++;
 					} // fin if token de verification
 					else {
-						t.ecrireDansConsole("2 Champs lances");
+						t.ecrireDansConsole(construEnCours +"construction en cours");
 						break;
 					}
 				} // fin while g <18
