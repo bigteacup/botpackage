@@ -1134,6 +1134,7 @@ public class FxFenetreController extends ScrollPane {
 										});
 										}
 									contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
+									e.consume();
 					            }
 					        }
 					});
@@ -1212,6 +1213,7 @@ public class FxFenetreController extends ScrollPane {
 														});
 														
 													contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
+													e.consume();
 									            }
 									        }
 									});			
