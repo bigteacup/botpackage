@@ -14,8 +14,7 @@ import javafx.fxml.FXML;
 public class Village {
 
 	public Village(String nom, String url, int x, int y, ArrayList batiments, int bois, int argile, int fer,
-			int cereales, int tokenconstruction, ArrayList constructionsEnCour, ArrayList batimentsEnFileDAttente,
-			double levelPlaceTournoi, boolean champsFinis, int maxStockDepot, int maxStockSilo) {
+			int cereales, int ConstructionsEnCours, double levelPlaceTournoi, boolean champsFinis, int maxStockDepot, int maxStockSilo) {
 		super();
 		this.nom = nom;
 		this.url = url;
@@ -26,9 +25,7 @@ public class Village {
 		this.argile = argile;
 		this.fer = fer;
 		this.cereales = cereales;
-		this.constructionsEnCour = constructionsEnCour;
-		this.batimentsEnFileDAttente = batimentsEnFileDAttente;
-		this.tokenconstruction = tokenconstruction;
+		this.constructionsEnCours = constructionsEnCours;
 		this.levelPlaceTournoi = levelPlaceTournoi;
 		this.champsFinis = champsFinis;
 	}
@@ -69,13 +66,7 @@ public class Village {
 		return cereales;
 	}
 
-	public ArrayList getConstructionsEnCour() {
-		return constructionsEnCour;
-	}
 
-	public ArrayList getBatimentsEnFileDAttente() {
-		return batimentsEnFileDAttente;
-	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -117,20 +108,12 @@ public class Village {
 		this.cereales = cereales;
 	}
 
-	public void setConstructionsEnCour(ArrayList constructionsEnCour) {
-		this.constructionsEnCour = constructionsEnCour;
+	public int getConstructionsEnCours() { 
+		return constructionsEnCours;
 	}
 
-	public void setBatimentsEnFileDAttente(ArrayList batimentsEnFileDAttente) {
-		this.batimentsEnFileDAttente = batimentsEnFileDAttente;
-	}
-
-	public int getTokenconstruction() {
-		return tokenconstruction;
-	}
-
-	public void setTokenconstruction(int tokenconstruction) {
-		this.tokenconstruction = tokenconstruction;
+	public void setConstructionsEnCours(int constructionsEnCours) {
+		this.constructionsEnCours = constructionsEnCours;
 	}
 
 	public double getLevelPlaceTournoi() {
@@ -391,9 +374,9 @@ public class Village {
 	private int argile;
 	private int fer;
 	private int cereales;
-	private ArrayList constructionsEnCour;
-	private int tokenconstruction;
-	private ArrayList batimentsEnFileDAttente;
+
+	private int constructionsEnCours;
+
 	private double levelPlaceTournoi;
 	private boolean champsFinis;
 	private int besoinDeFete;
@@ -439,6 +422,7 @@ public class Village {
 	public int marchédureeDuDernierAchat=0;
 	public Date heureDeGuet;
 	public List<AttaqueEntrante> attaquesSubies = new ArrayList<AttaqueEntrante>();
+	public boolean bloquerConstructionBatiment = false;
 	
 	
 	
@@ -720,17 +704,17 @@ public class Village {
 			test = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"content\"]/div[2]/div[10]/ul/li"));
 
 			if (test.size() < 1) {
-				village.setTokenconstruction(constructionEnCours);
+				village.setConstructionsEnCours(constructionEnCours);
 				t.ecrireDansConsole("Pas de construction en cours ");
 			}
 
 			if (test.size() >= 1) { // (test != null)
 				t.ecrireDansConsole(test.size() + " Construction de  deja en cours");
 				constructionEnCours = test.size();
-				village.setTokenconstruction(constructionEnCours);
+				village.setConstructionsEnCours(constructionEnCours);
 			}
 		} catch (Exception e) {
-			village.setTokenconstruction(constructionEnCours);
+			village.setConstructionsEnCours(constructionEnCours);
 		}
 	}
 
@@ -953,7 +937,7 @@ public class Village {
 		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 		List<WebElement> listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
 		//*[@id="village_map"]/div
-		int token = village.getTokenconstruction();
+		int token = village.getConstructionsEnCours();
 
 		if (token < t.limiteDeConstruction) {
 			try { // secu anti rechargement
@@ -963,7 +947,7 @@ public class Village {
 				while (g < 18) {
 					// on met a jour le token apres une eventuelle construction
 					village.voirListeDeConstruction(t);
-					token = village.getTokenconstruction();
+					token = village.getConstructionsEnCours();
 					// on reverifie le token pour pas boucler plus que
 					// necessaire
 					if (token < t.limiteDeConstruction ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
@@ -1195,13 +1179,14 @@ public class Village {
 			if (construire1.getNomBatiment().contains(batimentAConstruire)) {
 				int level = construire1.getLevelBatiment();
 
-				if (level < levelVoulu && village.getTokenconstruction() < t.limiteDeConstruction) {
+				if (level < levelVoulu && village.getConstructionsEnCours() < t.limiteDeConstruction) {
 
 					// Parse
 					try {
 
 						listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 						for (WebElement as : listeDesBatiments) {//////////////////////////////// ici
+						
 							//////////////////////////////// go
 							//////////////////////////////// to
 							//////////////////////////////// stale,
@@ -1214,7 +1199,7 @@ public class Village {
 
 							if (as.getAttribute("alt").contains(construire1.getNomBatiment())
 									&& as.getAttribute("href").split("id=")[1].contains(construire1.getSlotBatiment())
-									&& village.getTokenconstruction() < t.limiteDeConstruction) {
+									&& village.getConstructionsEnCours() < t.limiteDeConstruction) {
 								boisNecessaire = Integer.parseInt(
 										as.getAttribute("alt").split("r1\" src=\"img/x.gif\" />")[1].split("</span>")[0]
 												.trim());
@@ -1267,7 +1252,9 @@ public class Village {
 									try {
 										bouttonvert = t.getCompte().getDriver().findElement(By.xpath("//button[@class=\"green build\"]"));
 									} catch (Exception e) {
-										t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable");
+										t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable => WorkAround Construction Bloquée pour ce tour"); //=> WORKAROUND on ajoute des token
+										//village.setConstructionsEnCours(t.limiteDeConstruction); //WORKAROUND on ajoute des token
+										village.bloquerConstructionBatiment = true;
 										possibleOuPas = false;
 										t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 										t.randomsleep.classic();
@@ -1286,6 +1273,7 @@ public class Village {
 									t.ecrireDansConsole("[construireBatiment] Pas assez de Ressources pour faire un/une "+ batimentAConstruire);
 								}
 							}
+							
 						} // break;}
 					} catch (Exception e) {
 						t.ecrireDansConsole("[construireBatiment] Batiment de niveau deja en construction ou deja au level demande "+ batimentAConstruire);
@@ -1409,14 +1397,22 @@ public class Village {
 		if (champMin < 10 || village.getVillageCapitale() && t.bot.monterChampsCapitale == true) {
 			monterChamps(t);
 		}
-
-		if (village.getTokenconstruction() < t.limiteDeConstruction && village.getChampMin() <= 10
-				|| village.getTokenconstruction() < t.limiteDeConstruction && village.getVillageCapitale() == true) {
+		
+		
+		
+		if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getChampMin() <= 10
+				|| village.getConstructionsEnCours() < t.limiteDeConstruction && village.getVillageCapitale() == true) {
 			chargerBatiments(t);
 			// try {
-			for (int i = 0; i <= 1 && village.getTokenconstruction() < t.limiteDeConstruction; i++) {
-
-				// chargerBatiments(t);
+			
+			// avant de monter on pose les village du template des que possible
+			if(village.bloquerConstructionBatiment == false) {
+				creationBatiment(t, village); 
+			}
+			
+			for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction; i++) {
+				
+				
 				for (Batiment batimentDuTemplate : village.getTemplateDuVillage()) {
 					boolean trouver = false;
 					// on se remet sur la page au cas ou un echec des boucles
@@ -1426,8 +1422,11 @@ public class Village {
 						t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 						t.randomsleep.court();
 					}
+					
+					
+					//puis on lances les upgrade de batiments presents
 					for (Batiment batimentDuVillage : village.getBatiments()) {
-						if (village.getTokenconstruction() < t.limiteDeConstruction) {
+						if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.bloquerConstructionBatiment  == false) {
 							if (batimentDuVillage.getNomBatiment().equals(batimentDuTemplate.getNomBatiment())) {
 								trouver = true;
 								if (batimentDuVillage.getLevelBatiment() < batimentDuTemplate.getLevelBatiment()) {
@@ -1439,6 +1438,7 @@ public class Village {
 						}
 
 					}
+				
 					////// TODO Module de construction de batiments du template
 					////// inexistant sur le village
 
@@ -1452,7 +1452,8 @@ public class Village {
 				// sur palier 1");}
 			}
 		}
-		creationBatiment(t, village);
+		// on pose les batiment apres les upgrade
+		//creationBatiment(t, village);  // 1/10/2017
 	}
 
 	///////////////////////////////////////////////////////////////////////////// creationBatiment(t,
@@ -1466,8 +1467,9 @@ public class Village {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void creationBatiment(Travian t, Village village) {
+		chargerBatiments(t);
 		int tokenDeChangement = 0;
-		if(village.getTokenconstruction() < t.limiteDeConstruction){
+		if(village.getConstructionsEnCours() < t.limiteDeConstruction){
 			t.ecrireDansConsole("Essai de création de batiments :");
 			boolean trouver = false;
 			boolean slotDispo = false;

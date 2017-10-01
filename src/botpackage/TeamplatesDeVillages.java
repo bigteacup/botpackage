@@ -38,7 +38,7 @@ public  class   TeamplatesDeVillages {
 	static String pieges = "Fabricant de piéges";
 	static String residence = "Résidence";
 	static String atelier= "Atelier";
-	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville
+	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville
 	static String ambassade = "Ambassade";
 	static String mur = "Palissade";
 	static String palais = "Palais";
@@ -101,6 +101,7 @@ public  class   TeamplatesDeVillages {
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(residence, 10));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(marche, 15));
+		 listeDeBatimentsDuTeamplate3.add(new Batiment(hotel_de_ville, 1));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(caserne, 5));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(academie, 10));
 		 listeDeBatimentsDuTeamplate3.add(new Batiment(palais, 20));

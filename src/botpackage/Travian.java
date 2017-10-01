@@ -361,10 +361,11 @@ public class Travian extends Thread {
 			village.memoireMarcheDeLaRotation[1] = 0;
 			village.memoireMarcheDeLaRotation[2] = 0;
 			village.memoireMarcheDeLaRotation[3] = 0;
+			village.bloquerConstructionBatiment=false;
 			nI++;
 		}
 		t.tokenForcerMarcheDeLaRotation = 0;
-		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenForcerMarcheDeLaRotation);
+		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenForcerMarcheDeLaRotation +" Et bloquage des constructions levés");
 	
 
 	}
@@ -710,7 +711,7 @@ public class Travian extends Thread {
 				
 				if ( bot.construireBatiments == true ) {
 					if ( village.getRegimeConstruction() == true ) {
-					if (village.getTokenconstruction() < limiteDeConstruction ){ 
+					if (village.getConstructionsEnCours() < limiteDeConstruction ){ 
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours");}
 					}else {t.ecrireDansConsole("construction Desactivees... Par le regime du village");}
@@ -1522,9 +1523,9 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			boolean trouver = false;
 			while(trouver == false){
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
-					village.setTokenconstruction(donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
+					village.setConstructionsEnCours(donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
 
-					t.ecrireDansConsole(village.getNom()+ " : " +" setTokenconstruction == " + donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
+					t.ecrireDansConsole(village.getNom()+ " : " +" setConstructionsEnCours == " + donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
 					trouver = true;
 					i = 0;
 				} else {i++;}
@@ -1651,12 +1652,12 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		
 	
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
-		if (village.getChampsFinis() == false && village.getTokenconstruction() < limiteDeConstruction 
+		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction 
 				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true
 				|| village.getVillageCapitale() == true 
 				|| village.getVillagePillage() == true 
 				|| village.getCropDeath() == true 
-				|| village.getTokenconstruction() < limiteDeConstruction && village.getBesoinDeConstruction() == true
+				|| village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true
 				|| village.getBois() >= village.getMaxStockDepot()*90/100 	
 				|| village.getArgile() >= village.getMaxStockDepot()*90/100
 				|| village.getFer() >= village.getMaxStockDepot()*90/100
