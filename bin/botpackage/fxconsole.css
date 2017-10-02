@@ -387,6 +387,14 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-image-source:url("image/default_border.png");
      
      }
+     
+       .lesBatsTem{
+ 	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+ 	-fx-background-image: url("image/default_paper.png");
+ 	-fx-background-size: 100% 100%;
+
+     
+     }
  .ctuile {
 	-fx-background-color: #4caf50;
 	/*-fx-border-style: solid ;*/

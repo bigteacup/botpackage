@@ -1105,17 +1105,26 @@ public class FxFenetreController extends ScrollPane {
 			for(Village village : bot.travian.getListeDeVillages()) {
 				VBox vbv= new VBox();
 				Label nomVLabel = new Label(village.getNom());
+				nomVLabel.getStyleClass().add("vLabel");
+				nomVLabel.setPrefHeight(25);
+				nomVLabel.setPadding(new Insets(5, 15, 5, 15));
 				vbv.getChildren().add(nomVLabel);
+				 vbv.setPadding(new Insets(15, 15, 15, 15));
 				fxTemplate.getChildren().add(vbv);
 
 
 				//template
+				int i2 = 0;
 				for(ArrayList<Batiment> tem : village.getTemplate().listeDesTemplates) {
-					Label nomTemLabel = new Label("template");
-
+					i2++;
+					VBox vbv2= new VBox();
+					Label nomTemLabel = new Label("Template Stade " +i2);
+					
+					
 					FlowPane flowb = new FlowPane();
-					flowb.getChildren().add(nomTemLabel);
-					flowb.getStyleClass().add("lesCheckBoxs");
+					vbv2.getChildren().add(nomTemLabel);
+					vbv2.getChildren().add(flowb);
+					vbv2.getStyleClass().add("lesCheckBoxs");
 
 ///////////////////////////////////////////////////////////////
 					 ContextMenu contextMenu = new ContextMenu();
@@ -1169,15 +1178,18 @@ public class FxFenetreController extends ScrollPane {
 					//bat
 					for(Batiment bat : tem) {
 						FlowPane fta = new FlowPane();
-						CheckBox ta = new CheckBox(bat.getNomBatiment());
-						ta.setSelected(true);
+						Label ta = new Label(bat.getNomBatiment());
+						//ta.setSelected(true);
 						TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
-						tf.setPadding(new Insets(0, 0,0,0));
+						tf.setPadding(new Insets(0,0,0,0));
 						tf.setPrefColumnCount(2);
+						ta.setPadding(new Insets(0,5,0,5));
 						fta.getChildren().addAll(ta,tf);
 						
-						fta.setMaxWidth(50);
-						fta.getStyleClass().add("m1");
+						fta.setMaxWidth(170);
+						fta.setMaxHeight(19);
+						fta.setMinHeight(19);
+						fta.getStyleClass().add("lesBatsTem");
 
 						flowb.getChildren().add(fta);
 
@@ -1226,7 +1238,7 @@ public class FxFenetreController extends ScrollPane {
 					
 
 
-					vbv.getChildren().add(flowb);
+					vbv.getChildren().add(vbv2);
 
 					
 
@@ -1236,7 +1248,6 @@ public class FxFenetreController extends ScrollPane {
 				//	vbv.getStyleClass().add("fake3");
 				//	fxTemplate.getChildren().add(vbv);
 				i++;
-
 			}
 
 		}catch(Exception e) {
