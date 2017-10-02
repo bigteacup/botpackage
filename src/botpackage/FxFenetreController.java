@@ -34,7 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
-
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Lighting;
 import javafx.scene.input.Clipboard;
@@ -1177,21 +1177,40 @@ public class FxFenetreController extends ScrollPane {
 					
 					//bat
 					for(Batiment bat : tem) {
-						FlowPane fta = new FlowPane();
+						
+						FlowPane stackP  = new FlowPane();
+
 						Label ta = new Label(bat.getNomBatiment());
-						//ta.setSelected(true);
 						TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
+						
 						tf.setPadding(new Insets(0,0,0,0));
 						tf.setPrefColumnCount(2);
 						ta.setPadding(new Insets(0,5,0,5));
-						fta.getChildren().addAll(ta,tf);
-						
-						fta.setMaxWidth(170);
-						fta.setMaxHeight(19);
-						fta.setMinHeight(19);
-						fta.getStyleClass().add("lesBatsTem");
 
+						
+						stackP.getChildren().addAll(ta,tf); 
+						stackP.setMaxWidth(170);
+						stackP.setMaxHeight(19);
+						stackP.setMinHeight(19);
+						
+						
+						Pane fta = new Pane();
+	
+						fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
+						
+						for(Batiment b : village.getBatiments()) {
+							if(b.getNomBatiment().equals(bat.getNomBatiment()) && b.getLevelBatiment() >= bat.getLevelBatiment()) {
+								stackP.getStyleClass().remove("lesBatsTemFaitGreen");
+								stackP.getStyleClass().add("lesBatsTemFaitGreen");
+								fta.getStyleClass().remove("pink");
+								fta.getStyleClass().remove("lesBatsTem");
+								fta.getStyleClass().add("lesBatsTemFait");
+								
+							}
+						}
+						fta.getChildren().add(stackP);
 						flowb.getChildren().add(fta);
+						
 
 							
 

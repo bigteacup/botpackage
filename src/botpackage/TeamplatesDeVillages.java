@@ -211,8 +211,8 @@ public  class   TeamplatesDeVillages {
 	}
 	
 	public void listerBatimentDuJeu() {
-		 listeDeBatimentDuJeu.add(new Batiment(poterie, 0));
-		 listeDeBatimentDuJeu.add(new Batiment (grande_ecurie , 0));
+		listeDeBatimentDuJeu.add(new Batiment(poterie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (grande_ecurie , 0));
 		listeDeBatimentDuJeu.add(new Batiment (ecurie, 0));
 		listeDeBatimentDuJeu.add(new Batiment (comptoir , 0));
 		listeDeBatimentDuJeu.add(new Batiment (grande_caserne, 0));
