@@ -1100,10 +1100,11 @@ public class FxFenetreController extends ScrollPane {
 		fxTemplate.getChildren().clear();
 		int i = 0;
 		try{
-
+			faireEditeurDeTemplate();
 			//village
 			for(Village village : bot.travian.getListeDeVillages()) {
 				VBox vbv= new VBox();
+				
 				Label nomVLabel = new Label(village.getNom());
 				nomVLabel.getStyleClass().add("vLabel");
 				nomVLabel.setPrefHeight(25);
@@ -1115,10 +1116,16 @@ public class FxFenetreController extends ScrollPane {
 
 				//template
 				int i2 = 0;
-				for(ArrayList<Batiment> tem : village.getTemplate().listeDesTemplates) {
+				for(ArrayList<Batiment> tem : village.getTemplate().listeDesTemplatesParDefault) {
 					i2++;
 					VBox vbv2= new VBox();
 					Label nomTemLabel = new Label("Template Stade " +i2);
+					
+					FlowPane templateChooser = new FlowPane();
+					Label nomStade = new Label("Stade :");
+					TextField textStade1 = new TextField();
+					TextField textStade2 = new TextField();
+					templateChooser.getChildren().addAll(nomStade,textStade1, textStade2);
 					
 					
 					FlowPane flowb = new FlowPane();
@@ -1275,10 +1282,164 @@ public class FxFenetreController extends ScrollPane {
 	}
 
 
+
+
+
+public void  faireEditeurDeTemplate() {
+	fxTemplate.getChildren().clear();
+	int i = 0;
+	try{
+
+		//village
+			VBox vbv= new VBox();
+			Label nomVLabel = new Label("Editeur de Template");
+			nomVLabel.getStyleClass().add("vLabel");
+			nomVLabel.setPrefHeight(25);
+			nomVLabel.setPadding(new Insets(5, 15, 5, 15));
+			vbv.getChildren().add(nomVLabel);
+			 vbv.setPadding(new Insets(15, 15, 15, 15));
+			fxTemplate.getChildren().add(vbv);
+
+
+			//template
+			int i2 = 0;
+			for(ArrayList<Batiment> tem : bot.getTemplates().listeDesTemplatesParDefault) { //bot.getTemplates().listeDesTemplatesParDefault
+				i2++;
+				VBox vbv2= new VBox();
+				Label nomTemLabel = new Label("Template Stade " +i2 +" ==>");
+				
+				FlowPane templateChooser = new FlowPane();
+				Label nomStade = new Label("   ChampMin : ");
+				TextField textStade1 = new TextField();
+				textStade1.setPadding(new Insets(0, 0, 0, 0));
+				textStade1.setPrefColumnCount(2);
+				Label nomStadeA = new Label(" à ");
+				TextField textStade2 = new TextField();
+				textStade2.setPadding(new Insets(0,0,0,0));
+				textStade2.setPrefColumnCount(2);
+				templateChooser.getChildren().addAll(nomTemLabel, nomStade,textStade1, nomStadeA, textStade2);
+				
+				FlowPane flowb = new FlowPane();
+				vbv2.getChildren().add(templateChooser);
+				vbv2.getChildren().add(flowb);
+				vbv2.getStyleClass().add("lesCheckBoxs");
+
+///////////////////////////////////////////////////////////////
+				 ContextMenu contextMenu = new ContextMenu();
+				 flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+				        @Override public void handle(MouseEvent e) {
+				            if (e.getButton() == MouseButton.SECONDARY)  {
+				            	contextMenu.getItems().clear();
+								for(Batiment bataj : bot.getTemplates().listeDeBatimentDuJeu) { 
+									MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
+									contextMenu.getItems().add(contextMenuItem);
+									contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+									    public void handle(ActionEvent e) {
+									    	tem.add(bataj);
+									  
+									    }
+									});
+									}
+								contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
+								e.consume();
+				            }
+				        }
+				});
+///////////////////////////////////////////////////////////////////////////////	
+
+				
+				
+				
+				
+				
+				//bat
+				for(Batiment bat : tem) {
+					
+					FlowPane stackP  = new FlowPane();
+
+					Label ta = new Label(bat.getNomBatiment());
+					TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
+					
+					tf.setPadding(new Insets(0,0,0,0));
+					tf.setPrefColumnCount(2);
+					ta.setPadding(new Insets(0,5,0,5));
+
+					
+					stackP.getChildren().addAll(ta,tf); 
+					stackP.setMaxWidth(170);
+					stackP.setMaxHeight(19);
+					stackP.setMinHeight(19);
+					
+					
+					Pane fta = new Pane();
+
+					fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
+					
+	
+					fta.getChildren().add(stackP);
+					flowb.getChildren().add(fta);
+					
+
+						
+
+								if (i % 2 == 0) {
+									vbv.getStyleClass().remove("fake3");
+									vbv.getStyleClass().remove("off");
+									vbv.getStyleClass().add("fake3");
+								  	
+								} else {
+							vbv.getStyleClass().remove("fake3");
+									vbv.getStyleClass().remove("off");
+									vbv.getStyleClass().add("off");
+									
+								
+									
+								}
+								
+								 ContextMenu contextMenuDelete = new ContextMenu();
+								 fta.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+								        @Override public void handle(MouseEvent e) {
+								            if (e.getButton() == MouseButton.SECONDARY)  {
+								            	contextMenuDelete.getItems().clear();
+												 
+													MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
+													contextMenuDelete.getItems().add(contextMenuDeleteItem);
+													contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
+													    public void handle(ActionEvent e) {
+													    	tem.remove(bat);
+													  
+													    }
+													});
+													
+												contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
+												e.consume();
+								            }
+								        }
+								});			
+								
+								
+								
+								
+
+				}
+				
+
+
+				vbv.getChildren().add(vbv2);
+
+				
+
+
+			}
+
+
+		
+
+	}catch(Exception e) {
+
+	}
 }
-
-
-
+}
 
 
 

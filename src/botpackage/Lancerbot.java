@@ -79,7 +79,15 @@ import org.openqa.selenium.WebDriver;
 	public String motCleListeDePillage1 = "inactif";
 	public String motCleListeDesPertes = "perte";
 	
-	
+	public TemplatesDeVillages Templates = new  TemplatesDeVillages();	
+
+
+
+
+
+
+
+
 
 
 
@@ -165,6 +173,21 @@ public void setfxFenetreController(FxFenetreController fxFenetreController){
 	this.fxFenetreController = fxFenetreController;
 	
 }
+public TemplatesDeVillages getTemplates() {
+return Templates;
+}
+
+public void setTemplates(TemplatesDeVillages templates) {
+Templates = templates;
+}
+
+
+
+
+
+
+
+
 
 
 public void lancerTravian(String nomDeCompte, String serveur, String userName, String motDePasse){

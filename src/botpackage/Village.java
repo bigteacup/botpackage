@@ -269,7 +269,7 @@ public class Village {
 		this.champMin = champMin;
 		// if (champMin <= 10 ){
 		
-		List<Batiment> tem = template.etablirTeamplatePourUnVillage(champMin);
+		List<Batiment> tem = template.etablirTemplatePourUnVillage(champMin);
 		setTemplateDuVillage(tem);
 		// }
 	}
@@ -424,7 +424,7 @@ public class Village {
 	public List<AttaqueEntrante> attaquesSubies = new ArrayList<AttaqueEntrante>();
 	public boolean bloquerConstructionBatiment = false;
 	
-	TeamplatesDeVillages template = new TeamplatesDeVillages();
+	TemplatesDeVillages template = new TemplatesDeVillages();
 	
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -433,11 +433,11 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public TeamplatesDeVillages getTemplate() {
+	public TemplatesDeVillages getTemplate() {
 		return template;
 	}
 
-	public void setTemplate(TeamplatesDeVillages template) {
+	public void setTemplate(TemplatesDeVillages template) {
 		this.template = template;
 	}
 
@@ -1451,10 +1451,10 @@ public class Village {
 					////// inexistant sur le village
 
 					if (trouver == false) {
-						t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> pas trouve");// PAS
+						t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> pas trouve (Dans les conditions du Template en cours)");// PAS
 
 					} // fin trouver == false
-				} // fin du for (Batiment batimentDuteamplate :
+				} // fin du for (Batiment batimentDuTemplate :
 				// village.getTemplateDuVillage()){
 				// }catch (Exception e) {t.ecrireDansConsole(": Batiment absent
 				// sur palier 1");}
@@ -1677,7 +1677,7 @@ public class Village {
 	/*
 	t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> boucle CreationBatiment");// PAS
 	// TROUVE);
-	// if (batimentDuteamplate.getNomBatiment().equals("Résidence") &&
+	// if (batimentDuTemplate.getNomBatiment().equals("Résidence") &&
 	// village.getVillageCapitale() == true){}
 	for (Batiment bat : village.getBatiments()) {
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
