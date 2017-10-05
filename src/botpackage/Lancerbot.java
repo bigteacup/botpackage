@@ -79,7 +79,9 @@ import org.openqa.selenium.WebDriver;
 	public String motCleListeDePillage1 = "inactif";
 	public String motCleListeDesPertes = "perte";
 	
-	public TemplatesDeVillages Templates = new  TemplatesDeVillages();	
+	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
+	public TemplatesDeVillages templates = new TemplatesDeVillages();
+	
 
 
 
@@ -94,16 +96,20 @@ import org.openqa.selenium.WebDriver;
 
 
 
+/*
+public void faireUnTemplateDeCompte(int i) {
+	//listeDeTemplates.clear();
+	this.templates = new TemplatesDeVillages(i);
+	listeDeTemplates.add(templates);
+}
 
-
-
-
+*/
 
 		public  Lancerbot() {
 			
+		//	faireUnTemplateDeCompte(0);
 			
-			
-			
+			listeDeTemplates.add(templates);
 			
 			
 			
@@ -174,11 +180,11 @@ public void setfxFenetreController(FxFenetreController fxFenetreController){
 	
 }
 public TemplatesDeVillages getTemplates() {
-return Templates;
+return templates;
 }
 
 public void setTemplates(TemplatesDeVillages templates) {
-Templates = templates;
+templates = templates;
 }
 
 

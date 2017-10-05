@@ -13,26 +13,9 @@ import javafx.fxml.FXML;
 
 public class Village {
 
-	public Village(String nom, String url, int x, int y, ArrayList batiments, int bois, int argile, int fer,
-			int cereales, int ConstructionsEnCours, double levelPlaceTournoi, boolean champsFinis, int maxStockDepot, int maxStockSilo) {
-		super();
-		this.nom = nom;
-		this.url = url;
-		this.x = x;
-		this.y = y;
-		this.batiments = batiments;
-		this.bois = bois;
-		this.argile = argile;
-		this.fer = fer;
-		this.cereales = cereales;
-		this.constructionsEnCours = constructionsEnCours;
-		this.levelPlaceTournoi = levelPlaceTournoi;
-		this.champsFinis = champsFinis;
-	}
 
-	public Village() {
-		super();
-	}
+
+
 
 	public String getNom() {
 		return nom;
@@ -424,8 +407,45 @@ public class Village {
 	public List<AttaqueEntrante> attaquesSubies = new ArrayList<AttaqueEntrante>();
 	public boolean bloquerConstructionBatiment = false;
 	
-	TemplatesDeVillages template = new TemplatesDeVillages();
+
+
+	//Liste de Templates du village
+	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
 	
+	//template direct a voir si on garde
+	public TemplatesDeVillages template = new TemplatesDeVillages();
+	
+	
+	
+	
+	
+	public Village() {
+		listeDeTemplates.add(template);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public Village(String nom, String url, int x, int y, ArrayList batiments, int bois, int argile, int fer,
+			int cereales, int ConstructionsEnCours, double levelPlaceTournoi, boolean champsFinis, int maxStockDepot, int maxStockSilo) {
+		super();
+		this.nom = nom;
+		this.url = url;
+		this.x = x;
+		this.y = y;
+		this.batiments = batiments;
+		this.bois = bois;
+		this.argile = argile;
+		this.fer = fer;
+		this.cereales = cereales;
+		this.constructionsEnCours = constructionsEnCours;
+		this.levelPlaceTournoi = levelPlaceTournoi;
+		this.champsFinis = champsFinis;
+	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -446,6 +466,14 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public ArrayList<TemplatesDeVillages> getListeDeTemplates() {
+		return listeDeTemplates;
+	}
+
+	public void setListeDeTemplates(ArrayList<TemplatesDeVillages> listeDeTemplates) {
+		this.listeDeTemplates = listeDeTemplates;
+	}
+	
 	public boolean getRegimePillage() {
 		return regimePillage;
 	}

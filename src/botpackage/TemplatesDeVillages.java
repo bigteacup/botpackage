@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class   TemplatesDeVillages {
-	
+	int mode;
 	/*
 	batimentsALancer.add("Bâtiment principal");
 	batimentsALancer.add("Dépôt de ressources");
@@ -54,20 +54,67 @@ public  class   TemplatesDeVillages {
 	static String grandDepot = "Grand Dépôt de ressources";
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
+	String nomDuTemplate;
  
+	//liste de batimients
 	public ArrayList<Batiment> listeDeBatimentDuJeu = new ArrayList<Batiment>();
 	
+	//liste par default
 	public ArrayList<Batiment> listeDeBatimentsDuTemplateParDefault1 = new ArrayList<Batiment>();
 	public ArrayList<Batiment> listeDeBatimentsDuTemplateParDefault2 = new ArrayList<Batiment>();
 	public ArrayList<Batiment> listeDeBatimentsDuTemplateParDefault3 = new ArrayList<Batiment>();
 	public ArrayList<Batiment> listeDeBatimentsDuTemplateParDefault4 = new ArrayList<Batiment>();
 	
 	ArrayList<ArrayList<Batiment>> listeDesTemplatesParDefault = new ArrayList<ArrayList<Batiment>>();
+	
 
-	
+	ArrayList<Batiment> listeDeBatiments= new ArrayList<Batiment>();
+
 	public TemplatesDeVillages() {
+
 		listerBatimentDuJeu();
+	}
 	
+	
+	
+	
+	public void choisirModeTemplatesDeVillages(int mode) { // 1=normal 2=default 3=TimTool
+		this.mode = mode;
+		
+		if (mode == 0) { 
+			templateInterface();	
+		}
+		if (mode == 1) { 
+			templateClassique();	
+		}
+		if (mode == 2) { 
+			;	
+		}
+		if (mode == 3) { 
+			templatesDeVillagesTimTool();	
+		}
+
+	}
+	
+	
+	
+	
+
+	public void templateInterface() {
+		nomDuTemplate = "Edition";
+		listerBatimentDuJeu();
+	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void templatesDeVillagesTimTool() { //mode 3
+		nomDuTemplate = "TimTool Default";
+		listerBatimentDuJeu();
+		
+		listeDeBatimentsDuTemplateParDefault1.clear();
+		listeDeBatimentsDuTemplateParDefault2.clear();
+		listeDeBatimentsDuTemplateParDefault3.clear();
+		listeDeBatimentsDuTemplateParDefault4.clear();
+		
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 5));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(depot, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(silo, 6));
@@ -144,7 +191,7 @@ public  class   TemplatesDeVillages {
 		 
 
 			// on liste les liste par commodité pour plus tard
-			
+		 	listeDesTemplatesParDefault.clear();
 			listeDesTemplatesParDefault.add(listeDeBatimentsDuTemplateParDefault1);
 			listeDesTemplatesParDefault.add(listeDeBatimentsDuTemplateParDefault2);
 			listeDesTemplatesParDefault.add(listeDeBatimentsDuTemplateParDefault3);
@@ -153,6 +200,89 @@ public  class   TemplatesDeVillages {
 
 
 
+
+
+	public ArrayList<Batiment> etablirTemplatePourUnVillage(int champMin) {
+		if(mode==3) {
+		if (champMin <= 4 ){return listeDeBatimentsDuTemplateParDefault1;}
+		if (champMin <= 8 && champMin >4){return listeDeBatimentsDuTemplateParDefault2;}
+		if (champMin < 10 && champMin > 7){return listeDeBatimentsDuTemplateParDefault3;}
+		if (champMin == 10){return listeDeBatimentsDuTemplateParDefault4;}
+		if (champMin > 10){return listeDeBatimentsDuTemplateParDefault4;}
+		}
+		
+		
+	//	if(mode==1) {
+		if (champMin <= 4 ){return listeDeBatimentsDuTemplateParDefault1;}
+		if (champMin <= 8 && champMin >4){return listeDeBatimentsDuTemplateParDefault2;}
+		if (champMin < 10 && champMin > 7){return listeDeBatimentsDuTemplateParDefault3;}
+		if (champMin == 10){return listeDeBatimentsDuTemplateParDefault4;}
+		if (champMin > 10){return listeDeBatimentsDuTemplateParDefault4;}
+	//	}
+		
+		return null;
+
+	}
+	
+	public void listerBatimentDuJeu() {
+		listeDeBatimentDuJeu.clear();
+		
+		listeDeBatimentDuJeu.add(new Batiment(poterie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (grande_ecurie , 0));
+		listeDeBatimentDuJeu.add(new Batiment (ecurie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (comptoir , 0));
+		listeDeBatimentDuJeu.add(new Batiment (grande_caserne, 0));
+		listeDeBatimentDuJeu.add(new Batiment (place_tournoi, 0));
+		listeDeBatimentDuJeu.add(new Batiment (place_rassemblement, 0));
+		listeDeBatimentDuJeu.add(new Batiment (boulangerie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (moulin, 0));
+		listeDeBatimentDuJeu.add(new Batiment (scierie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (poterie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (fonderie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (cachette, 0));
+		listeDeBatimentDuJeu.add(new Batiment (pieges, 0));
+		listeDeBatimentDuJeu.add(new Batiment (residence, 0));
+		listeDeBatimentDuJeu.add(new Batiment (atelier, 0));
+		listeDeBatimentDuJeu.add(new Batiment (hotel_de_ville, 0));
+		listeDeBatimentDuJeu.add(new Batiment (ambassade, 0));
+		listeDeBatimentDuJeu.add(new Batiment (mur, 0));
+		listeDeBatimentDuJeu.add(new Batiment (palais, 0));
+		listeDeBatimentDuJeu.add(new Batiment (silo, 0));
+		listeDeBatimentDuJeu.add(new Batiment (depot, 0));
+		listeDeBatimentDuJeu.add(new Batiment (batiment_principal , 0));
+		listeDeBatimentDuJeu.add(new Batiment (empty , 0));
+		listeDeBatimentDuJeu.add(new Batiment (marche , 0));
+		listeDeBatimentDuJeu.add(new Batiment (academie , 0));
+		listeDeBatimentDuJeu.add(new Batiment (caserne , 0));
+		listeDeBatimentDuJeu.add(new Batiment (tailleur , 0));
+		listeDeBatimentDuJeu.add(new Batiment (grandSilo , 0));
+		listeDeBatimentDuJeu.add(new Batiment (grandDepot , 0));
+		listeDeBatimentDuJeu.add(new Batiment (forge , 0));
+		listeDeBatimentDuJeu.add(new Batiment (cdt, 0)); //Chambre aux trésors
+	
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void templateClassique() {
+		nomDuTemplate = "Classique";
+		listerBatimentDuJeu();
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public String getNomDuTemplate() {
+		return nomDuTemplate;
+	}
+	public void setNomDuTemplate(String nomDuTemplate) {
+		this.nomDuTemplate = nomDuTemplate;
+	}
+	
+	
 	public ArrayList<Batiment> getlisteDeBatimentsDuTemplateParDefault1() {
 		return listeDeBatimentsDuTemplateParDefault1;
 	}
@@ -197,55 +327,34 @@ public  class   TemplatesDeVillages {
 			ArrayList<Batiment> listeDeBatimentsDuTemplateParDefault4) {
 		this.listeDeBatimentsDuTemplateParDefault4 = listeDeBatimentsDuTemplateParDefault4;
 	}
+	
+	
+	
+	
+	
 
 
+	
+	public ArrayList<Batiment> getListeDeBatiments() {
+		return listeDeBatiments;
+	}
 
-	public ArrayList<Batiment> etablirTemplatePourUnVillage(int champMin) {
-		if (champMin <= 4 ){return listeDeBatimentsDuTemplateParDefault1;}
-		if (champMin <= 8 && champMin >4){return listeDeBatimentsDuTemplateParDefault2;}
-		if (champMin < 10 && champMin > 7){return listeDeBatimentsDuTemplateParDefault3;}
-		if (champMin == 10){return listeDeBatimentsDuTemplateParDefault4;}
-		if (champMin > 10){return listeDeBatimentsDuTemplateParDefault4;}
+	public void setListeDeBatiments(ArrayList<Batiment> listeDeBatiments) {
+		this.listeDeBatiments = listeDeBatiments;
+	}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*	public TemplatesDeVillages trouverTemplate(String nomTemplate) {
+		for(TemplatesDeVillages t : t.bot.listeDeTemplatePersonnalises) {
+			if() {
+				
+			}
+		}
 		return null;
-
+		
+		
 	}
-	
-	public void listerBatimentDuJeu() {
-		listeDeBatimentDuJeu.add(new Batiment(poterie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (grande_ecurie , 0));
-		listeDeBatimentDuJeu.add(new Batiment (ecurie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (comptoir , 0));
-		listeDeBatimentDuJeu.add(new Batiment (grande_caserne, 0));
-		listeDeBatimentDuJeu.add(new Batiment (place_tournoi, 0));
-		listeDeBatimentDuJeu.add(new Batiment (place_rassemblement, 0));
-		listeDeBatimentDuJeu.add(new Batiment (boulangerie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (moulin, 0));
-		listeDeBatimentDuJeu.add(new Batiment (scierie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (poterie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (fonderie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (cachette, 0));
-		listeDeBatimentDuJeu.add(new Batiment (pieges, 0));
-		listeDeBatimentDuJeu.add(new Batiment (residence, 0));
-		listeDeBatimentDuJeu.add(new Batiment (atelier, 0));
-		listeDeBatimentDuJeu.add(new Batiment (hotel_de_ville, 0));
-		listeDeBatimentDuJeu.add(new Batiment (ambassade, 0));
-		listeDeBatimentDuJeu.add(new Batiment (mur, 0));
-		listeDeBatimentDuJeu.add(new Batiment (palais, 0));
-		listeDeBatimentDuJeu.add(new Batiment (silo, 0));
-		listeDeBatimentDuJeu.add(new Batiment (depot, 0));
-		listeDeBatimentDuJeu.add(new Batiment (batiment_principal , 0));
-		listeDeBatimentDuJeu.add(new Batiment (empty , 0));
-		listeDeBatimentDuJeu.add(new Batiment (marche , 0));
-		listeDeBatimentDuJeu.add(new Batiment (academie , 0));
-		listeDeBatimentDuJeu.add(new Batiment (caserne , 0));
-		listeDeBatimentDuJeu.add(new Batiment (tailleur , 0));
-		listeDeBatimentDuJeu.add(new Batiment (grandSilo , 0));
-		listeDeBatimentDuJeu.add(new Batiment (grandDepot , 0));
-		listeDeBatimentDuJeu.add(new Batiment (forge , 0));
-		listeDeBatimentDuJeu.add(new Batiment (cdt, 0)); //Chambre aux trésors
-	
-	}
-	
-	
-	
+	*/
 }

@@ -1496,7 +1496,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 				
 					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
 						try {
-						if (donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[3]/a/span")).getText().equals("é") ){
+						if (donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[3]/a/span")).getText().equals("•") ){
 						besoinDeFete = 1;
 						village.setBesoinDeFete(besoinDeFete);
 
