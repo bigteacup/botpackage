@@ -54,7 +54,7 @@ public  class   TemplatesDeVillages {
 	static String grandDepot = "Grand Dépôt de ressources";
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
-	String nomDuTemplate;
+	String nomDuTemplate="";
  
 	//liste de batimients
 	public ArrayList<Batiment> listeDeBatimentDuJeu = new ArrayList<Batiment>();
@@ -78,7 +78,7 @@ public  class   TemplatesDeVillages {
 	
 	
 	
-	public void choisirModeTemplatesDeVillages(int mode) { // 1=normal 2=default 3=TimTool
+	public void choisirModeTemplatesDeVillages(int mode) { //0=editeur 1=normal 2=default 3=TimTool
 		this.mode = mode;
 		
 		if (mode == 0) { 
@@ -275,6 +275,13 @@ public  class   TemplatesDeVillages {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//public void setNomDuTemplate(String nomDuTemplate) {
+	//	this.nomDuTemplate = nomDuTemplate;
+	//	}
+	
+	
+	
 	public String getNomDuTemplate() {
 		return nomDuTemplate;
 	}

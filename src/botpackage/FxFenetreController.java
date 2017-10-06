@@ -638,21 +638,21 @@ public class FxFenetreController extends ScrollPane {
 		});
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	private void fxChargerComptes(){
@@ -702,28 +702,28 @@ public class FxFenetreController extends ScrollPane {
 	 */
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	@FXML
 	private void fxConsolescrollpane() throws IOException {
@@ -747,32 +747,32 @@ public class FxFenetreController extends ScrollPane {
 		//	 fxConsolescrollpane.setContent(console.fxConsoleTextArea(fxFenetreController, firstText));
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	int ia = 0;
 
 	@FXML
@@ -798,28 +798,28 @@ public class FxFenetreController extends ScrollPane {
 
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	int ipeupler= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
 	@FXML
@@ -911,38 +911,38 @@ public class FxFenetreController extends ScrollPane {
 
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	//raffraichit un vpane avec les instrcution donnée
@@ -1180,27 +1180,27 @@ public class FxFenetreController extends ScrollPane {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public void raffraichirCase (Village village, ArrayList<CheckBox> cl, FlowPane flowCases ){
 
 
@@ -1236,107 +1236,131 @@ public class FxFenetreController extends ScrollPane {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	@FXML 
-	public void  faireTemplate() {
+	public void  faireOngletTemplate() {
 		fxTemplate.getChildren().clear();
+		VBox c = faireEditeurDeTemplate(bot.getTemplateLancerBot());
+		fxTemplate.getChildren().add(c);
+
 		int i = 0;
-		try{
-			faireEditeurDeTemplate();
+
+		try {
 			//village
 			for(Village village : bot.travian.getListeDeVillages()) {
-				VBox vbv= new VBox();
+				VBox v = faireTemplate(village, i);
+				fxTemplate.getChildren().add(v);
+				i++;
 
-				
-				Label nomVLabel = new Label(village.getNom());
-				nomVLabel.getStyleClass().add("vLabel");
-				nomVLabel.setPrefHeight(25);
-				nomVLabel.setPadding(new Insets(5, 15, 5, 15));
-				vbv.getChildren().add(nomVLabel);
-				vbv.setPadding(new Insets(15, 15, 15, 15));
-				fxTemplate.getChildren().add(vbv);
-/*          				
- * if(i== 0) {
+			}
+		}catch (Exception e) {
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+	public VBox faireTemplate(Village village,  int i ) {
+
+
+		VBox vbv= new VBox();
+
+
+		Label nomVLabel = new Label(village.getNom());
+		nomVLabel.getStyleClass().add("vLabel");
+		nomVLabel.setPrefHeight(25);
+		nomVLabel.setPadding(new Insets(5, 15, 5, 15));
+		vbv.getChildren().add(nomVLabel);
+		vbv.setPadding(new Insets(15, 15, 15, 15));
+
+		/*          				
+		 * if(i== 0) {
 	bot.faireUnTemplateDeCompte(1);
 	}*/
-				
-				//template
-				int i2 = 0;
-				if(!village.getTemplate().listeDesTemplatesParDefault.isEmpty()) {
-					
-				for(ArrayList<Batiment> tem : village.getTemplate().listeDesTemplatesParDefault) {
-					i2++;
-					VBox vbv2= new VBox();
-					Label nomTemLabel = new Label(village.getTemplate().nomDuTemplate  + " : Selectionner : ");
-					FlowPane templateChooser = new FlowPane();
 
-					
-					
-					/////////////////////////////////////////////////////////////////////////////////////////// Liste Deroulante
-					ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
-					final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
-					for(TemplatesDeVillages t :  village.getListeDeTemplates()) {	
-						listeDeroulanteData.add(t);
-					}	
-					listeDeroulante.setItems(listeDeroulanteData);
-					listeDeroulante.getSelectionModel().selectFirst();
-					listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
-						@Override
-						public String toString(TemplatesDeVillages t) {
-							if (t == null) {
-								return null;
-							} else {
-								return t.getNomDuTemplate();
-							}
-						}
-						@Override
-						public TemplatesDeVillages fromString(String tString) {
-							return null; // No conversion fromString needed.
-						}
-					});
-					//Handle ComboBox event.
-					listeDeroulante.setOnAction((event) -> {
-						TemplatesDeVillages selectedTemplatesDeVillages = listeDeroulante.getSelectionModel().getSelectedItem();
-						System.out.println("ComboBox Action (selected: " + selectedTemplatesDeVillages.toString() + ")");
-					});
-					
-					
-					/*
+		//template
+		int i2 = 0;
+
+
+		for(TemplatesDeVillages tem : village.getListeDeTemplates()) {
+			i2++;
+			VBox vbv2= new VBox();
+			Label nomTemLabel = new Label(tem.nomDuTemplate  + " : Selectionner : ");
+			FlowPane templateChooser = new FlowPane();
+			Label nomStade = new Label("   ChampMin : ");
+			TextField textStade1 = new TextField();
+			textStade1.setPadding(new Insets(0, 0, 0, 0));
+			textStade1.setPrefColumnCount(2);
+			Label nomStadeA = new Label(" à ");
+			TextField textStade2 = new TextField();
+			textStade2.setPadding(new Insets(0,0,0,0));
+			textStade2.setPrefColumnCount(2);
+
+
+			//Liste deroulante
+			/////////////////////////////////////////////////////////////////////////////////////////// Liste Deroulante
+			ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
+			final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
+			for(TemplatesDeVillages t :  village.getListeDeTemplates()) {	
+				listeDeroulanteData.add(t);
+			}	
+			listeDeroulante.setItems(listeDeroulanteData);
+			listeDeroulante.getSelectionModel().selectFirst();
+			listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
+				@Override
+				public String toString(TemplatesDeVillages t) {
+					if (t == null) {
+						return null;
+					} else {
+						return t.getNomDuTemplate();
+					}
+				}
+				@Override
+				public TemplatesDeVillages fromString(String tString) {
+					return null; // No conversion fromString needed.
+				}
+			});
+			//Handle ComboBox event.
+			listeDeroulante.setOnAction((event) -> {
+				TemplatesDeVillages selectedTemplatesDeVillages = listeDeroulante.getSelectionModel().getSelectedItem();
+				System.out.println("ComboBox Action (selected: " + selectedTemplatesDeVillages.toString() + ")");
+			});
+
+
+			/*
 
 
 for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
@@ -1351,52 +1375,45 @@ listeDeroulante.getSelectionModel().selectFirst();
 System.out.println("The button did it!");
 });
 
-					 */
-					/////////////////////////////////////////////////////////////////////
-					/////////////////////////////////////////////////////////////////////
-					Label nomStade = new Label("   ChampMin : ");
-					TextField textStade1 = new TextField();
-					textStade1.setPadding(new Insets(0, 0, 0, 0));
-					textStade1.setPrefColumnCount(2);
-					Label nomStadeA = new Label(" à ");
-					TextField textStade2 = new TextField();
-					textStade2.setPadding(new Insets(0,0,0,0));
-					textStade2.setPrefColumnCount(2);
-					templateChooser.getChildren().addAll(nomTemLabel,listeDeroulante, nomStade,textStade1, nomStadeA, textStade2);
+			 */
+			/////////////////////////////////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////////
+
+			templateChooser.getChildren().addAll(nomTemLabel,listeDeroulante, nomStade,textStade1, nomStadeA, textStade2);
 
 
-					FlowPane flowb = new FlowPane();
-					
-					
-					vbv2.getChildren().add(templateChooser);
-					vbv2.getChildren().add(flowb);
-					vbv2.getStyleClass().add("lesCheckBoxs");
+			FlowPane flowb = new FlowPane();
 
-					///////////////////////////////////////////////////////////////
 
-					///////////////////////////////////////////////////////////////
-					ContextMenu contextMenu = new ContextMenu();
-					flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-						@Override public void handle(MouseEvent e) {
-							if (e.getButton() == MouseButton.SECONDARY)  {
-								contextMenu.getItems().clear();
-								for(Batiment bataj : village.getTemplate().listeDeBatimentDuJeu) { 
-									MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
-									contextMenu.getItems().add(contextMenuItem);
-									contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-										public void handle(ActionEvent e) {
-											tem.add(bataj);
+			vbv2.getChildren().add(templateChooser);
+			vbv2.getChildren().add(flowb);
+			vbv2.getStyleClass().add("lesCheckBoxs");
 
-										}
-									});
+			///////////////////////////////////////////////////////////////
+
+			///////////////////////////////////////////////////////////////
+			ContextMenu contextMenu = new ContextMenu();
+			flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent e) {
+					if (e.getButton() == MouseButton.SECONDARY)  {
+						contextMenu.getItems().clear();
+						for(Batiment bataj : village.getTemplate().listeDeBatimentDuJeu) { 
+							MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
+							contextMenu.getItems().add(contextMenuItem);
+							contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+								public void handle(ActionEvent e) {
+									tem.listeDeBatiments.add(bataj);
+
 								}
-								contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
-								e.consume();
-							}
+							});
 						}
-					});
-					///////////////////////////////////////////////////////////////////////////////	
-					/*	flowb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
+						e.consume();
+					}
+				}
+			});
+			///////////////////////////////////////////////////////////////////////////////	
+			/*	flowb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			            @Override
 			            public void handle(MouseEvent event) {
@@ -1416,256 +1433,125 @@ System.out.println("The button did it!");
 
 
 
-					 */
+			 */
 
 
-					//bat
-					for(Batiment bat : tem) {
+			//bat
+			for(Batiment bat : tem.listeDeBatiments) {
 
-						FlowPane stackP  = new FlowPane();
 
-						Label ta = new Label(bat.getNomBatiment());
-						TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
-						tf.setPadding(new Insets(0,0,0,0));
-						tf.setPrefColumnCount(2);
-						ta.setPadding(new Insets(0,5,0,5));
-						stackP.getChildren().addAll(ta,tf); 
-						stackP.setMaxWidth(170);
-						stackP.setMaxHeight(19);
-						stackP.setMinHeight(19);
-						Pane fta = new Pane();
+				flowb.getChildren().add(paneBatimentVillages( bat,  tem));
 
-						fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
+				if (i % 2 == 0) {
+					vbv.getStyleClass().remove("fake3");
+					vbv.getStyleClass().remove("off");
+					vbv.getStyleClass().add("fake3");
 
-						for(Batiment b : village.getBatiments()) {
-							if(b.getNomBatiment().equals(bat.getNomBatiment()) && b.getLevelBatiment() >= bat.getLevelBatiment()) {
-								stackP.getStyleClass().remove("lesBatsTemFaitGreen");
-								stackP.getStyleClass().add("lesBatsTemFaitGreen");
-								fta.getStyleClass().remove("pink");
-								fta.getStyleClass().remove("lesBatsTem");
-								fta.getStyleClass().add("lesBatsTemFait");
-							}
-						}
-						fta.getChildren().add(stackP);
-						flowb.getChildren().add(fta);
-
-						if (i % 2 == 0) {
-							vbv.getStyleClass().remove("fake3");
-							vbv.getStyleClass().remove("off");
-							vbv.getStyleClass().add("fake3");
-
-						} else {
-							vbv.getStyleClass().remove("fake3");
-							vbv.getStyleClass().remove("off");
-							vbv.getStyleClass().add("off");
-
-						}
-
-						ContextMenu contextMenuDelete = new ContextMenu();
-						fta.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-							@Override public void handle(MouseEvent e) {
-								if (e.getButton() == MouseButton.SECONDARY)  {
-									contextMenuDelete.getItems().clear();
-
-									MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
-									contextMenuDelete.getItems().add(contextMenuDeleteItem);
-									contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
-										public void handle(ActionEvent e) {
-											tem.remove(bat);
-
-										}
-									});
-
-									contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
-									e.consume();
-								}
-							}
-						});			
-
-					}
-
-					vbv.getChildren().add(vbv2);
+				} else {
+					vbv.getStyleClass().remove("fake3");
+					vbv.getStyleClass().remove("off");
+					vbv.getStyleClass().add("off");
 
 				}
 
-				i++;
-			}else {
-				ArrayList<Batiment> tem = new ArrayList<Batiment>();
-					i2++;
-					VBox vbv2= new VBox();
-					Label nomTemLabel = new Label(bot.getTemplates().nomDuTemplate  + " : Selectionner : ");
-					FlowPane templateChooser = new FlowPane();
-					/////////////////////////////////////////////////////////////////////////////////////////// Liste Deroulante
-					ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
-					final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
-					for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
-						listeDeroulanteData.add(t);
 
-
-					}
-					
-					
-					listeDeroulante.setItems(listeDeroulanteData);
-					listeDeroulante.getSelectionModel().selectFirst();
-					listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
-						@Override
-						public String toString(TemplatesDeVillages t) {
-							if (t == null) {
-								return null;
-							} else {
-								return t.getNomDuTemplate();
-							}
-						}
-						@Override
-						public TemplatesDeVillages fromString(String tString) {
-							return null; // No conversion fromString needed.
-						}
-					});
-					//Handle ComboBox event.
-					listeDeroulante.setOnAction((event) -> {
-						TemplatesDeVillages selectedTemplatesDeVillages = listeDeroulante.getSelectionModel().getSelectedItem();
-						System.out.println("ComboBox Action (selected: " + selectedTemplatesDeVillages.toString() + ")");
-					});
-					
-					/////////////////////////////////////////////////////////////////////
-					/////////////////////////////////////////////////////////////////////
-					Label nomStade = new Label("   ChampMin : ");
-					TextField textStade1 = new TextField();
-					textStade1.setPadding(new Insets(0, 0, 0, 0));
-					textStade1.setPrefColumnCount(2);
-					Label nomStadeA = new Label(" à ");
-					TextField textStade2 = new TextField();
-					textStade2.setPadding(new Insets(0,0,0,0));
-					textStade2.setPrefColumnCount(2);
-					templateChooser.getChildren().addAll(nomTemLabel,listeDeroulante, nomStade,textStade1, nomStadeA, textStade2);
-
-
-					FlowPane flowb = new FlowPane();
-					flowb.setMinHeight(40);
-					vbv2.getChildren().add(templateChooser);
-					vbv2.getChildren().add(flowb);
-					vbv2.getStyleClass().add("lesCheckBoxs");
-
-					///////////////////////////////////////////////////////////////
-
-					///////////////////////////////////////////////////////////////
-					ContextMenu contextMenu = new ContextMenu();
-					flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-						@Override public void handle(MouseEvent e) {
-							if (e.getButton() == MouseButton.SECONDARY)  {
-								contextMenu.getItems().clear();
-								for(Batiment bataj : bot.getTemplates().listeDeBatimentDuJeu) { 
-									MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
-									contextMenu.getItems().add(contextMenuItem);
-									contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-										public void handle(ActionEvent e) {
-											tem.add(bataj);
-
-										}
-									});
-								}
-								contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
-								e.consume();
-							}
-						}
-					});
-
-
-					//bat
-					for(Batiment bat : tem) {
-
-						FlowPane stackP  = new FlowPane();
-
-						Label ta = new Label(bat.getNomBatiment());
-						TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
-
-						tf.setPadding(new Insets(0,0,0,0));
-						tf.setPrefColumnCount(2);
-						ta.setPadding(new Insets(0,5,0,5));
-
-
-						stackP.getChildren().addAll(ta,tf); 
-						stackP.setMaxWidth(170);
-						stackP.setMaxHeight(19);
-						stackP.setMinHeight(19);
-
-
-						Pane fta = new Pane();
-
-						fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
-
-						for(Batiment b : village.getBatiments()) {
-							if(b.getNomBatiment().equals(bat.getNomBatiment()) && b.getLevelBatiment() >= bat.getLevelBatiment()) {
-								stackP.getStyleClass().remove("lesBatsTemFaitGreen");
-								stackP.getStyleClass().add("lesBatsTemFaitGreen");
-								fta.getStyleClass().remove("pink");
-								fta.getStyleClass().remove("lesBatsTem");
-								fta.getStyleClass().add("lesBatsTemFait");
-
-							}
-						}
-						fta.getChildren().add(stackP);
-						flowb.getChildren().add(fta);
-
-
-
-
-						if (i % 2 == 0) {
-							vbv.getStyleClass().remove("fake3");
-							vbv.getStyleClass().remove("off");
-							vbv.getStyleClass().add("fake3");
-
-						} else {
-							vbv.getStyleClass().remove("fake3");
-							vbv.getStyleClass().remove("off");
-							vbv.getStyleClass().add("off");
-
-
-
-						}
-
-						ContextMenu contextMenuDelete = new ContextMenu();
-						fta.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-							@Override public void handle(MouseEvent e) {
-								if (e.getButton() == MouseButton.SECONDARY)  {
-									contextMenuDelete.getItems().clear();
-
-									MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
-									contextMenuDelete.getItems().add(contextMenuDeleteItem);
-									contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
-										public void handle(ActionEvent e) {
-											tem.remove(bat);
-
-										}
-									});
-
-									contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
-									e.consume();
-								}
-							}
-						});			
-
-
-
-
-
-					}
-
-
-
-					vbv.getChildren().add(vbv2);
-
-
-
-
-				}
-		
 
 			}
 
-		}catch(Exception e) {
+			vbv.getChildren().add(vbv2);
 
 		}
+
+
+
+
+
+		return vbv;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public VBox faireEditeurDeTemplate(TemplatesDeVillages templateSelectione) {
+
+
+		int i = 0;
+		VBox vbv= new VBox();
+		//village
+		
+
+		
+	
+		
+		int i2 = 0;
+		i2++;
+
+		if (i % 2 == 0) {
+			vbv.getStyleClass().remove("fake3");
+			vbv.getStyleClass().remove("off");
+			vbv.getStyleClass().add("fake3");
+
+		} else {
+			vbv.getStyleClass().remove("fake3");
+			vbv.getStyleClass().remove("off");
+			vbv.getStyleClass().add("off");
+
+
+
+		}
+
+		VBox e = editeur(vbv , templateSelectione);
+		vbv.getChildren().add(e);
+
+		return vbv;
 	}
 
 
@@ -1687,99 +1573,83 @@ System.out.println("The button did it!");
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-	public void  faireEditeurDeTemplate() {
-
-		fxTemplate.getChildren().clear();
-		int i = 0;
+	public VBox editeur(VBox vbv, TemplatesDeVillages templateSelectione) {
+		VBox vbv2Creation= new VBox();
 		try{
 
-			//village
-			VBox vbv= new VBox();
+
+			FlowPane flowb = new FlowPane();
+			//template
+
+
 			Label nomVLabel = new Label("Editeur de Template");
 			nomVLabel.getStyleClass().add("vLabel");
 			nomVLabel.setPrefHeight(25);
 			nomVLabel.setPadding(new Insets(5, 15, 5, 15));
 			vbv.getChildren().add(nomVLabel);
 			vbv.setPadding(new Insets(15, 15, 15, 15));
-			fxTemplate.getChildren().add(vbv);
-			
 
-			//template
-			int i2 = 0;
-
-			if(bot.getTemplates().listeDesTemplatesParDefault.isEmpty()	) {
 		
-				i2++;
-				VBox vbv2= new VBox();
-				Label nomTemLabel = new Label(bot.getTemplates().nomDuTemplate  + " : Nom Template : ");
-				TextField nomDuTemplate1 = new TextField();
-				nomDuTemplate1.setPadding(new Insets(0, 0, 0, 0));
-				nomDuTemplate1.setPrefColumnCount(15);
+			
+			Label nomTemLabel = new Label(templateSelectione.nomDuTemplate  + " : Nom Template : ");
+			TextField nomDuTemplate1 = new TextField();
+			nomDuTemplate1.setPadding(new Insets(0, 0, 0, 0));
+			nomDuTemplate1.setPrefColumnCount(15);
+
+			Label nomStade = new Label("   ChampMin : ");
+			TextField textStade1 = new TextField();
+			textStade1.setPadding(new Insets(0, 0, 0, 0));
+			textStade1.setPrefColumnCount(2);
+			Label nomStadeA = new Label(" à ");
+			TextField textStade2 = new TextField();
+			textStade2.setPadding(new Insets(0,0,0,0));
+			textStade2.setPrefColumnCount(2);
+			Button saveTemplate = new Button("Save");
+			FlowPane templateChooser = new FlowPane();
 
 
-				FlowPane templateChooser = new FlowPane();
+			/////////////////////////////////////////////////////////////////////////////////////////// Liste Deroulante
+			ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
+			listeDeroulante.getSelectionModel().select(templateSelectione);
+			final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
+			for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
+				listeDeroulanteData.add(t);
 
-				/////////////////////////////////////////////////////////////////////////////////////////// Liste Deroulante
-				ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
-				final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
-				for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
-					listeDeroulanteData.add(t);
 
+			}
+			listeDeroulante.setItems(listeDeroulanteData);
+			listeDeroulante.getSelectionModel().select(templateSelectione);
+			listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
+				@Override
+				public String toString(TemplatesDeVillages t) {
+					if (t == null) {
+						return null;
+					} else {
+						return t.getNomDuTemplate();
+					}
+				}
+				@Override
+				public TemplatesDeVillages fromString(String tString) {
+					return null; // No conversion fromString needed.
+				}
+			});
+			//Handle ComboBox event.
+			listeDeroulante.setOnAction((event) -> {
+				TemplatesDeVillages selectedTemplatesDeVillages = listeDeroulante.getSelectionModel().getSelectedItem();
+				System.out.println("ComboBox Action (selected: " + selectedTemplatesDeVillages.toString() + ")");
+
+
+				bot.getTemplateLancerBot().getListeDeBatiments().clear();
+				for(Batiment b : selectedTemplatesDeVillages.listeDeBatiments){
+					bot.getTemplateLancerBot().listeDeBatiments.add(b);
 
 				}
-				listeDeroulante.setItems(listeDeroulanteData);
-				listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
-					@Override
-					public String toString(TemplatesDeVillages t) {
-						if (t == null) {
-							return null;
-						} else {
-							return t.getNomDuTemplate();
-						}
-					}
-					@Override
-					public TemplatesDeVillages fromString(String tString) {
-						return null; // No conversion fromString needed.
-					}
-				});
-				//Handle ComboBox event.
-				listeDeroulante.setOnAction((event) -> {
-					TemplatesDeVillages selectedTemplatesDeVillages = listeDeroulante.getSelectionModel().getSelectedItem();
-					System.out.println("ComboBox Action (selected: " + selectedTemplatesDeVillages.toString() + ")");
-				});
-				/*
+				vbv.getChildren().clear();
+				
+				
+				vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(selectedTemplatesDeVillages.nomDuTemplate)));
+			});
+			/*
 
 
  for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
@@ -1796,238 +1666,156 @@ button.setOnMouseClicked((e) -> {
 
 
 
-				 */
-				/////////////////////////////////////////////////////////////////////
-				Label nomStade = new Label("   ChampMin : ");
-				TextField textStade1 = new TextField();
-				textStade1.setPadding(new Insets(0, 0, 0, 0));
-				textStade1.setPrefColumnCount(2);
-				Label nomStadeA = new Label(" à ");
-				TextField textStade2 = new TextField();
-				textStade2.setPadding(new Insets(0,0,0,0));
-				textStade2.setPrefColumnCount(2);
-				Button saveTemplate = new Button("Save");
-				templateChooser.getChildren().addAll(nomTemLabel, nomDuTemplate1,listeDeroulante, nomStade,textStade1, nomStadeA, textStade2,saveTemplate);
+			 */
+			/////////////////////////////////////////////////////////////////////
 
 
-				FlowPane flowb = new FlowPane();
-				flowb.setMinHeight(40);
-				vbv2.getChildren().add(templateChooser);
-				vbv2.getChildren().add(flowb);
-				vbv2.getStyleClass().add("lesCheckBoxs");
+			templateChooser.getChildren().addAll(nomTemLabel, nomDuTemplate1,listeDeroulante, nomStade,textStade1, nomStadeA, textStade2,saveTemplate);
 
-				///////////////////////////////////////////////////////////////
-				ContextMenu contextMenu = new ContextMenu();
-				flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-					@Override public void handle(MouseEvent e) {
-						if (e.getButton() == MouseButton.SECONDARY)  {
-							contextMenu.getItems().clear();
-							for(Batiment bataj : bot.getTemplates().listeDeBatimentDuJeu) { 
-								MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
-								contextMenu.getItems().add(contextMenuItem);
-								contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-									public void handle(ActionEvent e) {
-										bot.getTemplates().listeDeBatiments.add(bataj);
 
-									}
-								});
-							}
-							contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
-							e.consume();
+
+
+			saveTemplate.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+
+					if(bot.creerNouveauTemplate(nomDuTemplate1.getText())) {
+						bot.trouverTemplate(nomDuTemplate1.getText()).listeDeBatiments.clear();
+						saveTemplate.setText("save");
+
+						for(Batiment b : bot.getTemplateLancerBot().listeDeBatiments) {
+
+
+							bot.trouverTemplate(nomDuTemplate1.getText()).listeDeBatiments.add(b);
+
+
+							
 						}
-					}
-				});
-				for(Batiment bat : bot.getTemplates().listeDeBatiments) {
-
-					FlowPane stackP  = new FlowPane();
-
-					Label ta = new Label(bat.getNomBatiment());
-					TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
-
-					tf.setPadding(new Insets(0,0,0,0));
-					tf.setPrefColumnCount(2);
-					ta.setPadding(new Insets(0,5,0,5));
-
-
-					stackP.getChildren().addAll(ta,tf); 
-					stackP.setMaxWidth(170);
-					stackP.setMaxHeight(19);
-					stackP.setMinHeight(19);
-
-
-					Pane fta = new Pane();
-
-					fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
-
-
-					fta.getChildren().add(stackP);
-					flowb.getChildren().add(fta);
-
-
-
-
-					if (i % 2 == 0) {
-						vbv.getStyleClass().remove("fake3");
-						vbv.getStyleClass().remove("off");
-						vbv.getStyleClass().add("fake3");
-
-					} else {
-						vbv.getStyleClass().remove("fake3");
-						vbv.getStyleClass().remove("off");
-						vbv.getStyleClass().add("off");
-
-
+						vbv.getChildren().clear();
+						vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(nomDuTemplate1.getText())));
+				
 
 					}
 
-					ContextMenu contextMenuDelete = new ContextMenu();
-					fta.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-						@Override public void handle(MouseEvent e) {
-							if (e.getButton() == MouseButton.SECONDARY)  {
-								contextMenuDelete.getItems().clear();
-
-								MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
-								contextMenuDelete.getItems().add(contextMenuDeleteItem);
-								contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
-									public void handle(ActionEvent e) {
-										bot.getTemplates().listeDeBatiments.remove(bat);
-
-									}
-								});
-
-								contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
-								e.consume();
-							}
-						}
-					});			
 				}
-				vbv.getChildren().add(vbv2);
+			});
 
-			}else {
-				///////////////////////////////////////////////////////////////////////////////		
-				for(ArrayList<Batiment> tem : bot.getTemplates().listeDesTemplatesParDefault) { //bot.getTemplates().listeDesTemplatesParDefault
-					i2++;
-					VBox vbv2= new VBox();
-					Label nomTemLabel = new Label(bot.getTemplates().nomDuTemplate  + " : Nom Template : ");
 
-					FlowPane templateChooser = new FlowPane();
-					Label nomStade = new Label("   ChampMin : ");
-					TextField textStade1 = new TextField();
-					textStade1.setPadding(new Insets(0, 0, 0, 0));
-					textStade1.setPrefColumnCount(2);
-					Label nomStadeA = new Label(" à ");
-					TextField textStade2 = new TextField();
-					textStade2.setPadding(new Insets(0,0,0,0));
-					textStade2.setPrefColumnCount(2);
-					templateChooser.getChildren().addAll(nomTemLabel, nomStade,textStade1, nomStadeA, textStade2);
 
-					FlowPane flowb = new FlowPane();
-					vbv2.getChildren().add(templateChooser);
-					vbv2.getChildren().add(flowb);
-					vbv2.getStyleClass().add("lesCheckBoxs");
+			flowb.setMinHeight(40);
+			vbv2Creation.getChildren().add(templateChooser);
+			vbv2Creation.getChildren().add(flowb);
+			vbv2Creation.getStyleClass().add("lesCheckBoxs");
 
-					///////////////////////////////////////////////////////////////
-					ContextMenu contextMenu = new ContextMenu();
-					flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-						@Override public void handle(MouseEvent e) {
-							if (e.getButton() == MouseButton.SECONDARY)  {
-								contextMenu.getItems().clear();
-								for(Batiment bataj : bot.getTemplates().listeDeBatimentDuJeu) { 
-									MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
-									contextMenu.getItems().add(contextMenuItem);
-									contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-										public void handle(ActionEvent e) {
-											tem.add(bataj);
+			///////////////////////////////////////////////////////////////
+			ContextMenu contextMenu = new ContextMenu();
+			flowb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+				@Override public void handle(MouseEvent e) {
+					if (e.getButton() == MouseButton.SECONDARY)  {
+						contextMenu.getItems().clear();
+						for(Batiment bataj : bot.getTemplateLancerBot().listeDeBatimentDuJeu) { 
+							MenuItem contextMenuItem = new MenuItem(bataj.getNomBatiment());
+							contextMenu.getItems().add(contextMenuItem);
+							contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+								public void handle(ActionEvent e) {
+									templateSelectione.listeDeBatiments.add(bataj);
 
-										}
-									});
+									flowb.getChildren().add( paneBatimentVillages( bataj,  templateSelectione));
 								}
-								contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
-								e.consume();
-							}
+							});
 						}
-					});
-					///////////////////////////////////////////////////////////////////////////////	
-
-					//bat
-					for(Batiment bat : tem) {
-
-						FlowPane stackP  = new FlowPane();
-
-						Label ta = new Label(bat.getNomBatiment());
-						TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
-
-						tf.setPadding(new Insets(0,0,0,0));
-						tf.setPrefColumnCount(2);
-						ta.setPadding(new Insets(0,5,0,5));
-
-
-						stackP.getChildren().addAll(ta,tf); 
-						stackP.setMaxWidth(170);
-						stackP.setMaxHeight(19);
-						stackP.setMinHeight(19);
-
-
-						Pane fta = new Pane();
-
-						fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
-
-
-						fta.getChildren().add(stackP);
-						flowb.getChildren().add(fta);
-
-
-
-
-						if (i % 2 == 0) {
-							vbv.getStyleClass().remove("fake3");
-							vbv.getStyleClass().remove("off");
-							vbv.getStyleClass().add("fake3");
-
-						} else {
-							vbv.getStyleClass().remove("fake3");
-							vbv.getStyleClass().remove("off");
-							vbv.getStyleClass().add("off");
-
-
-
-						}
-
-						ContextMenu contextMenuDelete = new ContextMenu();
-						fta.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
-							@Override public void handle(MouseEvent e) {
-								if (e.getButton() == MouseButton.SECONDARY)  {
-									contextMenuDelete.getItems().clear();
-
-									MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
-									contextMenuDelete.getItems().add(contextMenuDeleteItem);
-									contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
-										public void handle(ActionEvent e) {
-											tem.remove(bat);
-
-										}
-									});
-
-									contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
-									e.consume();
-								}
-							}
-						});			
+						contextMenu.show(flowb, e.getScreenX(), e.getScreenY());
+						e.consume();
 					}
-
-					vbv.getChildren().add(vbv2);
-				} 
-
+				}
+			});
 
 
-			}
+
+
+
+
+
+
+
+
+
 
 
 
 		}catch(Exception e) {
 
 		}
+		return vbv2Creation;
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public Pane paneBatimentVillages(Batiment bat, TemplatesDeVillages templateSelectione) {
+		FlowPane stackP  = new FlowPane();
+
+		Label ta = new Label(bat.getNomBatiment());
+		TextField tf = new TextField(String.valueOf(bat.getLevelBatiment()));
+
+		tf.setPadding(new Insets(0,0,0,0));
+		tf.setPrefColumnCount(2);
+		ta.setPadding(new Insets(0,5,0,5));
+
+
+		stackP.getChildren().addAll(ta,tf); 
+		stackP.setMaxWidth(170);
+		stackP.setMaxHeight(19);
+		stackP.setMinHeight(19);
+
+
+		Pane fta = new Pane();
+
+		fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
+
+
+		fta.getChildren().add(stackP);
+
+
+		ContextMenu contextMenuDelete = new ContextMenu();
+		fta.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				if (e.getButton() == MouseButton.SECONDARY)  {
+					contextMenuDelete.getItems().clear();
+
+					MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
+					contextMenuDelete.getItems().add(contextMenuDeleteItem);
+					contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent e) {
+							templateSelectione.listeDeBatiments.remove(bat);
+							fta.getChildren().remove(stackP);
+						}
+					});
+
+					contextMenuDelete.show(fta, e.getScreenX(), e.getScreenY());
+					e.consume();
+				}
+			}
+		});
+		return fta;		
+
+	}
+
+
+
+
+
+
+
+
 }
 
 

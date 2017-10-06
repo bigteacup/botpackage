@@ -1349,7 +1349,7 @@ public class Village {
 			int hotelNonPresent = 1;
 
 			for (WebElement batiment : listeDesBatiments) {
-				if (batiment.getAttribute("alt").contains(t.bot.getTemplates().hotel_de_ville)) {
+				if (batiment.getAttribute("alt").contains(t.bot.getTemplateLancerBot().hotel_de_ville)) {
 					hotelNonPresent = 0;
 					batiment.click();
 
@@ -1702,104 +1702,20 @@ public class Village {
 		//	else {break;}
 	} //fin
 
-	/*
-	t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> boucle CreationBatiment");// PAS
-	// TROUVE);
-	// if (batimentDuTemplate.getNomBatiment().equals("Résidence") &&
-	// village.getVillageCapitale() == true){}
-	for (Batiment bat : village.getBatiments()) {
-		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
-			t.randomsleep.court();
-			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
-			t.randomsleep.court();
-		}
-		if (bat.getNomBatiment().contains("Site de construction")) {
-			WebElement leBat = t.getCompte().getDriver()
-					.findElement(By.xpath("//*[@href=\"build.php?id=" + bat.getSlotBatiment() + "\"]"));
-			leBat.click();// t.getCompte().getDriver().get
-			t.randomsleep.court();
-			List<WebElement> listOngletsBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"tabItem\"]"));
-			List<WebElement> listWebBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"buildingWrapper\"]"));
-
-			for (WebElement webBat : listWebBats) {
-				String titre = webBat.getText(); 
-				if (titre.contains(nomBat)) {
-					List<WebElement> listDeBoutton = webBat.findElements(By.xpath("//*[@class=\"buildingWrapper\"]"));
-				}
-
-				// Les choix de la page de construction :
-				// TODO charger les onglets plutot que les parcourir un a un et
-				// faire un systeme qui sait ou le batiment est.
-				// bien relire
-
-				int i2 = 0;
-				while (trouver == false) {
-					i2++;
-					List<WebElement> listOngletsBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"tabItem\"]"));
-					List<WebElement> listWebBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"buildingWrapper\"]"));
-					for (WebElement webBat : listWebBats) {
-						// on recharge.
-						listOngletsBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"tabItem\"]"));
-						listWebBats = t.getCompte().getDriver()
-								.findElements(By.xpath("//*[@class=\"buildingWrapper\"]"));
-
-						// *[@class="buildingWrapper" and contains(.,
-						// 'construire le bâtiment.') and contains(., 'Silo')]
-						// // // //*[@class="buildingWrapper" and contains(.,
-						// 'construire le bâtiment.') and contains(., 'Silo')]
-						String titre = webBat.getText(); // t.getCompte().getDriver().findElement(By.xpath(""));
-						// //*[@class="buildingWrapper"]//div[@class="button-content"]
-						if (titre.contains(batimentDuTemplate.getNomBatiment())) {
-							List<WebElement> listDeBoutton = webBat
-									.findElements(By.xpath("//*[@class=\"buildingWrapper\"]")); // prends
-							// le
-							// premier
-							// bouton,
-							// a
-							// preciser
-							// via
-							// la
-							// recherche
-							// du
-							// texte
-							// du
-							// boutton
-							for (WebElement boutton : listDeBoutton) {
-								if (boutton.getText().contains("construire le bâtiment.")) {
-									t.randomsleep.court();
-									boutton.click();
-									trouver = true;
-									t.randomsleep.court();
-
-									chargerBatiments(t);
-									voirListeDeConstruction(t);
-									t.ecrireDansConsole("[construireBatiment] ->  Creation Batiment : "
-											+ batimentDuTemplate.getNomBatiment());
-
-									break;
-								}
-							}
-						}
-					}
-					if (trouver == false && i2 < listOngletsBats.size()) {
-						listOngletsBats.get(i2).click();
-						t.ecrireDansConsole("---------Changement d'onglet---------");
-					} else {
-						t.ecrireDansConsole("Debug : break 1");
-						break;
-
-					}
-
-					// *[@value="construire le bétiment."]
-
-				}
+	
+	public void creerNouveauTemplate(String nom) {
+		TemplatesDeVillages newTemplate = new TemplatesDeVillages();
+		newTemplate.setNomDuTemplate(nom);
+		listeDeTemplates.add(newTemplate);
+	}
+	public TemplatesDeVillages trouverTemplate(String nom) {
+		for(TemplatesDeVillages temT : listeDeTemplates ) {
+			if(temT.getNomDuTemplate().equals(nom)) {
+				return temT;
 			}
-			t.ecrireDansConsole("Debug : break 2");
-			// break;
-
 		}
-
-	 */
+		return null;
+	}
 
 
 	public ArrayList<Ordre> getListeOrdresMarcheDeLaRotation() {

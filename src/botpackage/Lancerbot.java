@@ -80,7 +80,7 @@ import org.openqa.selenium.WebDriver;
 	public String motCleListeDesPertes = "perte";
 	
 	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
-	public TemplatesDeVillages templates = new TemplatesDeVillages();
+	public TemplatesDeVillages templateLancerBot;
 	
 
 
@@ -106,10 +106,10 @@ public void faireUnTemplateDeCompte(int i) {
 */
 
 		public  Lancerbot() {
-			
+			templateLancerBot = new TemplatesDeVillages();
 		//	faireUnTemplateDeCompte(0);
 			
-			listeDeTemplates.add(templates);
+			listeDeTemplates.add(templateLancerBot);
 			
 			
 			
@@ -154,6 +154,35 @@ public void faireUnTemplateDeCompte(int i) {
 				}
 
 
+	public boolean creerNouveauTemplate(String nom) {
+		boolean trouver = false;
+			for(TemplatesDeVillages testT : listeDeTemplates) {
+				if(nom.equals(testT.getNomDuTemplate()) ) {
+					trouver=true;
+				}
+				}
+			if(trouver==false) {
+				TemplatesDeVillages newTemplate = new TemplatesDeVillages();
+				newTemplate.setNomDuTemplate(nom);
+				listeDeTemplates.add(newTemplate);
+				return true;
+			}
+			return false;
+		
+	}
+	public TemplatesDeVillages trouverTemplate(String nom) {
+		for(TemplatesDeVillages temT : listeDeTemplates ) {
+		
+			try {
+			if(temT.getNomDuTemplate().equals(nom)) {
+				return temT;
+			}
+			}catch(Exception e) {
+				
+			}
+		}
+		return null;
+	}
 
 
 
@@ -179,12 +208,12 @@ public void setfxFenetreController(FxFenetreController fxFenetreController){
 	this.fxFenetreController = fxFenetreController;
 	
 }
-public TemplatesDeVillages getTemplates() {
-return templates;
+public TemplatesDeVillages getTemplateLancerBot() {
+return templateLancerBot;
 }
 
-public void setTemplates(TemplatesDeVillages templates) {
-templates = templates;
+public void setTemplateLancerBot(TemplatesDeVillages templateLancerBot) {
+	this.templateLancerBot = templateLancerBot;
 }
 
 
