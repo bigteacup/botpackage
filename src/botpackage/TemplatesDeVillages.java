@@ -38,7 +38,7 @@ public  class   TemplatesDeVillages {
 	static String pieges = "Fabricant de piéges";
 	static String residence = "Résidence";
 	static String atelier= "Atelier";
-	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville
+	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville Hôtel de ville
 	static String ambassade = "Ambassade";
 	static String mur = "Palissade";
 	static String palais = "Palais";

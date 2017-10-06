@@ -1349,7 +1349,7 @@ public class Village {
 			int hotelNonPresent = 1;
 
 			for (WebElement batiment : listeDesBatiments) {
-				if (batiment.getAttribute("alt").contains("Hôtel de Ville")) {
+				if (batiment.getAttribute("alt").contains(t.bot.getTemplates().hotel_de_ville)) {
 					hotelNonPresent = 0;
 					batiment.click();
 
