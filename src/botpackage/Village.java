@@ -250,7 +250,7 @@ public class Village {
 
 	public void setChampMin(Village village,int champMin) {
 		this.champMin = champMin;
-		// if (champMin <= 10 ){
+		//if (champMin <= 10 ){
 		
 		List<Batiment> tem = template.etablirTemplatePourUnVillage(village, champMin);
 		setTemplateDuVillage(tem);

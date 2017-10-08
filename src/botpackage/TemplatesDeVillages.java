@@ -283,7 +283,7 @@ public  class   TemplatesDeVillages {
 	
 		for(TemplatesDeVillages temp : village.getListeDeTemplates()) {
 			if(!temp.getNomDuTemplate().equals("")) {
-		if(comparer(champMin, operateur1, temp.champMin1 ) == true && comparer(champMin, operateur2, temp.champMin2 ) == true)  {
+		if(comparer(champMin, temp.operateur1, temp.champMin1 ) == true && comparer(champMin, temp.operateur2, temp.champMin2 ) == true)  {
 			return temp.getListeDeBatiments();
 		}
 		}
