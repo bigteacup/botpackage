@@ -6,6 +6,10 @@ import java.util.List;
 
 public  class   TemplatesDeVillages {
 	int mode;
+	String operateur1 = ">=";
+	String operateur2 = "<=";
+	int champMin1 = 0;
+	int champMin2 = 10;
 	/*
 	batimentsALancer.add("Bâtiment principal");
 	batimentsALancer.add("Dépôt de ressources");
@@ -18,6 +22,55 @@ public  class   TemplatesDeVillages {
 	*///
 	
 	
+	public int getChampMin1() {
+		return champMin1;
+	}
+
+
+
+
+	public void setChampMin1(int champMin1) {
+		this.champMin1 = champMin1;
+	}
+
+
+
+
+	public int getChampMin2() {
+		return champMin2;
+	}
+
+
+
+
+	public void setChampMin2(int champMin2) {
+		this.champMin2 = champMin2;
+	}
+	public String getOperateur1() {
+		return operateur1;
+	}
+
+
+
+
+	public void setOperateur1(String operateur1) {
+		this.operateur1 = operateur1;
+	}
+
+
+
+
+	public String getOperateur2() {
+		return operateur2;
+	}
+
+
+
+
+	public void setOperateur2(String operateur2) {
+		this.operateur2 = operateur2;
+	}
+
 	//correspondances de noms
 	static String bois ="Bûcheron";
 	static String cereale = "Ferme";
@@ -72,11 +125,12 @@ public  class   TemplatesDeVillages {
 
 	public TemplatesDeVillages() {
 
-	//	listerBatimentDuJeu();
-		choisirModeTemplatesDeVillages(3); // mode forcé
+		listerBatimentDuJeu();
+		templatesDeVillagesTimTool();
+	//	choisirModeTemplatesDeVillages(3); // mode forcé templatesDeVillagesTimTool();
 	}
 	
-	
+
 	
 	
 	public void choisirModeTemplatesDeVillages(int mode) { //0=editeur 1=normal 2=default 3=TimTool
@@ -108,8 +162,8 @@ public  class   TemplatesDeVillages {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void templatesDeVillagesTimTool() { //mode 3
-		nomDuTemplate = "TimTool Default";
-		listerBatimentDuJeu();
+		
+		
 		
 		listeDeBatimentsDuTemplateParDefault1.clear();
 		listeDeBatimentsDuTemplateParDefault2.clear();
@@ -125,7 +179,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(marche, 3));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(academie, 3));
-		 
+		
 		 
 		 
 	//	 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(cachette, 10));
@@ -224,6 +278,35 @@ public  class   TemplatesDeVillages {
 		return null;
 
 	}
+	
+	public ArrayList<Batiment> etablirTemplatePourUnVillage(Village village, int champMin) {
+	
+		for(TemplatesDeVillages temp : village.getListeDeTemplates()) {
+			if(!temp.getNomDuTemplate().equals("")) {
+		if(comparer(champMin, operateur1, temp.champMin1 ) == true && comparer(champMin, operateur2, temp.champMin2 ) == true)  {
+			return temp.getListeDeBatiments();
+		}
+		}
+		}
+		
+		return null;
+
+	}
+	
+	public boolean comparer(int champMin, String signe, int level) {
+		boolean b = false;
+		if(signe.equals("")) {b = true;} //
+		
+		if(signe.equals("<")) {if(champMin<level) { b = true;}}
+		if(signe.equals("<=")) {if(champMin<=level) { b = true;}}
+		if(signe.equals("=")) {if(champMin==level) { b = true;}}
+		if(signe.equals(">=")) {if(champMin>=level) { b = true;}}
+		if(signe.equals(">")) {if(champMin>level) { b = true;}}
+		
+		return b;
+		
+	}
+
 	
 	public void listerBatimentDuJeu() {
 		listeDeBatimentDuJeu.clear();

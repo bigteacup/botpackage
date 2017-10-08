@@ -248,11 +248,11 @@ public class Village {
 		return champMin;
 	}
 
-	public void setChampMin(int champMin) {
+	public void setChampMin(Village village,int champMin) {
 		this.champMin = champMin;
 		// if (champMin <= 10 ){
 		
-		List<Batiment> tem = template.etablirTemplatePourUnVillage(champMin);
+		List<Batiment> tem = template.etablirTemplatePourUnVillage(village, champMin);
 		setTemplateDuVillage(tem);
 		// }
 	}
@@ -421,6 +421,53 @@ public class Village {
 	
 	public Village() {
 		listeDeTemplates.add(template);
+		
+		 TemplatesDeVillages templateParDefault1 = new TemplatesDeVillages();
+		 TemplatesDeVillages templateParDefault2 = new TemplatesDeVillages();
+		 TemplatesDeVillages templateParDefault3 = new TemplatesDeVillages();
+		 TemplatesDeVillages templateParDefault4 = new TemplatesDeVillages();
+		 
+		 templateParDefault1.setListeDeBatiments(templateParDefault1.listeDeBatimentsDuTemplateParDefault1);
+		 templateParDefault1.setNomDuTemplate("listeDeBatimentsDuTemplateParDefault1");
+		 templateParDefault1.setOperateur1("<=");
+		 templateParDefault1.setChampMin1(4);
+		 templateParDefault1.setOperateur2("");
+		 templateParDefault1.setChampMin2(0);
+		
+		 
+		 templateParDefault2.setListeDeBatiments(templateParDefault2.listeDeBatimentsDuTemplateParDefault2);
+		 templateParDefault2.setNomDuTemplate("listeDeBatimentsDuTemplateParDefault2");
+		 templateParDefault2.setOperateur1("<=");
+		 templateParDefault2.setChampMin1(8);
+		 templateParDefault2.setOperateur2(">");
+		 templateParDefault2.setChampMin2(4);
+
+		 
+		 templateParDefault3.setListeDeBatiments(templateParDefault3.listeDeBatimentsDuTemplateParDefault3);
+		 templateParDefault3.setNomDuTemplate("listeDeBatimentsDuTemplateParDefault3");
+		 templateParDefault3.setOperateur1("<");
+		 templateParDefault3.setChampMin1(10);
+		 templateParDefault3.setOperateur2(">");
+		 templateParDefault3.setChampMin2(7);
+
+		 
+		 templateParDefault4.setListeDeBatiments(templateParDefault4.listeDeBatimentsDuTemplateParDefault4);
+		 templateParDefault4.setNomDuTemplate("listeDeBatimentsDuTemplateParDefault4");
+		 templateParDefault4.setOperateur1(">=");
+		 templateParDefault4.setChampMin1(10);
+		 templateParDefault4.setOperateur2("");
+		 templateParDefault4.setChampMin2(0);
+		
+		listeDeTemplates.add(templateParDefault1);
+		listeDeTemplates.add(templateParDefault2);
+		listeDeTemplates.add(templateParDefault3);
+		listeDeTemplates.add(templateParDefault4);
+		
+	//	if (champMin <= 4 ){return listeDeBatimentsDuTemplateParDefault1;}
+	//	if (champMin <= 8 && champMin >4){return listeDeBatimentsDuTemplateParDefault2;}
+	//	if (champMin < 10 && champMin > 7){return listeDeBatimentsDuTemplateParDefault3;}
+	//	if (champMin == 10){return listeDeBatimentsDuTemplateParDefault4;}
+	//	if (champMin > 10){return listeDeBatimentsDuTemplateParDefault4;}
 	}
 	
 	
@@ -869,7 +916,7 @@ public class Village {
 			t.randomsleep.court();
 			champMin = Collections.min(listeLevelsChamps);
 			champMax = Collections.max(listeLevelsChamps);
-			village.setChampMin(champMin);
+			village.setChampMin(village , champMin);
 			if (champMin >= 10 ) {
 				village.setChampsFinis(true);
 			} else {
