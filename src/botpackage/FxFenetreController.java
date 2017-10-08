@@ -1482,7 +1482,7 @@ public class FxFenetreController extends ScrollPane {
 		ChoiceBox<String> cb1 = new ChoiceBox<String>();
 		ObservableList<String> obs =  FXCollections.observableArrayList("",  "<", "<=", "=", ">=", ">" );
 		cb1.setItems(obs);
-
+		cb1.getStyleClass().add("listeDeroulante");
 		cb1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
@@ -1521,7 +1521,7 @@ public class FxFenetreController extends ScrollPane {
 				"", "<", "<=", "=", ">=", ">" 
 				)
 				);
-
+		cb2.getStyleClass().add("listeDeroulante");
 		cb2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
