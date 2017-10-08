@@ -72,7 +72,8 @@ public  class   TemplatesDeVillages {
 
 	public TemplatesDeVillages() {
 
-		listerBatimentDuJeu();
+	//	listerBatimentDuJeu();
+		choisirModeTemplatesDeVillages(3); // mode forcé
 	}
 	
 	
