@@ -1987,7 +1987,7 @@ button.setOnMouseClicked((e) -> {
 				if (e.getButton() == MouseButton.SECONDARY)  {
 					contextMenuDelete.getItems().clear();
 
-					MenuItem contextMenuDeleteItem = new MenuItem("Suprimer");
+					MenuItem contextMenuDeleteItem = new MenuItem("Suprimer "+bat.getNomBatiment());
 					contextMenuDelete.getItems().add(contextMenuDeleteItem);
 					contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
 						public void handle(ActionEvent e) {
