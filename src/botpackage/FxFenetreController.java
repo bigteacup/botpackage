@@ -1593,6 +1593,30 @@ System.out.println("The button did it!");
 				}
 			}
 		});
+		
+		
+		///////////////////////////////////////////////////////////////////////////////
+		
+		ContextMenu contextMenuDelete = new ContextMenu();
+		vbv2.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+			@Override public void handle(MouseEvent e) {
+				if (e.getButton() == MouseButton.SECONDARY)  {
+					contextMenuDelete.getItems().clear();
+
+					MenuItem contextMenuDeleteItem = new MenuItem("Supprimer ce Stade");
+					contextMenuDelete.getItems().add(contextMenuDeleteItem);
+					contextMenuDeleteItem.setOnAction(new EventHandler<ActionEvent>() {
+						public void handle(ActionEvent e) {
+							village.listeDeTemplates.remove(tem);
+							vbv2Creation.getChildren().remove(vbv2);
+						}
+					});
+
+					contextMenuDelete.show(vbv2, e.getScreenX(), e.getScreenY());
+					e.consume();
+				}
+			}
+		});
 		///////////////////////////////////////////////////////////////////////////////	
 		/*	flowb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
