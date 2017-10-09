@@ -1320,12 +1320,12 @@ public class FxFenetreController extends ScrollPane {
 		if (i % 2 == 0) {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
-			vbv.getStyleClass().add("fake3");
+			vbv.getStyleClass().add("ctemplateV1");
 
 		} else {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
-			vbv.getStyleClass().add("off");
+			vbv.getStyleClass().add("ctemplateV2");
 
 
 
@@ -1568,7 +1568,7 @@ System.out.println("The button did it!");
 
 		vbv2.getChildren().add(templateChooser);
 		vbv2.getChildren().add(flowb);
-		vbv2.getStyleClass().add("lesCheckBoxs");
+		vbv2.getStyleClass().add("stade");
 
 		///////////////////////////////////////////////////////////////
 

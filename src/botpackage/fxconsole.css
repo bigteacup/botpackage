@@ -376,6 +376,14 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-image-width:10;
      -fx-border-image-source:url("image/default_border.png");
  }
+  .stade{
+ 	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(153,179,255)  100.0 );
+ 	 -fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
+ 	 -fx-background-image: url("image/default_paper.png");
+	-fx-background-size: 150% 150%;
+	-fx-background-position:75% 75%;
+ 	/*	-fx-opacity: 0.7;   */
+ }
   .lesOnglets{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
  	-fx-background-image: url("image/default_paper.png");
@@ -539,6 +547,52 @@ b.scroll-bar:horizontal b.track-background {
 
  -fx-background-color: none;
  }
+  .ctemplateV1 {
+	-fx-background-color: #4caf50;
+	
+	/*-fx-border-style: solid ;*/
+	/*-fx-border-color: white;*/
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.0) , 0, 0.0 , 0 , 0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 3, 0.3 , 0 , 1 );
+/*	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  
+-fx-background-image: url("file:///C:/travimage/default_border.png");
+-fx-background-size: 100% 100%;
+     -fx-border-style:solid;
+     -fx-border-width:32px;
+*/
+	-fx-background-image: url("image/bgd.jpg");
+	-fx-background-size: 100% auto;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("image/default_border.png");
+
+}
+  .ctemplateV2 {
+	-fx-background-color: #4caf50;
+	
+	/*-fx-border-style: solid ;*/
+	/*-fx-border-color: white;*/
+	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);*/
+	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.0) , 0, 0.0 , 0 , 0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 3, 0.3 , 0 , 1 );
+/*	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  
+-fx-background-image: url("file:///C:/travimage/default_border.png");
+-fx-background-size: 100% 100%;
+     -fx-border-style:solid;
+     -fx-border-width:32px;
+*/
+	-fx-background-image: url("image/bgf.jpg");
+	-fx-background-size: 100% auto;
+     -fx-border-image-insets:0;
+     -fx-border-image-repeat:no-repeat;
+     -fx-border-image-slice:16;
+     -fx-border-image-width:10;
+     -fx-border-image-source:url("image/default_border.png");
+
+}
  .vLabel{
 	/*-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );
 	 -fx-border-radius: 10 0 10 0;
