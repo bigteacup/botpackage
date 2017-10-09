@@ -1349,6 +1349,7 @@ public class Travian extends Thread {
 		for (Village village	: listeDeVillages){
 			boolean trouver = false;
 			while(trouver == false){
+				try {
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
 					village.setNombreDeMarchands(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[0].replaceAll("\\W", "")));
 					village.setNombreDeMarchandsMax(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[1].replaceAll("\\W", "")));
@@ -1360,6 +1361,14 @@ public class Travian extends Thread {
 
 				}
 				else {i++;}
+				}catch(Exception e) {
+					village.setNombreDeMarchands(0);
+					village.setNombreDeMarchandsMax(0);
+					
+					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax());
+					trouver = true;
+					i = 0;
+				}
 			}
 		}
 

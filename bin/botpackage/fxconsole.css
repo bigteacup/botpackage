@@ -411,6 +411,35 @@ b.scroll-bar:horizontal b.track-background {
 	-fx-background-color:rgba(107,227,55, 0.6) ;
 	-fx-background-radius: 3 3 3 3;
 	-fx-background-insets: 3 3 3 3;
+
+}
+
+      .listeDeroulante {
+	-fx-background-color: green;
+	-fx-background-color:radial-gradient( focus-angle 270.0deg, focus-distance 50.0%, center 50.0% 50.0%, radius 50.0%, rgb(255,204,102) 0.0, rgb(179,102,26) 100.0 ) ;
+	-fx-background-color:rgba(107,227,55, 0.8) ;
+	-fx-background-radius: 3 3 3 3;
+	-fx-background-insets: 3 3 3 3;
+	 -fx-text-fill: white;
+	
+	/*  -fx-font-size: 16px;*/
+}
+      .listeDeroulante .context-menu  {
+	-fx-background-color: green;
+	-fx-background-color:radial-gradient( focus-angle 270.0deg, focus-distance 50.0%, center 50.0% 50.0%, radius 50.0%, rgb(255,204,102) 0.0, rgb(179,102,26) 100.0 ) ;
+	-fx-background-color:rgba(107,227,55, 0.8) ;
+	-fx-background-radius: 3 3 3 3;
+	-fx-background-insets: 3 3 3 3;
+	 -fx-text-fill: white;
+	/*  -fx-font-weight:bold;
+	  -fx-font-size: 16px;*/
+}
+      .listeDeroulante .context-menu .label  {
+
+
+	 -fx-text-fill: black;
+	/*  -fx-font-weight:bold;
+	  -fx-font-size: 16px;*/
 }
  .ctuile {
 	-fx-background-color: #4caf50;
