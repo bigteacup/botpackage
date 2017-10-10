@@ -1565,7 +1565,7 @@ System.out.println("The button did it!");
 
 		FlowPane flowb = new FlowPane();
 
-
+		templateChooser.getStyleClass().add("stade2");
 		vbv2.getChildren().add(templateChooser);
 		vbv2.getChildren().add(flowb);
 		vbv2.getStyleClass().add("stade");
