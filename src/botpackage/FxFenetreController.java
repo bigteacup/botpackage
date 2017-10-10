@@ -23,6 +23,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -1267,6 +1268,7 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML 
 	public void  faireOngletTemplate() {
+
 		fxTemplate.getChildren().clear();
 		VBox c = faireEditeurDeTemplate(bot.getTemplateLancerBot());
 		fxTemplate.getChildren().add(c);
@@ -1278,12 +1280,15 @@ public class FxFenetreController extends ScrollPane {
 			for(Village village : bot.travian.getListeDeVillages()) {
 				VBox v =  faireSelecteurDeTemplateDeVillage(village, i);
 				fxTemplate.getChildren().add(v);
+		        v.setCache(true);
+		        v.setCacheHint(CacheHint.QUALITY);
 				i++;
 
 			}
 		}catch (Exception e) {
 
 		}
+
 
 	}
 
@@ -1466,9 +1471,9 @@ public class FxFenetreController extends ScrollPane {
 	public VBox stade(Village village, VBox vbv2Creation,  int i, TemplatesDeVillages tem   ) {
 
 		VBox vbv2= new VBox();
-		Label nomTemLabel = new Label(tem.nomDuTemplate  + " : Selectionner : ");
+		Label nomTemLabel = new Label(tem.nomDuTemplate );
 		FlowPane templateChooser = new FlowPane();
-		Label nomStade = new Label("   ChampMin ");
+		Label nomStade = new Label("   Quand le champs le plus petit est   ");
 		TextField textStade1 = new TextField();
 		textStade1.setPadding(new Insets(0, 0, 0, 0));
 		textStade1.setPrefColumnCount(2);
