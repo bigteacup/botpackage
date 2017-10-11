@@ -10,6 +10,7 @@ public  class   TemplatesDeVillages {
 	String operateur2 = "<=";
 	int champMin1 = 0;
 	int champMin2 = 10;
+	boolean autoriserAPoserBatiment = true;
 	/*
 	batimentsALancer.add("Bâtiment principal");
 	batimentsALancer.add("Dépôt de ressources");
@@ -20,8 +21,22 @@ public  class   TemplatesDeVillages {
 	batimentsALancer.add("Académie");
 	batimentsALancer.add("Caserne");Bûcheron écurie
 	*///
+
 	
-	
+	public boolean getAutoriserAPoserBatiment() {
+		return autoriserAPoserBatiment;
+	}
+
+
+
+
+	public void setAutoriserAPoserBatiment(boolean autoriserAPoserBatiment) {
+		this.autoriserAPoserBatiment = autoriserAPoserBatiment;
+	}
+
+
+
+
 	public int getChampMin1() {
 		return champMin1;
 	}
@@ -173,6 +188,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 5));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(depot, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(silo, 6));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(caserne, 3));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(place_rassemblement, 1));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10));
@@ -284,7 +300,9 @@ public  class   TemplatesDeVillages {
 		for(TemplatesDeVillages temp : village.getListeDeTemplates()) {
 			if(!temp.getNomDuTemplate().equals("")) {
 		if(comparer(champMin, temp.operateur1, temp.champMin1 ) == true && comparer(champMin, temp.operateur2, temp.champMin2 ) == true)  {
+			village.setTemplate(temp);
 			return temp.getListeDeBatiments();
+			
 		}
 		}
 		}

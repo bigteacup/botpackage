@@ -248,11 +248,13 @@ public class Village {
 		return champMin;
 	}
 
-	public void setChampMin(Village village,int champMin) {
+	public void setChampMin(Travian t, Village village,int champMin) {
 		this.champMin = champMin;
 		//if (champMin <= 10 ){
 		
 		List<Batiment> tem = template.etablirTemplatePourUnVillage(village, champMin);
+		t.ecrireDansConsole("Template choisi : "+village.getTemplate().getNomDuTemplate());
+		
 		setTemplateDuVillage(tem);
 		// }
 	}
@@ -916,7 +918,7 @@ public class Village {
 			t.randomsleep.court();
 			champMin = Collections.min(listeLevelsChamps);
 			champMax = Collections.max(listeLevelsChamps);
-			village.setChampMin(village , champMin);
+			village.setChampMin(t, village , champMin);
 			if (champMin >= 10 ) {
 				village.setChampsFinis(true);
 			} else {
@@ -1490,8 +1492,10 @@ public class Village {
 			
 			// avant de monter on pose les village du template des que possible
 			if(village.bloquerConstructionBatiment == false) {
+				if(village.getTemplate().getAutoriserAPoserBatiment() == true) {
 				creationBatiment(t, village); 
-			}
+				}else {t.ecrireDansConsole("Ce Stade n'a pas le droit de poser lui meme les batiments...");}
+				}
 			
 			for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction; i++) {
 				
@@ -1602,7 +1606,7 @@ public class Village {
 
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
-				if(nomBat.equals("Résidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){
+				if( nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||  
 					t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire");				
 				}else {
 					if(batimentDuTemplate.getPresent() == false ){
@@ -1661,7 +1665,7 @@ public class Village {
 
 							for(Batiment batimentDuTemplate : village.getBatimentsDuTemplateDuVillage()){
 								nomBat = batimentDuTemplate.getNomBatiment();
-								if(nomBat.equals("Résidence") || nomBat.equals("Palais") || nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){
+								if( nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||
 									t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire 2 "); 
 
 								}else {

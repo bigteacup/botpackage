@@ -57,6 +57,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
@@ -1455,13 +1456,46 @@ public class FxFenetreController extends ScrollPane {
 
 	}
 
+	public void initAutoriserAPoserBatBox(TemplatesDeVillages tem, CheckBox autoriserAPoserBatBox){
+
+		if (tem.getAutoriserAPoserBatiment() == true) {
+			autoriserAPoserBatBox.setSelected(true);
+		} else
+			autoriserAPoserBatBox.setSelected(false);
+
+		
+	}
 
 
 
 
+	private void switcherAutoriserAPoserBat(TemplatesDeVillages tem) {
+		if (tem.getAutoriserAPoserBatiment() == true) {
+			tem.setAutoriserAPoserBatiment(false) ;
+		} else {
+			tem.setAutoriserAPoserBatiment(true);
+		}
+	}
+	public void raffraichirCase (Village village, FlowPane Fc , CheckBox c){
 
 
 
+	
+			Fc.setPadding(new Insets(0, 0, 0, 12));
+			if(c.isSelected()){
+				c.getStyleClass().remove("off");
+				c.getStyleClass().remove("fake3");
+				c.getStyleClass().add("fake3");
+
+
+			}
+			else {
+				c.getStyleClass().remove("off");
+				c.getStyleClass().remove("fake3");
+				c.getStyleClass().add("off");
+
+			}
+		}
 
 
 
@@ -1473,7 +1507,9 @@ public class FxFenetreController extends ScrollPane {
 		VBox vbv2= new VBox();
 		Label nomTemLabel = new Label(tem.nomDuTemplate );
 		FlowPane templateChooser = new FlowPane();
+		FlowPane caseAutoriserBatFlowPane =new FlowPane();
 		Label nomStade = new Label("   Quand le champs le plus petit est   ");
+		//nomStade.setTextFill(Color.WHITE);
 		TextField textStade1 = new TextField();
 		textStade1.setPadding(new Insets(0, 0, 0, 0));
 		textStade1.setPrefColumnCount(2);
@@ -1507,9 +1543,7 @@ public class FxFenetreController extends ScrollPane {
 		});
 		
 		
-		
-		
-		
+
 		
 		
 		
@@ -1563,9 +1597,27 @@ System.out.println("The button did it!");
 
 		 */
 		/////////////////////////////////////////////////////////////////////
+		
+		CheckBox autoriserAPoserBatBox = new CheckBox("Autoriser à poser Batiment ?");
+		autoriserAPoserBatBox.setTextFill(Color.WHITE);
+		caseAutoriserBatFlowPane.getChildren().add(autoriserAPoserBatBox);
+		if(village.getTemplate().getAutoriserAPoserBatiment() == true) { autoriserAPoserBatBox.setSelected(true);}else {autoriserAPoserBatBox.setSelected(false);}
+		autoriserAPoserBatBox.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+			switcherAutoriserAPoserBat( tem);
+			 raffraichirCase(village, caseAutoriserBatFlowPane, autoriserAPoserBatBox);
+		///	raffraichirCase (village, cl, flowCases);
+		} }); 
+		initAutoriserAPoserBatBox(tem, autoriserAPoserBatBox);
+		 raffraichirCase(village,caseAutoriserBatFlowPane, autoriserAPoserBatBox);
+		 caseAutoriserBatFlowPane.setAlignment(Pos.CENTER_LEFT);
+		 
+
+		
+		
+		
 		/////////////////////////////////////////////////////////////////////
 
-		templateChooser.getChildren().addAll(nomTemLabel, nomStade, cb1, a1, textStade1, et, cb2, a2, textStade2);
+		templateChooser.getChildren().addAll(nomTemLabel, nomStade, cb1, a1, textStade1, et, cb2, a2, textStade2, caseAutoriserBatFlowPane );
 
 
 		FlowPane flowb = new FlowPane();
