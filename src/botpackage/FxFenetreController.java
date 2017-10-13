@@ -54,6 +54,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -1287,8 +1288,10 @@ public class FxFenetreController extends ScrollPane {
 				
 		        v.setCache(true);
 		        v.setCacheHint(CacheHint.QUALITY);//  v.setCacheHint(CacheHint.QUALITY);
-				
-				 tab.setContent(v);
+				ScrollPane sc=new ScrollPane();
+				sc.setContent(v);
+				 tab.setContent(sc);
+				 sc.setFitToWidth(true);
 				 tab.setText(village.getNom());
 				 onglets.getTabs().add(tab);
 				
