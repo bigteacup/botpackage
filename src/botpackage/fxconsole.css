@@ -608,6 +608,16 @@ b.scroll-bar:horizontal b.track-background {
      -fx-border-image-source:url("image/default_border.png");
 
 }
+
+  .cEditeur {
+	-fx-background-color: #4caf50;
+	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.0) , 0, 0.0 , 0 , 0 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 3, 0.3 , 0 , 1 );
+	-fx-background-image: url("image/tret.png");
+
+
+
+}
  .vLabel{
 	/*-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(0,26,128) 100.0 );
 	 -fx-border-radius: 10 0 10 0;

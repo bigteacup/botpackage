@@ -35,6 +35,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -1269,23 +1270,32 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML 
 	public void  faireOngletTemplate() {
-
+		TabPane onglets = new TabPane();
 		fxTemplate.getChildren().clear();
 		VBox c = faireEditeurDeTemplate(bot.getTemplateLancerBot());
 		fxTemplate.getChildren().add(c);
+        c.setCache(true);
+        c.setCacheHint(CacheHint.QUALITY);
 
 		int i = 0;
-
+		
 		try {
 			//village
 			for(Village village : bot.travian.getListeDeVillages()) {
+				Tab tab = new Tab();
 				VBox v =  faireSelecteurDeTemplateDeVillage(village, i);
-				fxTemplate.getChildren().add(v);
+				
 		        v.setCache(true);
-		        v.setCacheHint(CacheHint.QUALITY);
-				i++;
+		        v.setCacheHint(CacheHint.QUALITY);//  v.setCacheHint(CacheHint.QUALITY);
+				
+				 tab.setContent(v);
+				 tab.setText(village.getNom());
+				 onglets.getTabs().add(tab);
+				
+				 i++;
 
 			}
+			 fxTemplate.getChildren().add(onglets);
 		}catch (Exception e) {
 
 		}
@@ -1479,9 +1489,6 @@ public class FxFenetreController extends ScrollPane {
 	public void raffraichirCase (Village village, FlowPane Fc , CheckBox c){
 
 
-
-	
-			Fc.setPadding(new Insets(0, 0, 0, 12));
 			if(c.isSelected()){
 				c.getStyleClass().remove("off");
 				c.getStyleClass().remove("fake3");
@@ -1609,15 +1616,35 @@ System.out.println("The button did it!");
 		} }); 
 		initAutoriserAPoserBatBox(tem, autoriserAPoserBatBox);
 		 raffraichirCase(village,caseAutoriserBatFlowPane, autoriserAPoserBatBox);
+		 
 		 caseAutoriserBatFlowPane.setAlignment(Pos.CENTER_LEFT);
+		 caseAutoriserBatFlowPane.setMaxWidth(82);
+		 caseAutoriserBatFlowPane.setPadding(new Insets(0, 0, 0, 12));
+		 
 		 
 
-		
+		////////////////////////////////////////////////////////////////////////
+		 FlowPane prioriteFlow = new FlowPane();
+		 Label prioriteLabel = new Label("Priorité/ordre : ");
+			TextField priorite = new TextField();
+			
+			prioriteFlow.getChildren().addAll(prioriteLabel, priorite);
+			priorite.setText(String.valueOf(tem.getPriorite()));
+			priorite.setPrefColumnCount(2);
+			priorite.setPadding(new Insets(0, 0, 0, 0));
+			prioriteLabel.setTextFill(Color.WHITE);
+			prioriteFlow.setAlignment(Pos.CENTER_LEFT);
+			prioriteFlow.setPadding(new Insets(0, 0, 0, 12));
+			
+			priorite.setOnAction((event) -> {
+				tem.setPriorite(Integer.parseInt(priorite.getText()));
+				tem.trierListe(village.getListeDeTemplates());
+			});
 		
 		
 		/////////////////////////////////////////////////////////////////////
 
-		templateChooser.getChildren().addAll(nomTemLabel, nomStade, cb1, a1, textStade1, et, cb2, a2, textStade2, caseAutoriserBatFlowPane );
+		templateChooser.getChildren().addAll(nomTemLabel, nomStade, cb1, a1, textStade1, et, cb2, a2, textStade2, caseAutoriserBatFlowPane, prioriteFlow );
 
 
 		FlowPane flowb = new FlowPane();
@@ -1674,6 +1701,8 @@ System.out.println("The button did it!");
 				}
 			}
 		});
+		
+
 		///////////////////////////////////////////////////////////////////////////////	
 		/*	flowb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -1803,12 +1832,12 @@ System.out.println("The button did it!");
 		if (i % 2 == 0) {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
-			vbv.getStyleClass().add("fake3");
+			vbv.getStyleClass().add("cEditeur");
 
 		} else {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
-			vbv.getStyleClass().add("off");
+			vbv.getStyleClass().add("cEditeur");
 
 
 
@@ -1852,12 +1881,12 @@ System.out.println("The button did it!");
 			nomVLabel.getStyleClass().add("vLabel");
 			nomVLabel.setPrefHeight(25);
 			nomVLabel.setPadding(new Insets(5, 15, 5, 15));
-			vbv.getChildren().add(nomVLabel);
+			
 			vbv.setPadding(new Insets(15, 15, 15, 15));
 
 
 
-			Label nomTemLabel = new Label(templateSelectione.nomDuTemplate  + " : Nom Template : ");
+			Label nomTemLabel = new Label(templateSelectione.nomDuTemplate  + " Nom Template : ");
 			TextField nomDuTemplate1 = new TextField();
 			nomDuTemplate1.setPadding(new Insets(0, 0, 0, 0));
 			nomDuTemplate1.setPrefColumnCount(15);
@@ -1930,7 +1959,7 @@ button.setOnMouseClicked((e) -> {
 			/////////////////////////////////////////////////////////////////////
 
 
-			templateChooser.getChildren().addAll(nomTemLabel, nomDuTemplate1,listeDeroulante,saveTemplate);
+			templateChooser.getChildren().addAll(nomVLabel, nomTemLabel, nomDuTemplate1,listeDeroulante,saveTemplate);
 
 
 

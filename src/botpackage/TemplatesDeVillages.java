@@ -2,6 +2,8 @@ package botpackage;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public  class   TemplatesDeVillages {
@@ -11,6 +13,7 @@ public  class   TemplatesDeVillages {
 	int champMin1 = 0;
 	int champMin2 = 10;
 	boolean autoriserAPoserBatiment = true;
+	Integer priorite = 0;
 	/*
 	batimentsALancer.add("Bâtiment principal");
 	batimentsALancer.add("Dépôt de ressources");
@@ -23,6 +26,20 @@ public  class   TemplatesDeVillages {
 	*///
 
 	
+	public Integer getPriorite() {
+		return priorite;
+	}
+
+
+
+
+	public void setPriorite(Integer priorite) {
+		this.priorite = priorite;
+	}
+
+
+
+
 	public boolean getAutoriserAPoserBatiment() {
 		return autoriserAPoserBatiment;
 	}
@@ -295,8 +312,57 @@ public  class   TemplatesDeVillages {
 
 	}
 	
-	public ArrayList<Batiment> etablirTemplatePourUnVillage(Village village, int champMin) {
 	
+	
+	
+	
+	/*
+	 
+	 
+	 
+	 			ArrayList<TemplatesDeVillages> listeTemplatesCandidats = new ArrayList<TemplatesDeVillages>();
+					listeTemplatesCandidats.add(temp);
+					
+					for(TemplatesDeVillages tempCandidatA : listeTemplatesCandidats ) {
+						for(TemplatesDeVillages tempCandidatB: listeTemplatesCandidats ) {
+							if(tempCandidatA.getPriorite() > tempCandidatB.getPriorite()) {
+								listeTemplatesCandidats.remove(temp);
+
+							}
+
+						}
+					}
+
+					if(true) {
+						village.setTemplate(temp);
+						return temp.getListeDeBatiments();
+					}
+
+	 
+	 
+	 
+	 
+	 */
+	public ArrayList<TemplatesDeVillages> trierListe(ArrayList<TemplatesDeVillages> liste){
+
+		// Sorting
+		Collections.sort(liste, new Comparator<TemplatesDeVillages>() {
+		        @Override
+		        public int compare(TemplatesDeVillages temp1, TemplatesDeVillages temp2)
+		        {
+
+		            return temp1.getPriorite().compareTo(temp2.getPriorite());
+		        }
+		    });
+		
+		return liste;
+		
+		
+	}
+	
+	
+	public ArrayList<Batiment> etablirTemplatePourUnVillage(Village village, int champMin) {
+		trierListe(village.getListeDeTemplates());
 		for(TemplatesDeVillages temp : village.getListeDeTemplates()) {
 			if(!temp.getNomDuTemplate().equals("")) {
 		if(comparer(champMin, temp.operateur1, temp.champMin1 ) == true && comparer(champMin, temp.operateur2, temp.champMin2 ) == true)  {
