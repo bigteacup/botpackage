@@ -1,11 +1,13 @@
 package botpackage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-
+import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 
@@ -72,8 +74,8 @@ import org.openqa.selenium.WebDriver;
 	public boolean acheterAuMarché = true;
 	
 	public boolean afficherAttente = false;
-	
-
+	public ArrayList<File> listeFichiers = new ArrayList<File>();
+	public Properties fichierTemplatesProperties;
 	
 	public String idDeLaListeDePillage = "1592";
 	public String motCleListeDePillage1 = "inactif";
@@ -82,7 +84,7 @@ import org.openqa.selenium.WebDriver;
 	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
 	public TemplatesDeVillages templateLancerBot;
 	
-
+	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
 
 
 
@@ -106,13 +108,14 @@ public void faireUnTemplateDeCompte(int i) {
 */
 
 		public  Lancerbot() {
+			
 			templateLancerBot = new TemplatesDeVillages();
 		//	faireUnTemplateDeCompte(0);
 			
 			listeDeTemplates.add(templateLancerBot);
 			
-			
-			
+
+			 chargerTemplate();
 			
 			
 			
@@ -153,23 +156,43 @@ public void faireUnTemplateDeCompte(int i) {
 
 				}
 
-
-	public boolean creerNouveauTemplate(String nom) {
-		boolean trouver = false;
-			for(TemplatesDeVillages testT : listeDeTemplates) {
-				if(nom.equals(testT.getNomDuTemplate()) ) {
-					trouver=true;
-				}
-				}
-			if(trouver==false) {
-				TemplatesDeVillages newTemplate = new TemplatesDeVillages();
-				newTemplate.setNomDuTemplate(nom);
-				listeDeTemplates.add(newTemplate);
-				return true;
+	
+	
+	public void chargerTemplate() {
+		listeDeTemplates.clear();
+		listeFichiers = gestionnaireDeComptes.listerFichiers("templates", "template");
+		
+		if(listeFichiers.isEmpty()== false) {
+			for(File f :listeFichiers) {
+			fichierTemplatesProperties = loadTemplatesProperties(f.getName());
+			TemplatesDeVillages newTemplate = new TemplatesDeVillages();
+			
+			for(String batKey : fichierTemplatesProperties.stringPropertyNames()) {
+				Batiment newBat = new Batiment(batKey, Integer.parseInt(fichierTemplatesProperties.getProperty(batKey)));
+				newTemplate.getListeDeBatiments().add(newBat);
+				newTemplate.setNomDuTemplate(f.getName());
+				
 			}
-			return false;
+			listeDeTemplates.add(newTemplate);
+				}
+			}
+		
 		
 	}
+	
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
 	public TemplatesDeVillages trouverTemplate(String nom) {
 		for(TemplatesDeVillages temT : listeDeTemplates ) {
 		
@@ -189,12 +212,12 @@ public void faireUnTemplateDeCompte(int i) {
 
 
 
-
-
 public static void arreter(){
 	actif = false;
 
 }
+
+
 
 public WebDriver setDriver(WebDriver driver) {
 	driver = this.driver;
@@ -204,13 +227,21 @@ public WebDriver setDriver(WebDriver driver) {
 }
 
 
+
+
 public void setfxFenetreController(FxFenetreController fxFenetreController){
 	this.fxFenetreController = fxFenetreController;
 	
+
+	
 }
+
 public TemplatesDeVillages getTemplateLancerBot() {
 return templateLancerBot;
 }
+
+
+
 
 public void setTemplateLancerBot(TemplatesDeVillages templateLancerBot) {
 	this.templateLancerBot = templateLancerBot;
@@ -390,7 +421,61 @@ listeAttaques.add(attaque8);
 
 */
 
+////////////////////////////////////////////////////////////////////////
+//charger les configs précédentes
+public Properties loadTemplatesProperties(String nomTemplate){
 
+String path = System.getProperty("user.home")+"\\botpackage\\templates\\"+nomTemplate;		//System.getProperty("user.home") + "\\botpackage\\comptes"; +\".properties"
+Properties properties = new Properties();
+FileInputStream input = null;
+
+try {
+	input = new FileInputStream(path);
+} catch (FileNotFoundException e) {e.printStackTrace();} 
+
+
+try{
+properties.load(input);
+
+} catch (IOException e) {e.printStackTrace();}
+finally{
+	try {
+		if(input !=null)
+		input.close();
+	}  
+
+	catch (IOException e) {e.printStackTrace();}//
+		
+}
+return properties;	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public Properties getFichierProperties() {
+return fichierTemplatesProperties;
+}
+
+public void setFichierProperties(Properties fichierTemplatesProperties) {
+this.fichierTemplatesProperties = fichierTemplatesProperties;
+} 
 
 
 
