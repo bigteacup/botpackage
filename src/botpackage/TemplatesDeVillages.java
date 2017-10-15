@@ -165,32 +165,13 @@ public  class   TemplatesDeVillages {
 
 	
 	
-	public void choisirModeTemplatesDeVillages(int mode) { //0=editeur 1=normal 2=default 3=TimTool
-		this.mode = mode;
-		
-		if (mode == 0) { 
-			templateInterface();	
-		}
-		if (mode == 1) { 
-			templateClassique();	
-		}
-		if (mode == 2) { 
-			;	
-		}
-		if (mode == 3) { 
-			templatesDeVillagesTimTool();	
-		}
 
-	}
 	
 	
 	
 	
 
-	public void templateInterface() {
-		nomDuTemplate = "Edition";
-		listerBatimentDuJeu();
-	}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void templatesDeVillagesTimTool() { //mode 3
@@ -316,36 +297,10 @@ public  class   TemplatesDeVillages {
 	
 	
 	
-	/*
-	 
-	 
-	 
-	 			ArrayList<TemplatesDeVillages> listeTemplatesCandidats = new ArrayList<TemplatesDeVillages>();
-					listeTemplatesCandidats.add(temp);
-					
-					for(TemplatesDeVillages tempCandidatA : listeTemplatesCandidats ) {
-						for(TemplatesDeVillages tempCandidatB: listeTemplatesCandidats ) {
-							if(tempCandidatA.getPriorite() > tempCandidatB.getPriorite()) {
-								listeTemplatesCandidats.remove(temp);
-
-							}
-
-						}
-					}
-
-					if(true) {
-						village.setTemplate(temp);
-						return temp.getListeDeBatiments();
-					}
-
-	 
-	 
-	 
-	 
-	 */
+	
 	public ArrayList<TemplatesDeVillages> trierListe(ArrayList<TemplatesDeVillages> liste){
 
-		// Sorting
+		// Sort
 		Collections.sort(liste, new Comparator<TemplatesDeVillages>() {
 		        @Override
 		        public int compare(TemplatesDeVillages temp1, TemplatesDeVillages temp2)
@@ -434,10 +389,7 @@ public  class   TemplatesDeVillages {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void templateClassique() {
-		nomDuTemplate = "Classique";
-		listerBatimentDuJeu();
-	}
+
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
