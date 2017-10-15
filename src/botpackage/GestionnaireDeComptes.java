@@ -11,11 +11,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -36,6 +41,8 @@ public class GestionnaireDeComptes {
 	ArrayList<File> listeFichiers = new ArrayList<File>();
 	private FileReader in = null;
 	private FileWriter out = null;
+	
+	public Properties fichierTemplatesProperties;
 
 	// constructeur
 	public GestionnaireDeComptes() {
@@ -57,6 +64,10 @@ public class GestionnaireDeComptes {
 	        	}
 	         } catch (IOException e) {e.printStackTrace();}
 		} catch (MalformedURLException e) {e.printStackTrace();}
+		
+		creerDossierTemplates();
+		listeFichiers = listerFichiers("templates", "templates");
+		
 
 	}
 
@@ -84,8 +95,8 @@ public class GestionnaireDeComptes {
 	
 		/////////////////////////////////////////////////////////////////////////////////////	
 	
-	public ArrayList<File> getListeFichiers() {
-		listerFichiers("comptes", "comptetravian");
+	public ArrayList<File> getListeFichiers (String dossier, String extension) {
+		listerFichiers(dossier, extension);
 		return listeFichiers;
 
 	}
@@ -102,9 +113,17 @@ public class GestionnaireDeComptes {
 		System.out.println("Création du dossier" + userPath + " : " + isCreated);
 
 	}
+	////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+public void creerDossierTemplates() {
+String userPath = System.getProperty("user.home") + "\\botpackage\\templates";
+File dossierComptes = new File(userPath);
+boolean isCreated = dossierComptes.mkdirs();
+System.out.println("Création du dossier" + userPath + " : " + isCreated);
+
+}
 	/////////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<File> listerFichiers(String dossier, String extention) {
-		extention = "comptetravian";
 		String userPath = System.getProperty("user.home") + "\\botpackage\\" + dossier; // \\comptes
 		File chemin = new File(userPath);
 		File[] list = chemin.listFiles();
@@ -123,13 +142,33 @@ public class GestionnaireDeComptes {
 		return listeFichiers;
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
-	public void creerFichierCompte(String nomDeCompte, String dossier, String extention) {
-		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier + nomDeCompte + extention;
+	public void creerFichier(String nomDefichier, String dossier, String extention) {
+		
+		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier +"\\"+ nomDefichier + extention;
 		File newFichierCompte = new File(userPath);
+		boolean trouver=false;
+	//	newFichierCompte.
 
 		try {
-			boolean isCreated = newFichierCompte.createNewFile();
-			System.out.println("Création d'un fichier compte " + userPath + " : " + isCreated);
+			for(File file : listerFichiers(dossier, extention)) {
+				String strFile="";
+				try {
+					strFile = file.getName().split(extention)[0];
+					} catch (Exception e) {}
+				
+				
+				if((strFile.equals(nomDefichier)) ) { //&& (strFile.equals(null))
+					trouver= true;
+				}
+				
+				
+				
+				
+			}
+			if (trouver == false){
+				boolean isCreated = newFichierCompte.createNewFile();
+				System.out.println("Création d'un fichier compte " + userPath + " : " + isCreated);
+			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -138,8 +177,8 @@ public class GestionnaireDeComptes {
 
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
-	public void suprimerFichierCompte(String nomDeCompte, String dossier, String extention) {
-		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier + nomDeCompte + extention;
+	public void suprimerFichier(String nomDefichier, String dossier, String extention) {
+		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier + nomDefichier + extention;
 		File newFichierCompte = new File(userPath);
 
 		boolean isCreated = newFichierCompte.delete();
@@ -163,6 +202,52 @@ public class GestionnaireDeComptes {
 		} catch (FileNotFoundException e) {e.printStackTrace();}
 		
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////
+	public void ecrireDansFichierTemplate(String dossier, String nomFichier, TemplatesDeVillages templateDeVillage ) {
+		
+		PrintWriter writer;
+		try {
+		//	writer = new PrintWriter(new OutputStreamWriter(csocket.getOutputStream(), StandardCharsets.UTF_8), true);
+		//	OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(PROPERTIES_FILE), StandardCharsets.UTF_8);
+			// PrintWriter writer = new PrintWriter(new File("C:\\abc.xml"), "UTF-8");
+			try {
+				writer = new PrintWriter(new File (System.getProperty("user.home") + "\\botpackage\\" + dossier+"\\" + nomFichier), "UTF-8");
+
+			for(Batiment bat : templateDeVillage.getListeDeBatiments()) {
+			writer.println(encoding(bat.getNomBatiment().replaceAll("\\s", "\\\\ ")+ "="+ bat.getLevelBatiment()));
+
+}	
+			
+			writer.close();
+		} catch (FileNotFoundException e) {e.printStackTrace();}
+	
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	/////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public StringBuilder encoding(String src) {
+	//    final  = "Hallo äöü"; // this has to be read with the right encoding
+	    final CharsetEncoder asciiEncoder = Charset.forName("US-ASCII").newEncoder();
+	    final StringBuilder result = new StringBuilder();
+	    for (final Character character : src.toCharArray()) {
+	        if (asciiEncoder.canEncode(character)) {
+	            result.append(character);
+	        } else {
+	            result.append("\\u");
+	            result.append(Integer.toHexString(0x10000 | character).substring(1).toUpperCase());
+	        }
+	    }
+	    return result ;
+	 }
+	
+	
 	
 	/////////////////////////////////////////////////////////////////////////////////////
 	static public void extractZip(String fichierZip) throws ZipException, IOException 
