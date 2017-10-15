@@ -67,14 +67,14 @@ import javafx.util.StringConverter;
 
 //fx:controller="botpackage.FxFenetreController"
 public class FxFenetreController extends ScrollPane {
-	public Lancerbot bot;
+	public Lancerbot bot = new Lancerbot();
 
 	FxFenetreController fxFenetreController;
 	// FxConsole console;
 	// FxConsoleSimple console;
 	FxConsoleExperimentale console;
 	VirtualizedScrollPane<StyleClassedTextArea> vtScroll;
-	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
+
 
 	String compteSelectionne = null;
 
@@ -193,12 +193,13 @@ public class FxFenetreController extends ScrollPane {
 
 
 		console = new FxConsoleExperimentale(fxFenetreController); // console.start();
-		bot = new Lancerbot();
+	
 		bot.setConsole(console);
 		bot.setfxFenetreController(this);
 		fxConsolescrollpane();
 		casesInit();
 		fxOngletParametresController.setBot(bot);
+		
 
 
 
@@ -391,32 +392,40 @@ public class FxFenetreController extends ScrollPane {
 	private void switcherCaseRegimePillage(Village village){
 		if (village.getRegimePillage() == true) {
 			village.setRegimePillage(false)  ;
-		}else
-			village.setRegimePillage(true);
+		}else {
+			village.setRegimePillage(true);}
 	}
 	private void switcherCaseRegimeConstruction(Village village){
 		if (village.getRegimeConstruction() == true) {
 			village.setRegimeConstruction(false)  ;
-		}else
-			village.setRegimeConstruction(true);
+		}else {
+			village.setRegimeConstruction(true);}
 	}
 	private void switcherCaseRegimeFete(Village village){
 		if (village.getRegimeFete() == true) {
 			village.setRegimeFete(false)  ;
-		}else
-			village.setRegimeFete(true);
+		}else {
+			village.setRegimeFete(true);}
 	}
 	private void switcherCaseRegimeNPC(Village village){
 		if (village.getRegimeNPC() == true) {
 			village.setRegimeNPC(false)  ;
-		}else
-			village.setRegimeNPC(true);
+		}else {
+			village.setRegimeNPC(true);}
 	}
 	private void switcherCaseRegimeAcheterAuMarché(Village village){
 		if (village.getRegimeAcheterAuMarché() == true) {
 			village.setRegimeAcheterAuMarché(false)  ;
-		}else
-			village.setRegimeAcheterAuMarché(true);
+		}else {
+			village.setRegimeAcheterAuMarché(true);}
+	}
+	private void switcherCaseExclureVillage(Village village) {
+		if (village.getExclureVillage() == true) {
+			village.setExclureVillage(false);
+		}else {
+			village.setExclureVillage(true);
+		}
+		
 	}
 
 	@FXML
@@ -516,7 +525,7 @@ public class FxFenetreController extends ScrollPane {
 				Button buttonDelete = new Button("Supr'");
 				buttonDelete.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
-						gestionnaireDeComptes.suprimerFichierCompte(compte.getName(), "\\comptes\\", "");
+						bot.gestionnaireDeComptes.suprimerFichier(compte.getName(), "\\comptes\\", "");
 						fxChargerComptes();
 					}
 
@@ -594,8 +603,8 @@ public class FxFenetreController extends ScrollPane {
 				button1.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						button1.setText("En cours");
-						gestionnaireDeComptes.creerFichierCompte(troisChampsDeSaisieController.userName.getText(), "\\comptes\\",".comptetravian");
-						gestionnaireDeComptes.ecrireDansFichier(
+						bot.gestionnaireDeComptes.creerFichier(troisChampsDeSaisieController.userName.getText(), "\\comptes",".comptetravian");
+						bot.gestionnaireDeComptes.ecrireDansFichier(
 								"comptes",
 								troisChampsDeSaisieController.userName.getText()+".comptetravian",
 								troisChampsDeSaisieController.userName.getText(),
@@ -663,8 +672,8 @@ public class FxFenetreController extends ScrollPane {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	private void fxChargerComptes(){
-		ArrayList<File> listeFichiers = gestionnaireDeComptes.getListeFichiers(); 
-
+		ArrayList<File> listeFichiers = bot.gestionnaireDeComptes.getListeFichiers("comptes", "comptetravian"); 
+		
 
 
 		try { 
@@ -850,6 +859,7 @@ public class FxFenetreController extends ScrollPane {
 							StackPane v1pane = new StackPane();
 
 							vpane.setMinHeight(60);
+							
 							v1pane.setMinHeight(vpane.getMinHeight());
 							v1pane.setMinWidth(750);
 
@@ -874,6 +884,8 @@ public class FxFenetreController extends ScrollPane {
 
 							anchpane.getChildren().addAll(v1pane, vpane);
 							villageAnchorPane.getChildren().addAll(anchpane);
+							villageAnchorPane.getStyleClass().clear();
+							villageAnchorPane.getStyleClass().add("cEditeur");
 							//	villageAnchorPane.setEffect(lighting);
 							i++;
 
@@ -1102,7 +1114,8 @@ public class FxFenetreController extends ScrollPane {
 		CheckBox c3 = new CheckBox("Construction");
 		CheckBox c4 = new CheckBox("NPC");
 		CheckBox c5 = new CheckBox("AcheterAuMarché");
-		CheckBox c6 = new CheckBox("");
+		CheckBox c6 = new CheckBox("ExclureVillage");
+		CheckBox c7 = new CheckBox("");
 
 		FlowPane flowCases = new FlowPane();
 		ArrayList<CheckBox> cl = new ArrayList<CheckBox>();
@@ -1112,6 +1125,7 @@ public class FxFenetreController extends ScrollPane {
 		if(village.getRegimeConstruction() == true) { c3.setSelected(true);}else {c3.setSelected(false);}
 		if(village.getRegimeNPC() == true) { c4.setSelected(true);}else {c4.setSelected(false);}
 		if(village.getRegimeAcheterAuMarché() == true) { c5.setSelected(true);}else {c5.setSelected(false);}
+		if(village.getExclureVillage() == true) { c6.setSelected(true);}else {c6.setSelected(false);}
 
 
 
@@ -1140,6 +1154,11 @@ public class FxFenetreController extends ScrollPane {
 			switcherCaseRegimeAcheterAuMarché(village);
 			raffraichirCase (village, cl, flowCases);
 		} }); 
+		c6.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent e) {
+			switcherCaseExclureVillage(village);
+			raffraichirCase(village, cl , flowCases);
+			
+		}});
 
 
 
@@ -1271,6 +1290,7 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML 
 	public void  faireOngletTemplate() {
+		bot.chargerTemplate();
 		TabPane onglets = new TabPane();
 		fxTemplate.getChildren().clear();
 		VBox c = faireEditeurDeTemplate(bot.getTemplateLancerBot());
@@ -1292,13 +1312,16 @@ public class FxFenetreController extends ScrollPane {
 				sc.setContent(v);
 				 tab.setContent(sc);
 				 sc.setFitToWidth(true);
+				 sc.setFitToHeight(true);
 				 tab.setText(village.getNom());
+				 onglets.getStyleClass().add("cEditeur");
 				 onglets.getTabs().add(tab);
 				
 				 i++;
 
 			}
 			 fxTemplate.getChildren().add(onglets);
+			 
 		}catch (Exception e) {
 
 		}
@@ -1515,6 +1538,7 @@ public class FxFenetreController extends ScrollPane {
 	public VBox stade(Village village, VBox vbv2Creation,  int i, TemplatesDeVillages tem   ) {
 
 		VBox vbv2= new VBox();
+		FlowPane flowb = new FlowPane();
 		Label nomTemLabel = new Label(tem.nomDuTemplate );
 		FlowPane templateChooser = new FlowPane();
 		FlowPane caseAutoriserBatFlowPane =new FlowPane();
@@ -1621,7 +1645,7 @@ System.out.println("The button did it!");
 		 raffraichirCase(village,caseAutoriserBatFlowPane, autoriserAPoserBatBox);
 		 
 		 caseAutoriserBatFlowPane.setAlignment(Pos.CENTER_LEFT);
-		 caseAutoriserBatFlowPane.setMaxWidth(82);
+		 caseAutoriserBatFlowPane.setMaxWidth(50);
 		 caseAutoriserBatFlowPane.setPadding(new Insets(0, 0, 0, 12));
 		 
 		 
@@ -1638,10 +1662,18 @@ System.out.println("The button did it!");
 			prioriteLabel.setTextFill(Color.WHITE);
 			prioriteFlow.setAlignment(Pos.CENTER_LEFT);
 			prioriteFlow.setPadding(new Insets(0, 0, 0, 12));
+			prioriteFlow.setMaxWidth(120);
 			
 			priorite.setOnAction((event) -> {
 				tem.setPriorite(Integer.parseInt(priorite.getText()));
 				tem.trierListe(village.getListeDeTemplates());
+				
+				faireOngletTemplate();
+
+				
+
+				
+				
 			});
 		
 		
@@ -1650,11 +1682,11 @@ System.out.println("The button did it!");
 		templateChooser.getChildren().addAll(nomTemLabel, nomStade, cb1, a1, textStade1, et, cb2, a2, textStade2, caseAutoriserBatFlowPane, prioriteFlow );
 
 
-		FlowPane flowb = new FlowPane();
+		
 
 		templateChooser.getStyleClass().add("stade2");
-		vbv2.getChildren().add(templateChooser);
-		vbv2.getChildren().add(flowb);
+		vbv2.getChildren().addAll(templateChooser,flowb);
+		
 		vbv2.getStyleClass().add("stade");
 
 		///////////////////////////////////////////////////////////////
@@ -1895,7 +1927,7 @@ System.out.println("The button did it!");
 			nomDuTemplate1.setPrefColumnCount(15);
 
 
-			Button saveTemplate = new Button("Creer Template vide");
+			Button saveTemplate = new Button("Sauvegarder Template");
 			FlowPane templateChooser = new FlowPane();
 
 
@@ -1903,6 +1935,7 @@ System.out.println("The button did it!");
 			ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
 			listeDeroulante.getSelectionModel().select(templateSelectione);
 			final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
+			listeDeroulanteData.clear();
 			for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
 				listeDeroulanteData.add(t);
 
@@ -1916,7 +1949,7 @@ System.out.println("The button did it!");
 					if (t == null) {
 						return null;
 					} else {
-						return t.getNomDuTemplate();
+						return t.getNomDuTemplate().split(".template")[0];
 					}
 				}
 				@Override
@@ -1924,7 +1957,7 @@ System.out.println("The button did it!");
 					return null; // No conversion fromString needed.
 				}
 			});
-			//Handle ComboBox event.
+			//attraper ComboBox event.
 			listeDeroulante.setOnAction((event) -> {
 				TemplatesDeVillages selectedTemplatesDeVillages = listeDeroulante.getSelectionModel().getSelectedItem();
 				System.out.println("ComboBox Action (selected: " + selectedTemplatesDeVillages.toString() + ")");
@@ -1969,24 +2002,29 @@ button.setOnMouseClicked((e) -> {
 
 			saveTemplate.setOnAction(new EventHandler<ActionEvent>() {
 				@Override public void handle(ActionEvent e) {
-
-					if(bot.creerNouveauTemplate(nomDuTemplate1.getText())) {
-						bot.trouverTemplate(nomDuTemplate1.getText()).listeDeBatiments.clear();
-						saveTemplate.setText("save");
-
-						for(Batiment b : bot.getTemplateLancerBot().listeDeBatiments) {
-
-
-							bot.trouverTemplate(nomDuTemplate1.getText()).listeDeBatiments.add(b);
-
-
-
-						}
-						vbv.getChildren().clear();
-						vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(nomDuTemplate1.getText())));
+				String stringNomDuTemplate1 = nomDuTemplate1.getText().trim();
+					if(flowb.getChildren().size() > 0 && (!stringNomDuTemplate1.isEmpty()) && templateSelectione.getListeDeBatiments().size() > 0) {
+						//listeDeroulanteData.clear();
+					bot.gestionnaireDeComptes.creerFichier(stringNomDuTemplate1, "\\templates", ".template");
+					bot.gestionnaireDeComptes.ecrireDansFichierTemplate("\\templates", "\\"+stringNomDuTemplate1+".template", templateSelectione);
+					bot.chargerTemplate();
+					vbv.getChildren().clear();
+					//		vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(nomDuTemplate1.getText())));
 						faireOngletTemplate();
-
+					}else {
+						String nameParListeDeroulante = listeDeroulante.getSelectionModel().getSelectedItem().getNomDuTemplate().split(".template")[0];
+						if(flowb.getChildren().size() > 0 && (!nameParListeDeroulante.isEmpty()) && templateSelectione.getListeDeBatiments().size() > 0) {
+							//listeDeroulanteData.clear();
+						bot.gestionnaireDeComptes.creerFichier(nameParListeDeroulante, "\\templates", ".template");
+						bot.gestionnaireDeComptes.ecrireDansFichierTemplate("\\templates", "\\"+nameParListeDeroulante+".template", templateSelectione);
+						bot.chargerTemplate();
+						vbv.getChildren().clear();
+						
+							faireOngletTemplate();
+						
+						}
 					}
+					
 
 				}
 			});
@@ -2027,6 +2065,53 @@ button.setOnMouseClicked((e) -> {
 
 
 
+		
+		
+		////////////////////////////creation save
+/*		
+			Button save = new Button("Sauvegarder"); //compteSelectionne=compte.getName()
+			save.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					save.setText("sauvé");
+
+
+					bot.gestionnaireDeComptes.creerFichier(nomDefichier, "templates", "template);
+					
+					fxChargerComptes();
+
+				}
+			});
+
+			Button buttonDelete = new Button("Supr'");
+			buttonDelete.setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					bot.gestionnaireDeComptes.suprimerFichier(compte.getName(), "\\comptes\\", "");
+					fxChargerComptes();
+				}
+
+			});
+		
+		
+	*/	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		}catch(Exception e) {
 
 		}
