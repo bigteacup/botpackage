@@ -668,7 +668,7 @@ public class Travian extends Thread {
 
 	public void rotationVillage() {
 		for(Village village : listeDeVillages ){
-			
+			if(village.getExclureVillage() == false) {
 
 			if (allume == false){break;}
 			if (besoinDePasserSurLeVillage(village) == 1 ){
@@ -771,7 +771,8 @@ public class Travian extends Thread {
 					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.");}
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...");}
 			}//fin for
-		}
+		}else {ecrireDansConsole(village.getNom() + " Village Exclu de la rotation...");}
+	  }
 	}
 
 	private int heureServer(){ //heure serveur non precise pour lancer les fetes sans spammer a chaque tour de bot
