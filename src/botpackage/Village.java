@@ -338,6 +338,14 @@ public class Village {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public boolean getExclureVillage() {
+		return exclureVillage;
+	}
+
+	public void setExclureVillage(boolean exclureVillage) {
+		this.exclureVillage = exclureVillage;
+	}
+
 
 	// TODO maxstock de base a corriger
 	public int[] memoireMarcheDeLaRotation = { 0, 0, 0, 0 };
@@ -361,6 +369,8 @@ public class Village {
 	private int cereales;
 
 	private int constructionsEnCours;
+
+	public boolean exclureVillage= false;
 
 	private double levelPlaceTournoi;
 	private boolean champsFinis;
