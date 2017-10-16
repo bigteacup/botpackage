@@ -78,8 +78,10 @@ public class FxFenetreController extends ScrollPane {
 
 	String compteSelectionne = null;
 
-
-
+	String ongletEnCours = "rien";
+	
+	CheckBox caseFaireDefiler = new CheckBox();
+	
 	@FXML
 	private ResourceBundle resources;
 
@@ -123,7 +125,7 @@ public class FxFenetreController extends ScrollPane {
 	private CheckBox caseConstruireBatiment;
 
 	@FXML
-	private CheckBox monterChampCapitale;
+	private CheckBox caseMonterChampCapitale;
 
 	@FXML
 	private CheckBox caseEvacuerRessGrosVillages;
@@ -148,9 +150,6 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	public VBox vbox;
-
-	@FXML
-	private CheckBox caseFaireDefiler;
 
 	@FXML
 	private CheckBox caseRotationVillage;
@@ -188,7 +187,6 @@ public class FxFenetreController extends ScrollPane {
 		assert tabbedPane != null : "fx:id=\"tabbedPane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert fxConsolescrollpane != null : "fx:id=\"fxConsolescrollpane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert vbox != null : "fx:id=\"vbox\" was not injected: check your FXML file 'fxFenetre.fxml'.";
-		assert caseFaireDefiler != null : "fx:id=\"caseFaireDefiler\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert comptesTilePane != null : "fx:id=\"comptesTilePane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 
 
@@ -208,73 +206,91 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private void casesInit() {
+		
 		if (bot.pillage == true) {
-			// casePillage.isSelected();
+			// casePillage.isSelected(); 
 			casePillage.setSelected(true);
-		} else
-			casePillage.setSelected(false);
+		} else {
+			casePillage.setSelected(false);}
+		raffraichirCase (casePillage);
 
 		if (bot.faireFete == true) {
 			// casePillage.isSelected();
 			caseFetes.setSelected(true);
-		} else
-			caseFetes.setSelected(false);
+		} else {
+			caseFetes.setSelected(false);}
+		raffraichirCase (caseFetes);
 
 		if (bot.construireBatiments == true) {
 			// casePillage.isSelected();
 			caseConstruireBatiment.setSelected(true);
-		} else
-			caseConstruireBatiment.setSelected(false);
+		} else {
+			caseConstruireBatiment.setSelected(false);}
+		raffraichirCase (caseConstruireBatiment);
 
 		if (bot.evacuerSurplusRessources == true) {
 			caseEvacuerRessGrosVillages.setSelected(true);
-		} else
-			caseEvacuerRessGrosVillages.setSelected(false);
+		} else {
+			caseEvacuerRessGrosVillages.setSelected(false);}
+		raffraichirCase (caseEvacuerRessGrosVillages);
 
 		if (bot.approPetitsVillages == true) {
 			caseApproPetitsVillages.setSelected(true);
-		} else
-			caseApproPetitsVillages.setSelected(false);
+		} else {
+			caseApproPetitsVillages.setSelected(false);}
+		raffraichirCase (caseApproPetitsVillages);
 
 		if (bot.optimiserProdHero == true) {
 			caseOptimiserProdHero.setSelected(true);
-		} else
-			caseOptimiserProdHero.setSelected(false);
+		} else {
+			caseOptimiserProdHero.setSelected(false);}
+		raffraichirCase (caseOptimiserProdHero);
 
 		if (bot.rotationVillage == true) {
 			caseRotationVillage.setSelected(true);
-		} else
-			caseRotationVillage.setSelected(false);
+		} else {
+			caseRotationVillage.setSelected(false);}
+		raffraichirCase (caseRotationVillage);
 
 		if (bot.npc == true) {
 			// casePillage.isSelected();
 			caseNpc.setSelected(true);
-		} else
-			caseNpc.setSelected(false);
-
-		if (bot.faireDefiler == true) {
-			// casePillage.isSelected();
-			caseFaireDefiler.setSelected(true);
-		} else
-			caseFaireDefiler.setSelected(false);
+		} else {
+			caseNpc.setSelected(false);}
+		raffraichirCase (caseNpc);
 
 		if (bot.monterChampsCapitale == true) {
 			// casePillage.isSelected();
-			monterChampCapitale.setSelected(true);
-		} else
-			monterChampCapitale.setSelected(false);
+			caseMonterChampCapitale.setSelected(true);
+		} else {
+			caseMonterChampCapitale.setSelected(false);}
+		raffraichirCase (caseMonterChampCapitale);
 
 		if (bot.faireAventures == true) {
 			// casePillage.isSelected();
 			caseFaireAventures.setSelected(true);
-		} else
-			caseFaireAventures.setSelected(false);
+		} else {
+			caseFaireAventures.setSelected(false);}
+		raffraichirCase (caseFaireAventures);
 
 		if (bot.acheterAuMarché == true) {
 			caseAcheterAuMarché.setSelected(true);
-		} else
-			caseAcheterAuMarché.setSelected(false);
+		} else {
+			caseAcheterAuMarché.setSelected(false);}
+		raffraichirCase (caseAcheterAuMarché);
+		
+		
+		
+		
+		if (bot.faireDefiler == true) {
+			// casePillage.isSelected();
+			caseFaireDefiler.setSelected(true);
+		} else {
+			caseFaireDefiler.setSelected(false);}
+		raffraichirCase (caseFaireDefiler);
 
+		
+		
 	}
 
 
@@ -289,6 +305,7 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.pillage = true;
 		}
+		raffraichirCase (casePillage);
 	}
 
 	@FXML
@@ -298,6 +315,7 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.faireFete = true;
 		}
+		raffraichirCase (caseFetes);
 	}
 
 	@FXML
@@ -307,7 +325,7 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.construireBatiments = true;
 		}
-
+		raffraichirCase (caseConstruireBatiment);
 	}
 
 	@FXML
@@ -317,6 +335,7 @@ public class FxFenetreController extends ScrollPane {
 		}else {
 			bot.monterChampsCapitale = true;
 		}
+		raffraichirCase(caseMonterChampCapitale);
 	}
 
 
@@ -328,6 +347,7 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.evacuerSurplusRessources = true;
 		}
+		raffraichirCase (caseEvacuerRessGrosVillages);
 	}
 
 	@FXML
@@ -337,6 +357,7 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.npc = true;
 		}
+		raffraichirCase (caseNpc);
 	}
 
 	@FXML
@@ -346,48 +367,56 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.approPetitsVillages = true;
 		}
+		raffraichirCase (caseApproPetitsVillages);
 	}
 
 	@FXML
 	private void caseOptimiserProdHero() {
 		if (bot.optimiserProdHero == true) {
 			bot.optimiserProdHero = false;
-		} else
+		} else {
 			bot.optimiserProdHero = true;
+			}
+		raffraichirCase (caseOptimiserProdHero);
 	}
 
 	@FXML
 	private void caseRotationVillage() {
 		if (bot.rotationVillage == true) {
 			bot.rotationVillage = false;
-		} else
+		} else {
 			bot.rotationVillage = true;
+			}
+		raffraichirCase (caseRotationVillage);
 	}
 
-	@FXML
-	private void npc() {
-		if (bot.pillage == true) {
-			bot.pillage = false;
-		} else {
-			bot.pillage = true;
-		}
-	}
 
 	@FXML
 	private void caseFaireAventures(){
 		if (bot.faireAventures == true) {
 			bot.faireAventures = false;
-		}else
+		}else {
 			bot.faireAventures = true;
+			}
+		raffraichirCase (caseFaireAventures);
 	}
 
 	@FXML
 	private void caseAcheterAuMarché(){
 		if (bot.acheterAuMarché == true) {
 			bot.acheterAuMarché = false;
-		}else
+		}else {
 			bot.acheterAuMarché = true;
+		}
+		raffraichirCase (caseAcheterAuMarché);
 	}
+	
+	
+
+	
+	
+	
+	
 	//les regimes speciaux de village
 	private void switcherCaseRegimePillage(Village village){
 		if (village.getRegimePillage() == true) {
@@ -486,8 +515,13 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			bot.faireDefiler = true;
 		}
-
+		raffraichirCase (caseFaireDefiler);
 	}
+	
+	
+	
+
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void faireTuileDeCompte(File compte){
 
@@ -672,6 +706,9 @@ public class FxFenetreController extends ScrollPane {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	private void fxChargerComptes(){
+		
+	//	if(ongletEnCours.equals( "comptes") == false) {
+		//	ongletEnCours = "comptes" ;
 		ArrayList<File> listeFichiers = bot.gestionnaireDeComptes.getListeFichiers("comptes", "comptetravian"); 
 		
 
@@ -704,7 +741,8 @@ public class FxFenetreController extends ScrollPane {
 
 		 */
 
-	}
+//	}
+}
 
 	/*
 	 * public void ecrire(String flux, int c, int from, int to, String css ){
@@ -739,7 +777,7 @@ public class FxFenetreController extends ScrollPane {
 
 
 
-
+//  <CheckBox fx:id="caseFaireDefiler" mnemonicParsing="false" styleClass="lesOnglets" onAction="#caseFaireDefiler" selected="true" text="Faire Défiler" BorderPane.alignment="BOTTOM_RIGHT" />
 
 	@FXML
 	private void fxConsolescrollpane() throws IOException {
@@ -753,8 +791,28 @@ public class FxFenetreController extends ScrollPane {
 		// vbox.getChildren().remove(0);//clear();
 		// fxConsolescrollpane.setContent(vbox);
 		// TODO console text Flow 1
+		AnchorPane pane = new AnchorPane();
+	
+
+		caseFaireDefiler.setText("Faire Defiler");
+
+		
+		
+		caseFaireDefiler.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
+			caseFaireDefiler();
+			raffraichirCase (caseFaireDefiler);
+		} });
+		
 		vtScroll = new VirtualizedScrollPane(console.fxConsoleColored(fxFenetreController, firstText)); 
-		fxConsolescrollpane.setContent(vtScroll); // console qui marche
+		
+		pane.getChildren().addAll(vtScroll,  caseFaireDefiler );
+		AnchorPane.setTopAnchor(vtScroll, 0.0);
+		AnchorPane.setBottomAnchor(vtScroll, 0.0);
+		AnchorPane.setRightAnchor(vtScroll, 0.0);
+		AnchorPane.setLeftAnchor(vtScroll, 0.0);
+		AnchorPane.setRightAnchor(caseFaireDefiler, 15.0);
+		AnchorPane.setBottomAnchor(caseFaireDefiler, 15.0);
+		fxConsolescrollpane.setContent(pane); // console qui marche
 		//	fxConsolescrollpane.setContent(console.fxConsoleColored(fxFenetreController, firstText)); // console qui marche
 
 		// experimentale
@@ -859,7 +917,6 @@ public class FxFenetreController extends ScrollPane {
 							StackPane v1pane = new StackPane();
 
 							vpane.setMinHeight(60);
-							
 							v1pane.setMinHeight(vpane.getMinHeight());
 							v1pane.setMinWidth(750);
 
@@ -884,8 +941,6 @@ public class FxFenetreController extends ScrollPane {
 
 							anchpane.getChildren().addAll(v1pane, vpane);
 							villageAnchorPane.getChildren().addAll(anchpane);
-							villageAnchorPane.getStyleClass().clear();
-							villageAnchorPane.getStyleClass().add("cEditeur");
 							//	villageAnchorPane.setEffect(lighting);
 							i++;
 
@@ -1290,6 +1345,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML 
 	public void  faireOngletTemplate() {
+	//	if(ongletEnCours.equals( "template") == false) {
+	//		ongletEnCours = "template" ;
+			
 		bot.chargerTemplate();
 		TabPane onglets = new TabPane();
 		fxTemplate.getChildren().clear();
@@ -1314,7 +1372,7 @@ public class FxFenetreController extends ScrollPane {
 				 sc.setFitToWidth(true);
 				 sc.setFitToHeight(true);
 				 tab.setText(village.getNom());
-				 onglets.getStyleClass().add("cEditeur");
+				 onglets.getStyleClass().add("cEditeur");   //onglets.getStyleClass().add("cEditeur");
 				 onglets.getTabs().add(tab);
 				
 				 i++;
@@ -1326,7 +1384,7 @@ public class FxFenetreController extends ScrollPane {
 
 		}
 
-
+	//}
 	}
 
 
@@ -1347,15 +1405,8 @@ public class FxFenetreController extends ScrollPane {
 
 	public VBox faireSelecteurDeTemplateDeVillage(Village village, int i) {
 
-
-
 		VBox vbv= new VBox();
 		//village
-
-
-
-
-
 
 
 
@@ -1368,7 +1419,6 @@ public class FxFenetreController extends ScrollPane {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
 			vbv.getStyleClass().add("ctemplateV2");
-
 
 
 		}
@@ -1468,6 +1518,13 @@ public class FxFenetreController extends ScrollPane {
 			}
 		});
 
+		
+		
+		
+		
+		
+		
+		
 		/*          				
 		 * if(i== 0) {
 	bot.faireUnTemplateDeCompte(1);
@@ -1484,25 +1541,49 @@ public class FxFenetreController extends ScrollPane {
 			}
 		}
 		return vbv2Creation;
-
-
-
-
-
-
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void initAutoriserAPoserBatBox(TemplatesDeVillages tem, CheckBox autoriserAPoserBatBox){
 
 		if (tem.getAutoriserAPoserBatiment() == true) {
 			autoriserAPoserBatBox.setSelected(true);
 		} else
 			autoriserAPoserBatBox.setSelected(false);
-
-		
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 	private void switcherAutoriserAPoserBat(TemplatesDeVillages tem) {
@@ -1512,6 +1593,20 @@ public class FxFenetreController extends ScrollPane {
 			tem.setAutoriserAPoserBatiment(true);
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void raffraichirCase (Village village, FlowPane Fc , CheckBox c){
 
 
@@ -1529,6 +1624,31 @@ public class FxFenetreController extends ScrollPane {
 
 			}
 		}
+	
+	public void raffraichirCase (CheckBox c){
+
+		
+	//	flowCases.setHgap(0);
+	//	flowCases.setVgap(0);
+		c.setPadding(new Insets(5,5,5,5));
+		c.setStyle("-fx-background-radius: 6 6 6 6;");
+		if(c.isSelected()){
+			
+			c.getStyleClass().clear();
+			c.getStyleClass().remove("off");
+			c.getStyleClass().add("fake3");
+			
+
+		}
+		else {
+			
+			c.getStyleClass().clear();
+			c.getStyleClass().remove("fake3");
+			c.getStyleClass().add("off");
+			
+
+		}
+	}
 
 
 
@@ -1561,7 +1681,7 @@ public class FxFenetreController extends ScrollPane {
 		cb1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-				System.out.println(cb1.getItems().get((Integer) number2));
+			//	System.out.println(cb1.getItems().get((Integer) number2));
 				tem.setOperateur1(cb1.getItems().get((Integer) number2));
 			}
 		});
@@ -1598,7 +1718,7 @@ public class FxFenetreController extends ScrollPane {
 		cb2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-				System.out.println(cb2.getItems().get((Integer) number2));
+			//	System.out.println(cb2.getItems().get((Integer) number2));
 				tem.setOperateur2(cb2.getItems().get((Integer) number2));
 			}
 		});
@@ -1866,20 +1986,20 @@ System.out.println("The button did it!");
 
 		if (i % 2 == 0) {
 			vbv.getStyleClass().remove("fake3");
-			vbv.getStyleClass().remove("off");
-			vbv.getStyleClass().add("cEditeur");
+			vbv.getStyleClass().add("off");
+			//vbv.getStyleClass().add("cEditeur");
 
 		} else {
 			vbv.getStyleClass().remove("fake3");
-			vbv.getStyleClass().remove("off");
-			vbv.getStyleClass().add("cEditeur");
+			vbv.getStyleClass().add("off");
+		//	vbv.getStyleClass().add("cEditeur");
 
 
 
 		}
 
 		VBox e = editeur(vbv , templateSelectione);
-		vbv.getChildren().add(e);
+		fxTemplate.getChildren().add(e);
 
 		return vbv;
 	}
@@ -1917,7 +2037,7 @@ System.out.println("The button did it!");
 			nomVLabel.setPrefHeight(25);
 			nomVLabel.setPadding(new Insets(5, 15, 5, 15));
 			
-			vbv.setPadding(new Insets(15, 15, 15, 15));
+			vbv.setPadding(new Insets(0, 0,0, 0));
 
 
 
@@ -2031,7 +2151,7 @@ button.setOnMouseClicked((e) -> {
 
 
 
-			flowb.setMinHeight(40);
+			flowb.setMinHeight(25);
 			vbv2Creation.getChildren().add(templateChooser);
 			vbv2Creation.getChildren().add(flowb);
 			vbv2Creation.getStyleClass().add("lesCheckBoxs");
