@@ -397,7 +397,26 @@ b.scroll-bar:horizontal b.track-background {
  	 -fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
  	/* -fx-background-image: url("image/default_paper.png");
 	-fx-background-size: 150% 150%;
-	-fx-background-position:75% 75%;*/
+	-fx-background-position:75% 75%;   solid #283308             */
+}
+
+.btnTravianOff{
+	
+-fx-border-radius: 5px;
+
+	-fx-background-color: linear-gradient( from 0.0% 0.0% to 0.0% 100.0%, rgb(255,102,102) 0.0, rgb(153,0,0) 100.0);
+	
+}
+.btnTravianOn{
+
+	-fx-border-radius: 5px;
+	-fx-background-color: linear-gradient( from 0.0% 0.0% to 0.0% 100.0%, rgb(153,204,153) 0.0, rgb(81,158,70) 100.0) ;
+	/*  -fx-border: 1px solid #283308;
+   -fx-background-image: linear-gradient(to bottom,#7cb029,#587c1e);
+  -fx-box-shadow: inset 2px 0 1px -1px #4b6f19, inset -2px 0 1px -1px #4b6f19, inset 0 3px 1px -1px #b5e251, inset 0 -3px 1px -1px rgba(44,75,12,0.6);
+	-fx-border-radius: 5px;
+*/
+	
 }
   .lesOnglets{
  	-fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
