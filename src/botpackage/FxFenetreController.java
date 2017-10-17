@@ -72,13 +72,13 @@ public class FxFenetreController extends ScrollPane {
 	FxFenetreController fxFenetreController;
 	// FxConsole console;
 	// FxConsoleSimple console;
-	FxConsoleExperimentale console;
+	FxConsoleExperimentale console ;
 	VirtualizedScrollPane<StyleClassedTextArea> vtScroll;
-
+	//public Lancerbot bot = new Lancerbot(fxFenetreController, console);
 
 	String compteSelectionne = null;
 
-	String ongletEnCours = "rien";
+	int ongletEnCours = 0;
 	
 	CheckBox caseFaireDefiler = new CheckBox();
 	
@@ -706,9 +706,13 @@ public class FxFenetreController extends ScrollPane {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	private void fxChargerComptes(){
+	//	if(!(ongletEnCours == 1) ) {
+			ongletEnCours = 1;
+			try {
+				console.flux.envoyer(fxFenetreController, "ongletEnCours = 1");
+			} catch (Exception e1) {}
 		
-	//	if(ongletEnCours.equals( "comptes") == false) {
-		//	ongletEnCours = "comptes" ;
+
 		ArrayList<File> listeFichiers = bot.gestionnaireDeComptes.getListeFichiers("comptes", "comptetravian"); 
 		
 
@@ -742,8 +746,8 @@ public class FxFenetreController extends ScrollPane {
 		 */
 
 //	}
-}
-
+//}
+	}
 	/*
 	 * public void ecrire(String flux, int c, int from, int to, String css ){
 	 * javafx.application.Platform.runLater( ()
@@ -791,7 +795,7 @@ public class FxFenetreController extends ScrollPane {
 		// vbox.getChildren().remove(0);//clear();
 		// fxConsolescrollpane.setContent(vbox);
 		// TODO console text Flow 1
-		AnchorPane pane = new AnchorPane();
+		AnchorPane anchorpane = new AnchorPane();
 	
 
 		caseFaireDefiler.setText("Faire Defiler");
@@ -805,14 +809,14 @@ public class FxFenetreController extends ScrollPane {
 		
 		vtScroll = new VirtualizedScrollPane(console.fxConsoleColored(fxFenetreController, firstText)); 
 		
-		pane.getChildren().addAll(vtScroll,  caseFaireDefiler );
+		anchorpane.getChildren().addAll(vtScroll,  caseFaireDefiler );
 		AnchorPane.setTopAnchor(vtScroll, 0.0);
 		AnchorPane.setBottomAnchor(vtScroll, 0.0);
 		AnchorPane.setRightAnchor(vtScroll, 0.0);
 		AnchorPane.setLeftAnchor(vtScroll, 0.0);
 		AnchorPane.setRightAnchor(caseFaireDefiler, 15.0);
 		AnchorPane.setBottomAnchor(caseFaireDefiler, 15.0);
-		fxConsolescrollpane.setContent(pane); // console qui marche
+		fxConsolescrollpane.setContent(anchorpane); // console qui marche
 		//	fxConsolescrollpane.setContent(console.fxConsoleColored(fxFenetreController, firstText)); // console qui marche
 
 		// experimentale
@@ -898,7 +902,12 @@ public class FxFenetreController extends ScrollPane {
 	int ipeupler= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
 	@FXML
 	private void peupleractif() {
-
+	//	if(!(ongletEnCours == 2) ) {
+	//		ongletEnCours = 2;
+			try {
+				console.flux.envoyer(fxFenetreController, "ongletEnCours = 2");
+			} catch (IOException e1) {}
+			
 		if(ipeupler == 0){
 			ipeupler=1; // mode reconsctruction sur le chargement de l'onglet, pour develloper tranquille
 			Platform.runLater(new Runnable() {
@@ -931,7 +940,8 @@ public class FxFenetreController extends ScrollPane {
 
 							}
 							vpane = raffraichirVpane(village, vpane); //construit un vpane par village
-
+							vpane.setCache(true);
+							vpane .setCacheHint(CacheHint.QUALITY);
 
 							AnchorPane anchpane = new AnchorPane();
 							anchpane.setLeftAnchor(vpane, 0.0);
@@ -966,6 +976,7 @@ public class FxFenetreController extends ScrollPane {
 			});
 
 		}
+//		}
 		ipeupler = 0;
 	}
 	private EventHandler<ActionEvent> setb(Village leVillage, int typeBAFC, String textfield) {
@@ -1345,8 +1356,12 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML 
 	public void  faireOngletTemplate() {
-	//	if(ongletEnCours.equals( "template") == false) {
-	//		ongletEnCours = "template" ;
+
+	//	if(!(ongletEnCours == 3) ) {
+	//		ongletEnCours = 3;
+			try {
+				console.flux.envoyer(fxFenetreController, "ongletEnCours = 3");
+			} catch (IOException e1) {}
 			
 		bot.chargerTemplate();
 		TabPane onglets = new TabPane();
@@ -1383,7 +1398,8 @@ public class FxFenetreController extends ScrollPane {
 		}catch (Exception e) {
 
 		}
-
+//		}
+//
 	//}
 	}
 
@@ -1636,7 +1652,7 @@ public class FxFenetreController extends ScrollPane {
 			
 			c.getStyleClass().clear();
 			c.getStyleClass().remove("off");
-			c.getStyleClass().add("fake3");
+			c.getStyleClass().add("fake3"); //btnTravianOn
 			
 
 		}
@@ -1644,7 +1660,7 @@ public class FxFenetreController extends ScrollPane {
 			
 			c.getStyleClass().clear();
 			c.getStyleClass().remove("fake3");
-			c.getStyleClass().add("off");
+			c.getStyleClass().add("off" ); //btnTravianOff
 			
 
 		}

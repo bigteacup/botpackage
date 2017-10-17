@@ -143,7 +143,13 @@ public void faireUnTemplateDeCompte(int i) {
 
 		}
 
-
+		public  Lancerbot(FxFenetreController fxFenetreController, FxConsoleExperimentale console) {
+			setConsole(console);
+			setfxFenetreController(fxFenetreController);
+			templateLancerBot = new TemplatesDeVillages();
+			listeDeTemplates.add(templateLancerBot);
+			 chargerTemplate();
+		}
 
 
 

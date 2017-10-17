@@ -114,7 +114,7 @@ public void envoyer(FxFenetreController fxFenetreController, String ligne) throw
       // ligne.getStyleClass().add("x");
 
 	//	fxFenetreController.console.fxConsoleTextArea(fxFenetreController, ligne +"\n" );//listeMotsCouleurfinal 
-	} catch (Exception e) {e.printStackTrace();
+	} catch (Exception e) {
 	}
 	});
 
