@@ -1652,15 +1652,16 @@ public class FxFenetreController extends ScrollPane {
 			
 			c.getStyleClass().clear();
 			c.getStyleClass().remove("off");
-			c.getStyleClass().add("fake3"); //btnTravianOn
-			
+			c.getStyleClass().add("btnTravianOn"); //btnTravianOn  fake3
+			 
 
 		}
 		else {
 			
 			c.getStyleClass().clear();
 			c.getStyleClass().remove("fake3");
-			c.getStyleClass().add("off" ); //btnTravianOff
+			c.getStyleClass().add("btnTravianOff" ); //btnTravianOff   off
+			
 			
 
 		}
