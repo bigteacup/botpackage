@@ -411,10 +411,10 @@ b.scroll-bar:horizontal b.track-background {
    -fx-background-insets: 0,0 0 3 0, 0 3 4 0, 0 3 5 0;
     -fx-background-radius: 5;
     -fx-background-color: 
-        linear-gradient(from 0% 93% to 0% 100%,   #bf0b32 0%,#f72250 100%),
-       	#f72250,
-        #bf0b32,
-        radial-gradient(center 50% 50%, radius 100%,  #f72250,  #bf0b32);
+        linear-gradient(from 0% 93% to 0% 100%,   #bc0707 0%,#f93131 100%),
+       	#f93131,
+        #bc0707,
+        radial-gradient(center 50% 50%, radius 100%,  #f93131,  #bc0707);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }
 .btnTravianOff .text  {
