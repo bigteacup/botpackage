@@ -110,7 +110,8 @@ public class FxFenetreController extends ScrollPane {
 	@FXML
 	private Button bypassPause;
 
-
+	@FXML
+	private VBox fxOngletEnvoiTroupes;
 
 	@FXML
 	private FlowPane lesCheckBoxs;
@@ -2337,9 +2338,10 @@ button.setOnMouseClicked((e) -> {
 
 
 
-
-
-
+@FXML
+	public void faireOngletEnvoiTroupes() {
+		
+	}
 
 }
 

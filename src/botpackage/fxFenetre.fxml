@@ -187,6 +187,15 @@
                         </ScrollPane>
                      </content>
                    </Tab>
+                   <Tab closable="false"  onSelectionChanged="#faireOngletEnvoiTroupes"  text="Mouvements de Troupes" styleClass="lesOnglets">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" >
+                           <content>
+                             <VBox fx:id="fxOngletEnvoiTroupes"  styleClass="compteStyle1" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                   </Tab>
               </tabs>
             </TabPane>
          </center>

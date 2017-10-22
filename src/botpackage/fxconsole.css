@@ -426,7 +426,7 @@ b.scroll-bar:horizontal b.track-background {
 	
 	*/
 	-fx-text-fill: white;
-	
+	-fx-font-size: 13px;
 	-fx-translate-y:  -2px;
  
 
@@ -445,7 +445,7 @@ b.scroll-bar:horizontal b.track-background {
         radial-gradient(center 50% 50%, radius 100%,  #7cb029, #587c1e);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 	*/
-
+-fx-font-size: 13px;
     
     -fx-background-insets: 0,0 0 1 0, 0 0 2 0, 0 0 2 0;
     -fx-background-radius: 5;
