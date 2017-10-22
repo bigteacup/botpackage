@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -118,7 +120,7 @@ public void faireUnTemplateDeCompte(int i) {
 			 chargerTemplate();
 			
 			
-			
+			 System.out.println("Encodage : "+System.getProperty("file.encoding"));
 			
 			
 			//this.bot = bot;
@@ -144,11 +146,13 @@ public void faireUnTemplateDeCompte(int i) {
 		}
 
 		public  Lancerbot(FxFenetreController fxFenetreController, FxConsoleExperimentale console) {
+			 
 			setConsole(console);
 			setfxFenetreController(fxFenetreController);
 			templateLancerBot = new TemplatesDeVillages();
 			listeDeTemplates.add(templateLancerBot);
 			 chargerTemplate();
+			
 		}
 
 
@@ -430,27 +434,37 @@ listeAttaques.add(attaque8);
 ////////////////////////////////////////////////////////////////////////
 //charger les configs précédentes
 public Properties loadTemplatesProperties(String nomTemplate){
-
+	
 String path = System.getProperty("user.home")+"\\botpackage\\templates\\"+nomTemplate;		//System.getProperty("user.home") + "\\botpackage\\comptes"; +\".properties"
 Properties properties = new Properties();
 FileInputStream input = null;
-
+InputStreamReader i= null;
 try {
 	input = new FileInputStream(path);
 } catch (FileNotFoundException e) {e.printStackTrace();} 
 
+try {
+	 i =new InputStreamReader(input,"UTF-8");
+} catch (UnsupportedEncodingException e1) {	e1.printStackTrace();}
+
 
 try{
-properties.load(input);
+properties.load(i);
 
 } catch (IOException e) {e.printStackTrace();}
 finally{
+	try {
+		if(i !=null)
+		i.close();
+	}  
+
+	catch (IOException e) {e.printStackTrace();}//
 	try {
 		if(input !=null)
 		input.close();
 	}  
 
-	catch (IOException e) {e.printStackTrace();}//
+	catch (IOException e) {e.printStackTrace();}
 		
 }
 return properties;	

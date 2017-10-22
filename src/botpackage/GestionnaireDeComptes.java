@@ -206,7 +206,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 	/////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////
 	public void ecrireDansFichierTemplate(String dossier, String nomFichier, TemplatesDeVillages templateDeVillage ) {
-		
+		 System.out.println("Encodage : "+System.getProperty("file.encoding"));
 		PrintWriter writer;
 		try {
 		//	writer = new PrintWriter(new OutputStreamWriter(csocket.getOutputStream(), StandardCharsets.UTF_8), true);
@@ -216,8 +216,10 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 				writer = new PrintWriter(new File (System.getProperty("user.home") + "\\botpackage\\" + dossier+"\\" + nomFichier), "UTF-8");
 
 			for(Batiment bat : templateDeVillage.getListeDeBatiments()) {
-			writer.println(encoding(bat.getNomBatiment().replaceAll("\\s", "\\\\ ")+ "="+ bat.getLevelBatiment()));
-
+		//	writer.println(encoding(bat.getNomBatiment().replaceAll("\\s", "\\\\ ")+ "="+ bat.getLevelBatiment()));
+			
+				writer.println(bat.getNomBatiment().replaceAll("\\s", "\\\\ ")+ "="+ bat.getLevelBatiment());
+			
 }	
 			
 			writer.close();
