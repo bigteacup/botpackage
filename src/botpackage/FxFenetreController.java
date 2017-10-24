@@ -169,6 +169,10 @@ public class FxFenetreController extends ScrollPane {
 	@FXML
 	private TroisChampsDeSaisieController troisChampsDeSaisieController;
 
+//	public FxFenetreController(Stage primaryStage) {
+	//	this.fx
+//	}
+	private Stage stage;
 	///// 
 	@FXML
 	void initialize() throws IOException {
@@ -548,7 +552,7 @@ public class FxFenetreController extends ScrollPane {
 				button1.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						button1.setText("En cours");
-
+						stage.setTitle("TimTools lite" + "  ==>  " + compte.getName().split(".compte")[0]);
 
 						compteSelectionne = compte.getName();
 						//update de cochon
@@ -901,6 +905,8 @@ public class FxFenetreController extends ScrollPane {
 
 
 	int ipeupler= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
+
+	
 	@FXML
 	private void peupleractif() {
 	//	if(!(ongletEnCours == 2) ) {
@@ -2342,6 +2348,11 @@ button.setOnMouseClicked((e) -> {
 	public void faireOngletEnvoiTroupes() {
 		
 	}
+
+public void setStage(Stage primaryStage) {
+	this.stage = primaryStage;
+	
+}
 
 }
 
