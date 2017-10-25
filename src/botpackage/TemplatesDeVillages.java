@@ -125,7 +125,7 @@ public  class   TemplatesDeVillages {
 	static String atelier= "Atelier";
 	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville Hôtel de ville
 	static String ambassade = "Ambassade";
-	static String mur = "Palissade";
+	static String murGaulois = "Palissade";
 	static String palais = "Palais";
 	static String silo ="Silo de céréales";
 	static String depot ="Dépôt de ressources";
@@ -139,6 +139,7 @@ public  class   TemplatesDeVillages {
 	static String grandDepot = "Grand Dépôt de ressources";
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
+	static String murRomain = "Mur d'enceinte"; //Mur d&#39;enceinte //Mur d'enceinte
 	String nomDuTemplate="";
  
 	//liste de batimients
@@ -193,6 +194,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(marche, 3));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(academie, 3));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(murRomain, 3));
 		
 		 
 		 
@@ -209,6 +211,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(palais, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(academie, 5));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(murRomain, 6));
 		// listeDeBatimentsDuTemplateParDefault2.add(new Batiment(cachette, 10));
 		 
 		 
@@ -230,6 +233,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(tailleur, 12));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(place_rassemblement, 10));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(boulangerie, 5));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(murRomain, 10));
 		 // listeDeBatimentsDuTemplateParDefault3.add(new Batiment(cachette, 10)); Chambre aux trésors
 		 		 
 
@@ -256,6 +260,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cdt, 1));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 10));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 10));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(murRomain, 15));
 		 // listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cachette, 10));
 		 
 
@@ -368,7 +373,8 @@ public  class   TemplatesDeVillages {
 		listeDeBatimentDuJeu.add(new Batiment (atelier, 0));
 		listeDeBatimentDuJeu.add(new Batiment (hotel_de_ville, 0));
 		listeDeBatimentDuJeu.add(new Batiment (ambassade, 0));
-		listeDeBatimentDuJeu.add(new Batiment (mur, 0));
+		listeDeBatimentDuJeu.add(new Batiment (murGaulois, 0));
+		listeDeBatimentDuJeu.add(new Batiment (murRomain, 0));
 		listeDeBatimentDuJeu.add(new Batiment (palais, 0));
 		listeDeBatimentDuJeu.add(new Batiment (silo, 0));
 		listeDeBatimentDuJeu.add(new Batiment (depot, 0));

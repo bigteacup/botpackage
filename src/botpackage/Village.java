@@ -1248,7 +1248,7 @@ public class Village {
 					int levelSuivantDispo = 0;
 					levelSuivantDispo = Integer.parseInt(webBatiment.getAttribute("alt").split("Coût pour le niveau ")[1].split(":<br")[0]);
 					level = (levelSuivantDispo - 1); //level en cours
-				}catch(Exception e){/* t.ecrireDansConsole("Echec levelSuivantDispo de construire batiment");*/} //Coét pour le niveau 8:
+				}catch(Exception e){/* t.ecrireDansConsole("Echec levelSuivantDispo de construire batiment");*/} //Cout pour le niveau 8:
 				
 				String slot = webBatiment.getAttribute("href").split("id=")[1];
 
@@ -1693,7 +1693,7 @@ public class Village {
 											if (titre.toLowerCase().contains(nomBat.toLowerCase())) {
 												t.ecrireDansConsole(nomBat+" ////////// tentative pour contruction"); 
 												try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., '"+ titre +"')]//div[@class='button-content']"));
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ titre +"\")]//div[@class='button-content']"));
 
 													if (boutton.getText().contains("Construire le bâtiment.")) {
 														t.randomsleep.court();
@@ -1706,7 +1706,7 @@ public class Village {
 												}catch (Exception e) {
 													t.ecrireDansConsole("Echec par Titre");
 													try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., '"+ nomBat +"')]//div[@class='button-content']"));
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ nomBat +"\")]//div[@class='button-content']"));
 													if (boutton.getText().contains("Construire le bâtiment.")) {
 														t.randomsleep.court();
 														boutton.click();
