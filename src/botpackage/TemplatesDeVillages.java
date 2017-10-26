@@ -139,7 +139,7 @@ public  class   TemplatesDeVillages {
 	static String grandDepot = "Grand Dépôt de ressources";
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
-	static String murRomain = "Mur d'enceinte"; //Mur d&#39;enceinte //Mur d'enceinte
+	static String murRomain = "Mur d'enceinte"; //Mur d&#39;enceinte //Mur d' enceinte
 	String nomDuTemplate="";
  
 	//liste de batimients
@@ -194,7 +194,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(marche, 3));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(academie, 3));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(murRomain, 3));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(murRomain, 5));
 		
 		 
 		 
@@ -211,7 +211,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(palais, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(academie, 5));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(murRomain, 6));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(murRomain, 10));
 		// listeDeBatimentsDuTemplateParDefault2.add(new Batiment(cachette, 10));
 		 
 		 
@@ -233,7 +233,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(tailleur, 12));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(place_rassemblement, 10));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(boulangerie, 5));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(murRomain, 10));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(murRomain, 15));
 		 // listeDeBatimentsDuTemplateParDefault3.add(new Batiment(cachette, 10)); Chambre aux trésors
 		 		 
 

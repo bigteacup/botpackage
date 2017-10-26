@@ -971,7 +971,8 @@ public class Village {
 
 			// on les rempli
 			try {
-				nomBatiment = webBatiment.getAttribute("alt").split(" <span")[0];
+				nomBatiment = webBatiment.getAttribute("alt").split(" <span")[0].replace("&#39;", "'"); //&#39;
+				
 				levelBatiment = Integer.parseInt(webBatiment.getAttribute("alt").split("<span class=\"level\">Niveau ")[1].split("</span>")[0]);
 				// reperer conctructions en cours
 				if (webBatiment.getAttribute("alt").contains("Amélioration en cours")) {
@@ -1240,7 +1241,7 @@ public class Village {
 
 		for (WebElement webBatiment : listeDesBatiments) {
 			try {
-				String nom = webBatiment.getAttribute("alt").split(" <span")[0];
+				String nom = webBatiment.getAttribute("alt").split(" <span")[0].replace("&#39;", "'");
 				int level = Integer.parseInt(webBatiment.getAttribute("alt").split("<span class=\"level\">Niveau ")[1].split("</span>")[0]);
 				
 				// on corrige le level si un level est en cour de consrtuction
@@ -1292,7 +1293,7 @@ public class Village {
 
 							// voirListeDeConstruction(t);
 
-							if (as.getAttribute("alt").contains(construire1.getNomBatiment())
+							if (as.getAttribute("alt").replace("&#39;", "'").contains(construire1.getNomBatiment())
 									&& as.getAttribute("href").split("id=")[1].contains(construire1.getSlotBatiment())
 									&& village.getConstructionsEnCours() < t.limiteDeConstruction) {
 								boisNecessaire = Integer.parseInt(
@@ -1321,7 +1322,17 @@ public class Village {
 										&& stockFer >= ferNecessaire && stockCereales >= cerealesNecessaire) {
 									t.ecrireDansConsole("[construireBatiment] Ressources ok");
 									// go la page
+
+								if(as.getAttribute("alt").contains("Mur")) { //TODO rendre compatible les races
+									Actions action = new Actions(t.getCompte().getDriver());
+									action.moveToElement(as, 320, 440).click().perform();
+								//as.getAttribute("href");;
+								}	
+								else {
 									as.click();
+								}
+								
+									
 									t.randomsleep.court();
 
 									//TODO  en faire un Objet          
