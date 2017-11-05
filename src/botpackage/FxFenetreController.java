@@ -575,7 +575,9 @@ public class FxFenetreController extends ScrollPane {
 
 				// vpane.getChildren().add(button1);
 				// vpane.getChildren().add(titre);
+				titre.getStyleClass().remove("ctitre");
 				titre.getStyleClass().add("ctitre");
+				button1.getStyleClass().remove("cbutton1");
 				button1.getStyleClass().add("cbutton1");
 				//  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
 				vpane.setTop(titre);
@@ -583,6 +585,7 @@ public class FxFenetreController extends ScrollPane {
 				button1.setPadding(new Insets(5, 5, 5, 5));
 				BorderPane.setMargin(button1, new Insets(2, 2, 2, 2));
 
+				buttonDelete.getStyleClass().remove("buttonDelete");
 				buttonDelete.getStyleClass().add("buttonDelete");
 				//  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
 				vpane.setTop(titre);
@@ -599,8 +602,13 @@ public class FxFenetreController extends ScrollPane {
 				comptesTilePane.setPrefColumns(13);
 
 				vpane.getStyleClass().clear();
-				if (s == true) {vpane.getStyleClass().add("ctuile");
-				}else {vpane.getStyleClass().add("ctuileb");}
+				if (s == true) {
+					vpane.getStyleClass().remove("ctuile");
+					vpane.getStyleClass().add("ctuile");
+				}else {
+					vpane.getStyleClass().remove("ctuileb");
+					vpane.getStyleClass().add("ctuileb");
+				}
 
 
 
@@ -661,7 +669,9 @@ public class FxFenetreController extends ScrollPane {
 
 
 				Label titre = new Label("Nouveau Compte");
+				titre.getStyleClass().remove("ctitre");
 				titre.getStyleClass().add("ctitre");
+				button1.getStyleClass().remove("cbutton1");
 				button1.getStyleClass().add("cbutton1");
 				//  titre.setAlignment(Pos.TOP_LEFT); //setAlignment(Pos.CENTER);
 				vpane.setTop(titre);
@@ -684,8 +694,13 @@ public class FxFenetreController extends ScrollPane {
 				comptesTilePane.setPrefColumns(13);
 
 				vpane.getStyleClass().clear();
-				if ( true) {vpane.getStyleClass().add("ctuile");
-				}else {vpane.getStyleClass().add("ctuileb");}
+				if ( true) {
+					vpane.getStyleClass().remove("ctuile");
+					vpane.getStyleClass().add("ctuile");
+				}else {
+					vpane.getStyleClass().remove("ctuileb");
+					vpane.getStyleClass().add("ctuileb");
+					}
 
 				vpane.setMinHeight(100);
 				vpane.setMinWidth(150);
@@ -937,10 +952,12 @@ public class FxFenetreController extends ScrollPane {
 							v1pane.setMinWidth(750);
 
 							if (i % 2 == 0) {
+								v1pane.getStyleClass().remove("v1");
 								v1pane.getStyleClass().add("v1");
 								//		v1pane.setEffect(glow);
 
 							} else {
+								v1pane.getStyleClass().remove("v2");
 								v1pane.getStyleClass().add("v2");
 
 								//	v1pane.setEffect(lighting);
@@ -1069,16 +1086,17 @@ public class FxFenetreController extends ScrollPane {
 		//tableau ressources
 		Pane paneMarche = new Pane();
 		paneMarche.setPadding(new Insets(0,0,0,0));
+		paneMarche.getStyleClass().remove("m1");
 		paneMarche.getStyleClass().add("m1");
-		TextField t0 = new TextField(""+village.regimeMarcheBoisMax+"");t0.setPrefColumnCount(2);t0.getStyleClass().add("m2");t0.setOnAction((event) -> {setb(village, 0, t0.getText());});
-		TextField t1 = new TextField(""+village.regimeMarcheArgileMax+""); t1.setPrefColumnCount(2);t1.getStyleClass().add("m2");t1.setOnAction((event) -> {setb(village, 1, t1.getText());});
-		TextField t2 = new TextField(""+village.regimeMarcheFerMax+"");t2.setPrefColumnCount(2);t2.getStyleClass().add("m2");t2.setOnAction((event) -> {setb(village, 2, t2.getText());});
-		TextField t3 = new TextField(""+village.regimeMarcheCerealesMax+"");t3.setPrefColumnCount(2);t3.getStyleClass().add("m2");t3.setOnAction((event) -> {setb(village, 3, t3.getText());});
+		TextField t0 = new TextField(""+village.regimeMarcheBoisMax+"");t0.setPrefColumnCount(2);t0.getStyleClass().remove("m2");t0.getStyleClass().add("m2");t0.setOnAction((event) -> {setb(village, 0, t0.getText());});
+		TextField t1 = new TextField(""+village.regimeMarcheArgileMax+""); t1.setPrefColumnCount(2);t1.getStyleClass().remove("m2");t1.getStyleClass().add("m2");t1.setOnAction((event) -> {setb(village, 1, t1.getText());});
+		TextField t2 = new TextField(""+village.regimeMarcheFerMax+"");t2.setPrefColumnCount(2);t2.getStyleClass().remove("m2");t2.getStyleClass().add("m2");t2.setOnAction((event) -> {setb(village, 2, t2.getText());});
+		TextField t3 = new TextField(""+village.regimeMarcheCerealesMax+"");t3.setPrefColumnCount(2);t3.getStyleClass().remove("m2");t3.getStyleClass().add("m2");t3.setOnAction((event) -> {setb(village, 3, t3.getText());});
 
-		TextField t4 = new TextField(""+village.regimeMarcheBoisMin+"");t4.setPrefColumnCount(2);t4.getStyleClass().add("m2");t4.setOnAction((event) -> {setb(village, 4, t4.getText());});
-		TextField t5 = new TextField(""+village.regimeMarcheArgileMin+""); t5.setPrefColumnCount(2);t5.getStyleClass().add("m2");t5.setOnAction((event) -> {setb(village, 5, t5.getText());});
-		TextField t6 = new TextField(""+village.regimeMarcheFerMin+"");t6.setPrefColumnCount(2);t6.getStyleClass().add("m2");t6.setOnAction((event) -> {setb(village, 6, t6.getText());});
-		TextField t7 = new TextField(""+village.regimeMarcheCerealesMin+"");t7.setPrefColumnCount(2);t7.getStyleClass().add("m2");t7.setOnAction((event) -> {setb(village, 7, t7.getText());});
+		TextField t4 = new TextField(""+village.regimeMarcheBoisMin+"");t4.setPrefColumnCount(2);t4.getStyleClass().remove("m2");t4.getStyleClass().add("m2");t4.setOnAction((event) -> {setb(village, 4, t4.getText());});
+		TextField t5 = new TextField(""+village.regimeMarcheArgileMin+""); t5.setPrefColumnCount(2);t5.getStyleClass().remove("m2");t5.getStyleClass().add("m2");t5.setOnAction((event) -> {setb(village, 5, t5.getText());});
+		TextField t6 = new TextField(""+village.regimeMarcheFerMin+"");t6.setPrefColumnCount(2);t6.getStyleClass().remove("m2");t6.getStyleClass().add("m2");t6.setOnAction((event) -> {setb(village, 6, t6.getText());});
+		TextField t7 = new TextField(""+village.regimeMarcheCerealesMin+"");t7.setPrefColumnCount(2);t7.getStyleClass().remove("m2");t7.getStyleClass().add("m2");t7.setOnAction((event) -> {setb(village, 7, t7.getText());});
 
 		ArrayList<TextField> ts = new ArrayList<TextField>();
 		ts.add(t0);ts.add(t1);ts.add(t2);ts.add(t3);ts.add(t4);ts.add(t5);ts.add(t6);ts.add(t7);
@@ -1127,7 +1145,7 @@ public class FxFenetreController extends ScrollPane {
 
 
 		}); 
-
+		tb.getStyleClass().remove("m3");
 		tb.getStyleClass().add("m3");
 		tb.setEffect(lighting);
 		tb.setMinHeight(45);
@@ -1162,8 +1180,10 @@ public class FxFenetreController extends ScrollPane {
 
 		bvbox.getChildren().addAll(bvbl1,bvbl2,bvbl3);
 		if (village.regimeGeneral == false) {
+			bvbox.getStyleClass().remove("fake3");
 			bvbox.getStyleClass().add("fake3");
 		} else {
+			bvbox.getStyleClass().remove("off");
 			bvbox.getStyleClass().add("off");
 		}
 
@@ -1255,13 +1275,18 @@ public class FxFenetreController extends ScrollPane {
 
 		if (village.getVillageCapitale() == true) {
 			nomVLabel.getStyleClass().remove("vLabel");
+			nomVLabel.getStyleClass().remove("vLabelcap");
 			nomVLabel.getStyleClass().add("vLabelcap");
 		} else {
 			if(village.getVillagePillage() == true){
 				nomVLabel.getStyleClass().remove("vLabel");
 				nomVLabel.getStyleClass().remove("vLabelcap");
+				nomVLabel.getStyleClass().remove("vLabelpillage");
 				nomVLabel.getStyleClass().add("vLabelpillage");
 			}else {
+				nomVLabel.getStyleClass().remove("vLabelcap");
+				nomVLabel.getStyleClass().remove("vLabelpillage");
+				nomVLabel.getStyleClass().remove("vLabel");
 				nomVLabel.getStyleClass().add("vLabel");
 			}
 		}
@@ -1363,7 +1388,8 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML 
 	public void  faireOngletTemplate() {
-
+		TabPane onglets = null ;
+		
 	//	if(!(ongletEnCours == 3) ) {
 	//		ongletEnCours = 3;
 			try {
@@ -1371,7 +1397,10 @@ public class FxFenetreController extends ScrollPane {
 			} catch (IOException e1) {}
 			
 		bot.chargerTemplate();
-		TabPane onglets = new TabPane();
+		
+		onglets = new TabPane();
+		onglets.getTabs().clear();
+		
 		fxTemplate.getChildren().clear();
 		VBox c = faireEditeurDeTemplate(bot.getTemplateLancerBot());
 		fxTemplate.getChildren().add(c);
@@ -1394,6 +1423,7 @@ public class FxFenetreController extends ScrollPane {
 				 sc.setFitToWidth(true);
 				 sc.setFitToHeight(true);
 				 tab.setText(village.getNom());
+				 onglets.getStyleClass().remove("cEditeur"); 
 				 onglets.getStyleClass().add("cEditeur");   //onglets.getStyleClass().add("cEditeur");
 				 onglets.getTabs().add(tab);
 				
@@ -1436,11 +1466,15 @@ public class FxFenetreController extends ScrollPane {
 		if (i % 2 == 0) {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
+			vbv.getStyleClass().remove("ctemplateV1");
+			vbv.getStyleClass().remove("ctemplateV2");
 			vbv.getStyleClass().add("ctemplateV1");
 
 		} else {
 			vbv.getStyleClass().remove("fake3");
 			vbv.getStyleClass().remove("off");
+			vbv.getStyleClass().remove("ctemplateV1");
+			vbv.getStyleClass().remove("ctemplateV2");
 			vbv.getStyleClass().add("ctemplateV2");
 
 
@@ -1481,6 +1515,7 @@ public class FxFenetreController extends ScrollPane {
 		ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
 		FlowPane nomVillage = new FlowPane();
 		Label nomVLabel = new Label(village.getNom());
+		nomVLabel.getStyleClass().remove("vLabel");
 		nomVLabel.getStyleClass().add("vLabel");
 		nomVLabel.setPrefHeight(25);
 		nomVLabel.setPadding(new Insets(5, 15, 5, 15));
@@ -1701,6 +1736,7 @@ public class FxFenetreController extends ScrollPane {
 		ChoiceBox<String> cb1 = new ChoiceBox<String>();
 		ObservableList<String> obs =  FXCollections.observableArrayList("",  "<", "<=", "=", ">=", ">" );
 		cb1.setItems(obs);
+		cb1.getStyleClass().remove("listeDeroulante");
 		cb1.getStyleClass().add("listeDeroulante");
 		cb1.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
@@ -1738,6 +1774,7 @@ public class FxFenetreController extends ScrollPane {
 				"", "<", "<=", "=", ">=", ">" 
 				)
 				);
+		cb2.getStyleClass().remove("listeDeroulante");
 		cb2.getStyleClass().add("listeDeroulante");
 		cb2.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
@@ -1827,10 +1864,11 @@ System.out.println("The button did it!");
 
 
 		
-
+		templateChooser.getStyleClass().remove("stade2");
 		templateChooser.getStyleClass().add("stade2");
 		vbv2.getChildren().addAll(templateChooser,flowb);
 		
+		vbv2.getStyleClass().remove("stade");
 		vbv2.getStyleClass().add("stade");
 
 		///////////////////////////////////////////////////////////////
@@ -1937,6 +1975,7 @@ System.out.println("The button did it!");
 					fta.getChildren().get(0).getStyleClass().add("lesBatsTemFaitGreen");
 					fta.getStyleClass().remove("pink");
 					fta.getStyleClass().remove("lesBatsTem");
+					fta.getStyleClass().remove("lesBatsTemFait");
 					fta.getStyleClass().add("lesBatsTemFait");
 
 				}
@@ -2010,11 +2049,13 @@ System.out.println("The button did it!");
 
 		if (i % 2 == 0) {
 			vbv.getStyleClass().remove("fake3");
+			vbv.getStyleClass().remove("off");
 			vbv.getStyleClass().add("off");
 			//vbv.getStyleClass().add("cEditeur");
 
 		} else {
 			vbv.getStyleClass().remove("fake3");
+			vbv.getStyleClass().remove("off");
 			vbv.getStyleClass().add("off");
 		//	vbv.getStyleClass().add("cEditeur");
 
@@ -2057,6 +2098,7 @@ System.out.println("The button did it!");
 
 
 			Label nomVLabel = new Label("Editeur de Template");
+			nomVLabel.getStyleClass().remove("vLabel");
 			nomVLabel.getStyleClass().add("vLabel");
 			nomVLabel.setPrefHeight(25);
 			nomVLabel.setPadding(new Insets(5, 15, 5, 15));
@@ -2178,6 +2220,7 @@ button.setOnMouseClicked((e) -> {
 			flowb.setMinHeight(25);
 			vbv2Creation.getChildren().add(templateChooser);
 			vbv2Creation.getChildren().add(flowb);
+			vbv2Creation.getStyleClass().remove("lesCheckBoxs");
 			vbv2Creation.getStyleClass().add("lesCheckBoxs");
 
 			///////////////////////////////////////////////////////////////
@@ -2293,6 +2336,7 @@ button.setOnMouseClicked((e) -> {
 
 		Pane fta = new Pane();
 
+		fta.getStyleClass().remove("lesBatsTem");
 		fta.getStyleClass().add("lesBatsTem"); //fta.getStyleClass().add("pink");
 
 

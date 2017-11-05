@@ -44,7 +44,7 @@
                      </children>
                   </VBox>
                  
-                  <FlowPane fx:id="lesCheckBoxs" columnHalignment="CENTER" hgap="15.0" rowValignment="TOP" styleClass="lesCheckBoxs" GridPane.columnIndex="2">
+                  <FlowPane fx:id="lesCheckBoxs" columnHalignment="CENTER" hgap="0.0" rowValignment="TOP" styleClass="lesCheckBoxs" GridPane.columnIndex="2">
                      <children>
                         <CheckBox fx:id="casePillage" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#casePillage" selected="true" text="Auto Pillage">
                            <FlowPane.margin>
@@ -86,7 +86,7 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
-                        <CheckBox fx:id="monterChampCapitale" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseMonterChampCapitale" selected="true" text="MonterChampsCapitale">
+                        <CheckBox fx:id="caseMonterChampCapitale" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseMonterChampCapitale" selected="true" text="MonterChampsCapitale">
                            <FlowPane.margin>
                               <Insets />
                            </FlowPane.margin>
@@ -111,7 +111,7 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
-                                                <CheckBox   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false"  selected="true" text="">
+                                                <CheckBox   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false"  selected="true" text="" styleClass=""> 
                            <FlowPane.margin>
                               <Insets />
                            </FlowPane.margin>
@@ -127,15 +127,15 @@
          <center>
             <TabPane fx:id="tabbedPane" styleClass="b" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                  <Tab fx:id="comptes" styleClass="lesOnglets" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes">
+                  <Tab fx:id="comptes" styleClass="lesOnglets" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes"><!-- onSelectionChanged=" -->
                      <content>
-                        <TilePane fx:id="comptesTilePane" styleClass="compteStyle2" prefHeight="200.0" prefWidth="200.0" />
+                        <TilePane fx:id="comptesTilePane"  styleClass="compteStyle1" prefHeight="200.0" prefWidth="200.0" />
                      </content>
                   </Tab>
                
                 <Tab closable="false" text="Console" styleClass="lesOnglets">
                      <content>
-                        <ScrollPane fx:id="fxConsolescrollpane" fitToHeight="true" fitToWidth="true" styleClass="b">
+                        <ScrollPane fx:id="fxConsolescrollpane" fitToHeight="true" fitToWidth="true"   styleClass="compteStyle1">
                            <content>
                           <!--    <VBox fx:id="vbox" prefWidth="100.0" styleClass="consoleVBox" />  -->
                            </content>
@@ -145,11 +145,11 @@
                 
                 <Tab closable="false" text="Parametres" styleClass="lesOnglets">
                		 <content>
-						<ScrollPane styleClass="c">
+						<ScrollPane  styleClass="compteStyle1">
 						<content>
                		     	<!--   <fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/>  -->
                		     	<!--   <fx:include fx:id="fxOngletParametres" source="fxOngletParametres.fxml"/>   	pour dev  --> 
-               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml" />
+               		     	<fx:include fx:id="fxOngletParametres" source="/botpackage/fxOngletParametres.fxml"/>
                 			
                 			</content>
                            </ScrollPane>
@@ -158,26 +158,40 @@
                 </Tab>
               
                 <Tab closable="false" text="Xpath perso" styleClass="lesOnglets">
-                     <content>
-                        <ToggleButton mnemonicParsing="false" text="ToggleButton">
+                     <content >
+                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                           <content>
+                             <ToggleButton mnemonicParsing="false" text="ToggleButton">
                            <graphic>
                               <Label text="Label" />
                            </graphic>
                         </ToggleButton>
+                              <VBox  prefHeight="200.0" prefWidth="100.0"  styleClass="compteStyle1"/>
+                           </content>
+                        </ScrollPane>
                      </content></Tab>
                 <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages" styleClass="lesOnglets">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>
-                              <VBox fx:id="villageAnchorPane" prefHeight="200.0" prefWidth="100.0" />
+                              <VBox fx:id="villageAnchorPane" prefHeight="200.0" prefWidth="100.0"  styleClass="compteStyle1"/>
                            </content>
                         </ScrollPane>
                      </content></Tab>
                  <Tab closable="false"  onSelectionChanged="#faireOngletTemplate"  text="Template" styleClass="lesOnglets">
                      <content>
-                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" >
                            <content>
-                             <VBox fx:id="fxTemplate"  />
+                             <VBox fx:id="fxTemplate"  styleClass="compteStyle1" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                   </Tab>
+                   <Tab closable="false"  onSelectionChanged="#faireOngletEnvoiTroupes"  text="Mouvements de Troupes" styleClass="lesOnglets">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" >
+                           <content>
+                             <VBox fx:id="fxOngletEnvoiTroupes"  styleClass="compteStyle1" />
                            </content>
                         </ScrollPane>
                      </content>
@@ -186,7 +200,7 @@
             </TabPane>
          </center>
          <bottom>
-            <CheckBox fx:id="caseFaireDefiler" mnemonicParsing="false" styleClass="lesOnglets" onAction="#caseFaireDefiler" selected="true" text="Faire Défiler" BorderPane.alignment="BOTTOM_RIGHT" />
+          
          </bottom>
       </BorderPane>
    </content>
