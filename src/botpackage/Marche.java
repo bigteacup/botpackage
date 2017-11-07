@@ -1243,7 +1243,7 @@ public class Marche {
 				if(village.getNombreDeMarchands() >= marchandsMinPourFonctionner){ 
 					try {
 						List<WebElement> offres = null;
-						offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]")); //offres
+						offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]")); //offres   
 						String tempstrajet =	offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
 						if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
 						String[] decoupage = tempstrajet.split(":");
@@ -1253,6 +1253,8 @@ public class Marche {
 						int secondes = Integer.parseInt(decoupage[2]);
 						int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
 						if(durationEnMilli <= (tempsMax*3600)*1000 ){
+							//TODO Faire listeNoire + gui
+							if(!(offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains("Ogodai"))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
 							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 							offres.get(0).click(); // on accepte loffre !
 							t.ecrireDansConsole("1 achat effectué au marché");
@@ -1260,6 +1262,9 @@ public class Marche {
 							village.setMarchéLastDate(lastDate);
 
 							t.randomsleep.court();
+							}else {
+								t.ecrireDansConsole("Joueur en liste noire...");
+							}
 						}else {
 							continuer = false;
 							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure" );

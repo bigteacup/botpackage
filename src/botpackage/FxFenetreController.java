@@ -1292,6 +1292,7 @@ public class FxFenetreController extends ScrollPane {
 		}
 
 		FlowPane bG = new FlowPane();
+		bG.getChildren().clear();
 		bG.getChildren().addAll(lp ,flowPaneMarche, flowCases);
 		vpane.getChildren().addAll(bG); //Maj du noeud ;)
 		bG.setAlignment(Pos.CENTER_LEFT);
