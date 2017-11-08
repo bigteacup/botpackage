@@ -1244,7 +1244,12 @@ public class Marche {
 					try {
 						List<WebElement> offres = null;
 						offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]")); //offres   
-						String tempstrajet =	offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
+						if(!offres.isEmpty()) {
+						int i = 0;
+						
+						for(WebElement offre : offres) {
+							
+						String tempstrajet =	offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
 						if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
 						String[] decoupage = tempstrajet.split(":");
 						t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage[0]+" "+decoupage[1]+" "+decoupage[2]);
@@ -1254,9 +1259,9 @@ public class Marche {
 						int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
 						if(durationEnMilli <= (tempsMax*3600)*1000 ){
 							//TODO Faire une listeNoire + gui
-							if(!(offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains("Ogodai"))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
+							if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains("Ogodai"))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
 							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
-							offres.get(0).click(); // on accepte loffre !
+							offres.get(i).click(); // on accepte loffre !
 							t.ecrireDansConsole("1 achat effectué au marché");
 							Date lastDate = t.randomsleep.date(true);
 							village.setMarchéLastDate(lastDate);
@@ -1264,18 +1269,27 @@ public class Marche {
 							t.randomsleep.court();
 							}else {
 								t.ecrireDansConsole("Joueur en liste noire...");
-								continuer = false;
+								
 							}
 						}else {
-							continuer = false;
+							
 							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure" );
 
 
 
 						}
-					}catch (Exception e) {
+						i++;
+						
+					}
 						continuer = false;
-						t.ecrireDansConsole("pas d'offre trouvée");
+						t.ecrireDansConsole("fin du parcour des offres du marché");
+						}else {
+							continuer = false;
+							t.ecrireDansConsole("pas d'offre trouvée");
+						}
+						}catch (Exception e) {
+						continuer = false;
+						t.ecrireDansConsole("echec accepter offre");
 					}
 
 				}else {
