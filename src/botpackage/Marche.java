@@ -1253,7 +1253,7 @@ public class Marche {
 						int secondes = Integer.parseInt(decoupage[2]);
 						int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
 						if(durationEnMilli <= (tempsMax*3600)*1000 ){
-							//TODO Faire listeNoire + gui
+							//TODO Faire une listeNoire + gui
 							if(!(offres.get(0).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains("Ogodai"))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
 							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 							offres.get(0).click(); // on accepte loffre !
@@ -1264,6 +1264,7 @@ public class Marche {
 							t.randomsleep.court();
 							}else {
 								t.ecrireDansConsole("Joueur en liste noire...");
+								continuer = false;
 							}
 						}else {
 							continuer = false;
