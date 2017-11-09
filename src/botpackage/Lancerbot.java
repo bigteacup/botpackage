@@ -79,14 +79,15 @@ import org.openqa.selenium.WebDriver;
 	public ArrayList<File> listeFichiers = new ArrayList<File>();
 	public Properties fichierTemplatesProperties;
 	
-	public String idDeLaListeDePillage = "1592";
-	public String motCleListeDePillage1 = "inactif";
+	public String idDeLaListeDePillage = "1076";
+	public String motCleListeDePillage1 = "listedepillage1";
 	public String motCleListeDesPertes = "perte";
 	
 	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
 	public TemplatesDeVillages templateLancerBot;
 	
 	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
+
 
 
 

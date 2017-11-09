@@ -844,7 +844,7 @@ public class Village {
 			List<WebElement> troupesDuVillage = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
 			for (WebElement typeTroupe : troupesDuVillage) {
 				boolean troupesPresentes = false; 
-				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "éclairs de Toutatis", "Combattants à l'épée"   };
+				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "éclairs de Toutatis", "Combattants à l'épée",  "Légionnaire"   };
 
 				for (int i = 0; i < tableauTroupes.length; i++){
 					if ( typeTroupe.findElement(By.className("un")).getText().contains(tableauTroupes[i])){
@@ -856,7 +856,7 @@ public class Village {
 						if (troupesPresentes == true) {
 							village.setVillagePillage(true);
 						}
-						if (troupesPresentes && nombreTroupesPresentes >= 200) {
+						if (troupesPresentes && nombreTroupesPresentes >= 20) {
 							troupesAQuai = true;
 						}
 					}
@@ -1220,7 +1220,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t) {
 		t.ecrireDansConsole("debut construireBatiments");
-		t.randomsleep.court();
+		//t.randomsleep.court();
 
 		// if (!compte.getDriver().getCurrentUrl().contains("dorf2.php"))
 		// {compte.getDriver().get(compte.getServer() + "dorf2.php");}

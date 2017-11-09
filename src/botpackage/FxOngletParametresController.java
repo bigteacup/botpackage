@@ -50,6 +50,9 @@ public class FxOngletParametresController {
     @FXML 
     private TextField motCleListeDesPertes;
     
+    @FXML 
+    private TextField motCleListeDePillage1;
+    
     @FXML
     private TextField idTempsMax;
 
@@ -137,6 +140,10 @@ public class FxOngletParametresController {
     @FXML
     private void motCleListeDesPertes(ActionEvent event) {
     	bot.motCleListeDesPertes = motCleListeDesPertes.getText() ; 
+    }
+    @FXML
+    private void motCleListeaLancer(ActionEvent event) {
+    	bot.motCleListeDePillage1 = motCleListeDePillage1.getText() ; 
     }
     /////////
     @FXML
