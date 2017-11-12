@@ -198,6 +198,8 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 			writer.println("login="+ userName);
 			writer.println("password="+ motDePasse);
 			writer.println("race="+ race);
+			writer.println("banmarchejoueur=");
+			writer.println("banmarcheinterieur=");
 			writer.close();
 		} catch (FileNotFoundException e) {e.printStackTrace();}
 		

@@ -124,9 +124,13 @@
             <Label text="Lancer liste tout les (tours)" GridPane.rowIndex="1" />
 
             <Label text="ID de la liste de pillage" GridPane.rowIndex="2" />
-            <TextField fx:id="idDeLaListeDePillage" onAction="#idDeLaListeDePillage" promptText="1386" text="1592" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Mot clé pour la liste on le bot transferera les frigo avec pertes" GridPane.rowIndex="3" />
+            <TextField fx:id="idDeLaListeDePillage" onAction="#idDeLaListeDePillage" promptText="1076" text="1076" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            
+            <Label text="Mot clé pour la liste ou le bot transferera les frigo avec pertes" GridPane.rowIndex="3" />
             <TextField fx:id="motCleListeDesPertes" onAction="#motCleListeDesPertes" promptText="liste pertes" text="perte" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            
+             <Label text="Mot clé pour la liste à lancer" GridPane.rowIndex="4" />
+            <TextField fx:id="motCleListeDePillage1"  onAction="#motCleListeaLancer" promptText="Liste à lancer" text="listedepillage1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <GridPane>

@@ -3,6 +3,8 @@ package botpackage;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -1041,18 +1043,22 @@ public class Marche {
 		if((totalBois < (moyenne/100*pourcentageDeclenchementAcheter)) ){ //&& (village.getMaxStockDepot() > (moyenne) ) // && (village.getBois() < (moyenne))
 			acheterBois = true;
 			besoinMarché = 1;
+			tableauBesoin.add(besoinMarché);
 		}
 		if((totalArgile < (moyenne/100*pourcentageDeclenchementAcheter))    ) {  //&& (village.getMaxStockDepot() > (moyenne) ) //&& (village.getArgile() < (moyenne))
 			acheterArgile = true;
 			besoinMarché = 2;
+			tableauBesoin.add(besoinMarché);
 		}
 		if((totalFer < (moyenne/100*pourcentageDeclenchementAcheter)) ) { // && (village.getMaxStockDepot() > (moyenne) ) // && (village.getFer() < (moyenne) )
 			acheterFer = true;
 			besoinMarché = 3;
+			tableauBesoin.add(besoinMarché);
 		}
 		if((totalCereales < (moyenne/100*pourcentageDeclenchementAcheter))) { //  && (village.getCereales() < (moyenne)  )
 			acheterCereales = true;
 			besoinMarché = 4;
+			tableauBesoin.add(besoinMarché);
 		}
 
 
@@ -1073,7 +1079,8 @@ public class Marche {
 			if(totalBois < totalArgile && totalBois < totalFer && totalBois < totalCereales){
 				if(village.getMaxStockDepot() - village.getBois() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
 					besoinMarché = 1;
-					tableauBesoin.add(besoinMarché);
+					tableauBesoin.remove(tableauBesoin.indexOf(1));
+					tableauBesoin.add(0, besoinMarché);
 				}else {
 					t.ecrireDansConsole("totalBois pas de place");}
 			}
@@ -1081,21 +1088,24 @@ public class Marche {
 			if(totalArgile < totalBois && totalArgile < totalFer && totalArgile < totalCereales){
 				if(village.getMaxStockDepot() - village.getArgile() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {	
 					besoinMarché = 2;
-					tableauBesoin.add(besoinMarché);
+					tableauBesoin.remove(tableauBesoin.indexOf(2));
+					tableauBesoin.add(0, besoinMarché);
 				}else {
 					t.ecrireDansConsole("totalArgiles pas de place");}
 			}
 			if(totalFer < totalBois && totalFer < totalArgile   && totalFer < totalCereales){
 				if(village.getMaxStockDepot() - village.getFer() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
 					besoinMarché = 3;
-					tableauBesoin.add(besoinMarché);
+					tableauBesoin.remove(tableauBesoin.indexOf(3));
+					tableauBesoin.add(0, besoinMarché);
 				}else {
 					t.ecrireDansConsole("totalFer pas de place");}
 			}
 			if(totalCereales <  totalBois && totalCereales < totalArgile  && totalCereales < totalFer){
 				if(village.getMaxStockSilo() - village.getCereales() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
 					besoinMarché = 4;
-					tableauBesoin.add(besoinMarché);
+					tableauBesoin.remove(tableauBesoin.indexOf(4));
+					tableauBesoin.add(0, besoinMarché);
 				}else {
 					t.ecrireDansConsole("totalCereales pas de place");}
 			}
@@ -1178,7 +1188,7 @@ public class Marche {
 						ressources.get(b-1).click(); 
 					}
 					/////////////////////////
-					for(int p : tableauAcheterContre) { // acheter contre
+					for(int p : tableauAcheterContre) { // acheter contre;
 						if(marchandsConsomés >= marchandsAllouésPourAchat ) {
 							t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 2");	
 						}else {
@@ -1258,8 +1268,12 @@ public class Marche {
 						int secondes = Integer.parseInt(decoupage[2]);
 						int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
 						if(durationEnMilli <= (tempsMax*3600)*1000 ){
+							
+							String liste = t.getCompte().fichierProperties.getProperty("banmarchejoueur");
+							ArrayList<String> banJ = new ArrayList<String>(Arrays.asList(liste.split(",")));
+							for(String exclu : banJ) { //Ogodai
 							//TODO Faire une listeNoire + gui
-							if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains("Ogodai"))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
+							if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains(exclu))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
 							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 							offres.get(i).click(); // on accepte loffre !
 							t.ecrireDansConsole("1 achat effectué au marché");
@@ -1270,6 +1284,7 @@ public class Marche {
 							}else {
 								t.ecrireDansConsole("Joueur en liste noire...");
 								
+							}
 							}
 						}else {
 							
