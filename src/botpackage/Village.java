@@ -409,6 +409,7 @@ public class Village {
 	public boolean regimePillage = true;
 	public boolean regimeFete= true;
 	public boolean regimeConstruction = true;
+	public boolean regimeMonterChamps = true;
 	public boolean regimeNPC = true;
 	public boolean regimeAcheterAuMarché = true;
 	//fin regime
@@ -555,6 +556,14 @@ public class Village {
 
 	public void setRegimeConstruction(boolean regimeConstruction) {
 		this.regimeConstruction = regimeConstruction;
+	}
+	
+	public boolean getRegimeMonterChamps() {
+		return regimeMonterChamps;
+	}
+
+	public void setRegimeMonterChamps(boolean regimeMonterChamps) {
+		this.regimeMonterChamps = regimeMonterChamps;
 	}
 
 	public boolean getRegimeNPC() {
@@ -1500,14 +1509,22 @@ public class Village {
 	public void EssayerConstruireBatiments(Travian t, Village village) {
 		
 		if(t.bot.monterChamps == true || village.getVillageCapitale() && t.bot.monterChampsCapitale == true ) {
+			
 		if (t.bot.monterChampsCapitale == false){t.ecrireDansConsole("Monter champs Capitale > 10 désactivé... ");}
+		
 		if (champMin < 10 || village.getVillageCapitale() && t.bot.monterChampsCapitale == true) {
 			
-				monterChamps(t);
 		
+			if ( village.getRegimeMonterChamps() == true ) {
+				monterChamps(t);
+			}else {
+				t.ecrireDansConsole("monterChamps desactivé par le regime du village...");
+			}
+			
+			
 		}
 		}else {
-			t.ecrireDansConsole("monterChamps desactivé...");
+			t.ecrireDansConsole("monterChamps desactivé sur le compte...");
 		}
 		
 		

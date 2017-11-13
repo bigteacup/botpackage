@@ -480,6 +480,19 @@ public class FxFenetreController extends ScrollPane {
 		}
 		
 	}
+	
+	private void switcherCaseRegimeMonterChamps(Village village) {
+		if (village.getRegimeMonterChamps() == true) {
+			village.setRegimeMonterChamps(false);
+		}else {
+			village.setRegimeMonterChamps(true);
+		}
+		
+	}
+	
+	
+	
+	//switcherCaseRegimeMonterChamps
 
 	@FXML
 	private void bypassPause() {
@@ -1224,10 +1237,11 @@ public class FxFenetreController extends ScrollPane {
 		CheckBox c1 = new CheckBox("Pillage");
 		CheckBox c2 = new CheckBox("Fetes");
 		CheckBox c3 = new CheckBox("Construction");
+		
 		CheckBox c4 = new CheckBox("NPC");
 		CheckBox c5 = new CheckBox("AcheterAuMarché");
 		CheckBox c6 = new CheckBox("ExclureVillage");
-		CheckBox c7 = new CheckBox("");
+		CheckBox c7 = new CheckBox("MonterChamps");
 
 		FlowPane flowCases = new FlowPane();
 		ArrayList<CheckBox> cl = new ArrayList<CheckBox>();
@@ -1238,6 +1252,7 @@ public class FxFenetreController extends ScrollPane {
 		if(village.getRegimeNPC() == true) { c4.setSelected(true);}else {c4.setSelected(false);}
 		if(village.getRegimeAcheterAuMarché() == true) { c5.setSelected(true);}else {c5.setSelected(false);}
 		if(village.getExclureVillage() == true) { c6.setSelected(true);}else {c6.setSelected(false);}
+		if(village.getRegimeMonterChamps() == true) { c7.setSelected(true);}else {c7.setSelected(false);}
 
 
 
@@ -1256,6 +1271,9 @@ public class FxFenetreController extends ScrollPane {
 			switcherCaseRegimeConstruction(village);
 			raffraichirCase (village, cl, flowCases);
 		} }); 
+		
+		
+		
 
 		c4.setOnAction(new EventHandler<ActionEvent>() { @Override public void handle(ActionEvent e) {
 			switcherCaseRegimeNPC(village);
@@ -1271,10 +1289,16 @@ public class FxFenetreController extends ScrollPane {
 			raffraichirCase(village, cl , flowCases);
 			
 		}});
+		
+		c7.setOnAction(new EventHandler<ActionEvent>() {@Override public void handle(ActionEvent e) {
+			switcherCaseRegimeMonterChamps(village);
+			raffraichirCase(village, cl , flowCases);
+			
+		}});
 
 
 
-		cl.add(c1);cl.add(c2);cl.add(c3);cl.add(c4);cl.add(c5);cl.add(c6);
+		cl.add(c1);cl.add(c2);cl.add(c7);cl.add(c3);cl.add(c4);cl.add(c5);cl.add(c6);
 
 
 		raffraichirCase (village, cl, flowCases);
@@ -1282,7 +1306,7 @@ public class FxFenetreController extends ScrollPane {
 
 
 
-		flowCases.getChildren().addAll(c1, c2, c3, c4, c5, c6);
+		flowCases.getChildren().addAll(c1, c2, c7, c3, c4, c5, c6);
 		flowCases.setOrientation(Orientation.VERTICAL);
 		flowCases.setPrefSize(100, 50);
 		flowCases.setHgap(0);
