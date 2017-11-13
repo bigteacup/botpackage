@@ -127,6 +127,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private CheckBox caseMonterChampCapitale;
+	
+	@FXML
+	private CheckBox caseMonterChamps;
 
 	@FXML
 	private CheckBox caseEvacuerRessGrosVillages;
@@ -263,6 +266,13 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			caseNpc.setSelected(false);}
 		raffraichirCase (caseNpc);
+		
+		if (bot.monterChamps == true) {
+			// casePillage.isSelected();
+			caseMonterChamps.setSelected(true);
+		} else {
+			caseMonterChamps.setSelected(false);}
+		raffraichirCase (caseMonterChamps);
 
 		if (bot.monterChampsCapitale == true) {
 			// casePillage.isSelected();
@@ -341,6 +351,15 @@ public class FxFenetreController extends ScrollPane {
 			bot.monterChampsCapitale = true;
 		}
 		raffraichirCase(caseMonterChampCapitale);
+	}
+	@FXML
+	private void caseMonterChamps(){
+		if (bot.monterChamps == true){
+			bot.monterChamps = false;
+		}else {
+			bot.monterChamps = true;
+		}
+		raffraichirCase(caseMonterChamps);
 	}
 
 

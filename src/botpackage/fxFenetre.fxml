@@ -86,7 +86,12 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
-                        <CheckBox fx:id="caseMonterChampCapitale" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseMonterChampCapitale" selected="true" text="MonterChampsCapitale">
+                            <CheckBox fx:id="caseMonterChamps" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseMonterChamps" selected="true" text="MonterChamps">                          
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="caseMonterChampCapitale" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseMonterChampCapitale" selected="true" text="MonterChampsCapitale">                          
                            <FlowPane.margin>
                               <Insets />
                            </FlowPane.margin>

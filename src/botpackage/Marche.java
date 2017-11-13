@@ -1184,6 +1184,7 @@ public class Marche {
 					if(marchandsConsomés >= marchandsAllouésPourAchat) {
 						t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 1");	
 					}else { 
+						t.randomsleep.court();
 						List<WebElement> ressources = t.getCompte().getDriver().findElements(By.xpath("//*[@id='search_select']/tbody/tr/td"));
 						ressources.get(b-1).click(); 
 					}
@@ -1195,7 +1196,9 @@ public class Marche {
 							if( b != p ) { // on ne vend pas la meme ressource que l'on cherche
 								t.randomsleep.court();
 								List<WebElement> ressourcesDemandees = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"bid_select\"]/tbody/tr/td"));
-								ressourcesDemandees.get(p-1).click();
+								if( ressourcesDemandees.get(p-1).findElements(By.xpath(".//button[contains(@class, 'iconFilterActive')]")).isEmpty() ) {
+									ressourcesDemandees.get(p-1).click();
+								}
 								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 								marchandsConsomés = marchandsConsomés + accepterOffre(t, village, marchandsAllouésPourAchat, marchandsMinPourFonctionner, tempsMax, marchandsConsomés, marchandsD );
 								/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

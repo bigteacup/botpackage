@@ -709,13 +709,13 @@ public class Travian extends Thread {
 
 				if (allume == false){break;}
 				
-				if ( bot.construireBatiments == true ) {
-					if ( village.getRegimeConstruction() == true ) {
+			//	if ( bot.construireBatiments == true ) {
+				//	if ( village.getRegimeConstruction() == true ) {
 					if (village.getConstructionsEnCours() < limiteDeConstruction ){ 
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours");}
-					}else {t.ecrireDansConsole("construction Desactivees... Par le regime du village");}
-				}else {t.ecrireDansConsole("construction Desactivees...");}
+				//	}else {t.ecrireDansConsole("construction Desactivees... Par le regime du village");}
+			//	}else {t.ecrireDansConsole("construction Desactivees...");}
 				
 				
 				try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur

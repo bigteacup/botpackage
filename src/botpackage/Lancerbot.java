@@ -71,6 +71,7 @@ import org.openqa.selenium.WebDriver;
 	public boolean optimiserProdHero = true;
 	public boolean faireAventures = true;
 	public boolean monterChampsCapitale = true;
+	public boolean monterChamps = true;
 	public boolean npc = true;
 	public boolean rotationVillage = true;
 	public boolean acheterAuMarché = true;

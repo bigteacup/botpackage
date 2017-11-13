@@ -888,7 +888,7 @@ public class Village {
 		Village village = t.villageEnCours(); // pas utilisee ici
 
 		//////////////////////////////////////////////////////
-		// se replacer sur la bonne page si un module est rester ailleur
+		// se replacer sur la bonne page si un module est reste ailleur
 		String urlTest = null;
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
@@ -916,8 +916,7 @@ public class Village {
 
 				String nomChamp = listeWebelementChamps.get(i).getAttribute("alt");
 				listeNomsChamps.add(nomChamp);
-				listeLevelsChamps
-				.add(Integer.parseInt(listeWebelementChamps.get(i).getAttribute("alt").split("Niveau ")[1]));
+				listeLevelsChamps.add(Integer.parseInt(listeWebelementChamps.get(i).getAttribute("alt").split("Niveau ")[1]));
 				i++;
 				if (i == 18) {
 					t.ecrireDansConsole("Liste des " + i + " champs : " + listeLevelsChamps + "");
@@ -1499,12 +1498,21 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void EssayerConstruireBatiments(Travian t, Village village) {
+		
+		if(t.bot.monterChamps == true || village.getVillageCapitale() && t.bot.monterChampsCapitale == true ) {
 		if (t.bot.monterChampsCapitale == false){t.ecrireDansConsole("Monter champs Capitale > 10 désactivé... ");}
 		if (champMin < 10 || village.getVillageCapitale() && t.bot.monterChampsCapitale == true) {
-			monterChamps(t);
+			
+				monterChamps(t);
+		
+		}
+		}else {
+			t.ecrireDansConsole("monterChamps desactivé...");
 		}
 		
 		
+		if ( t.bot.construireBatiments == true ) {
+			if ( village.getRegimeConstruction() == true ) {
 		
 		if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getChampMin() <= 10
 				|| village.getConstructionsEnCours() < t.limiteDeConstruction && village.getVillageCapitale() == true) {
@@ -1562,6 +1570,12 @@ public class Village {
 		}
 		// on pose les batiment apres les upgrade
 		//creationBatiment(t, village);  // 1/10/2017
+			}else {
+				t.ecrireDansConsole("construction Desactivees... Par le regime du village");
+				}
+		}else {
+			t.ecrireDansConsole("construction de batiments Desactivees sur le compte...");
+		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////// creationBatiment(t,
