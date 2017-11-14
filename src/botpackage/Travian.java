@@ -43,7 +43,8 @@ public class Travian extends Thread {
 	Travian t = this;
 	private Compte compte;
 
-	private ArrayList<Village> listeDeVillages = new ArrayList();
+	private ArrayList<Village> listeDeVillages = new ArrayList<Village>();
+	private ArrayList<Village> listeDeVillagesPerdus = new ArrayList<Village>();
 	Randomsleep randomsleep = new Randomsleep(t);
 	Date memDate;
 	private Marche marche = new Marche();
@@ -607,6 +608,37 @@ public class Travian extends Thread {
 
 			}
 
+		}
+		
+		///on suprime les villages perdus
+		if(listeDeVillages.size() > urls.size()  ) {
+			
+			for(Village v : listeDeVillages) {
+				boolean trouver = false;
+				
+				for (WebElement url : urls) {
+				
+					String stringUrl = url.getAttribute("href");
+					String vUrl = v.getUrl();
+					
+						if (vUrl.split("\\?")[1].split("&")[0].equals(stringUrl.split("\\?")[1].split("&")[0])) {
+						trouver = true;
+						break;
+							}
+						}
+				if (trouver == false) {
+				
+				 listeDeVillagesPerdus.add(v);
+				
+				}
+				
+			}
+			
+			
+		}
+		for(Village villagePerdu : listeDeVillagesPerdus) {
+			 listeDeVillages.remove( villagePerdu);
+		ecrireDansConsole("Village perdu ou detruit : " + villagePerdu.getNom() );
 		}
 		ecrireDansConsole("Nombre de Villages = " + listeDeVillages.size());
 	}
