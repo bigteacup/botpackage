@@ -430,7 +430,12 @@ public class FxConsoleExperimentale  { //extends Thread
 			 for (Village v : fxFenetreController.bot.travian.getListeDeVillages()){
 			if( str.contains(v.getNom())){
 				String classeCss = "console9";
-				return classeCss;}}
+				return classeCss;
+				}else {
+					String classeCss = "console9";
+					return classeCss;
+				}
+			}
 			}
 
 			else {
