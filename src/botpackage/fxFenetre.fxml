@@ -175,7 +175,7 @@
                            </content>
                         </ScrollPane>
                      </content></Tab>
-                <Tab closable="false" onSelectionChanged="#peupleractif" text="Villages" styleClass="lesOnglets">
+                <Tab closable="false" onSelectionChanged="#peupleractifswitch" text="Villages" styleClass="lesOnglets">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>

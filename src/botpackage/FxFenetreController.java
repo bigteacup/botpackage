@@ -565,7 +565,7 @@ public class FxFenetreController extends ScrollPane {
 		Platform.runLater(new Runnable() {
 
 			public void run() {
-
+			//	Runtime.getRuntime().gc();
 
 				String textDeBoutton = "Selectionner";
 				boolean s = false;
@@ -952,7 +952,22 @@ public class FxFenetreController extends ScrollPane {
 
 
 	int ipeupler= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
+	@FXML
+	private void peupleractifswitch() {
+		
+		if (ipeupler == 0) {
+			ipeupler = 1;
+			peupleractif();
+		} else {
+			ipeupler = 0;
+		}
+		
+		
 
+	}
+	
+	
+	
 	
 	@FXML
 	private void peupleractif() {
@@ -962,8 +977,7 @@ public class FxFenetreController extends ScrollPane {
 				console.flux.envoyer(fxFenetreController, "ongletEnCours = 2");
 			} catch (IOException e1) {}
 			
-		if(ipeupler == 0){
-			ipeupler=1; // mode reconsctruction sur le chargement de l'onglet, pour develloper tranquille
+
 			Platform.runLater(new Runnable() {
 
 				public void run() {
@@ -1032,9 +1046,7 @@ public class FxFenetreController extends ScrollPane {
 			});
 
 		}
-//		}
-		ipeupler = 0;
-	}
+
 	private EventHandler<ActionEvent> setb(Village leVillage, int typeBAFC, String textfield) {
 
 		if(typeBAFC == 0){leVillage.setRegimeMarcheBoisMax(Integer.parseInt(textfield));}

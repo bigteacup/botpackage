@@ -93,6 +93,7 @@ public class FxConsoleExperimentale  { //extends Thread
 ///////////////////////////////////////////////////////////////////////////
 		//TODO console textFlow
 		public TextArea fxConsoleTextArea(FxFenetreController fxFenetreController, String flux){
+			ligne2.getStyleClass().remove("consoleVBox");
 			ligne2.getStyleClass().add("consoleVBox");
 			faireDefiler = fxFenetreController.bot.faireDefiler;
 			boolean trouver = false;
@@ -116,8 +117,9 @@ public class FxConsoleExperimentale  { //extends Thread
 					
 				
 
-			
-			
+
+					
+				
 			
 			
 			
@@ -219,12 +221,16 @@ public class FxConsoleExperimentale  { //extends Thread
 			boolean trouver = false;
 			String mota = "null";
 			
+			if (motsaTester.isEmpty() ){
 			for(String l : l1){
-				if (fxFenetreController.bot.travian == null ){
+				
 					motsaTester.add(l);
 					}
 				}
+			
+			
 			if(fxFenetreController.bot.travian != null){
+				
 				for (Village v : fxFenetreController.bot.travian.getListeDeVillages()){
 					mota = v.getNom();
 					for(String motM : motsaTester){
@@ -246,7 +252,7 @@ public class FxConsoleExperimentale  { //extends Thread
 			}
 			
 			int textSizeBefore = ligne.getLength();
-		if (ligne.getLength() ==0){ligne.getStyleClass().add("consoleVBox"); }
+		if (ligne.getLength() ==0){ligne.getStyleClass().remove("consoleVBox");ligne.getStyleClass().add("consoleVBox"); }
 
 			
 		//	javafx.application.Platform.runLater( () ->{   
@@ -303,6 +309,7 @@ public class FxConsoleExperimentale  { //extends Thread
 						if(ligne.getParagraphs().size() > 10000) {
 							try{
 								ligne.deleteText(1, 0, 2, 0);
+								
 							}catch(Exception e) {
 								
 							}

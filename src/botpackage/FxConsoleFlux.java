@@ -92,7 +92,7 @@ public void envoyer(FxFenetreController fxFenetreController, String ligne) throw
 
 	try { //TODO console textFlow 2
 ////	//	fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne +"\n" );//listeMotsCouleurfinal
-		Lighting lighting = new Lighting();
+	/*	Lighting lighting = new Lighting();
 		Bloom bloom = new Bloom();
 		bloom.setThreshold(0.01);
 		Glow glow = new Glow(0.9);
@@ -103,9 +103,11 @@ public void envoyer(FxFenetreController fxFenetreController, String ligne) throw
         ds.setColor(Color.GRAY);
          Reflection r = new Reflection();
         r.setFraction(0.75);
-
-        
-        StyleClassedTextArea ligneeffet = fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne +"\n"  );
+*
+*/
+                fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne +"\n"  );
+                
+      //  StyleClassedTextArea ligneeffet = fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne +"\n"  );
       //  ligneeffet.setStyle(".scroll-bar{-fx-background-color: rgb(96,96,96);-fx-background-radius: 2em;}");
         //ligneeffet.setEffect(glow);
       //  ligneeffet.getStyleClass().clear();
