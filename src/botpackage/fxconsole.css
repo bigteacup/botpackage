@@ -324,8 +324,8 @@ b.scroll-bar:horizontal b.track-background {
 }	
 	
  .v1{
- 	-fx-background-image: url("image/bga.jpg");
- 	-fx-background-position: 0% 12%; 
+  -fx-background-image: url("image/bga.jpg");
+		-fx-background-position: 0% 12%; 
  	
  	-fx-background-size: 100% auto;
      -fx-border-image-insets:0;
@@ -341,7 +341,7 @@ b.scroll-bar:horizontal b.track-background {
 	/*-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);  -120px*/
 }
  .v2{
- 	-fx-background-image: url("image/fs1.jpg");
+  	-fx-background-image: url("image/fs1petite.jpg");
  	-fx-background-position:50% 20%;
 	-fx-background-size: 100% auto;
      -fx-border-image-insets:0;
@@ -368,8 +368,10 @@ b.scroll-bar:horizontal b.track-background {
  .lesCheckBoxs{
  	-fx-background-color: radial-gradient( focus-angle 0.0deg, focus-distance 0.0%, center 50.0% 50.0%, radius 100.0%, rgb(153,179,255) 0.0, rgb(153,179,255)  100.0 );
  	 -fx-effect: innershadow( three-pass-box , rgba(0,0,0, 0.3) , 3, 0.6 , 0 , 1 );
- 	 -fx-background-image: url("image/simplpap.jpg");
-	 -fx-background-size: 100% auto;
+ 	 -fx-background-image: url("image/default_paper.png");
+	-fx-background-size: 150% 150%;
+	-fx-background-position:75% 75%;
+
      -fx-border-image-insets:0;
      -fx-border-image-repeat:no-repeat;
      -fx-border-image-slice:16;

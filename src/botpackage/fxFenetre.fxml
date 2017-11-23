@@ -132,7 +132,7 @@
          <center>
             <TabPane fx:id="tabbedPane" styleClass="b" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                  <Tab fx:id="comptes" styleClass="lesOnglets" closable="false" onSelectionChanged="#fxChargerComptes" text="Comptes"><!-- onSelectionChanged=" -->
+                  <Tab fx:id="comptes" styleClass="lesOnglets" closable="false" onSelectionChanged="#fxChargerComptesSwitch" text="Comptes"><!-- onSelectionChanged=" -->
                      <content>
                         <TilePane fx:id="comptesTilePane"  styleClass="compteStyle1" prefHeight="200.0" prefWidth="200.0" />
                      </content>
@@ -175,7 +175,7 @@
                            </content>
                         </ScrollPane>
                      </content></Tab>
-                <Tab closable="false" onSelectionChanged="#peupleractifswitch" text="Villages" styleClass="lesOnglets">
+                <Tab closable="false" onSelectionChanged="#peupleractifSwitch" text="Villages" styleClass="lesOnglets">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>
@@ -183,7 +183,7 @@
                            </content>
                         </ScrollPane>
                      </content></Tab>
-                 <Tab closable="false"  onSelectionChanged="#faireOngletTemplate"  text="Template" styleClass="lesOnglets">
+                 <Tab closable="false"  onSelectionChanged="#faireOngletTemplateSwitch"  text="Template" styleClass="lesOnglets">
                      <content>
                         <ScrollPane fitToHeight="true" fitToWidth="true" >
                            <content>

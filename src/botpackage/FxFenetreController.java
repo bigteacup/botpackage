@@ -67,18 +67,19 @@ import javafx.util.StringConverter;
 
 //fx:controller="botpackage.FxFenetreController"
 public class FxFenetreController extends ScrollPane {
-	public Lancerbot bot = new Lancerbot();
+	FxFenetreController fxFenetreController = this;
+	FxConsoleExperimentale console = new FxConsoleExperimentale(fxFenetreController); ;
+	public Lancerbot bot = new Lancerbot(this, console);
 
-	FxFenetreController fxFenetreController;
+	
 	// FxConsole console;
 	// FxConsoleSimple console;
-	FxConsoleExperimentale console ;
+	
 	VirtualizedScrollPane<StyleClassedTextArea> vtScroll;
 	//public Lancerbot bot = new Lancerbot(fxFenetreController, console);
 
 	String compteSelectionne = null;
 
-	int ongletEnCours = 0;
 	
 	CheckBox caseFaireDefiler = new CheckBox();
 	
@@ -179,7 +180,7 @@ public class FxFenetreController extends ScrollPane {
 	///// 
 	@FXML
 	void initialize() throws IOException {
-		this.fxFenetreController = this;
+	
 		assert rootScrollpane != null : "fx:id=\"rootScrollpane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert borderPane != null : "fx:id=\"borderPane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 		assert boutonOn != null : "fx:id=\"boutonOn\" was not injected: check your FXML file 'fxFenetre.fxml'.";
@@ -198,10 +199,6 @@ public class FxFenetreController extends ScrollPane {
 		assert comptesTilePane != null : "fx:id=\"comptesTilePane\" was not injected: check your FXML file 'fxFenetre.fxml'.";
 
 
-		console = new FxConsoleExperimentale(fxFenetreController); // console.start();
-	
-		bot.setConsole(console);
-		bot.setfxFenetreController(this);
 		fxConsolescrollpane();
 		casesInit();
 		fxOngletParametresController.setBot(bot);
@@ -758,11 +755,7 @@ public class FxFenetreController extends ScrollPane {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@FXML
 	private void fxChargerComptes(){
-	//	if(!(ongletEnCours == 1) ) {
-			ongletEnCours = 1;
-			try {
-				console.flux.envoyer(fxFenetreController, "ongletEnCours = 1");
-			} catch (Exception e1) {}
+
 		
 
 		ArrayList<File> listeFichiers = bot.gestionnaireDeComptes.getListeFichiers("comptes", "comptetravian"); 
@@ -902,7 +895,6 @@ public class FxFenetreController extends ScrollPane {
 
 
 
-
 	int ia = 0;
 
 	@FXML
@@ -930,6 +922,33 @@ public class FxFenetreController extends ScrollPane {
 
 
 
+/////////////////////////////////////////////   LES SWITCHES
+
+
+	int ifxChargerComptes = 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
+	@FXML
+	private void fxChargerComptesSwitch() {
+		
+		if (ifxChargerComptes == 0) {
+			ifxChargerComptes = 1;
+			
+			try {
+				console.flux.envoyer(fxFenetreController, "fxChargerComptes creation");
+			} catch (IOException e) {}
+			fxChargerComptes();
+		} else {
+			ifxChargerComptes = 0;
+			try {
+				console.flux.envoyer(fxFenetreController, "fxChargerComptes sortie");
+			} catch (IOException e) {}
+			comptesTilePane.getChildren().clear();
+			
+			
+		}
+		
+		
+
+	}
 
 
 
@@ -941,10 +960,27 @@ public class FxFenetreController extends ScrollPane {
 
 
 
+	int ifaireTemplate= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
+	@FXML
+	private void faireOngletTemplateSwitch() {
+		
+		if (ifaireTemplate == 0) {
+			ifaireTemplate = 1;
+			try {
+				console.flux.envoyer(fxFenetreController, "faireOngletTemplate creation");
+			} catch (IOException e) {}
+			faireOngletTemplate();
+		} else {
+			ifaireTemplate = 0;
+			try {
+				console.flux.envoyer(fxFenetreController, "faireOngletTemplate sortie");
+			} catch (IOException e) {}
+			fxTemplate.getChildren().clear();
+		}
+		
+		
 
-
-
-
+	}
 
 
 
@@ -953,13 +989,20 @@ public class FxFenetreController extends ScrollPane {
 
 	int ipeupler= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
 	@FXML
-	private void peupleractifswitch() {
+	private void peupleractifSwitch() {
 		
 		if (ipeupler == 0) {
 			ipeupler = 1;
+			try {
+				console.flux.envoyer(fxFenetreController, "peupleractif creation");
+			} catch (Exception e) {}
 			peupleractif();
 		} else {
 			ipeupler = 0;
+			try {
+				console.flux.envoyer(fxFenetreController, "peupleractif sortie");
+			} catch (IOException e) {}
+			villageAnchorPane.getChildren().clear();
 		}
 		
 		
@@ -971,17 +1014,12 @@ public class FxFenetreController extends ScrollPane {
 	
 	@FXML
 	private void peupleractif() {
-	//	if(!(ongletEnCours == 2) ) {
-	//		ongletEnCours = 2;
-			try {
-				console.flux.envoyer(fxFenetreController, "ongletEnCours = 2");
-			} catch (IOException e1) {}
-			
+
 
 			Platform.runLater(new Runnable() {
 
 				public void run() {
-					// code goes here.
+				
 
 
 					try {
@@ -1030,11 +1068,11 @@ public class FxFenetreController extends ScrollPane {
 					} catch (Exception e) {
 						try {
 							console.flux.envoyer(fxFenetreController, "pas de village chargés");
-							ipeupler = 0;   
+					 
 
 						} catch (IOException e1) {
 							e1.printStackTrace();
-							ipeupler = 0;
+						
 						}
 					}
 
@@ -1446,12 +1484,7 @@ public class FxFenetreController extends ScrollPane {
 	public void  faireOngletTemplate() {
 		TabPane onglets = null ;
 		
-	//	if(!(ongletEnCours == 3) ) {
-	//		ongletEnCours = 3;
-			try {
-				console.flux.envoyer(fxFenetreController, "ongletEnCours = 3");
-			} catch (IOException e1) {}
-			
+
 		bot.chargerTemplate();
 		
 		onglets = new TabPane();

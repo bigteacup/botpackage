@@ -156,7 +156,13 @@ public void faireUnTemplateDeCompte(int i) {
 			 chargerTemplate();
 			
 		}
-
+		public  Lancerbot(FxFenetreController fxFenetreController) {
+			 
+			
+			setfxFenetreController(fxFenetreController);
+			templateLancerBot = new TemplatesDeVillages();
+			listeDeTemplates.add(templateLancerBot);
+		}
 
 
 
