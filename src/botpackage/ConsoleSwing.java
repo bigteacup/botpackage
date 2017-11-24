@@ -227,7 +227,7 @@ private SimpleAttributeSet coloration(String str){
 
 private Color Color(int i, int j, int k) {
 	Color color = new Color(i,j,k) ;
-	// TODO Auto-generated method stub
+	
 	return color;
 }
 

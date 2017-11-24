@@ -519,7 +519,7 @@ public class FxFenetreController extends ScrollPane {
 			boutonOn.getStyleClass().add("onc");
 			console.flux.envoyer(fxFenetreController, "Pas de compte selectionne... Veuillez selectionner un compte.");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}}
 	}
@@ -708,7 +708,7 @@ public class FxFenetreController extends ScrollPane {
 					vpane.getChildren().add(stc());
 
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					// 
 					e1.printStackTrace();
 				}
 				vpane.setBottom(button1);

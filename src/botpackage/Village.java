@@ -1126,7 +1126,7 @@ public class Village {
 						int lien = Integer.parseInt(listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[1]); // bug
 						String type = listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[0].trim();
 						
-						//TODO faire un systeme plus clair et parametrable
+						//TODO Decalage faire un systeme plus clair et parametrable
 						if(type.toLowerCase().contains("ferme")) {
 							ArrayList<Integer> baf = new ArrayList<Integer>();
 							baf.addAll(village.getListeLevelsChampsBois() ); // 
