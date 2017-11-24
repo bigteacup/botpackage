@@ -306,9 +306,9 @@ public class FxConsoleExperimentale  { //extends Thread
 						//fxFenetreController.vbox.getBaselineOffset();
 							
 						}
-						if(ligne.getParagraphs().size() > 10000) {
+						if(ligne.getParagraphs().size() > 30000) {
 							try{
-								ligne.deleteText(1, 0, 2, 0);
+								ligne.deleteText(1, 0, (ligne.getParagraphs().size()-2000), 0);
 								
 							}catch(Exception e) {
 								
