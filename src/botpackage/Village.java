@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import javafx.fxml.FXML;
+import net.sourceforge.htmlunit.corejs.javascript.ast.SwitchCase;
 
 public class Village {
 
@@ -394,6 +395,10 @@ public class Village {
 	private List<Batiment> batimentsDuTemplateDuVillage = new ArrayList<Batiment>();
 	private int champMin;
 	private int champMax;
+	public ArrayList<Integer> listeLevelsChampsBois = new ArrayList<Integer>();
+	public ArrayList<Integer> listeLevelsChampsArgile = new ArrayList<Integer>();
+	public ArrayList<Integer> listeLevelsChampsFer = new ArrayList<Integer>();
+	public ArrayList<Integer> listeLevelsChampsCereales = new ArrayList<Integer>();
 	
 	//regime
 	public boolean regimeGeneral = true;
@@ -512,6 +517,38 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public ArrayList<Integer> getListeLevelsChampsBois() {
+		return listeLevelsChampsBois;
+	}
+
+	public void setListeLevelsChampsBois(ArrayList<Integer> listeLevelsChampsBois) {
+		this.listeLevelsChampsBois = listeLevelsChampsBois;
+	}
+
+	public ArrayList<Integer> getListeLevelsChampsArgile() {
+		return listeLevelsChampsArgile;
+	}
+
+	public void setListeLevelsChampsArgile(ArrayList<Integer> listeLevelsChampsArgile) {
+		this.listeLevelsChampsArgile = listeLevelsChampsArgile;
+	}
+
+	public ArrayList<Integer> getListeLevelsChampsFer() {
+		return listeLevelsChampsFer;
+	}
+
+	public void setListeLevelsChampsFer(ArrayList<Integer> listeLevelsChampsFer) {
+		this.listeLevelsChampsFer = listeLevelsChampsFer;
+	}
+
+	public ArrayList<Integer> getListeLevelsChampsCereales() {
+		return listeLevelsChampsCereales;
+	}
+
+	public void setListeLevelsChampsCereales(ArrayList<Integer> listeLevelsChampsCereales) {
+		this.listeLevelsChampsCereales = listeLevelsChampsCereales;
+	}
 
 	public TemplatesDeVillages getTemplate() {
 		return template;
@@ -914,6 +951,10 @@ public class Village {
 		List<WebElement> listeWebelementChamps = t.getCompte().getDriver()
 				.findElements(By.xpath("//*[@id=\"rx\"]/area"));
 		ArrayList<Integer> listeLevelsChamps = new ArrayList<Integer>();
+		ArrayList<Integer> listeLevelsChampsBois = new ArrayList<Integer>();
+		ArrayList<Integer> listeLevelsChampsArgile = new ArrayList<Integer>();
+		ArrayList<Integer> listeLevelsChampsFer = new ArrayList<Integer>();
+		ArrayList<Integer> listeLevelsChampsCereales = new ArrayList<Integer>();
 		ArrayList<String> listeNomsChamps = new ArrayList<String>();
 
 		// On verifie que lon est sur la page des champs de ressources
@@ -923,14 +964,38 @@ public class Village {
 			int i = 0;
 			while (i < 18) {
 
-				String nomChamp = listeWebelementChamps.get(i).getAttribute("alt");
-				listeNomsChamps.add(nomChamp);
-				listeLevelsChamps.add(Integer.parseInt(listeWebelementChamps.get(i).getAttribute("alt").split("Niveau ")[1]));
+				String typeChamp = listeWebelementChamps.get(i).getAttribute("alt").split("Niveau ")[0].trim();
+				listeNomsChamps.add(typeChamp);
+				int levelChamp = Integer.parseInt(listeWebelementChamps.get(i).getAttribute("alt").split("Niveau ")[1]);
+				listeLevelsChamps.add(levelChamp);
+				
+				
+			 if(typeChamp.toLowerCase().contains("cheron")) {
+				 listeLevelsChampsBois.add(levelChamp);
+			 }				
+			 if(typeChamp.toLowerCase().contains("argile")) {
+				 listeLevelsChampsArgile.add(levelChamp);
+				 
+			 }
+			 if(typeChamp.toLowerCase().contains("fer") && !typeChamp.toLowerCase().contains("ferme")) {
+				 listeLevelsChampsFer.add(levelChamp);
+			 }
+			 if(typeChamp.toLowerCase().contains("ferme") || typeChamp.contains("cereales")) {
+				 listeLevelsChampsCereales.add(levelChamp);
+				 
+			 }
+			 
 				i++;
 				if (i == 18) {
 					t.ecrireDansConsole("Liste des " + i + " champs : " + listeLevelsChamps + "");
 				}
 			}
+			
+			// on envoi les liste au village
+			village.setListeLevelsChampsBois(listeLevelsChampsBois);
+			village.setListeLevelsChampsArgile(listeLevelsChampsArgile);
+			village.setListeLevelsChampsFer(listeLevelsChampsFer);
+			village.setListeLevelsChampsCereales(listeLevelsChampsCereales);
 
 			// On determine le niveau des champs le plus petit
 			t.randomsleep.court();
@@ -1059,14 +1124,23 @@ public class Village {
 						listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 						listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
 						int lien = Integer.parseInt(listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[1]); // bug
-						// ici
-						// au
-						// retour
-						// String lienNom =
-						// listeWebelementChamps.get(g).getAttribute("alt").split("Niveau
-						// ")[0];
-
-						// t.ecrireDansConsole("valeur g : " + g);
+						String type = listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[0].trim();
+						
+						//TODO faire un systeme plus clair et parametrable
+						if(type.toLowerCase().contains("ferme")) {
+							ArrayList<Integer> baf = new ArrayList<Integer>();
+							baf.addAll(village.getListeLevelsChampsBois() ); // 
+							baf.addAll(village.getListeLevelsChampsArgile() );
+							baf.addAll(village.getListeLevelsChampsFer() );
+							int valchampMinBaf = Collections.min(baf);
+							
+							if(lien >= (valchampMinBaf - 3 ) && valchampMinBaf < 10 && valchampMinBaf > 7) { // decalage
+								g++;
+								continue;
+								
+							}
+							
+						}
 
 						/// test
 						/// ressources///////////////////////////////////////////////////////////////////////
