@@ -1102,7 +1102,7 @@ public class Village {
 	public void monterChamps(Travian t) {
 		t.ecrireDansConsole("Debut monterChamps");
 		Village village = t.villageEnCours();
-
+		int valchampMinBaf = champMin;
 		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 		List<WebElement> listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
 		//*[@id="village_map"]/div
@@ -1132,9 +1132,9 @@ public class Village {
 							baf.addAll(village.getListeLevelsChampsBois() ); // 
 							baf.addAll(village.getListeLevelsChampsArgile() );
 							baf.addAll(village.getListeLevelsChampsFer() );
-							int valchampMinBaf = Collections.min(baf);
+							 valchampMinBaf = Collections.min(baf);
 							
-							if(lien >= (valchampMinBaf - 3 ) && valchampMinBaf < 10 && valchampMinBaf > 7) { // decalage
+							if(lien >= (valchampMinBaf - 3 ) && valchampMinBaf < 10 && valchampMinBaf >= 7) { // decalage
 								g++;
 								continue;
 								
@@ -1149,13 +1149,13 @@ public class Village {
 							tagUnderConstruction = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div[" + (g + 1)+ "][contains(@class, 'underConstruction')]"));
 						} catch (Exception e) {
 						}
-						if (lien == champMin && tagUnderConstruction == null) {
+						if ((lien == champMin && tagUnderConstruction == null) || (lien ==  valchampMinBaf && tagUnderConstruction == null)) {
 							boolean retrytoken = false;
 							int boisNecessaire = 0;
 							int argileNecessaire = 0;
 							int ferNecessaire = 0;
 							int cerealesNecessaire = 0;
-							t.ecrireDansConsole("try lien==chamPmin : " + lien + " et : " + champMin);
+							t.ecrireDansConsole("try lien==chamPmin : " + lien + " et : " + champMin + " valchampMinBaf : " + valchampMinBaf);
 /*
 							//deplacer le curseur au loin
 							Actions ecartCurseur = new Actions(t.getCompte().getDriver());
