@@ -1248,20 +1248,30 @@ public class Marche {
 		boolean continuer = true;
 
 		while(continuer == true){
-
+			try {
+				List<WebElement> offres = null;
+				offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]")); //offres   
+				if(!offres.isEmpty()) {
+				int i = 0;
+				for(WebElement offre : offres) {
+						offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]"));
 
 			updateNombreDeMarchandsDispo(t, village); //6
 			marchandsConsomés = marchandsConsomés + (marchandsD - village.getNombreDeMarchands());
 			if(marchandsConsomés < marchandsAllouésPourAchat){
 				if(village.getNombreDeMarchands() >= marchandsMinPourFonctionner){ 
+					
+					
+					
 					try {
-						List<WebElement> offres = null;
-						offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]")); //offres   
-						if(!offres.isEmpty()) {
-						int i = 0;
+				
 						
-						for(WebElement offre : offres) {
-							
+						
+						
+						
+						
+						
+					
 						String tempstrajet =	offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
 						if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
 						String[] decoupage = tempstrajet.split(":");
@@ -1270,13 +1280,41 @@ public class Marche {
 						int minutes = Integer.parseInt(decoupage[1]);
 						int secondes = Integer.parseInt(decoupage[2]);
 						int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
+						
+						
+						
+						
+						
+						
 						if(durationEnMilli <= (tempsMax*3600)*1000 ){
 							
-							String liste = t.getCompte().fichierProperties.getProperty("banmarchejoueur");
-							ArrayList<String> banJ = new ArrayList<String>(Arrays.asList(liste.split(",")));
+							
+							boolean tokenBanj = true;
+							try {
+								String liste = t.getCompte().fichierProperties.getProperty("banmarchejoueur");
+								ArrayList<String> banJ = new ArrayList<String>(Arrays.asList(liste.split(",")));
 							for(String exclu : banJ) { //Ogodai
-							//TODO Faire une listeNoire + gui
-							if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains(exclu))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
+								//TODO Faire une listeNoire + gui
+								if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains(exclu))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
+								village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
+								offres.get(i).click(); // on accepte loffre !
+								t.ecrireDansConsole("1 achat effectué au marché");
+								Date lastDate = t.randomsleep.date(true);
+								village.setMarchéLastDate(lastDate);
+								 tokenBanj = false;
+								t.randomsleep.court();
+								}else {
+									t.ecrireDansConsole("Joueur en liste noire...");
+									
+								}
+								}
+							
+							}catch(Exception e) {
+								t.ecrireDansConsole("liste noire vide ou echec ===> on autorise par default");
+								tokenBanj = true; // on autorise par default
+							}
+							
+							if(tokenBanj = true) {
 							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 							offres.get(i).click(); // on accepte loffre !
 							t.ecrireDansConsole("1 achat effectué au marché");
@@ -1284,31 +1322,54 @@ public class Marche {
 							village.setMarchéLastDate(lastDate);
 
 							t.randomsleep.court();
-							}else {
-								t.ecrireDansConsole("Joueur en liste noire...");
-								
 							}
-							}
-						}else {
 							
-							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure" );
-
-
-
-						}
-						i++;
-						
-					}
-						continuer = false;
-						t.ecrireDansConsole("fin du parcour des offres du marché");
 						}else {
-							continuer = false;
-							t.ecrireDansConsole("pas d'offre trouvée");
+							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure" );
 						}
+						
+						
+						
+						
+						
+				
+						
+						
+						
+						
+						
+						
+
+
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						}catch (Exception e) {
 						continuer = false;
 						t.ecrireDansConsole("echec accepter offre");
 					}
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 
 				}else {
 					continuer = false;
@@ -1318,6 +1379,26 @@ public class Marche {
 				continuer = false;
 				t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés");
 			}
+			
+			
+			
+			
+			i++;
+			
+				}
+				continuer = false;
+				t.ecrireDansConsole("fin du parcour des offres du marché");
+
+			}else {
+				continuer = false;
+				t.ecrireDansConsole("pas d'offre trouvée");
+			}
+			}catch (Exception e) {
+				continuer = false;
+				t.ecrireDansConsole("echec accepter offre");
+			}
+			
+			
 		}
 		return marchandsConsomés;
 
