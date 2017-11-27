@@ -1604,6 +1604,7 @@ public class FxFenetreController extends ScrollPane {
 		ComboBox<TemplatesDeVillages> listeDeroulante  = new ComboBox<TemplatesDeVillages>();
 		FlowPane nomVillage = new FlowPane();
 		Label nomVLabel = new Label(village.getNom());
+
 		nomVLabel.getStyleClass().remove("vLabel");
 		nomVLabel.getStyleClass().add("vLabel");
 		nomVLabel.setPrefHeight(25);
@@ -1808,6 +1809,13 @@ public class FxFenetreController extends ScrollPane {
 		VBox vbv2= new VBox();
 		FlowPane flowb = new FlowPane();
 		Label nomTemLabel = new Label(tem.nomDuTemplate );
+		if (village.getTemplate().getNomDuTemplate().equals(tem.nomDuTemplate) ) {
+			nomTemLabel.getStyleClass().remove("templateSelectionne");
+			nomTemLabel.getStyleClass().add("templateSelectionne");
+		}else {
+			nomTemLabel.getStyleClass().remove("templateSelectionne"); //templateSelectionne
+
+		}
 		FlowPane templateChooser = new FlowPane();
 		FlowPane caseAutoriserBatFlowPane =new FlowPane();
 		Label nomStade = new Label("   Quand le champs le plus petit est   ");

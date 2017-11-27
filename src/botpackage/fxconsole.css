@@ -767,6 +767,10 @@ b.scroll-bar:horizontal b.track-background {
 	-fx-fill:red;
 	
 }
+.templateSelectionne{
+	-fx-background-color: rgba(0,98,255,0.6235294342041016);
+	
+}
 /* 
 .ligne .scroll-bar:vertical:disabled {
     -fx-opacity: 0;
