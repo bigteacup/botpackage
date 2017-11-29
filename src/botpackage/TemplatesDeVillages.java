@@ -201,13 +201,13 @@ public  class   TemplatesDeVillages {
 	//	 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(cachette, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(place_rassemblement, 1));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(moulin, 3));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(batiment_principal, 10));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(depot, 12));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(silo, 12));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(batiment_principal, 14));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(depot, 14));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(silo, 14));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(residence, 10));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(marche, 8));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(caserne, 5));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(marche, 12));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(caserne, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(palais, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(academie, 5));
