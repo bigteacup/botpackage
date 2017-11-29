@@ -62,7 +62,7 @@ import org.openqa.selenium.WebDriver;
 	int pourcentageDeclenchementAcheterContreVillage = 25;
 	
 	
-	
+	boolean decalageCereales = true;
 	boolean pillage = true;
 	boolean faireFete = true;
 	boolean evacuerSurplusRessources = true;

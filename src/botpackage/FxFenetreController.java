@@ -119,7 +119,11 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private CheckBox casePillage;
+	
+	@FXML
+	private CheckBox caseDecalageCereales;
 
+	
 	@FXML
 	private CheckBox caseFetes;
 
@@ -291,7 +295,11 @@ public class FxFenetreController extends ScrollPane {
 			caseAcheterAuMarché.setSelected(false);}
 		raffraichirCase (caseAcheterAuMarché);
 		
-		
+		if (bot.decalageCereales == true) {
+			caseDecalageCereales.setSelected(true);
+		} else {
+			caseDecalageCereales.setSelected(false);}
+		raffraichirCase (caseDecalageCereales);
 		
 		
 		if (bot.faireDefiler == true) {
@@ -432,7 +440,15 @@ public class FxFenetreController extends ScrollPane {
 		raffraichirCase (caseAcheterAuMarché);
 	}
 	
-	
+	@FXML
+	private void caseDecalageCereales(){
+		if (bot.decalageCereales == true) {
+			bot.decalageCereales = false;
+		}else {
+			bot.decalageCereales = true;
+		}
+		raffraichirCase (caseDecalageCereales);
+	}
 
 	
 	

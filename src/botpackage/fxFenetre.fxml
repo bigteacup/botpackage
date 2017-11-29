@@ -106,7 +106,7 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
-                                                <CheckBox   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false"  selected="true" text="">
+                              <CheckBox fx:id="caseDecalageCereales"   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseDecalageCereales"  selected="true" text="DécalageCereales">
                            <FlowPane.margin>
                               <Insets />
                            </FlowPane.margin>

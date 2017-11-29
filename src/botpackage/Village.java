@@ -410,7 +410,8 @@ public class Village {
 	public int regimeMarcheArgileMin = 20;
 	public int regimeMarcheFerMin = 20;
 	public int regimeMarcheCerealesMin = 20;
-
+	
+	public boolean regimeDecalageCereales = true;
 	public boolean regimePillage = true;
 	public boolean regimeFete= true;
 	public boolean regimeConstruction = true;
@@ -1126,6 +1127,10 @@ public class Village {
 						int lien = Integer.parseInt(listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[1]); // bug
 						String type = listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[0].trim();
 						
+						
+						if (t.bot.decalageCereales == true) {
+							if (regimeDecalageCereales == true) {
+								t.ecrireDansConsole("Decalage Cereales");
 						//TODO Decalage faire un systeme plus clair et parametrable
 						if(type.toLowerCase().contains("ferme")) {
 							ArrayList<Integer> baf = new ArrayList<Integer>();
@@ -1134,14 +1139,28 @@ public class Village {
 							baf.addAll(village.getListeLevelsChampsFer() );
 							 valchampMinBaf = Collections.min(baf);
 							
-							if(lien >= (valchampMinBaf - 3 ) && valchampMinBaf < 10 && valchampMinBaf >= 7) { // decalage
+							 int a = Collections.max(village.getListeLevelsChampsBois());
+							 if (a >= 10) {a = 0;
+							 }
+							 int b = Collections.max(village.getListeLevelsChampsFer());
+							 if (b >= 10) {b = 0;
+							 }
+							 int c = Collections.max(village.getListeLevelsChampsArgile());
+							 if (c >= 10) {c = 0;
+							 }
+							
+							 int d = a + b + c;
+						
+							 
+							if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (d > 0)) { // decalage
 								g++;
 								continue;
 								
 							}
 							
+						   }
+						 }
 						}
-
 						/// test
 						/// ressources///////////////////////////////////////////////////////////////////////
 						WebElement tagUnderConstruction = null;
