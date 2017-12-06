@@ -1130,7 +1130,7 @@ public class Village {
 						
 						if (t.bot.decalageCereales == true) {
 							if (regimeDecalageCereales == true) {
-								t.ecrireDansConsole("Decalage Cereales");
+								
 						//TODO Decalage faire un systeme plus clair et parametrable
 						if(type.toLowerCase().contains("ferme")) {
 							ArrayList<Integer> baf = new ArrayList<Integer>();
@@ -1153,6 +1153,7 @@ public class Village {
 						
 							 
 							if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (d > 0)) { // decalage
+								t.ecrireDansConsole("Decalage Cereales actif");
 								g++;
 								continue;
 								
@@ -1174,7 +1175,7 @@ public class Village {
 							int argileNecessaire = 0;
 							int ferNecessaire = 0;
 							int cerealesNecessaire = 0;
-							t.ecrireDansConsole("try lien==chamPmin : " + lien + " et : " + champMin + " valchampMinBaf : " + valchampMinBaf);
+							t.ecrireDansConsole("try lien==chamPmin : lien : " + lien + "   champMin : " + champMin + "    valchampMinBaf : " + valchampMinBaf);
 /*
 							//deplacer le curseur au loin
 							Actions ecartCurseur = new Actions(t.getCompte().getDriver());
