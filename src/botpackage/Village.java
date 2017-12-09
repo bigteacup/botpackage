@@ -1169,7 +1169,7 @@ public class Village {
 							tagUnderConstruction = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div[" + (g + 1)+ "][contains(@class, 'underConstruction')]"));
 						} catch (Exception e) {
 						}
-						if ((lien == champMin && tagUnderConstruction == null) || (lien ==  valchampMinBaf && tagUnderConstruction == null)) {
+						if ((lien == champMin && tagUnderConstruction == null) || ( (!type.toLowerCase().contains("ferme") ) && lien ==  valchampMinBaf && tagUnderConstruction == null)) {
 							boolean retrytoken = false;
 							int boisNecessaire = 0;
 							int argileNecessaire = 0;

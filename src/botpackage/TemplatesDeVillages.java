@@ -200,10 +200,10 @@ public  class   TemplatesDeVillages {
 		 
 	//	 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(cachette, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(place_rassemblement, 1));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(poterie, 3));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(scierie, 3));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(fonderie, 3));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(batiment_principal, 14));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(poterie, 4));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(scierie, 4));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(fonderie, 4));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(batiment_principal, 15));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(depot, 14));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(silo, 14));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(moulin, 5));
