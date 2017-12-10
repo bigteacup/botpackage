@@ -1115,17 +1115,23 @@ public class Village {
 				// trouver lien du premier plus petit
 				int g = 0;
 				while (g < 18) {
+					
+					
+					boolean decalageToken = false;
 					// on met a jour le token apres une eventuelle construction
 					village.voirListeDeConstruction(t);
 					construEnCours = village.getConstructionsEnCours();
 					// on reverifie le token pour pas boucler plus que
 					// necessaire
+					
+					
 					if (construEnCours < t.limiteDeConstruction ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
 						// On recharge la liste apres un eventuel rechargement
 						listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 						listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
 						int lien = Integer.parseInt(listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[1]); // bug
 						String type = listeWebelementChamps.get(g).getAttribute("alt").split("Niveau ")[0].trim();
+						
 						
 						
 						if (t.bot.decalageCereales == true) {
@@ -1149,11 +1155,12 @@ public class Village {
 							 if (c >= 10) {c = 0;
 							 }
 							
-							 int d = a + b + c;
+  							 int d = a + b + c;
 						
 							 
 							if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (d > 0)) { // decalage
 								t.ecrireDansConsole("Decalage Cereales actif");
+								decalageToken = true;
 								g++;
 								continue;
 								
@@ -1169,7 +1176,8 @@ public class Village {
 							tagUnderConstruction = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div[" + (g + 1)+ "][contains(@class, 'underConstruction')]"));
 						} catch (Exception e) {
 						}
-						if ((lien == champMin && tagUnderConstruction == null) || ( (!type.toLowerCase().contains("ferme") ) && lien ==  valchampMinBaf && tagUnderConstruction == null)) {
+						if ((lien == champMin && tagUnderConstruction == null) || decalageToken == true && lien ==  valchampMinBaf && tagUnderConstruction == null) {
+							
 							boolean retrytoken = false;
 							int boisNecessaire = 0;
 							int argileNecessaire = 0;
@@ -1255,7 +1263,7 @@ public class Village {
 							// Village2 village = villageEnCours();
 							village.updateRessources(t);
 							int stockBois = village.getBois();
-							int stockArgile = village.getArgile();
+							int stockArgile = village.getArgile();;
 							int stockFer = village.getFer();
 							int stockCereales = village.getCereales();
 
@@ -1295,8 +1303,10 @@ public class Village {
 					} // fin if token de verification
 					else {
 						t.ecrireDansConsole(construEnCours +"construction en cours");
+						decalageToken = false;
 						break;
 					}
+					decalageToken = false;
 				} // fin while g <18
 			} catch (Exception e) {
 				t.ecrireDansConsole("echec monterChamps");
