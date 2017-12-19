@@ -314,7 +314,7 @@ public class FxConsoleExperimentale  { //extends Thread
 								
 							}
 							}
-							
+					//	flux.
 						return ligne;	
 						
 		}

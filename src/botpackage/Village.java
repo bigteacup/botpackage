@@ -1114,10 +1114,11 @@ public class Village {
 				// Lancer construction champs
 				// trouver lien du premier plus petit
 				int g = 0;
+				boolean decalageToken = false;
 				while (g < 18) {
 					
 					
-					boolean decalageToken = false;
+					
 					// on met a jour le token apres une eventuelle construction
 					village.voirListeDeConstruction(t);
 					construEnCours = village.getConstructionsEnCours();

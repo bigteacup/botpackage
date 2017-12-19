@@ -184,7 +184,7 @@ public  class   TemplatesDeVillages {
 		listeDeBatimentsDuTemplateParDefault3.clear();
 		listeDeBatimentsDuTemplateParDefault4.clear();
 		
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 5));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 10));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(depot, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(silo, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10));
