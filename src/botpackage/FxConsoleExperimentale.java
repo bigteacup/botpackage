@@ -4,17 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.StyleClassedTextArea;
-
-import javafx.collections.ListChangeListener;
-import javafx.scene.Node;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.scene.web.WebView;
+
 
 
 public class FxConsoleExperimentale  { //extends Thread
@@ -47,6 +40,7 @@ public class FxConsoleExperimentale  { //extends Thread
 						"Echec", "En Negatif = false", "Marché", "Marchands Dispos", "Ordre", "En Debordement" , "Debug", "gestionHeroProd", "Aventure"};
 		
 		volatile	StyleClassedTextArea ligne = new StyleClassedTextArea();
+		
 		volatile	 TextArea ligne2 = new  TextArea ();
 	//	volatile	 TextFlow  ligne2 = new  TextFlow();
 		boolean  ready = true;
@@ -217,6 +211,7 @@ public class FxConsoleExperimentale  { //extends Thread
 		
 		public StyleClassedTextArea fxConsoleColored(FxFenetreController fxFenetreController, String flux) throws IOException{ //, ArrayList<String> motaTestdelasession
 			faireDefiler = fxFenetreController.bot.faireDefiler;
+		//	ligne.undoAvailableProperty().
 			
 			boolean trouver = false;
 			String mota = "null";
@@ -309,12 +304,14 @@ public class FxConsoleExperimentale  { //extends Thread
 						if(ligne.getParagraphs().size() > 30000) {
 							try{
 								ligne.deleteText(1, 0, (ligne.getParagraphs().size()-2000), 0);
+								ligne.getUndoManager().forgetHistory();
 								
 							}catch(Exception e) {
 								
 							}
 							}
 					//	flux.
+						
 						return ligne;	
 						
 		}

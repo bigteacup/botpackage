@@ -1079,6 +1079,7 @@ public class Marche {
 			if(totalBois < totalArgile && totalBois < totalFer && totalBois < totalCereales){
 				if(village.getMaxStockDepot() - village.getBois() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
 					besoinMarché = 1;
+					//decalage en premiere position (ne suprime rien)
 					tableauBesoin.remove(tableauBesoin.indexOf(1));
 					tableauBesoin.add(0, besoinMarché);
 				}else {
