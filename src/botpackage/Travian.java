@@ -332,6 +332,7 @@ public class Travian extends Thread {
 						+ (milliEcartDate / 1000 - (milliEcartDate / 1000 / 60) * 60)
 						+ "sec. et le chiffre de base en milliseconde " + milliEcartDate);
 				
+				fxFenetreController.console.ligne.getUndoManager().forgetHistory(); // on efface l'historique à la fin de la rotation
 				randomsleep.treslent();
 				//	randomsleep.court();
 
