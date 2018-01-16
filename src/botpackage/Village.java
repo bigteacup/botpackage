@@ -869,7 +869,7 @@ public class Village {
 	public void voirTroupesDuVillage(Travian t) {
 		
 		//////////////////////////////////////////////////////
-		// se replacer sur la bonne page si un module est rester ailleur
+		// se replacer sur la bonne page si un module est resté ailleurs
 		String urlTest = null;
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];

@@ -1138,7 +1138,13 @@ public class Travian extends Thread {
 
 
 		if(compteurDeBoot % rythmePillage == 0){
-			compte.getDriver().findElement(By.xpath("//*[text()[contains( .,'Lancer pillage')]]")).click();  //   Lancement
+			try { //   //*[@id="list1076"] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]
+			List<WebElement> btnLancerPillage = compte.getDriver().findElements(By.xpath("//*[@class='listEntry' and contains(., '" + t.villageEnCours().getNom() + "')  and contains(., '" + t.bot.motCleListeDePillage1 + "')] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]"));
+			 btnLancerPillage.get(0).click();
+			}catch (Exception e) {
+				ecrireDansConsole("echec trouver ou cliquer bouton de pillage");
+			}
+		//	compte.getDriver().findElement(By.xpath("//*[text()[contains( .,'Lancer pillage')]]")).click();  //   Lancement
 			ecrireDansConsole(compteurDeBoot + " --> Pillage --> MODE IMPRUDENT (Multiple de 1)"  );
 		}
 
