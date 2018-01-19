@@ -26,6 +26,10 @@ public class Compte {
 public String nomDeCompte;	
 public Properties	fichierProperties ;
 public int limiteDeConstructionSimultanees;
+public int SlotDeVillageDuCompte = 0;
+
+
+
 
 private String server;
 private String userName;
@@ -114,7 +118,12 @@ this.fichierProperties = fichierProperties;
 		this.tribut = tribut;
 	}
 	
-	
+	public int getSlotDeVillageDuCompte() {
+		return SlotDeVillageDuCompte;
+	}
+	public void setSlotDeVillageDuCompte(int slotDeVillageDuCompte) {
+		SlotDeVillageDuCompte = slotDeVillageDuCompte;
+	}
 	
 	private WebDriver driver;
 	

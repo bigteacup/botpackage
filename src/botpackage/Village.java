@@ -346,6 +346,16 @@ public class Village {
 	public void setExclureVillage(boolean exclureVillage) {
 		this.exclureVillage = exclureVillage;
 	}
+	
+	
+	
+	public int getVillageSlot() {
+		return villageSlot;
+	}
+
+	public void setVillageSlot(int villageSlot) {
+		this.villageSlot = villageSlot;
+	}
 
 
 	// TODO maxstock de base a corriger
@@ -368,6 +378,10 @@ public class Village {
 	private int argile;
 	private int fer;
 	private int cereales;
+	public int villageSlot = 0;
+
+
+
 
 	private int constructionsEnCours;
 

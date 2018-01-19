@@ -223,6 +223,7 @@ public class Travian extends Thread {
 
 				if (allume == false){break;}
 				detectionTribut(); //ici pour le moment
+				detectionSlotDeVillageDuCompte();
 				limiteDeConstruction = t.getCompte().etablirLimiteDeConstructionSimultanees();
 				try {
 					listerVillages();
@@ -1140,7 +1141,8 @@ public class Travian extends Thread {
 		if(compteurDeBoot % rythmePillage == 0){
 			try { //   //*[@id="list1076"] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]
 			List<WebElement> btnLancerPillage = compte.getDriver().findElements(By.xpath("//*[@class='listEntry' and contains(., '" + t.villageEnCours().getNom() + "')  and contains(., '" + t.bot.motCleListeDePillage1 + "')] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]"));
-			 btnLancerPillage.get(0).click();
+			ecrireDansConsole("Boutton-s trouvé-s : "+btnLancerPillage.size()+""); 
+			btnLancerPillage.get(0).click();
 			}catch (Exception e) {
 				ecrireDansConsole("echec trouver ou cliquer bouton de pillage");
 			}
@@ -1373,7 +1375,9 @@ public class Travian extends Thread {
 
 		randomsleep.court();
 
-		determinerBesoinDeFetes();} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeFetes");
+		determinerBesoinDeFetes();
+		majSlot();
+		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeFetes ou slot");
 		//pour finir, fermer la fenetre de pub travian
 		fermerFenetre();
 		t.ecrireDansConsole("Conclusion pas de compte + ou bug");
@@ -1498,7 +1502,19 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			t.ecrireDansConsole("Tribut : " + tribut);
 		}catch (Exception e){t.ecrireDansConsole("echec detection tribut");}
 	}
-
+	
+	private void detectionSlotDeVillageDuCompte(){
+		try {
+			String slot = compte.getDriver().findElement(By.xpath("//*[@id=\"sidebarBoxVillagelist\"]/div[2]/div[1]/div[2]/div[1]")).getText();
+			String txt1 = slot.split("/")[0].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");;
+			String txt2 = slot.split("/")[1].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");;
+			int intSlot1 = Integer.parseInt(txt1);
+			int intSlot2 = Integer.parseInt(txt2);
+			int result = intSlot2 - intSlot1;
+			compte.setSlotDeVillageDuCompte(result);
+			t.ecrireDansConsole("Slot de Village Du Compte: " + intSlot1 +" sur "+ intSlot2 + " Slot Libre : " +result);
+		}catch (Exception e){t.ecrireDansConsole("echec detection slot De Village Du Compte");}
+	}
 
 
 
@@ -1557,6 +1573,52 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 						catch (Exception e) {trouver = true; i = 0; village.setBesoinDeFete(besoinDeFete);}
 					t.ecrireDansConsole(village.getNom()+ " : " +" besoinFete == " + besoinDeFete);	
 					}else {i++;}
+				
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void  majSlot(){
+		int villageSlot = 0 ;
+	
+		int i = 0;
+
+
+		for (Village village : listeDeVillages) {
+		
+			boolean trouver = false;
+			while(trouver == false){
+				
+					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
+						
+						try {
+							
+						WebElement slotTxt = donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[5]"));
+						String txt1 = slotTxt.getText().split("/")[0].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
+						String txt2 = slotTxt.getText().split("/")[1].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
+						int intTxt1 = Integer.parseInt(txt1);
+						int intTxt2 = Integer.parseInt(txt2);
+						int result = intTxt2 - intTxt1;
+						villageSlot = result;
+						village.setVillageSlot(villageSlot);
+			
+						
+						trouver = true;
+						i = 0;	
+						}catch (Exception e) {
+							trouver = true;
+							t.ecrireDansConsole("echec lecture des slots");
+							i = 0;
+							
+							}
+					t.ecrireDansConsole(village.getNom()+ " : " +" Slot de Village disponible == " + villageSlot );	
+					}else {
+						i++;
+						}
 				
 			}
 		}
