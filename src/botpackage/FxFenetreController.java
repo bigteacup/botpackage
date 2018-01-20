@@ -1048,8 +1048,9 @@ public class FxFenetreController extends ScrollPane {
 							StackPane v1pane = new StackPane();
 
 							vpane.setMinHeight(60);
+							vpane.setMaxHeight(60);
 							v1pane.setMinHeight(vpane.getMinHeight());
-							v1pane.setMinWidth(750);
+							v1pane.setMinWidth(950);
 
 							if (i % 2 == 0) {
 								v1pane.getStyleClass().remove("v1");
