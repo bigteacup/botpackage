@@ -992,6 +992,8 @@ public class FxFenetreController extends ScrollPane {
 				console.flux.envoyer(fxFenetreController, "faireOngletTemplate sortie");
 			} catch (IOException e) {}
 			fxTemplate.getChildren().clear();
+			tokenSpecial = 0;
+			
 		}
 		
 		
@@ -1493,21 +1495,60 @@ public class FxFenetreController extends ScrollPane {
 
 
 
+	int ifaireOngletVillageTemplate= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables [methode de la ]
+	int tokenSpecial = 0;
+	private void faireOngletVillageTemplateSwitch(Village village, TabPane onglets, Tab tab, int ii) {
+		if(ifaireTemplate == 1 && tokenSpecial == 0) {
+			ifaireOngletVillageTemplate= 0;
+			tokenSpecial = 1;
+			}
+		if (ifaireOngletVillageTemplate == 0) {
+			ifaireOngletVillageTemplate = 1;
+			try {
+				console.flux.envoyer(fxFenetreController, "faireOngletVillageTemplate creation");
+			} catch (IOException e) {}
+			VBox vbv= new VBox();
+			//village
+			
+			 faireSelecteurDeTemplateDeVillage(village, ii, vbv);
+			
+			VBox e = selecteur(village, vbv, ii);
+			vbv.getChildren().add(e);
+			
+	     //  v.setCache(true);
+	     //   v.setCacheHint(CacheHint.QUALITY);//  v.setCacheHint(CacheHint.QUALITY);
+			ScrollPane sc=new ScrollPane();
+			sc.setContent(vbv);
+			 tab.setContent(sc);
+			 sc.setFitToWidth(true);
+			 sc.setFitToHeight(true);
+			
 
+		} else {
+			ifaireOngletVillageTemplate = 0;
+			try {
+				console.flux.envoyer(fxFenetreController, "faireOngletVillageTemplate sortie");
+			} catch (IOException e) {}
+			tab.setContent(null);
+		}
+		
+		
+
+	}
 
 
 
 	@FXML 
 	public void  faireOngletTemplate() {
-		TabPane onglets = null ;
+		TabPane onglets =  new TabPane();
 		
 
 		bot.chargerTemplate();
 		
-		onglets = new TabPane();
 		onglets.getTabs().clear();
 		
 		fxTemplate.getChildren().clear();
+		
 		VBox c = faireEditeurDeTemplate(bot.getTemplateLancerBot());
 		fxTemplate.getChildren().add(c);
         c.setCache(true);
@@ -1518,21 +1559,30 @@ public class FxFenetreController extends ScrollPane {
 		try {
 			//village
 			for(Village village : bot.travian.getListeDeVillages()) {
+				int ii = i;
 				Tab tab = new Tab();
-				VBox v =  faireSelecteurDeTemplateDeVillage(village, i);
+				tab.setClosable(false);
 				
-		        v.setCache(true);
-		        v.setCacheHint(CacheHint.QUALITY);//  v.setCacheHint(CacheHint.QUALITY);
-				ScrollPane sc=new ScrollPane();
-				sc.setContent(v);
-				 tab.setContent(sc);
-				 sc.setFitToWidth(true);
-				 sc.setFitToHeight(true);
-				 tab.setText(village.getNom());
+				
+				
+				tab.setOnSelectionChanged( (event) -> {
+	
+					faireOngletVillageTemplateSwitch(village, onglets, tab, ii);
+					
+		
+					 
+
+					
+				} );
+				
+				
+				
+				
+				
+				tab.setText(village.getNom());
 				 onglets.getStyleClass().remove("cEditeur"); 
 				 onglets.getStyleClass().add("cEditeur");   //onglets.getStyleClass().add("cEditeur");
 				 onglets.getTabs().add(tab);
-				
 				 i++;
 
 			}
@@ -1562,11 +1612,9 @@ public class FxFenetreController extends ScrollPane {
 
 
 
-	public VBox faireSelecteurDeTemplateDeVillage(Village village, int i) {
+	public void faireSelecteurDeTemplateDeVillage(Village village, int i, VBox vbv) {
 
-		VBox vbv= new VBox();
-		//village
-
+	
 
 
 		if (i % 2 == 0) {
@@ -1586,10 +1634,8 @@ public class FxFenetreController extends ScrollPane {
 
 		}
 
-		VBox e = selecteur(village, vbv, i);
-		vbv.getChildren().add(e);
 
-		return vbv;
+	
 	}
 
 
