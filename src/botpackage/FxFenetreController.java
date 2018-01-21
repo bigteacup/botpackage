@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.StyleClassedTextArea;
-
+import org.openqa.selenium.By;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -113,6 +113,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private VBox fxOngletEnvoiTroupes;
+	
+	@FXML
+	private VBox fxOngletColonisation;
 
 	@FXML
 	private FlowPane lesCheckBoxs;
@@ -1027,6 +1030,32 @@ public class FxFenetreController extends ScrollPane {
 
 	}
 	
+	int iColonisation= 0; // pour charger la liste une seulle fois et ensuite mettrre a jours les variables
+	@FXML
+	private void faireOngletColonisationSwitch() {
+		
+		if (iColonisation == 0) {
+			iColonisation = 1;
+			try {
+				console.flux.envoyer(fxFenetreController, "faireOngletColonisationSwitch creation");
+			} catch (Exception e) {}
+			try {
+				faireOngletColonisation();
+				
+		} catch (Exception e) {
+			try {console.flux.envoyer(fxFenetreController, "pas de données chargées");} catch (IOException e1) {}
+			}
+			} else {
+			iColonisation = 0;
+			try {
+				console.flux.envoyer(fxFenetreController, "faireOngletColonisationSwitch sortie");
+			} catch (IOException e) {}
+			fxOngletColonisation.getChildren().clear();
+		}
+		
+		
+
+	}
 	
 	
 	
@@ -2552,6 +2581,186 @@ button.setOnMouseClicked((e) -> {
 	public void faireOngletEnvoiTroupes() {
 		
 	}
+
+@FXML
+public void faireOngletColonisation() {
+	VBox capsule = new VBox();
+	Label titre = new Label("Entrez des coordonnées :");
+	
+	Label xLabel = new Label(" x :");
+	Label yLabel = new Label(" y :");
+	
+	VBox xVBox = new VBox();
+	VBox yVBox = new VBox();
+	
+	TextField xText = new TextField();
+	TextField yText = new TextField();
+	
+	
+	FlowPane groupe = new FlowPane();
+	Button btn = new Button("Sauvergarder");
+	btn.setOnAction(
+			new EventHandler<ActionEvent>() {
+		@Override public void handle(ActionEvent e) {
+			try {
+			
+			if(        (xText.getText().length() > 0)         &&        (yText.getText().length() > 0)      ) {
+			
+			btn.setText("En cours");
+			int x = Integer.parseInt(xText.getText().replaceAll("\\s", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", ""));
+			int y = Integer.parseInt(yText.getText().replaceAll("\\s", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", ""));
+			Ordre ordre = new Ordre(x, y);
+			
+			bot.travian.getCompte().listeCompteCoordoneesPourColoniser.add(ordre);
+			fxOngletColonisation.getChildren().clear();
+			faireOngletColonisation();
+		}
+			
+			}catch(Exception ee) {
+				fxOngletColonisation.getChildren().clear();
+				faireOngletColonisation();
+				try {
+					console.flux.envoyer(fxFenetreController, "faireOngletColonisation : Pas de compte chargé ou format chiffres incorrect");
+				} catch (IOException e1) {}
+			}
+			
+			
+			
+		}
+	});
+	
+	
+	
+	
+	
+	
+	xVBox.getChildren().addAll(xLabel, xText);
+	yVBox.getChildren().addAll(yLabel, yText);
+	
+	groupe.getChildren().addAll(xVBox, yVBox, btn);
+	
+	capsule.getChildren().addAll(titre, groupe);
+	
+	
+	titre.getStyleClass().remove("ctitre");
+	titre.getStyleClass().add("ctitre");
+	xLabel.getStyleClass().remove("ctitre");
+	xLabel.getStyleClass().add("ctitre");
+	yLabel.getStyleClass().remove("ctitre");
+	yLabel.getStyleClass().add("ctitre");
+	btn.getStyleClass().remove("cbutton1");
+	btn.getStyleClass().add("cbutton1");
+	
+	fxOngletColonisation.getChildren().add(capsule);
+	
+
+	faireListeColonisation();
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public void faireListeColonisation() {
+	try {
+	for(Ordre ordre : bot.travian.getCompte().listeCompteCoordoneesPourColoniser) {
+	
+	VBox capsule = new VBox();
+	Label titre = new Label("Prochaines colonisations :");
+	
+	Label xLabel = new Label(" x :");
+	Label yLabel = new Label(" y :");
+	
+	VBox xVBox = new VBox();
+	VBox yVBox = new VBox();
+	
+	TextField xText = new TextField(String.valueOf(ordre.getX()));
+	TextField yText = new TextField(String.valueOf(ordre.getY()));
+	xText.setEditable(false);
+	yText.setEditable(false);
+	
+	FlowPane groupe = new FlowPane();
+	Button btn = new Button("Suprimer");
+	
+	btn.setOnAction(
+			new EventHandler<ActionEvent>() {
+		@Override public void handle(ActionEvent e) {
+			btn.setText("En cours");
+			bot.travian.getCompte().listeCompteCoordoneesPourColoniser.remove(ordre);
+			fxOngletColonisation.getChildren().clear();
+			faireOngletColonisation();
+		}
+	});
+	
+	
+	
+	
+	
+	
+	xVBox.getChildren().addAll(xLabel, xText);
+	yVBox.getChildren().addAll(yLabel, yText);
+	
+	groupe.getChildren().addAll(xVBox, yVBox, btn);
+	
+	capsule.getChildren().addAll(titre, groupe);
+	
+	
+	titre.getStyleClass().remove("ctitre");
+	titre.getStyleClass().add("ctitre");
+	xLabel.getStyleClass().remove("ctitre");
+	xLabel.getStyleClass().add("ctitre");
+	yLabel.getStyleClass().remove("ctitre");
+	yLabel.getStyleClass().add("ctitre");
+	btn.getStyleClass().remove("cbutton1");
+	btn.getStyleClass().add("cbutton1");
+	
+	fxOngletColonisation.getChildren().add(capsule);
+	
+	}
+	}catch(Exception ee) {
+	//	try {
+	//		console.flux.envoyer(fxFenetreController, " faireListeColonisation : Pas de compte chargé ou format chiffres incorrect 2");
+	//	} catch (IOException e1) {}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 public void setStage(Stage primaryStage) {
 	this.stage = primaryStage;

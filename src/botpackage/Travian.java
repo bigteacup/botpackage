@@ -45,6 +45,7 @@ public class Travian extends Thread {
 
 	private ArrayList<Village> listeDeVillages = new ArrayList<Village>();
 	private ArrayList<Village> listeDeVillagesPerdus = new ArrayList<Village>();
+	
 	Randomsleep randomsleep = new Randomsleep(t);
 	Date memDate;
 	private Marche marche = new Marche();
@@ -64,7 +65,7 @@ public class Travian extends Thread {
 	public int tokenForcerMarcheDeLaRotation = 0;
 	int limiteDeConstruction = 2;
 	private WebDriver driver;
-
+	
 	Hero hero = new Hero();
 
 
@@ -719,12 +720,14 @@ public class Travian extends Thread {
 				if (allume == false){break;}
 				
 				
-				if(true) {
-				int a = 41;
-				int b =-11;
-				colonisationPlanifiee(a ,b);
+
+				village.voirTroupesCivilesDuVillage(t);
+				if(t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0) { //TODO Faire un bouton dans la GUI
+					
+					if(village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3) {
+				colonisationPlanifiee(village);
+					}
 				}
-				
 				
 				if (allume == false){break;}
 				village.voirListeDeConstruction(t);
@@ -744,6 +747,9 @@ public class Travian extends Thread {
 						}else{ecrireDansConsole("Pillages Desactives... Par le regime du village");}
 					}else{ecrireDansConsole("Pillages Desactives...");}
 				}catch(Exception e){ecrireDansConsole("Echec pillage ");}
+				
+				
+
 				
 				if (allume == false){break;}
 				
@@ -1778,6 +1784,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
 		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction 
+				|| village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0
 				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true
 				|| village.getVillageCapitale() == true 
 				|| village.getVillagePillage() == true 
@@ -1964,20 +1971,28 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	
 	
 	
-	public void colonisationPlanifiee(int x, int y) {
+	public void colonisationPlanifiee(Village village) {
+		int x = t.compte.listeCompteCoordoneesPourColoniser.get(0).getX();// 41;
+		int y = t.compte.listeCompteCoordoneesPourColoniser.get(0).getY();//-11;
 		try {
+			
+			
 			t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href, 'karte.php')]")).click();
 			randomsleep.court();
 			t.getCompte().getDriver().get("https://ts1.travian.fr/position_details.php?x="+ x +"&y="+ y +"");
 			randomsleep.court();
 			WebElement btn = t.getCompte().getDriver().findElement(By.xpath("//a[contains(., 'fonder') or contains(., 'Fonder')] "));
 			randomsleep.court();
-	           Actions builder = new Actions(t.getCompte().getDriver());
-	            builder.contextClick(btn);
-	            builder.perform();
-		
+			btn.click();
+			randomsleep.court();
+	        //   Actions builder = new Actions(t.getCompte().getDriver());
+	        //    builder.contextClick(btn);
+	        //    builder.perform();
+			ecrireDansConsole("Colons lancés sur : "+ x +" " + y) ;
+	            t.compte.listeCompteCoordoneesPourColoniser.remove(0);
+	            village.setColons(0);
 		}catch (Exception e) {
-			
+			ecrireDansConsole("echec lancement colons") ;
 		}
 	}
 

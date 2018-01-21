@@ -3,6 +3,7 @@ package botpackage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -27,7 +28,7 @@ public String nomDeCompte;
 public Properties	fichierProperties ;
 public int limiteDeConstructionSimultanees;
 public int SlotDeVillageDuCompte = 0;
-
+public ArrayList<Ordre> listeCompteCoordoneesPourColoniser = new ArrayList<Ordre>();
 
 
 

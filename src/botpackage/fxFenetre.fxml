@@ -201,6 +201,15 @@
                         </ScrollPane>
                      </content>
                    </Tab>
+                   <Tab closable="false"  onSelectionChanged="#faireOngletColonisationSwitch"  text="Colonisation" styleClass="lesOnglets">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" >
+                           <content>
+                             <VBox fx:id="fxOngletColonisation"  styleClass="compteStyle1" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                   </Tab>
               </tabs>
             </TabPane>
          </center>
