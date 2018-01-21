@@ -265,6 +265,7 @@ public class Travian extends Thread {
 
 
 				 */		
+
 				try {
 					if (t.bot.rotationVillage == true){
 						rotationVillage();			
@@ -716,10 +717,23 @@ public class Travian extends Thread {
 				//TODO Remonter chargerchamp pour rendre le NPC effectif des la premiere co
 				village.updateRessources(t); 
 				if (allume == false){break;}
+				
+				
+				if(true) {
+				int a = 41;
+				int b =-11;
+				colonisationPlanifiee(a ,b);
+				}
+				
+				
+				if (allume == false){break;}
 				village.voirListeDeConstruction(t);
 				if (allume == false){break;}
 				village.chargerChamps(t);
 				if (allume == false){break;}
+				
+
+				
 				try { 
 					
 					if (allume == false){break;}
@@ -1928,7 +1942,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			}
 		}
 */
-		
+
 
 	
 	}
@@ -1945,6 +1959,27 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			randomsleep.court();
 		}catch(Exception e ) {ecrireDansConsole("echec fermer fenetre");}
 		}
+	
+	
+	
+	
+	
+	public void colonisationPlanifiee(int x, int y) {
+		try {
+			t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href, 'karte.php')]")).click();
+			randomsleep.court();
+			t.getCompte().getDriver().get("https://ts1.travian.fr/position_details.php?x="+ x +"&y="+ y +"");
+			randomsleep.court();
+			WebElement btn = t.getCompte().getDriver().findElement(By.xpath("//a[contains(., 'fonder') or contains(., 'Fonder')] "));
+			randomsleep.court();
+	           Actions builder = new Actions(t.getCompte().getDriver());
+	            builder.contextClick(btn);
+	            builder.perform();
+		
+		}catch (Exception e) {
+			
+		}
+	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
