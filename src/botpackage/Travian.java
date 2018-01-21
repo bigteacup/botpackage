@@ -1985,7 +1985,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			randomsleep.court();
 			btn.click();
 			randomsleep.court();
-			WebElement btn2 = t.getCompte().getDriver().findElement(By.xpath("//a[contains(., 'Colonisation') or contains(., 'colonisation')] "));
+			WebElement btn2 = t.getCompte().getDriver().findElement(By.xpath("//button[contains(., 'Colonisation') or contains(., 'colonisation')] "));
 			randomsleep.court();
 			btn2.click();
 			randomsleep.court();
