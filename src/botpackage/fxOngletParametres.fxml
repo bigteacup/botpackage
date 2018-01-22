@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -113,6 +114,7 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints />
          </rowConstraints>
          <children>
                      <Label opacity="0.75" text="Pillage">
@@ -130,13 +132,13 @@
             <TextField fx:id="motCleListeDesPertes" onAction="#motCleListeDesPertes" promptText="liste pertes" text="perte" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             
              <Label text="Mot clé pour la liste à lancer" GridPane.rowIndex="4" />
-            <TextField fx:id="motCleListeDePillage1"  onAction="#motCleListeaLancer" promptText="Liste à lancer" text="listedepillage1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="motCleListeDePillage1" onAction="#motCleListeaLancer" promptText="Liste à lancer" text="listedepillage1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <GridPane>
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"   />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"  maxWidth="70.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
         
@@ -155,21 +157,48 @@
                   <Font name="System Bold Italic" size="15.0" /> 
                </font>
             </Label>
-            <Label text="tempsMax En heure *aller*"  GridPane.rowIndex="1" />
-            <Label text="marchandsMinPourFonctionner, pour limiter les petit villages si besoin"  GridPane.rowIndex="2" />
+            <Label text="tempsMax En heure *aller*" GridPane.rowIndex="1" />
+            <Label text="marchandsMinPourFonctionner, pour limiter les petit villages si besoin" GridPane.rowIndex="2" />
             <Label text="marchandsAllouésPourAchat Les marchands du vuillage divisés par : " GridPane.rowIndex="3" />
-            <Label text="pourcentageDeclenchementAcheter Moin de tant de % de la moyenne des ressources du compte"  GridPane.rowIndex="4" />
-            <Label text="pourcentageDeclenchementAcheterContre **inactif** selectionner les ressources au dessus de la moyenne de tant de %"  GridPane.rowIndex="5" />
+            <Label text="pourcentageDeclenchementAcheter Moin de tant de % de la moyenne des ressources du compte" GridPane.rowIndex="4" />
+            <Label text="pourcentageDeclenchementAcheterContre **inactif** selectionner les ressources au dessus de la moyenne de tant de %" GridPane.rowIndex="5" />
             <Label text="pourcentageDeclenchementAcheterContreMoyenne selectionner les ressources au dessus de la moyenne de tant de %" GridPane.rowIndex="6" />
             <Label text="pourcentageDeclenchementAcheterContreVillage selectionner les ressources dont le remplissage du depot sur le village est superieur a %" GridPane.rowIndex="7" />
-            <TextField promptText="Temps en heure" text="5" fx:id="idTempsMax" onAction="#idTempsMax" GridPane.columnIndex="1" GridPane.rowIndex="1"  />
-            <TextField promptText="1" text="1" fx:id="idMarchandsMinPourFonctionner" onAction="#idMarchandsMinPourFonctionner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField promptText="4" text="2" fx:id="idMarchandsAllouésPourAchat" onAction="#idMarchandsAllouésPourAchat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField promptText="75" text="75" fx:id="idPourcentageDeclenchementAcheter" onAction="#idPourcentageDeclenchementAcheter" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField promptText="50" text="50" fx:id="idPourcentageDeclenchementAcheterContre" onAction="#idPourcentageDeclenchementAcheterContre" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField promptText="50" text="50" fx:id="idPourcentageDeclenchementAcheterContreMoyenne" onAction="#idPourcentageDeclenchementAcheterContreMoyenne" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField promptText="25" text="25" fx:id="idPourcentageDeclenchementAcheterContreVillage" onAction="#idPourcentageDeclenchementAcheterContreVillage" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="idTempsMax" onAction="#idTempsMax" promptText="Temps en heure" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="idMarchandsMinPourFonctionner" onAction="#idMarchandsMinPourFonctionner" promptText="1" text="1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="idMarchandsAllouésPourAchat" onAction="#idMarchandsAllouésPourAchat" promptText="4" text="2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="idPourcentageDeclenchementAcheter" onAction="#idPourcentageDeclenchementAcheter" promptText="75" text="75" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="idPourcentageDeclenchementAcheterContre" onAction="#idPourcentageDeclenchementAcheterContre" promptText="50" text="50" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="idPourcentageDeclenchementAcheterContreMoyenne" onAction="#idPourcentageDeclenchementAcheterContreMoyenne" promptText="50" text="50" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="idPourcentageDeclenchementAcheterContreVillage" onAction="#idPourcentageDeclenchementAcheterContreVillage" promptText="25" text="25" GridPane.columnIndex="1" GridPane.rowIndex="7" />
              </children>
+      </GridPane>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="485.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="313.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="21.0" prefWidth="259.0" text="Decalage Cereales *Parametrage personalisé Inactif pour le moment*">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Label>
+            <Label text="Commencer à Decaler quand les champs de cereales sont tous de niveau :" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="477.0" text="Jusqu à ce que 1 champs au moins de chaque ressource Terre Bois Fer soit au niveau :" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Mode strict (Ne produit de champs TBF qu'un emplacement de chaque)" GridPane.rowIndex="3" />
+            <Label text="Label" GridPane.rowIndex="4" />
+            <CheckBox mnemonicParsing="false" text="activé" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
       </GridPane>
    </children>
 </VBox>
