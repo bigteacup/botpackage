@@ -452,7 +452,16 @@ public class Village {
 	public Date heureDeGuet;
 	public List<AttaqueEntrante> attaquesSubies = new ArrayList<AttaqueEntrante>();
 	public boolean bloquerConstructionBatiment = false;
+	public int slotBatimentsLibres = 16;
 
+
+	public int getSlotBatimentsLibres() {
+		return slotBatimentsLibres;
+	}
+
+	public void setSlotBatimentsLibres(int slotBatimentsLibres) {
+		this.slotBatimentsLibres = slotBatimentsLibres;
+	}
 
 
 	//Liste de Templates du village
@@ -1124,7 +1133,9 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void chargerBatiments(Travian t) {
+		int slotTemp = 0;
 		t.ecrireDansConsole("Debut chargerBatiment");
+		
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 			t.randomsleep.court();
 			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
@@ -1132,6 +1143,7 @@ public class Village {
 		}
 
 		Village village = t.villageEnCours();
+		village.setSlotBatimentsLibres(slotTemp);// remise à zero
 		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
 		List<Batiment> listeDesBatimentsVillage = new ArrayList();
@@ -1157,6 +1169,8 @@ public class Village {
 				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
 				// si un slot est vide : on le nomme
 			} catch (Exception e) {
+				
+				slotTemp++; 
 				nomBatiment = webBatiment.getAttribute("alt");
 				levelBatiment = 0;
 				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
@@ -1192,6 +1206,8 @@ public class Village {
 
 			}
 		}
+		village.setSlotBatimentsLibres(slotTemp);
+		t.ecrireDansConsole("Slot libre : " + slotTemp);
 		t.ecrireDansConsole("Fin chargerBatiment");
 	}
 

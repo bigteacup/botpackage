@@ -1783,17 +1783,17 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		
 	
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
-		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction 
+		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction && (bot.monterChamps == true && village.regimeMonterChamps == true)
 				|| village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0
-				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true
+				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true && village.regimeFete == true
 				|| village.getVillageCapitale() == true 
 				|| village.getVillagePillage() == true 
 				|| village.getCropDeath() == true 
-				|| village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true
-				|| village.getBois() >= village.getMaxStockDepot()*90/100 	
-				|| village.getArgile() >= village.getMaxStockDepot()*90/100
-				|| village.getFer() >= village.getMaxStockDepot()*90/100
-				|| village.getCereales() >= village.getMaxStockSilo()*90/100 		
+				|| village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true && village.getSlotBatimentsLibres() > 0
+				|| village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
+				|| village.getArgile() >= village.getMaxStockDepot()*90/100 &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
+				|| village.getFer() >= village.getMaxStockDepot()*90/100    &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
+				|| village.getCereales() >= village.getMaxStockSilo()*90/100 && (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
 				|| compteurDeBoot == 1)	{
 			besoin = 1;
 		}
