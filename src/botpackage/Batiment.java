@@ -1,5 +1,7 @@
 package botpackage;
 
+import java.util.ArrayList;
+
 public class Batiment {
 	
 private String nomBatiment;
@@ -9,8 +11,24 @@ private String lienBatiment;
 private String alt;
 private int nombrePresent = 0 ;
 private boolean present = false ;
+public ArrayList<Batiment> prerequisBatiment = new ArrayList<Batiment>();
+public ArrayList<Boolean> prerequisBoolean = new ArrayList<Boolean>();
+public boolean needCapitale = false;
+public Boolean needArtefact;
 
 
+public ArrayList<Batiment> getPrerequisBatiment() {
+	return prerequisBatiment;
+}
+public void setPrerequisBatiment(ArrayList<Batiment> prerequisBatiment) {
+	this.prerequisBatiment = prerequisBatiment;
+}
+public ArrayList<Boolean> getPrerequisBoolean() {
+	return prerequisBoolean;
+}
+public void setPrerequisBoolean(ArrayList<Boolean> prerequisBoolean) {
+	this.prerequisBoolean = prerequisBoolean;
+}
 public boolean getPresent() {
 	return present;
 }
@@ -92,6 +110,36 @@ public Batiment (String nomBatiment, int levelBatiment){
 }
 
 
+public Batiment (String nomBatiment, int levelBatiment,  ArrayList<Batiment> prerequisBatiment){
+	this.nomBatiment = nomBatiment;
+	this.levelBatiment = levelBatiment;
+	this.prerequisBatiment =  prerequisBatiment;
+	
+} 
+public Batiment (String nomBatiment, int levelBatiment, Boolean needCapitale){
+	this.nomBatiment = nomBatiment;
+	this.levelBatiment = levelBatiment;
+	this.needCapitale = needCapitale;
+	
+}
+
+ 
+
+public Batiment (String nomBatiment, int levelBatiment, Boolean needCapitale, Boolean needArtefact){
+	this.nomBatiment = nomBatiment;
+	this.levelBatiment = levelBatiment;
+	this.needCapitale = needCapitale;
+	this.needArtefact = needArtefact;
+	
+}
+public Batiment (String nomBatiment, int levelBatiment,  ArrayList<Batiment> prerequisBatiment, Boolean needCapitale ){
+	this.nomBatiment = nomBatiment;
+	this.levelBatiment = levelBatiment;
+	this.prerequisBatiment =  prerequisBatiment;
+	this.needCapitale = needCapitale;
+	
+	
+}
 
 
 public Batiment() {

@@ -184,7 +184,7 @@ public  class   TemplatesDeVillages {
 		listeDeBatimentsDuTemplateParDefault3.clear();
 		listeDeBatimentsDuTemplateParDefault4.clear();
 		
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 10));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 10) ); 
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(depot, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(silo, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10));
@@ -211,7 +211,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(marche, 12));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(caserne, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(palais, 10));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5, true));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(academie, 5));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(murRomain, 10));
 		// listeDeBatimentsDuTemplateParDefault2.add(new Batiment(cachette, 10));
@@ -226,15 +226,15 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(residence, 10));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(moulin, 5));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(marche, 15));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(hotel_de_ville, 1));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(hotel_de_ville, 1) );
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(caserne, 5));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(academie, 10));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(palais, 20));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(ecurie, 10));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(comptoir, 5));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(tailleur, 12));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(comptoir, 5 ));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(tailleur, 12, true));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(place_rassemblement, 10));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(boulangerie, 5));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(boulangerie, 5 ));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(murRomain, 15));
 		 // listeDeBatimentsDuTemplateParDefault3.add(new Batiment(cachette, 10)); Chambre aux trésors
 		 		 
@@ -243,7 +243,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(scierie, 5));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(fonderie, 5));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(moulin, 5));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(boulangerie, 5));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(boulangerie, 5 ));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(batiment_principal, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(silo, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(depot, 20));
@@ -254,12 +254,12 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_rassemblement, 15));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(palais, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(residence, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(tailleur, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandSilo, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandDepot, 20));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(tailleur, 20, true));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandSilo, 20 , false, true));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandDepot, 20, false, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(forge, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 12));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cdt, 1));
+		// listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cdt, 1));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 10));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 10));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(murRomain, 15));
@@ -397,8 +397,14 @@ public  class   TemplatesDeVillages {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Prerequis :
+public void prerequis() {	
+ArrayList<Batiment> hv = new ArrayList<Batiment>();
+	 hv.add( (new Batiment(batiment_principal, 10) )) ;
+	 hv.add( (new Batiment(academie, 10) )) ;
 
 	
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
