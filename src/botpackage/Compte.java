@@ -23,7 +23,14 @@ public class Compte {
 		
 	}
 	
-	
+	public boolean PossedeUnArtefactGDGS = false;	
+public boolean getPossedeUnArtefactGDGS() {
+		return PossedeUnArtefactGDGS;
+	}
+	public void setPossedeUnArtefactGDGS(boolean possedeUnArtefactGDGS) {
+		PossedeUnArtefactGDGS = possedeUnArtefactGDGS;
+	}
+
 public String nomDeCompte;	
 public Properties	fichierProperties ;
 public int limiteDeConstructionSimultanees;

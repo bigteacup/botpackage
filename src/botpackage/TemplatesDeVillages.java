@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.hamcrest.FeatureMatcher;
+
 public  class   TemplatesDeVillages {
 	int mode;
 	String operateur1 = ">=";
@@ -159,6 +161,7 @@ public  class   TemplatesDeVillages {
 	public TemplatesDeVillages() {
 
 		listerBatimentDuJeu();
+		prerequis();
 		templatesDeVillagesTimTool();
 	//	choisirModeTemplatesDeVillages(3); // mode forcé templatesDeVillagesTimTool();
 	}
@@ -187,81 +190,80 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(batiment_principal, 10) ); 
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(depot, 6));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(silo, 6));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(caserne, 3));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10, batResidence));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(caserne, 3, batCaserne));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(place_rassemblement, 1));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(residence, 10));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(marche, 3));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(moulin, 5));
-		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(academie, 3));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(marche, 3, batMarche));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(moulin, 5, batMoulin));
+		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(academie, 3, batAcademie));
 		 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(murRomain, 5));
 		
 		 
 		 
 	//	 listeDeBatimentsDuTemplateParDefault1.add(new Batiment(cachette, 10));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(place_rassemblement, 1));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(poterie, 4));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(scierie, 4));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(fonderie, 4));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(poterie, 4, batPoterie));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(scierie, 4, batScierie));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(fonderie, 4, batFonderie));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(batiment_principal, 15));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(depot, 14));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(silo, 14));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(moulin, 5));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(residence, 10));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(marche, 12));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(caserne, 10));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(moulin, 5, batMoulin));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(residence, 10, batResidence));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(marche, 12, batMarche));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(caserne, 10, batCaserne));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(palais, 10));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5, true));
-		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(academie, 5));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(tailleur, 5, batTailleur, true));
+		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(academie, 5, batAcademie));
 		 listeDeBatimentsDuTemplateParDefault2.add(new Batiment(murRomain, 10));
 		// listeDeBatimentsDuTemplateParDefault2.add(new Batiment(cachette, 10));
 		 
 		 
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(batiment_principal, 20));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(poterie, 5));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(scierie, 5));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(fonderie, 5));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(poterie, 5, batPoterie));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(scierie, 5, batScierie));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(fonderie, 5, batFonderie));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(silo, 15));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(depot, 15));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(residence, 10));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(moulin, 5));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(marche, 15));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(hotel_de_ville, 1) );
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(caserne, 5));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(academie, 10));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(residence, 10, batResidence));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(moulin, 5, batMoulin));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(marche, 15, batMarche));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(hotel_de_ville, 1, batHV) );
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(caserne, 5, batCaserne));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(academie, 10, batAcademie));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(palais, 20));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(ecurie, 10));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(comptoir, 5 ));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(tailleur, 12, true));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(ecurie, 10, batEcurie));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(comptoir, 5, batComptoir ));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(tailleur, 12, batTailleur, true));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(place_rassemblement, 10));
-		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(boulangerie, 5 ));
+		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(boulangerie, 5, batBoulangerie ));
 		 listeDeBatimentsDuTemplateParDefault3.add(new Batiment(murRomain, 15));
 		 // listeDeBatimentsDuTemplateParDefault3.add(new Batiment(cachette, 10)); Chambre aux trésors
 		 		 
 
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(poterie, 5));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(scierie, 5));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(fonderie, 5));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(moulin, 5));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(boulangerie, 5 ));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(poterie, 5, batPoterie));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(scierie, 5, batScierie));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(fonderie, 5, batFonderie));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(moulin, 5, batMoulin));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(boulangerie, 5, batBoulangerie ));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(batiment_principal, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(silo, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(depot, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(marche, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(academie, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(hotel_de_ville, 15));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(caserne, 16));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(marche, 20, batMarche));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(academie, 20, batAcademie));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(hotel_de_ville, 15, batHV));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(caserne, 16, batCaserne));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_rassemblement, 15));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(palais, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(residence, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(tailleur, 20, true));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(residence, 20, batResidence));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(tailleur, 20, batTailleur, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandSilo, 20 , false, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandDepot, 20, false, true));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(forge, 20));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 12));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(forge, 20, batForge));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 12, batPlaceDeTournoi));
 		// listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cdt, 1));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 10));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 10));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 10, batEcurie));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 10, batComptoir));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(murRomain, 15));
 		 // listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cachette, 10));
 		 
@@ -357,23 +359,23 @@ public  class   TemplatesDeVillages {
 	public void listerBatimentDuJeu() {
 		listeDeBatimentDuJeu.clear();
 		
-		listeDeBatimentDuJeu.add(new Batiment(poterie, 0));
+		
 		listeDeBatimentDuJeu.add(new Batiment (grande_ecurie , 0));
-		listeDeBatimentDuJeu.add(new Batiment (ecurie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (comptoir , 0));
+		listeDeBatimentDuJeu.add(new Batiment (ecurie, 0, batEcurie));
+		listeDeBatimentDuJeu.add(new Batiment (comptoir , 0, batComptoir));
 		listeDeBatimentDuJeu.add(new Batiment (grande_caserne, 0));
-		listeDeBatimentDuJeu.add(new Batiment (place_tournoi, 0));
+		listeDeBatimentDuJeu.add(new Batiment (place_tournoi, 0, batPlaceDeTournoi));
 		listeDeBatimentDuJeu.add(new Batiment (place_rassemblement, 0));
-		listeDeBatimentDuJeu.add(new Batiment (boulangerie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (moulin, 0));
-		listeDeBatimentDuJeu.add(new Batiment (scierie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (poterie, 0));
-		listeDeBatimentDuJeu.add(new Batiment (fonderie, 0));
+		listeDeBatimentDuJeu.add(new Batiment (boulangerie, 0, batBoulangerie));
+		listeDeBatimentDuJeu.add(new Batiment (moulin, 0, batMoulin));
+		listeDeBatimentDuJeu.add(new Batiment (scierie, 0, batScierie));
+		listeDeBatimentDuJeu.add(new Batiment (poterie, 0, batPoterie));
+		listeDeBatimentDuJeu.add(new Batiment (fonderie, 0, batFonderie));
 		listeDeBatimentDuJeu.add(new Batiment (cachette, 0));
 		listeDeBatimentDuJeu.add(new Batiment (pieges, 0));
-		listeDeBatimentDuJeu.add(new Batiment (residence, 0));
-		listeDeBatimentDuJeu.add(new Batiment (atelier, 0));
-		listeDeBatimentDuJeu.add(new Batiment (hotel_de_ville, 0));
+		listeDeBatimentDuJeu.add(new Batiment (residence, 0, batResidence));
+		listeDeBatimentDuJeu.add(new Batiment (atelier, 0, batAtelier));
+		listeDeBatimentDuJeu.add(new Batiment (hotel_de_ville, 0, batHV));
 		listeDeBatimentDuJeu.add(new Batiment (ambassade, 0));
 		listeDeBatimentDuJeu.add(new Batiment (murGaulois, 0));
 		listeDeBatimentDuJeu.add(new Batiment (murRomain, 0));
@@ -382,29 +384,147 @@ public  class   TemplatesDeVillages {
 		listeDeBatimentDuJeu.add(new Batiment (depot, 0));
 		listeDeBatimentDuJeu.add(new Batiment (batiment_principal , 0));
 		listeDeBatimentDuJeu.add(new Batiment (empty , 0));
-		listeDeBatimentDuJeu.add(new Batiment (marche , 0));
-		listeDeBatimentDuJeu.add(new Batiment (academie , 0));
-		listeDeBatimentDuJeu.add(new Batiment (caserne , 0));
-		listeDeBatimentDuJeu.add(new Batiment (tailleur , 0));
-		listeDeBatimentDuJeu.add(new Batiment (grandSilo , 0));
-		listeDeBatimentDuJeu.add(new Batiment (grandDepot , 0));
-		listeDeBatimentDuJeu.add(new Batiment (forge , 0));
-		listeDeBatimentDuJeu.add(new Batiment (cdt, 0)); //Chambre aux trésors
+		listeDeBatimentDuJeu.add(new Batiment (marche , 0, batMarche));
+		listeDeBatimentDuJeu.add(new Batiment (academie , 0, batAcademie));
+		listeDeBatimentDuJeu.add(new Batiment (caserne , 0, batCaserne));
+		listeDeBatimentDuJeu.add(new Batiment (tailleur , 0, batTailleur, true));
+		listeDeBatimentDuJeu.add(new Batiment (grandSilo , 0, false, true));
+		listeDeBatimentDuJeu.add(new Batiment (grandDepot , 0, false, true));
+		listeDeBatimentDuJeu.add(new Batiment (forge , 0, batForge));
+		listeDeBatimentDuJeu.add(new Batiment (cdt, 0, batCDT)); //Chambre aux trésors
 	
 	}
-	
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Prerequis :
-public void prerequis() {	
-ArrayList<Batiment> hv = new ArrayList<Batiment>();
-	 hv.add( (new Batiment(batiment_principal, 10) )) ;
-	 hv.add( (new Batiment(academie, 10) )) ;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////A deplacer dans une autre classe///////////////////////////////////////////////////////////////////////////////////////
+//Prerequis :
+	//civil
+	 ArrayList<Batiment> batHV = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batMarche = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batComptoir = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batResidence = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batCDT = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batTailleur = new ArrayList<Batiment>();
+	 
+	 //militaire
+	 ArrayList<Batiment> batForge = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batEcurie = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batAcademie = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batPlaceDeTournoi = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batCaserne = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batAtelier = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batManoir = new ArrayList<Batiment>();
+	 
+	 // ressource
+	 ArrayList<Batiment> batBoulangerie = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batFonderie = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batScierie = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batPoterie = new ArrayList<Batiment>();
+	 ArrayList<Batiment> batMoulin = new ArrayList<Batiment>();
+
+public void prerequis() {	
+	//civil
+
+	 batHV.add( (new Batiment(batiment_principal, 10) )) ;
+	 batHV.add( (new Batiment(academie, 10) )) ;
+
+
+	 batMarche.add( (new Batiment(batiment_principal, 3) )) ;
+	 batMarche.add( (new Batiment(depot, 1) )) ;
+	 batMarche.add( (new Batiment(silo, 1) )) ;
+
+
+	 batComptoir.add( (new Batiment(marche,20) )) ;
+	 batComptoir.add( (new Batiment(ecurie, 10) )) ;
+
+
+	 batResidence.add( (new Batiment(batiment_principal, 5) )) ;
+	 
+
+
+	 batCDT.add( (new Batiment(batiment_principal, 10) )) ;
+	 
+
+
+	 batTailleur.add( (new Batiment(batiment_principal, 10, true) )) ;
+	 
+	 
+	 //militaire
+	 
+	 batForge.add( (new Batiment(batiment_principal, 3) )) ;
+	 batForge.add( (new Batiment(academie, 1) )) ;
+
+
+	 batEcurie.add( (new Batiment(forge, 3) )) ;
+	 batEcurie.add( (new Batiment(academie, 5) )) ;
+	 
+
+	 batAcademie.add( (new Batiment(batiment_principal, 3) )) ;
+	 batAcademie.add( (new Batiment(caserne, 3) )) ;
+	 
+
+	 batPlaceDeTournoi.add( (new Batiment(place_rassemblement, 15) )) ;
+	 
+	 
+
+	 batCaserne.add( (new Batiment(batiment_principal, 3) )) ;
+	 batCaserne.add( (new Batiment(place_rassemblement, 1) )) ;
+	 
+
+	 batAtelier.add( (new Batiment(batiment_principal, 5) )) ;
+	 batAtelier.add( (new Batiment(academie, 10) )) ;
+	 
+
+	 batManoir.add( (new Batiment(batiment_principal, 3) )) ;
+	 batManoir.add( (new Batiment(place_rassemblement, 1) )) ;
+	 
+	 
+	 
+	 
+	 // ressource
 	
+	 batBoulangerie.add( (new Batiment(batiment_principal, 5) )) ;
+	 batBoulangerie.add( (new Batiment(moulin, 5) )) ;
+	 batBoulangerie.add( (new Batiment(cereale, 10) )) ;
+	 
+
+	 batFonderie.add( (new Batiment(batiment_principal, 5) )) ;
+	 batFonderie.add( (new Batiment(fer, 10) )) ;
+	 
+
+	 batScierie.add( (new Batiment(batiment_principal, 5) )) ;
+	 batScierie.add( (new Batiment(bois, 10) )) ;
+	 
+
+	 batPoterie.add( (new Batiment(batiment_principal, 5) )) ;
+	 batPoterie.add( (new Batiment(terre, 10) )) ;
+	 
+
+	 batMoulin.add( (new Batiment(cereale, 5) )) ;
+	 
+	 //ArrayList<Batiment> hv = new ArrayList<Batiment>();
+	 //hv.add( (new Batiment(batiment_principal, 10) )) ;
+	 //hv.add( (new Batiment(academie, 10) )) ;
+	 
+	 //ArrayList<Batiment> hv = new ArrayList<Batiment>();
+	 //hv.add( (new Batiment(batiment_principal, 10) )) ;
+	 //hv.add( (new Batiment(academie, 10) )) ;
+
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

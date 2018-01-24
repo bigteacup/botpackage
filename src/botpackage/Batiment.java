@@ -14,7 +14,21 @@ private boolean present = false ;
 public ArrayList<Batiment> prerequisBatiment = new ArrayList<Batiment>();
 public ArrayList<Boolean> prerequisBoolean = new ArrayList<Boolean>();
 public boolean needCapitale = false;
-public Boolean needArtefact;
+public boolean needArtefact = false;
+
+public boolean getNeedCapitale() {
+	return needCapitale;
+}
+public void setNeedCapitale(boolean needCapitale) {
+	this.needCapitale = needCapitale;
+}
+public Boolean getNeedArtefact() {
+	return needArtefact;
+}
+public void setNeedArtefact(Boolean needArtefact) {
+	this.needArtefact = needArtefact;
+}
+
 
 
 public ArrayList<Batiment> getPrerequisBatiment() {

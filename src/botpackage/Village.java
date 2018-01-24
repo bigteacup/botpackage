@@ -1876,14 +1876,54 @@ public class Village {
 			// on regarde la necessité d'essayer de contruire un nouveau batiment
 			trouver = true;
 			for(Batiment batimentDuTemplate :  batimentsDuTemplateDuVillage){
+				trouver = true;
 
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
 				if( nomBat.equals("Tailleur de Pierres")|| nomBat.contains("Grand silo de céréales") || nomBat.contains("Grand dépôt de ressources") || nomBat.contains("Chambre aux trésors")){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||  
 					t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire");				
 				}else {
-					if(batimentDuTemplate.getPresent() == false ){
-						trouver = false;
+					if(batimentDuTemplate.getPresent() == false  ){
+						// on test les cas *Beta*
+
+
+						if( (batimentDuTemplate.getNeedCapitale() == true && village.getVillageCapitale() == true) || (batimentDuTemplate.getNeedArtefact() == true &&  t.getCompte().getPossedeUnArtefactGDGS() == true) ) {
+							trouver = false;
+						}
+
+
+						int nombreConditionsRequises =  batimentDuTemplate.prerequisBatiment.size();
+						if(batimentDuTemplate.getNeedCapitale() == true) {nombreConditionsRequises++;}
+						if(batimentDuTemplate.getNeedArtefact() == true) {nombreConditionsRequises++;}
+						int nombreConditionsRemplies = 0 ;
+						//test pour les batiments
+						for(Batiment batRequis : batimentDuTemplate.prerequisBatiment) {
+							for(Batiment batVillage : village.getBatiments()) { //batVillage.equals(batRequis)
+								if(  (batVillage.getLevelBatiment() == batRequis.getLevelBatiment()) && (batVillage.getNomBatiment() == batRequis.getNomBatiment())  ) {
+									nombreConditionsRemplies++;		
+								}
+							}
+						}
+						//test pour les champs
+						for(Batiment batRequis : batimentDuTemplate.prerequisBatiment) {
+							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsArgile) && batRequis.getNomBatiment().contains("argile")) {
+									nombreConditionsRemplies++;		
+									}
+							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsFer) && batRequis.getNomBatiment().contains("fer")) {
+								nombreConditionsRemplies++;		
+								}
+							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsBois) && batRequis.getNomBatiment().contains("bois")) {
+								nombreConditionsRemplies++;		
+								}
+							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsCereales) && batRequis.getNomBatiment().contains("cereales")) {
+								nombreConditionsRemplies++;		
+								}
+						}
+						if(nombreConditionsRemplies == nombreConditionsRequises) {
+							t.ecrireDansConsole(nomBat+" Conditions remplies");	
+							trouver = false;
+						}
+
 					}
 				}
 			}
