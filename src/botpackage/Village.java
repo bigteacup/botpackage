@@ -1216,8 +1216,10 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void monterChamps(Travian t) {
+	public int monterChamps(Travian t, int g) {
+		try {
 		t.ecrireDansConsole("Debut monterChamps");
+		
 		Village village = t.villageEnCours();
 		int valchampMinBaf = champMin;
 		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
@@ -1226,10 +1228,10 @@ public class Village {
 		int construEnCours = village.getConstructionsEnCours();
 
 		if (construEnCours < t.limiteDeConstruction) {
-			try { // secu anti rechargement
+			//try { // secu anti rechargement
 				// Lancer construction champs
 				// trouver lien du premier plus petit
-				int g = 0;
+				//int g = 0;
 				boolean decalageToken = false;
 				while (g < 18) {
 
@@ -1288,6 +1290,7 @@ public class Village {
 						}
 						/// test
 						/// ressources///////////////////////////////////////////////////////////////////////
+					
 						WebElement tagUnderConstruction = null;
 						try {
 							tagUnderConstruction = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div[" + (g + 1)+ "][contains(@class, 'underConstruction')]"));
@@ -1301,13 +1304,6 @@ public class Village {
 							int ferNecessaire = 0;
 							int cerealesNecessaire = 0;
 							t.ecrireDansConsole("try lien==chamPmin : lien : " + lien + "   champMin : " + champMin + "    valchampMinBaf : " + valchampMinBaf);
-							/*
-							//deplacer le curseur au loin
-							Actions ecartCurseur = new Actions(t.getCompte().getDriver());
-							try {ecartCurseur.moveByOffset(-2, -2);}catch(Exception e) {}
-							ecartCurseur.perform();
-							t.randomsleep.tcourt();
-							 */
 
 							// survol souris du champs = a champMin
 							Actions builder = new Actions(t.getCompte().getDriver());
@@ -1326,17 +1322,6 @@ public class Village {
 							// choper le tableau des ressources necessaires pour
 							// le champs en cours
 							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")); ////*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span
-							//	String test = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")).get(0).getText();
-							//ressourcesNecessaires.get(0).getText(); //a delete
-
-							// t.ecrireDansConsole("valeur ressourcesnecessaire
-							// "+ ressourcesNecessaires.get(0).getText());
-							// t.ecrireDansConsole("valeur ressourcesnecessaire
-							// "+ ressourcesNecessaires.get(1).getText());
-							// t.ecrireDansConsole("valeur ressourcesnecessaire
-							// "+ ressourcesNecessaires.get(2).getText());
-							// t.ecrireDansConsole("valeur ressourcesnecessaire
-							// "+ ressourcesNecessaires.get(3).getText());
 
 							// correction bug de MouseHover REVISION 2017 deconne, à surveiller
 							if (ressourcesNecessaires.get(0).getText().isEmpty() || ressourcesNecessaires.size()==0) {   // if (ressourcesNecessaires.size()==0)
@@ -1352,18 +1337,7 @@ public class Village {
 								t.randomsleep.court();
 
 								ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
-								// t.ecrireDansConsole("valeur
-								// ressourcesnecessaire "+
-								// ressourcesNecessaires.get(0).getText());
-								// t.ecrireDansConsole("valeur
-								// ressourcesnecessaire "+
-								// ressourcesNecessaires.get(1).getText());
-								// t.ecrireDansConsole("valeur
-								// ressourcesnecessaire "+
-								// ressourcesNecessaires.get(2).getText());
-								// t.ecrireDansConsole("valeur
-								// ressourcesnecessaire "+
-								// ressourcesNecessaires.get(3).getText());
+
 								retrytoken = false;
 							}
 
@@ -1390,6 +1364,7 @@ public class Village {
 								// go la page si //*[@id="stockBarFreeCrop"]
 
 								listeWebelementChamps.get(g).click();
+						
 								t.randomsleep.court();
 								// trouver le bouton vert
 								WebElement bouttonvert = null;
@@ -1417,6 +1392,7 @@ public class Village {
 							}
 						} // fin if lien== champMin
 						g++;
+						
 					} // fin if token de verification
 					else {
 						t.ecrireDansConsole(construEnCours +"construction en cours");
@@ -1425,13 +1401,18 @@ public class Village {
 					}
 					decalageToken = false;
 				} // fin while g <18
-			} catch (Exception e) {
-				t.ecrireDansConsole("echec monterChamps");
-				//	monterChamps(t);
-			}
+		//	} catch (Exception e) {
+		//		t.ecrireDansConsole("echec monterChamps");
+		//		return g;
+		//	}
 		} // fin if token <2
 		village.voirListeDeConstruction(t);
+		}catch (Exception e) {
+			t.ecrireDansConsole("Erreur");
+			return g;
+		}
 		t.ecrireDansConsole("fin monterChamps");
+		return -1;
 	}// fin monterchamps
 
 	/* } */
@@ -1441,7 +1422,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	public void parcourtChamps(Travian t, int g, Village village, int valchampMinBaf, List<WebElement> listeWebelementChamps, List<WebElement> listeWebelementChampsBis, int construEnCours, boolean decalageToken ) {}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1736,8 +1717,15 @@ public class Village {
 			if (champMin < 10 || village.getVillageCapitale() && t.bot.monterChampsCapitale == true) {
 
 
+				int erreurChamps = 0;
+				int g = 0;
 				if ( village.getRegimeMonterChamps() == true ) {
-					monterChamps(t);
+					while( g >= 0 && erreurChamps < 30) {
+						g = monterChamps(t, g);
+						erreurChamps++;
+						
+					}
+					t.ecrireDansConsole("erreurChamps : " + erreurChamps + " g : " + g);
 				}else {
 					t.ecrireDansConsole("monterChamps desactivé par le regime du village...");
 				}
