@@ -111,7 +111,7 @@ public  class   TemplatesDeVillages {
 	static String fer= "fer";
 	static String terre= "argile";
 	static String grande_ecurie = "Grande écurie";
-	static String ecurie = "écurie";
+	static String ecurie = "Écurie";
 	static String comptoir = "Comptoir de commerce";
 	static String grande_caserne= "Grande caserne";
 	static String place_tournoi= "Place du tournoi";
