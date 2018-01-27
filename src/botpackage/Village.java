@@ -365,6 +365,13 @@ public class Village {
 	public void setListeCoordoneesPourColoniser(ArrayList<Ordre> listeCoordoneesPourColoniser) {
 		this.listeVillageCoordoneesPourColoniser = listeCoordoneesPourColoniser;
 	}
+	public List<Batiment> getListeDeBatimentsEnCoursDeConstruction() {
+		return getListeDeBatimentsEnCoursDeConstruction();
+	}
+
+	public void setListeDeBatimentsEnCoursDeConstruction(List<Batiment> listeDeBatimentsEnCoursDeConstruction) {
+		this.listeDeBatimentsEnCoursDeConstruction = listeDeBatimentsEnCoursDeConstruction;
+	}
 
 
 	// TODO maxstock de base a corriger
@@ -420,6 +427,9 @@ public class Village {
 	private boolean cropDeath;
 	private boolean besoinDeConstruction;
 	private List<Batiment> batimentsDuTemplateDuVillage = new ArrayList<Batiment>();
+	private List<Batiment> listeDeBatimentsEnCoursDeConstruction = new ArrayList<Batiment>();
+
+
 	private int champMin;
 	private int champMax;
 	public ArrayList<Integer> listeLevelsChampsBois = new ArrayList<Integer>();
@@ -855,7 +865,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	void voirListeDeConstruction(Travian t) {
+	public void voirListeDeConstruction(Travian t) {
 		Village village = t.villageEnCours();
 
 
@@ -872,7 +882,7 @@ public class Village {
 			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf1.php");
 			t.randomsleep.court();
 		}
-
+		//////////////////////////////////////////////////////
 
 
 		List<WebElement> test = null;
@@ -890,9 +900,54 @@ public class Village {
 				t.ecrireDansConsole(test.size() + " Constructions deja en cours");
 				constructionEnCours = test.size();
 				village.setConstructionsEnCours(constructionEnCours);
+				try {
+					voirListeDeConstructionAnalyse(t, test);
+					}catch (Exception e2) {
+						t.ecrireDansConsole("Echec analyse precise ! ");
+					}
 			}
 		} catch (Exception e) {
 			village.setConstructionsEnCours(constructionEnCours);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void voirListeDeConstructionAnalyse(Travian t, List<WebElement> listeTest) {
+		
+		//////////////////////////////////////////////////////
+		// se replacer sur la bonne page si un module est reste ailleur
+		String urlTest = null;
+		try {
+			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
+		} catch (Exception e) {
+			t.ecrireDansConsole("echec urlTest1 ");
+		}
+
+		if (!urlTest.contains("dorf1") && !urlTest.contains("dorf2")) {
+			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf1.php");
+			t.randomsleep.court();
+		}
+		//////////////////////////////////////////////////////
+		
+		Village village = t.villageEnCours();
+		village.getListeDeBatimentsEnCoursDeConstruction().clear();
+		try {
+			
+			for (WebElement element : listeTest) {
+			String nomBat =	element.findElement(By.xpath("./*[@class=\"name\"]")).getText().split("Niveau")[0].trim(); //Batiment.determinerType(nomBat)
+			village.getListeDeBatimentsEnCoursDeConstruction().add(new Batiment(nomBat));
+				
+			}
+
+
+		} catch (Exception e) {
+			t.ecrireDansConsole("echec analyse precise : findelement ");
 		}
 	}
 

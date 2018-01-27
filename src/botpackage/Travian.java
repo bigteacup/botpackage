@@ -1655,11 +1655,18 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			while(trouver == false){
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
 					village.setConstructionsEnCours(donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
+					village.getListeDeBatimentsEnCoursDeConstruction().clear();
+					for( WebElement element : (donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img"))) ) {
+						String nomBat = element.getAttribute("alt").trim();
+						village.getListeDeBatimentsEnCoursDeConstruction().add(new Batiment(nomBat));
+					}
 
 					t.ecrireDansConsole(village.getNom()+ " : " +" setConstructionsEnCours == " + donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
 					trouver = true;
 					i = 0;
-				} else {i++;}
+				} else {
+					i++;
+				}
 
 			}
 		}
@@ -1789,7 +1796,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 				|| village.getVillageCapitale() == true 
 				|| village.getVillagePillage() == true 
 				|| village.getCropDeath() == true 
-				|| village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true && village.getSlotBatimentsLibres() > 0
+				|| village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true //&& village.getSlotBatimentsLibres() > 0
 				|| village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
 				|| village.getArgile() >= village.getMaxStockDepot()*90/100 &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
 				|| village.getFer() >= village.getMaxStockDepot()*90/100    &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
