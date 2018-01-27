@@ -110,6 +110,13 @@ public  class   TemplatesDeVillages {
 	static String cereale = "Ferme";
 	static String fer= "fer";
 	static String terre= "argile";
+	
+	
+	static String ChampsBucheron ="Bûcheron";
+	static String ChampsFerme = "Ferme";
+	static String ChampsMineDeFer= "Mine de fer";
+	static String ChampsCarriereDArgile= "Carrière d'argile";
+	
 	static String grande_ecurie = "Grande écurie";
 	static String ecurie = "Écurie";
 	static String comptoir = "Comptoir de commerce";

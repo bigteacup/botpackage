@@ -6,6 +6,10 @@ public class Batiment {
 	
 private String nomBatiment;
 private int levelBatiment;
+public int typeChampsOuBatiment; // 0 == champs    // 1== Batiments
+
+
+
 private String slotBatiment;
 private String lienBatiment;
 private String alt;
@@ -28,7 +32,12 @@ public Boolean getNeedArtefact() {
 public void setNeedArtefact(Boolean needArtefact) {
 	this.needArtefact = needArtefact;
 }
-
+public int getTypeChampsOuBatiment() {
+	return typeChampsOuBatiment;
+}
+public void setTypeChampsOuBatiment(int typeChampsOuBatiment) {
+	this.typeChampsOuBatiment = typeChampsOuBatiment;
+}
 
 
 public ArrayList<Batiment> getPrerequisBatiment() {
@@ -105,6 +114,7 @@ public Batiment(String nomBatiment, int levelBatiment, String slotBatiment, Stri
 	this.levelBatiment = levelBatiment;
 	this.slotBatiment = slotBatiment;
 	this.alt = alt;
+	determinerType(nomBatiment);
 }
 
 
@@ -112,6 +122,7 @@ public Batiment(String nomBatiment, int levelBatiment, String slotBatiment) {
 	this.nomBatiment = nomBatiment;
 	this.levelBatiment = levelBatiment;
 	this.slotBatiment = slotBatiment;
+	determinerType(nomBatiment);
 }
 
 
@@ -119,7 +130,7 @@ public Batiment(String nomBatiment, int levelBatiment, String slotBatiment) {
 public Batiment (String nomBatiment, int levelBatiment){
 	this.nomBatiment = nomBatiment;
 	this.levelBatiment = levelBatiment;
-	
+	determinerType(nomBatiment);
 	
 }
 
@@ -128,13 +139,13 @@ public Batiment (String nomBatiment, int levelBatiment,  ArrayList<Batiment> pre
 	this.nomBatiment = nomBatiment;
 	this.levelBatiment = levelBatiment;
 	this.prerequisBatiment =  prerequisBatiment;
-	
+	determinerType(nomBatiment);
 } 
 public Batiment (String nomBatiment, int levelBatiment, Boolean needCapitale){
 	this.nomBatiment = nomBatiment;
 	this.levelBatiment = levelBatiment;
 	this.needCapitale = needCapitale;
-	
+	determinerType(nomBatiment);
 }
 
  
@@ -144,14 +155,14 @@ public Batiment (String nomBatiment, int levelBatiment, Boolean needCapitale, Bo
 	this.levelBatiment = levelBatiment;
 	this.needCapitale = needCapitale;
 	this.needArtefact = needArtefact;
-	
+	determinerType(nomBatiment);
 }
 public Batiment (String nomBatiment, int levelBatiment,  ArrayList<Batiment> prerequisBatiment, Boolean needCapitale ){
 	this.nomBatiment = nomBatiment;
 	this.levelBatiment = levelBatiment;
 	this.prerequisBatiment =  prerequisBatiment;
 	this.needCapitale = needCapitale;
-	
+	determinerType(nomBatiment);
 	
 }
 
@@ -162,7 +173,21 @@ public Batiment() {
 	
 }
 
-
+public int determinerType(String nomBatiment) { // un set pour la creation du constructeur et un return pour des test sur noms 
+	int type = 1;
+	if( nomBatiment.toLowerCase().contains(TemplatesDeVillages.ChampsBucheron.toLowerCase()) 
+			|| nomBatiment.contains(TemplatesDeVillages.ChampsCarriereDArgile.toLowerCase()) 
+			|| nomBatiment.contains(TemplatesDeVillages.ChampsFerme.toLowerCase()) 
+			|| nomBatiment.contains(TemplatesDeVillages.ChampsMineDeFer.toLowerCase()) ) {
+		this.setTypeChampsOuBatiment(0);
+		type = 0;
+	}else {
+		this.setTypeChampsOuBatiment(1);
+		type = 1;
+	}
+	
+	return type;
+}
 
 
 
