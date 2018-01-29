@@ -220,6 +220,11 @@ public class Travian extends Thread {
 					eviterSurvey();
 				}catch (Exception e) {ecrireDansConsole("Echec eviterSurvey");
 				}
+				try {
+					enMaintenance();
+				}catch (Exception e) {ecrireDansConsole("Echec enMaintenance");
+				}
+				
 				randomsleep.court();
 
 				if (allume == false){break;}
@@ -472,6 +477,8 @@ public class Travian extends Thread {
 
 
 		try {
+			eviterSurvey();
+			enMaintenance();
 			compte.getDriver().close();
 			compte.getDriver().quit();
 
@@ -794,7 +801,9 @@ public class Travian extends Thread {
 				if (allume == false){break;}
 				
 				if (bot.evacuerSurplusRessources == true){
-					marche.evacuerSurplusRessources(t, village, listeDeVillages);
+					try {
+						marche.evacuerSurplusRessources(t, village, listeDeVillages);
+						}catch(Exception e) {ecrireDansConsole("[Marché] evacuerSurplusRessources Echec"); }
 				}else{ecrireDansConsole("Evacuation ressources Desactives...");}
 
 				if (allume == false){break;}
@@ -821,7 +830,7 @@ public class Travian extends Thread {
 				//test
 				if(bot.acheterAuMarché == true){
 					if(village.getRegimeAcheterAuMarché() == true){
-				marche.acheterAuMarché(t, village);
+						try {	marche.acheterAuMarché(t, village);}catch(Exception e) { ecrireDansConsole("[Marché] acheterAuMarché Echec");}
 					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.");}
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...");}
 			}//fin for
@@ -1820,7 +1829,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void eviterSurvey() {
 		try {
-			prendrePhoto("Connexion");
+			prendrePhoto("eviterSurvey");
 			randomsleep.court();
 			boolean boutonContinuer = compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]/p[1]/a")).isDisplayed();
 			randomsleep.court();
@@ -1831,8 +1840,25 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			}
 		}catch (Exception e) {
 			ecrireDansConsole("Pas de sondage a eviter");
+
 		}
 
+	}
+	public void enMaintenance() {
+	
+			try {
+				boolean maintenance = compte.getDriver().findElement(By.xpath("//*[@id=\"content\"]")).getText().toLowerCase().contains("maintenance");
+				if (maintenance == true) {
+					prendrePhoto("Maintenance");
+					ecrireDansConsole("En maintenance");
+				}else {
+					ecrireDansConsole("Pas de maintenance");	
+				}
+			}catch(Exception e1) {
+				ecrireDansConsole("Lecture maintenance Echec");
+			}
+		
+		//enMaintenance //*[@id="content"]
 	}
 
 	private void prendrePhoto(String nom) {

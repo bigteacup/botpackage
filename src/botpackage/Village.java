@@ -366,7 +366,7 @@ public class Village {
 		this.listeVillageCoordoneesPourColoniser = listeCoordoneesPourColoniser;
 	}
 	public List<Batiment> getListeDeBatimentsEnCoursDeConstruction() {
-		return getListeDeBatimentsEnCoursDeConstruction();
+		return listeDeBatimentsEnCoursDeConstruction;
 	}
 
 	public void setListeDeBatimentsEnCoursDeConstruction(List<Batiment> listeDeBatimentsEnCoursDeConstruction) {

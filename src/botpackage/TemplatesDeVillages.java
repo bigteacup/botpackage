@@ -99,7 +99,20 @@ public  class   TemplatesDeVillages {
 	}
 
 
-
+public String mur(Travian t) {
+	String  murRace = murGaulois;
+	if(t.getCompte().getTribut() == "Romain") {
+		murRace = murRomain;
+	}
+	if(t.getCompte().getTribut() == "Gaulois") {
+		murRace = murGaulois;
+	}
+	if(t.getCompte().getTribut() == "Germain") {
+		murRace = murGermain;
+	}
+	return murRace;
+	
+}
 
 	public void setOperateur2(String operateur2) {
 		this.operateur2 = operateur2;
@@ -135,6 +148,7 @@ public  class   TemplatesDeVillages {
 	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville Hôtel de ville
 	static String ambassade = "Ambassade";
 	static String murGaulois = "Palissade";
+	
 	static String palais = "Palais";
 	static String silo ="Silo de céréales";
 	static String depot ="Dépôt de ressources";
@@ -149,6 +163,7 @@ public  class   TemplatesDeVillages {
 	static String forge = "Forge";
 	static String cdt = "Chambre aux trésors"; //Chambre aux trésors
 	static String murRomain = "Mur d'enceinte"; //Mur d&#39;enceinte //Mur d' enceinte
+	static String murGermain = "Mur de terre";
 	String nomDuTemplate="";
  
 	//liste de batimients
@@ -259,7 +274,7 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(marche, 20, batMarche));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(academie, 20, batAcademie));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(hotel_de_ville, 15, batHV));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(caserne, 16, batCaserne));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(caserne, 20, batCaserne));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_rassemblement, 15));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(palais, 20));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(residence, 20, batResidence));
@@ -267,11 +282,11 @@ public  class   TemplatesDeVillages {
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandSilo, 20 , false, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandDepot, 20, false, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(forge, 20, batForge));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 12, batPlaceDeTournoi));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 14, batPlaceDeTournoi));
 		// listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cdt, 1));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 10, batEcurie));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 10, batComptoir));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(murRomain, 15));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 12, batEcurie));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 12, batComptoir));
+		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(murRomain, 20));
 		 // listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cachette, 10));
 		 
 
@@ -398,7 +413,8 @@ public  class   TemplatesDeVillages {
 		listeDeBatimentDuJeu.add(new Batiment (grandSilo , 0, false, true));
 		listeDeBatimentDuJeu.add(new Batiment (grandDepot , 0, false, true));
 		listeDeBatimentDuJeu.add(new Batiment (forge , 0, batForge));
-		listeDeBatimentDuJeu.add(new Batiment (cdt, 0, batCDT)); //Chambre aux trésors
+		listeDeBatimentDuJeu.add(new Batiment (cdt, 0, batCDT)); //Chambre aux trésors 	static String murGaulois = "Palissade";
+		listeDeBatimentDuJeu.add(new Batiment (murGermain, 0));
 	
 	}
 

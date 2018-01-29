@@ -19,6 +19,7 @@ public ArrayList<Batiment> prerequisBatiment = new ArrayList<Batiment>();
 public ArrayList<Boolean> prerequisBoolean = new ArrayList<Boolean>();
 public boolean needCapitale = false;
 public boolean needArtefact = false;
+public int race = 0; //01234 race romains gaulois germains huns egyptien 
 
 public boolean getNeedCapitale() {
 	return needCapitale;
@@ -185,9 +186,9 @@ public Batiment() {
 public static int determinerType(String nomBatiment) { // un set pour la creation du constructeur et un return pour des test sur noms 
 	int type = 1;
 	if( nomBatiment.toLowerCase().contains(TemplatesDeVillages.ChampsBucheron.toLowerCase()) 
-			|| nomBatiment.contains(TemplatesDeVillages.ChampsCarriereDArgile.toLowerCase()) 
-			|| nomBatiment.contains(TemplatesDeVillages.ChampsFerme.toLowerCase()) 
-			|| nomBatiment.contains(TemplatesDeVillages.ChampsMineDeFer.toLowerCase()) ) {
+			|| nomBatiment.toLowerCase().contains(TemplatesDeVillages.ChampsCarriereDArgile.toLowerCase()) 
+			|| nomBatiment.toLowerCase().contains(TemplatesDeVillages.ChampsFerme.toLowerCase()) 
+			|| nomBatiment.toLowerCase().contains(TemplatesDeVillages.ChampsMineDeFer.toLowerCase()) ) {
 		type = 0;
 	}else {	
 		type = 1;
