@@ -3,20 +3,6 @@ package botpackage;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import org.fxmisc.richtext.StyleClassedTextArea;
-
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.Lighting;
-import javafx.scene.effect.Reflection;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 
 

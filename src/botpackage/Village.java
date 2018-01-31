@@ -9,9 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import javafx.fxml.FXML;
-//import net.sourceforge.htmlunit.corejs.javascript.ast.SwitchCase;
-
 public class Village {
 
 

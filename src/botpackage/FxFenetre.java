@@ -3,18 +3,13 @@ package botpackage;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.Bloom;
-import javafx.scene.layout.Background;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 //import javafx.stage.StageStyle;
 
@@ -48,7 +43,13 @@ public class FxFenetre extends Application {
 	        	primaryStage.setTitle("TimTools lite");
 	        	controller = new FxFenetreController(); //primaryStage
 	        	controller.setStage(primaryStage); 
-	     
+	        //	primaryStage.setsetIconImage(new ImageIcon(this.getClass().getResource("mainicon.png")).getImage());
+	        	try {
+	        		Image anotherIcon = new Image("https://iconverticons.com/img/logo.png");
+	        		primaryStage.getIcons().add(anotherIcon);
+	        	} catch (Exception e) {
+				}
+	                
 	        
 
 	        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxFenetre.fxml"));
@@ -114,8 +115,6 @@ public class FxFenetre extends Application {
     	
 
     }
-
-
 
 
 

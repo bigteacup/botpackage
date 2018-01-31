@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.Cookie;
 
 
@@ -201,7 +200,7 @@ public class Travian extends Thread {
 
 
 		//System.setProperty("webdriver.chrome.driver", "C:\\Selenium2.45\\chrome\\chromedriver.exe");
-		//		driver = new ChromeDriver();//new ChromeDriver();
+		//		driver = new ChromeDriver();//new ChromeDriver();   
 
 
 
@@ -216,6 +215,7 @@ public class Travian extends Thread {
 
 			while (allume) {
 				t.bot.fxFenetreController.ona(t);
+				prendrePhoto("Connexion");
 				try {
 					eviterSurvey();
 				}catch (Exception e) {ecrireDansConsole("Echec eviterSurvey");
@@ -223,6 +223,10 @@ public class Travian extends Thread {
 				try {
 					enMaintenance();
 				}catch (Exception e) {ecrireDansConsole("Echec enMaintenance");
+				}
+				try {
+					messageSystem();
+				}catch (Exception e) {ecrireDansConsole("Echec messageSystem");
 				}
 				
 				randomsleep.court();
@@ -1829,12 +1833,11 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void eviterSurvey() {
 		try {
-			prendrePhoto("eviterSurvey");
 			randomsleep.court();
-			boolean boutonContinuer = compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]/p[1]/a")).isDisplayed();
+			boolean boutonContinuer = compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]/p[1]/a")).isDisplayed();  //*[@id=\"sysmsg\"]/p[1]/a
 			randomsleep.court();
 			if (boutonContinuer == true) {
-				prendrePhoto("ifboutonContinueregaltrue");
+				prendrePhoto("eviterSurvey---ifboutonContinueregaltrue");
 				compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]/p[1]/a")).click();
 				ecrireDansConsole("Eviter Sondage fait");
 			}
@@ -1844,6 +1847,23 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		}
 
 	}
+	public void messageSystem() {
+		
+		try {
+			boolean messageSystem = compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]")).isDisplayed();
+			if (messageSystem == true) {
+				prendrePhoto("messageSystem");
+				ecrireDansConsole("messageSystem");
+			}else {
+				ecrireDansConsole("Pas de messageSystem");	
+			}
+		}catch(Exception e1) {
+			ecrireDansConsole("pas de messageSystem / messageArte etc...");
+		}
+	
+	//enMaintenance //*[@id="content"]
+}
+	
 	public void enMaintenance() {
 	
 			try {

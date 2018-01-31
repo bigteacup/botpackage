@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.StyleClassedTextArea;
-import org.openqa.selenium.By;
-
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +21,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -33,7 +29,6 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -41,11 +36,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.effect.Lighting;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -54,14 +47,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 
 
@@ -2579,8 +2570,34 @@ button.setOnMouseClicked((e) -> {
 
 @FXML
 	public void faireOngletEnvoiTroupes() {
-		
+	VBox c = new VBox();
+	
+//	 Image icon = new Image("https://iconverticons.com/img/logo.png");
+	 
+	 ImageView iv = new ImageView();
+	// iv.setImage(icon);
+     c.getChildren().add(iv);
+     
+     fxOngletEnvoiTroupes.getChildren().remove(c);
+     fxOngletEnvoiTroupes.getChildren().add(c);
+     turn(iv);
 	}
+
+
+public void turn(ImageView image) {
+	
+	//while(true) {
+    
+   
+    image.getTransforms().add(new Rotate(0,0,0));
+    
+//	}
+   
+}
+
+
+
+
 
 @FXML
 public void faireOngletColonisation() {
@@ -2741,6 +2758,8 @@ public void faireListeColonisation() {
 	//	} catch (IOException e1) {}
 	}
 }
+
+
 
 
 

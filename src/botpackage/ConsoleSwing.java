@@ -2,7 +2,6 @@ package botpackage;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.List;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -13,7 +12,6 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 public class ConsoleSwing extends Thread {
 	JTextPane consoleColor;
