@@ -1369,7 +1369,7 @@ public class Village {
 							builder.perform();
 
 
-							t.randomsleep.court();
+							//t.randomsleep.tcourt();
 
 							// choper le tableau des ressources necessaires pour
 							// le champs en cours
@@ -1386,9 +1386,9 @@ public class Village {
 								retry.moveToElement(listeWebelementChampsBis.get(g), 0, 0); //retry.moveToElement(listeWebelementChamps.get(g+1), 0, 0);
 								retry.perform();
 
-								t.randomsleep.court();
+								t.randomsleep.tcourt();
 
-								ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
+								//ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
 
 								retrytoken = false;
 							}
@@ -1591,11 +1591,13 @@ public class Village {
 										//as.getAttribute("href");;
 									}	
 									else {
+										
 										as.click();
+										t.randomsleep.court();
 									}
 
 
-									t.randomsleep.court();
+								//	t.randomsleep.court();
 
 									//TODO  en faire un Objet          
 									// si cest un marche ou autre cliquer le bon                         //*[contains(@class, 'subNavi')]//div[contains(@class, 'container')]
@@ -1947,16 +1949,16 @@ public class Village {
 						}
 						//test pour les champs
 						for(Batiment batRequis : batimentDuTemplate.prerequisBatiment) {
-							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsArgile) && batRequis.getNomBatiment().contains("argile")) {
+							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsArgile) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsCarriereDArgile)) {
 									nombreConditionsRemplies++;		
 									}
-							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsFer) && batRequis.getNomBatiment().contains("fer")) {
+							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsFer) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsMineDeFer)) {
 								nombreConditionsRemplies++;		
 								}
-							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsBois) && batRequis.getNomBatiment().contains("bois")) {
+							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsBois) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsBucheron)) {
 								nombreConditionsRemplies++;		
 								}
-							if(batRequis.getLevelBatiment() ==  Collections.max(village.listeLevelsChampsCereales) && batRequis.getNomBatiment().contains("cereales")) {
+							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsCereales) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsFerme)) {
 								nombreConditionsRemplies++;		
 								}
 						}
