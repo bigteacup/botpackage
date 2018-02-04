@@ -539,8 +539,8 @@ public class Village {
 
 
 
-	public Village(String nom, String url, int x, int y, ArrayList batiments, int bois, int argile, int fer,
-			int cereales, int ConstructionsEnCours, double levelPlaceTournoi, boolean champsFinis, int maxStockDepot, int maxStockSilo) {
+	public Village(String nom, String url, int x, int y, ArrayList<Batiment> batiments, int bois, int argile, int fer,
+			int cereales, int ConstructionsEnCours, double levelPlaceTournoi, boolean champsFinis, int maxStockDepot, int maxStockSilo, int constructionsEnCours) {
 		super();
 		this.nom = nom;
 		this.url = url;
@@ -1198,7 +1198,7 @@ public class Village {
 	//	village.setSlotBatimentsLibres(22);// remise à zero
 		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
-		List<Batiment> listeDesBatimentsVillage = new ArrayList();
+		List<Batiment> listeDesBatimentsVillage = new ArrayList<Batiment>();
 
 		for (WebElement webBatiment : listeDesBatiments) {
 			// on intialise les variables
@@ -1683,7 +1683,8 @@ public class Village {
 			int hotelNonPresent = 1;
 
 			for (WebElement batiment : listeDesBatiments) {
-				if (batiment.getAttribute("alt").contains(t.bot.getTemplateLancerBot().hotel_de_ville)) {
+				t.bot.getTemplateLancerBot();
+				if (batiment.getAttribute("alt").contains(TemplatesDeVillages.hotel_de_ville)) {
 					hotelNonPresent = 0;
 					batiment.click();
 
@@ -1923,7 +1924,7 @@ public class Village {
 
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
-				if( nomBat.equals(template.tailleur)|| nomBat.contains(template.grandSilo) || nomBat.contains(template.grandDepot) || nomBat.contains(template.cdt)|| nomBat.contains(template.palais) ){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||  
+				if( nomBat.equals(TemplatesDeVillages.tailleur)|| nomBat.contains(TemplatesDeVillages.grandSilo) || nomBat.contains(TemplatesDeVillages.grandDepot) || nomBat.contains(TemplatesDeVillages.cdt)|| nomBat.contains(TemplatesDeVillages.palais) ){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||  
 					t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire");				
 				}else {
 					if(batimentDuTemplate.getPresent() == false  ){
@@ -2024,7 +2025,7 @@ public class Village {
 
 							for(Batiment batimentDuTemplate : village.getBatimentsDuTemplateDuVillage()){
 								nomBat = batimentDuTemplate.getNomBatiment();
-								if( nomBat.equals(template.tailleur)|| nomBat.contains(template.grandSilo) || nomBat.contains(template.grandDepot) || nomBat.contains(template.cdt)|| nomBat.contains(template.palais) ){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||
+								if( nomBat.equals(TemplatesDeVillages.tailleur)|| nomBat.contains(TemplatesDeVillages.grandSilo) || nomBat.contains(TemplatesDeVillages.grandDepot) || nomBat.contains(TemplatesDeVillages.cdt)|| nomBat.contains(TemplatesDeVillages.palais) ){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||
 									t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire 2 "); 
 
 								}else {
