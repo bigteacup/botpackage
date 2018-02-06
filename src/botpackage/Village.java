@@ -1369,7 +1369,7 @@ public class Village {
 							builder.perform();
 
 
-							//t.randomsleep.tcourt();
+							t.randomsleep.tcourt();
 
 							// choper le tableau des ressources necessaires pour
 							// le champs en cours
@@ -1386,7 +1386,7 @@ public class Village {
 								retry.moveToElement(listeWebelementChampsBis.get(g), 0, 0); //retry.moveToElement(listeWebelementChamps.get(g+1), 0, 0);
 								retry.perform();
 
-								t.randomsleep.tcourt();
+								t.randomsleep.court();
 
 								//ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
 
