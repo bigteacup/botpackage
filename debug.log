@@ -1,2 +1,15 @@
 [1022/015512.540:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
 [1112/161755.334:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[1210/053604.095:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[1216/044632.290:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[1216/142008.943:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[1231/031516.809:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[0210/192416.178:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0211/192416.183:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0212/192418.422:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0218/164943.801:ERROR:file_io_win.cc(170)] CreateFile C:\Users\timseven\AppData\Local\Temp\scoped_dir9052_30509\Crashpad\reports\c7ab25a5-a919-42b4-ac31-3e407658581b.dmp: Le chemin d’accès spécifié est introuvable. (0x3)
+[0218/164943.807:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[0220/005158.833:ERROR:file_io_win.cc(170)] CreateFile C:\Users\timseven\AppData\Local\Temp\scoped_dir17824_31439\Crashpad\reports\b26247cf-8e36-4e96-97cd-887cd9a41c11.dmp: Le chemin d’accès spécifié est introuvable. (0x3)
+[0220/005158.835:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[0220/005628.029:ERROR:process_info.cc(380)] UncheckedAllocate
+[0220/010010.394:ERROR:process_info.cc(380)] UncheckedAllocate

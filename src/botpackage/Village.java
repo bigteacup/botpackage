@@ -1309,7 +1309,7 @@ public class Village {
 							if (regimeDecalageCereales == true) {
 
 								//TODO Decalage faire un systeme plus clair et parametrable
-								if(type.toLowerCase().contains("ferme")) {
+							
 									ArrayList<Integer> baf = new ArrayList<Integer>();
 									baf.addAll(village.getListeLevelsChampsBois() ); // 
 									baf.addAll(village.getListeLevelsChampsArgile() );
@@ -1325,19 +1325,30 @@ public class Village {
 									int c = Collections.max(village.getListeLevelsChampsArgile());
 									if (c >= 10) {c = 0;
 									}
+									int d = Collections.max(village.getListeLevelsChampsCereales());
+								
 
-									int d = a + b + c;
+									int e = a + b + c;
 
 
-									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (d > 0)) { // decalage
+									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (e > 0)) { // decalage
 										t.ecrireDansConsole("Decalage Cereales actif");
 										decalageToken = true;
+										
+
+									}
+
+								
+								if(type.toLowerCase().contains("ferme")) {
+									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (e > 0)) { // decalage
+										t.ecrireDansConsole("Decalage Cereales effectué");
 										g++;
 										continue;
 
 									}
 
 								}
+								
 							}
 						}
 						/// test
