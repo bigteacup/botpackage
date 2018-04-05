@@ -47,7 +47,7 @@ public class CalculsTravian {
 	public double calculDeDistance(double xa,double ya,double xb,double yb, boolean verbose ) throws ParseException {
 
 		double distance = Math.sqrt((xa - xb)*(xa - xb)+(ya - yb)*(ya - yb));
-		if(verbose ==true){	t.ecrireDansConsole("Raw Distance = "+distance);}
+		if(verbose ==true){	t.ecrireDansConsole("Raw Distance = "+distance, true);}
 		arrondirADeuxChiffres(distance,verbose);
 		return distance;
 	}
@@ -62,7 +62,7 @@ public class CalculsTravian {
 		//besoin de formater pour enlever la virgule
 		NumberFormat nf = NumberFormat.getInstance();
 		double number = nf.parse(y).doubleValue();
-		if(verbose ==true){   t.ecrireDansConsole("Distance Arrondie = "+number);}
+		if(verbose ==true){   t.ecrireDansConsole("Distance Arrondie = "+number, true);}
 
 		return number;
 
@@ -112,7 +112,7 @@ public class CalculsTravian {
 		if(secondes <=9 ){secondesString = "0"+secondes;} else {secondesString = ""+secondes;}
 
 		String heureTravian = heuresString +":"+ minutesString +":"+ secondesString ;
-		if(verbose ==true){	t.ecrireDansConsole("Temps de trajet : "+heureTravian+"   et chriffre de base : "+a);}
+		if(verbose ==true){	t.ecrireDansConsole("Temps de trajet : "+heureTravian+"   et chriffre de base : "+a, true);}
 
 		return a;
 

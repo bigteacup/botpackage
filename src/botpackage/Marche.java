@@ -110,7 +110,7 @@ public class Marche {
 				t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"enabledButton\"]/div/div[2]")).click();
 
 			}		
-		}catch(Exception e){t.ecrireDansConsole("Echec evacuation cereales marche : marche2 ");}
+		}catch(Exception e){t.ecrireDansConsole("Echec evacuation cereales marche : marche2 ", true);}
 	}
 
 
@@ -139,7 +139,7 @@ public class Marche {
 				}
 			}
 		} catch (Exception e) {
-			t.ecrireDansConsole("bug :)");
+			t.ecrireDansConsole("bug :)", true);
 		}
 	}
 
@@ -165,7 +165,7 @@ public class Marche {
 				nombreMarchandDispoInteger = Integer.valueOf(nombreMarchandDispoString); 
 				village.setNombreDeMarchands(nombreMarchandDispoInteger);
 			}catch(Exception e1) {
-				t.ecrireDansConsole("echec updateNombreDeMarchandsDispo valeur par default : " + nombreMarchandDispoInteger );}
+				t.ecrireDansConsole("echec updateNombreDeMarchandsDispo valeur par default : " + nombreMarchandDispoInteger, true );}
 
 		}
 		return nombreMarchandDispoInteger;
@@ -181,13 +181,13 @@ public class Marche {
 			quantiteMaxParMarchandString = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).getText().replaceAll("\\W", "");
 			quantiteMaxParMarchandInteger = Integer.valueOf(quantiteMaxParMarchandString);
 			village.setQuantiteMaxTransporteeParMarchands(quantiteMaxParMarchandInteger);
-			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger ); 
+			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger, true ); 
 		} catch (Exception e) {
 			if(token <= 6) {
 				changementOngletMarche(t, village, token, "Envoi");
 				quantiteMaxParMarchandInteger = updateQuantiteMaxTransporteParMarchand(t, village, token);
 			}else {
-				t.ecrireDansConsole("echec [On change d'onglet] " + token );
+				t.ecrireDansConsole("echec [On change d'onglet] " + token, true );
 
 
 			}//t.ecrireDansConsole("echec updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger +" " + token); 
@@ -200,7 +200,7 @@ public class Marche {
 
 	public void changementOngletMarche(Travian t,Village village, int token, String titreOnglet) {
 		try {
-			t.ecrireDansConsole("ChangementOnglet " + token );
+			t.ecrireDansConsole("ChangementOnglet " + token, true );
 			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
 			for (WebElement tabGestion : listeDesTabs) {
 
@@ -213,7 +213,7 @@ public class Marche {
 			}
 
 		}catch (Exception e1) {
-			t.ecrireDansConsole("echec changementOngletMarche  "  + token); 
+			t.ecrireDansConsole("echec changementOngletMarche  "  + token, true); 
 		}
 
 	}
@@ -224,7 +224,7 @@ public class Marche {
 	///////////////////////////////////////////////efficace en serveur vitesse 1, pour village sources dont les depots sont superieurs a 4000 en germain, 3100 en gaulois, 2000 en romains sans comptoir du commerce.   
 	public void evacuerSurplusRessources(Travian t, Village village, ArrayList<Village> listeDeVillages ) {
 
-		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Début");
+		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Début", true);
 
 
 		try {
@@ -251,11 +251,11 @@ public class Marche {
 				pourcentageArgileMin = village.getRegimeMarcheArgileMin();
 				pourcentageFerMin = village.getRegimeMarcheFerMin();
 				pourcentageCerealesMin = village.getRegimeMarcheCerealesMin();
-				t.ecrireDansConsole("[Marché] Prise des valeurs personnalisées");
+				t.ecrireDansConsole("[Marché] Prise des valeurs personnalisées", true);
 			}
-			t.ecrireDansConsole(" Pourcentage de Vidage Marché en cours --> Regime General (par default) : "+pourcentageRegimeGeneral+" |Bois : "+pourcentageBois+" | Argile : "+pourcentageArgile+" |Fer : "+pourcentageFer+" |Cereales : "+pourcentageCereales+"");
+			t.ecrireDansConsole(" Pourcentage de Vidage Marché en cours --> Regime General (par default) : "+pourcentageRegimeGeneral+" |Bois : "+pourcentageBois+" | Argile : "+pourcentageArgile+" |Fer : "+pourcentageFer+" |Cereales : "+pourcentageCereales+"", true);
 			int pourcentageNePasLaisserLeVillageSourceEnDessousDe = t.bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe;
-			t.ecrireDansConsole("pourcentageNePasLaisserLeVillageSourceEnDessousDe en cours --> Regime General (par default) : "+pourcentageNePasLaisserLeVillageSourceEnDessousDe +" |Bois : "+pourcentageBoisMin+" | Argile : "+pourcentageArgileMin+" |Fer : "+pourcentageFerMin+" |Cereales : "+pourcentageCerealesMin+"");
+			t.ecrireDansConsole("pourcentageNePasLaisserLeVillageSourceEnDessousDe en cours --> Regime General (par default) : "+pourcentageNePasLaisserLeVillageSourceEnDessousDe +" |Bois : "+pourcentageBoisMin+" | Argile : "+pourcentageArgileMin+" |Fer : "+pourcentageFerMin+" |Cereales : "+pourcentageCerealesMin+"", true);
 			boolean tropBois = village.getBois() >= village.getMaxStockDepot()/100*pourcentageBois;
 			boolean tropArgile = village.getArgile() >= village.getMaxStockDepot()/100*pourcentageArgile;
 			boolean tropFer = village.getFer() >= village.getMaxStockDepot()/100*pourcentageFer;
@@ -356,8 +356,8 @@ public class Marche {
 				}
 			}
 
-		}catch(Exception e){t.ecrireDansConsole("Echec evacuation cereales marche, Pas de marche ?  Ou pas de compte + ? Bug general");}
-		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Fin");
+		}catch(Exception e){t.ecrireDansConsole("Echec evacuation cereales marche, Pas de marche ?  Ou pas de compte + ? Bug general", true);}
+		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Fin", true);
 	}
 
 
@@ -445,7 +445,7 @@ public class Marche {
 									villageCibleNom = villageCible.getNom();
 									ordre.setVillageCible(villageCibleNom);
 									continuer = false;
-									t.ecrireDansConsole("[Ordre]"+village.getNom()+" enverra sur "+villageCibleNom );
+									t.ecrireDansConsole("[Ordre]"+village.getNom()+" enverra sur "+villageCibleNom, true );
 									t.calculs.calculDeDistance(village.getX(), village.getY(), villageCible.getX(), villageCible.getY(),true);
 									t.calculs.tempsDeTrajet(distance, vitesseMarchands, 0, 0,0, true);
 									break;
@@ -453,7 +453,7 @@ public class Marche {
 
 								if (pourcentage == 100){
 									continuer=false;	
-									t.ecrireDansConsole("[Marché]Pas de villages ayant la capacitée pour evacuer cette ressource : " +ordre.getNomOrdre());
+									t.ecrireDansConsole("[Marché]Pas de villages ayant la capacitée pour evacuer cette ressource : " +ordre.getNomOrdre(), true);
 									break;}
 
 
@@ -463,20 +463,20 @@ public class Marche {
 
 						}else {
 							if(distance == 0.0) {
-								t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " ne peut pas s'envoyer a lui meme. Pourcentage actuel : " + pourcentage);
+								t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " ne peut pas s'envoyer a lui meme. Pourcentage actuel : " + pourcentage, true);
 								if (pourcentage >= 100){
 									continuer=false;	
-									t.ecrireDansConsole("[Marché]Pas de villages é portée pour evacuer cette ressource : " +ordre.getNomOrdre());
+									t.ecrireDansConsole("[Marché]Pas de villages é portée pour evacuer cette ressource : " +ordre.getNomOrdre(), true);
 									break;
 								}
 
 							}
 							//	nbrVillageTropLoin++;
 							if(distance > 0.0) {
-								t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " est trop eloigné. Pourcentage actuel : " + pourcentage);
+								t.ecrireDansConsole("[Marché] " + villageCible.getNom() + " est trop eloigné. Pourcentage actuel : " + pourcentage, true);
 								if (pourcentage >= 100){
 									continuer=false;	
-									t.ecrireDansConsole("[Marché]Pas de villages à portée pour evacuer cette ressource : " +ordre.getNomOrdre());
+									t.ecrireDansConsole("[Marché]Pas de villages à portée pour evacuer cette ressource : " +ordre.getNomOrdre(), true);
 									break;
 								}
 								//	if (nbrVillageTropLoin >= listeDeVillages.size() && pourcentage >= 100 ){
@@ -499,7 +499,7 @@ public class Marche {
 			}
 
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec envoyerMarchandSelectionDuVillageCible");
+			t.ecrireDansConsole("echec envoyerMarchandSelectionDuVillageCible", true);
 		}	
 
 	}
@@ -559,7 +559,7 @@ public class Marche {
 								if (ordreEnvoyes.getNomOrdre().equals("Cereales")){ typeDeRessource = 4;
 								villageCiblebis.memoireMarcheDeLaRotation[3] = villageCiblebis.memoireMarcheDeLaRotation[3]+ ressourcesEnvoyees;  }
 
-								t.ecrireDansConsole("[Marché] " +village.getNom()+ " envoi " + ressourcesEnvoyees +  " de " +ordreEnvoyes.getNomOrdre()+" sur " + cible);
+								t.ecrireDansConsole("[Marché] " +village.getNom()+ " envoi " + ressourcesEnvoyees +  " de " +ordreEnvoyes.getNomOrdre()+" sur " + cible, true);
 								// On supprime l'élément courant de la liste
 								ordreEnvoyesIter.remove(); // 
 							}
@@ -583,7 +583,7 @@ public class Marche {
 			}
 
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec envoyerMarchandCliquage : Probable changement de village ou marche lvl 0 (en construction ver lvl 1)");
+			t.ecrireDansConsole("echec envoyerMarchandCliquage : Probable changement de village ou marche lvl 0 (en construction ver lvl 1)", true);
 		}	
 
 	}
@@ -601,7 +601,7 @@ public class Marche {
 				/////mode envoyer en plusieur fois
 				try {
 					t.getCompte().getDriver().findElement(By.xpath("//*[@id='x2']/option[1]")).click(); //*[@id='x2']/option[1] | //*[@id='x2']
-				}catch (Exception e){t.ecrireDansConsole("Pas de club Gold ou echec");}
+				}catch (Exception e){t.ecrireDansConsole("Pas de club Gold ou echec", true);}
 				t.randomsleep.tcourt();
 				//nom du village receveur
 				WebElement enterVillageName = t.getCompte().getDriver().findElement(By.xpath("//*[@id='enterVillageName']"));
@@ -619,7 +619,7 @@ public class Marche {
 				ok = true;
 
 			} catch (Exception e) {
-				t.ecrireDansConsole("echec envoyerMarchand");
+				t.ecrireDansConsole("echec envoyerMarchand", true);
 			}	
 		}
 		return ok;
@@ -788,12 +788,12 @@ public class Marche {
 			t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
 			t.randomsleep.court();
 		} catch (Exception e) {
-			t.ecrireDansConsole("Pas de compte + ou pas de marché Passage en force");
+			t.ecrireDansConsole("Pas de compte + ou pas de marché Passage en force", true);
 
 			try{
 				t.getCompte().getDriver().findElement(By.xpath("//*[@id='dialogCancelButton']")).click();	//*[@id="dialogCancelButton"]
 
-			}catch (Exception e1) {t.ecrireDansConsole("echec evitement de la pub Travian+ ---> normal code mort  mais laisser pour garder le code pour autre chose");}
+			}catch (Exception e1) {t.ecrireDansConsole("echec evitement de la pub Travian+ ---> normal code mort  mais laisser pour garder le code pour autre chose", true);}
 
 			try {//bon bah on va sur une page contenant le marché
 				if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
@@ -805,7 +805,7 @@ public class Marche {
 				boutton.click();
 				t.randomsleep.court();
 			}catch (Exception e3){
-				t.ecrireDansConsole("Pas de marché :(");
+				t.ecrireDansConsole("Pas de marché :(", true);
 			}
 		}	
 
@@ -822,7 +822,7 @@ public class Marche {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//TODO REafctorer pour utiliser le systeme d'ordre plutot que cela // Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que tant de marchands de chaque par ressource
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
-		t.ecrireDansConsole("[Marché] ApproPetitVillage Début");
+		t.ecrireDansConsole("[Marché] ApproPetitVillage Début", true);
 		try {
 			if (village.getChampMin() <= t.bot.champMinFx){
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
@@ -945,7 +945,7 @@ public class Marche {
 										}}
 									//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
 									if(envoyerMarchands(t, village.getNom())){
-										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom());
+										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
 									}
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(village.getUrl());
@@ -960,7 +960,7 @@ public class Marche {
 
 						}else {
 
-							t.ecrireDansConsole("[Marché] " + villageCandidat.getNom() + " est trop eloigné. " );
+							t.ecrireDansConsole("[Marché] " + villageCandidat.getNom() + " est trop eloigné. ", true );
 						}
 
 
@@ -968,8 +968,8 @@ public class Marche {
 					}
 				}
 			}
-		}catch (Exception e){t.ecrireDansConsole("echec approPetitVillage");}
-		t.ecrireDansConsole("[Marché] ApproPetitVillage Fin");
+		}catch (Exception e){t.ecrireDansConsole("echec approPetitVillage", true);}
+		t.ecrireDansConsole("[Marché] ApproPetitVillage Fin", true);
 
 	}
 
@@ -985,7 +985,7 @@ public class Marche {
 	//TODO limiter les achats afin de ne pas causer un manque sur une autre ressource, bref pas compatible avec les petits villages
 	// faire un limiteur par la taille du village, ou des depot, ou le calcul complet
 	public void acheterAuMarché(Travian t, Village village){
-		t.ecrireDansConsole("[Marché] acheterAuMarché Début ");
+		t.ecrireDansConsole("[Marché] acheterAuMarché Début ", true);
 		int tempsMax = t.bot.tempsMax; // temps en heure
 		//int marchandsMinPourAcheter = 10;
 		int marchandsMinPourFonctionner = t.bot.marchandsMinPourFonctionner; //dans la boucle while plus bas 
@@ -1080,7 +1080,7 @@ public class Marche {
 					tableauBesoin.remove(tableauBesoin.indexOf(1));
 					tableauBesoin.add(0, besoinMarché);
 				}else {
-					t.ecrireDansConsole("totalBois pas de place");}
+					t.ecrireDansConsole("totalBois pas de place", true);}
 			}
 
 			if(totalArgile < totalBois && totalArgile < totalFer && totalArgile < totalCereales){
@@ -1089,7 +1089,7 @@ public class Marche {
 					tableauBesoin.remove(tableauBesoin.indexOf(2));
 					tableauBesoin.add(0, besoinMarché);
 				}else {
-					t.ecrireDansConsole("totalArgiles pas de place");}
+					t.ecrireDansConsole("totalArgiles pas de place", true);}
 			}
 			if(totalFer < totalBois && totalFer < totalArgile   && totalFer < totalCereales){
 				if(village.getMaxStockDepot() - village.getFer() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
@@ -1097,7 +1097,7 @@ public class Marche {
 					tableauBesoin.remove(tableauBesoin.indexOf(3));
 					tableauBesoin.add(0, besoinMarché);
 				}else {
-					t.ecrireDansConsole("totalFer pas de place");}
+					t.ecrireDansConsole("totalFer pas de place", true);}
 			}
 			if(totalCereales <  totalBois && totalCereales < totalArgile  && totalCereales < totalFer){
 				if(village.getMaxStockSilo() - village.getCereales() > (marchandsAllouésPourAchat*village.getQuantiteMaxTransporteeParMarchands())) {
@@ -1105,7 +1105,7 @@ public class Marche {
 					tableauBesoin.remove(tableauBesoin.indexOf(4));
 					tableauBesoin.add(0, besoinMarché);
 				}else {
-					t.ecrireDansConsole("totalCereales pas de place");}
+					t.ecrireDansConsole("totalCereales pas de place", true);}
 			}
 
 			//on deteremine les ressources au dessus d'un seuil 
@@ -1163,7 +1163,7 @@ public class Marche {
 				}
 			}catch (Exception e){
 				autorisationAchat = true; 
-				t.ecrireDansConsole("Premier lancement probable : pas d'heure dans le village --> autorisation");
+				t.ecrireDansConsole("Premier lancement probable : pas d'heure dans le village --> autorisation", true);
 			}
 
 			if(autorisationAchat == true){
@@ -1180,7 +1180,7 @@ public class Marche {
 				///////////////
 				for(int b : tableauBesoin) { // selection du besoin
 					if(marchandsConsomés >= marchandsAllouésPourAchat) {
-						t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 1");	
+						t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 1", true);	
 					}else { 
 						t.randomsleep.court();
 						List<WebElement> ressources = t.getCompte().getDriver().findElements(By.xpath("//*[@id='search_select']/tbody/tr/td"));
@@ -1189,7 +1189,7 @@ public class Marche {
 					/////////////////////////
 					for(int p : tableauAcheterContre) { // acheter contre;
 						if(marchandsConsomés >= marchandsAllouésPourAchat ) {
-							t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 2");	
+							t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés break 2", true);	
 						}else {
 							if( b != p ) { // on ne vend pas la meme ressource que l'on cherche
 								t.randomsleep.court();
@@ -1207,9 +1207,9 @@ public class Marche {
 			}else {
 				//milliEcartDate > village.marchédureeDuDernierAchat
 
-				t.ecrireDansConsole("Attente du retour de tout les anciens marchands envoyé par cette fonction : "+(milliEcartDate/1000)/60 +" minutes écoulé sur : " + (village.marchédureeDuDernierAchat/1000)/60 + "minutes aproximativement" );}
+				t.ecrireDansConsole("Attente du retour de tout les anciens marchands envoyé par cette fonction : "+(milliEcartDate/1000)/60 +" minutes écoulé sur : " + (village.marchédureeDuDernierAchat/1000)/60 + "minutes aproximativement", true );}
 		}else {
-			t.ecrireDansConsole("Pas de besoin ou pas de marchands : on ne vas pas sur l'onglet");
+			t.ecrireDansConsole("Pas de besoin ou pas de marchands : on ne vas pas sur l'onglet", true);
 		}
 
 		////*[@class='tabItem' and contains(., 'Acheter')]
@@ -1227,7 +1227,7 @@ public class Marche {
 		 */
 		tableauBesoin.clear();
 		tableauAcheterContre.clear();
-		t.ecrireDansConsole("[Marché] acheterAuMarché Fin ");
+		t.ecrireDansConsole("[Marché] acheterAuMarché Fin ", true);
 	}//fin methode acheter au marché
 
 	
@@ -1273,7 +1273,7 @@ public class Marche {
 						String tempstrajet =	offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
 						if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
 						String[] decoupage = tempstrajet.split(":");
-						t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage[0]+" "+decoupage[1]+" "+decoupage[2]);
+						t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage[0]+" "+decoupage[1]+" "+decoupage[2], true);
 						int heures = Integer.parseInt(decoupage[0]);
 						int minutes = Integer.parseInt(decoupage[1]);
 						int secondes = Integer.parseInt(decoupage[2]);
@@ -1296,26 +1296,26 @@ public class Marche {
 								if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains(exclu))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
 								village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 								offres.get(i).click(); // on accepte loffre !
-								t.ecrireDansConsole("1 achat effectué au marché");
+								t.ecrireDansConsole("1 achat effectué au marché", true);
 								Date lastDate = t.randomsleep.date(true);
 								village.setMarchéLastDate(lastDate);
 								 tokenBanj = false;
 								t.randomsleep.court();
 								}else {
-									t.ecrireDansConsole("Joueur en liste noire...");
+									t.ecrireDansConsole("Joueur en liste noire...", true);
 									
 								}
 								}
 							
 							}catch(Exception e) {
-								t.ecrireDansConsole("liste noire vide ou echec ===> on autorise par default");
+								t.ecrireDansConsole("liste noire vide ou echec ===> on autorise par default", true);
 								tokenBanj = true; // on autorise par default
 							}
 							
 							if(tokenBanj = true) {
 							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
 							offres.get(i).click(); // on accepte loffre !
-							t.ecrireDansConsole("1 achat effectué au marché");
+							t.ecrireDansConsole("1 achat effectué au marché", true);
 							Date lastDate = t.randomsleep.date(true);
 							village.setMarchéLastDate(lastDate);
 
@@ -1323,7 +1323,7 @@ public class Marche {
 							}
 							
 						}else {
-							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure" );
+							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure", true );
 						}
 						
 						
@@ -1354,7 +1354,7 @@ public class Marche {
 						
 						}catch (Exception e) {
 						continuer = false;
-						t.ecrireDansConsole("echec accepter offre");
+						t.ecrireDansConsole("echec accepter offre", true);
 					}
 					
 					
@@ -1371,11 +1371,11 @@ public class Marche {
 
 				}else {
 					continuer = false;
-					t.ecrireDansConsole("Plus assez de marchands dispo pour acheter");
+					t.ecrireDansConsole("Plus assez de marchands dispo pour acheter", true);
 				}
 			}else {
 				continuer = false;
-				t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés");
+				t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés", true);
 			}
 			
 			
@@ -1385,15 +1385,15 @@ public class Marche {
 			
 				}
 				continuer = false;
-				t.ecrireDansConsole("fin du parcour des offres du marché");
+				t.ecrireDansConsole("fin du parcour des offres du marché", true);
 
 			}else {
 				continuer = false;
-				t.ecrireDansConsole("pas d'offre trouvée");
+				t.ecrireDansConsole("pas d'offre trouvée", true);
 			}
 			}catch (Exception e) {
 				continuer = false;
-				t.ecrireDansConsole("echec accepter offre");
+				t.ecrireDansConsole("echec accepter offre", true);
 			}
 			
 			

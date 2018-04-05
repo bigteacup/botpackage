@@ -63,7 +63,7 @@ public void retour(String retour){
 	
 	
 } 
-public void envoyer(FxFenetreController fxFenetreController, String ligne) throws IOException{
+public void envoyer(FxFenetreController fxFenetreController, String ligne, boolean retourALaLigne) throws IOException{
 	/*
 	 * ArrayList<String> listeMotsCouleurfinal = null ;
 		ArrayList<String> listeMotsCouleur ;
@@ -74,6 +74,7 @@ public void envoyer(FxFenetreController fxFenetreController, String ligne) throw
 	
 	*/
 	//TODO precalculer la liste des mots a colorier.
+	
 	javafx.application.Platform.runLater( () ->{  	
 
 	try { //TODO console textFlow 2
@@ -91,7 +92,13 @@ public void envoyer(FxFenetreController fxFenetreController, String ligne) throw
         r.setFraction(0.75);
 *
 */
-                fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne +"\n"  );
+		String rall = "\\n";
+		if (retourALaLigne == true) {
+			 rall = "\n";
+		}else {
+			rall = "";
+		}
+                fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne + rall  );
                 
       //  StyleClassedTextArea ligneeffet = fxFenetreController.console.fxConsoleColored(fxFenetreController, ligne +"\n"  );
       //  ligneeffet.setStyle(".scroll-bar{-fx-background-color: rgb(96,96,96);-fx-background-radius: 2em;}");

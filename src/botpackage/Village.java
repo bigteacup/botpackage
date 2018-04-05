@@ -251,7 +251,7 @@ public class Village {
 		//if (champMin <= 10 ){
 
 		List<Batiment> tem = template.etablirTemplatePourUnVillage(village, champMin);
-		t.ecrireDansConsole("Template choisi : "+village.getTemplate().getNomDuTemplate());
+		t.ecrireDansConsole("Template choisi : "+village.getTemplate().getNomDuTemplate(), true);
 
 		setTemplateDuVillage(tem);
 		// }
@@ -852,7 +852,7 @@ public class Village {
 		village.setMaxStockDepot(maxStockDepot);
 		village.setMaxStockSilo(maxStockSilo);
 
-		t.ecrireDansConsole("Update Ressources de : " + village.getNom());
+		t.ecrireDansConsole("Update Ressources de : " + village.getNom(), true);
 
 	}
 
@@ -872,7 +872,7 @@ public class Village {
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec urlTest1 ");
+			t.ecrireDansConsole("echec urlTest1 ", true);
 		}
 
 		if (!urlTest.contains("dorf1") && !urlTest.contains("dorf2")) {
@@ -890,17 +890,17 @@ public class Village {
 
 			if (test.size() < 1) {
 				village.setConstructionsEnCours(constructionEnCours);
-				t.ecrireDansConsole("Pas de construction en cours ");
+				t.ecrireDansConsole("Pas de construction en cours ", true);
 			}
 
 			if (test.size() >= 1) { // (test != null)
-				t.ecrireDansConsole(test.size() + " Constructions deja en cours");
+				t.ecrireDansConsole(test.size() + " Constructions deja en cours", true);
 				constructionEnCours = test.size();
 				village.setConstructionsEnCours(constructionEnCours);
 				try {
 					voirListeDeConstructionAnalyse(t, test);
 					}catch (Exception e2) {
-						t.ecrireDansConsole("Echec analyse precise ! ");
+						t.ecrireDansConsole("Echec analyse precise ! ", true);
 					}
 			}
 		} catch (Exception e) {
@@ -923,7 +923,7 @@ public class Village {
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec urlTest1 ");
+			t.ecrireDansConsole("echec urlTest1 ", true);
 		}
 
 		if (!urlTest.contains("dorf1") && !urlTest.contains("dorf2")) {
@@ -944,7 +944,7 @@ public class Village {
 
 
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec analyse precise : findelement ");
+			t.ecrireDansConsole("echec analyse precise : findelement ", true);
 		}
 	}
 
@@ -971,7 +971,7 @@ public class Village {
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec urlTest1 ");
+			t.ecrireDansConsole("echec urlTest1 ", true);
 		}
 
 		if (!urlTest.contains("dorf1")) {
@@ -995,7 +995,7 @@ public class Village {
 						
 						troupesPresentes = true;
 						int nombreTroupesPresentes = Integer.parseInt(typeTroupe.findElement(By.className("num")).getText());
-						t.ecrireDansConsole("Type : "+tableauTroupes[i] +"--> "+ nombreTroupesPresentes );
+						t.ecrireDansConsole("Type : "+tableauTroupes[i] +"--> "+ nombreTroupesPresentes, true );
 
 						if (troupesPresentes == true ) {
 							village.setVillagePillage(true);
@@ -1016,7 +1016,7 @@ public class Village {
 			t.pillage();
 
 		} else {
-			t.ecrireDansConsole("Pas de Troupes -> pas de pillages");
+			t.ecrireDansConsole("Pas de Troupes -> pas de pillages", true);
 		}
 
 	}// fin
@@ -1034,7 +1034,7 @@ public class Village {
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec urlTest1 ");
+			t.ecrireDansConsole("echec urlTest1 ", true);
 		}
 
 		if (!urlTest.contains("dorf1")) {
@@ -1064,7 +1064,7 @@ public class Village {
 
 						troupesPresentes = true;
 						int nombreTroupesPresentes = Integer.parseInt(typeTroupe.findElement(By.className("num")).getText());
-						t.ecrireDansConsole("Type : "+tableauTroupes[i] +"--> "+ nombreTroupesPresentes );
+						t.ecrireDansConsole("Type : "+tableauTroupes[i] +"--> "+ nombreTroupesPresentes, true );
 
 					}
 				}
@@ -1101,7 +1101,7 @@ public class Village {
 		try {
 			urlTest = t.getCompte().getDriver().getCurrentUrl().split(".php")[0].split(".fr/")[1];
 		} catch (Exception e) {
-			t.ecrireDansConsole("echec urlTest1 ");
+			t.ecrireDansConsole("echec urlTest1 ", true);
 		}
 
 		if (!urlTest.contains("dorf1")) {
@@ -1149,7 +1149,7 @@ public class Village {
 
 				i++;
 				if (i == 18) {
-					t.ecrireDansConsole("Liste des " + i + " champs : " + listeLevelsChamps + "");
+					t.ecrireDansConsole("Liste des " + i + " champs : " + listeLevelsChamps + "", true);
 				}
 			}
 
@@ -1174,7 +1174,7 @@ public class Village {
 			} else {
 				village.setVillageCapitale(false);
 			}
-			t.ecrireDansConsole("Min val: " + champMin +" Max val: "+champMax);
+			t.ecrireDansConsole("Min val: " + champMin +" Max val: "+champMax, true);
 		}
 	}
 
@@ -1186,7 +1186,7 @@ public class Village {
 
 	public void chargerBatiments(Travian t) {
 		int slotTemp = 0;
-		t.ecrireDansConsole("Debut chargerBatiment");
+		t.ecrireDansConsole("Debut chargerBatiment", true);
 		
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 			t.randomsleep.court();
@@ -1259,8 +1259,8 @@ public class Village {
 			}
 		}
 		village.setSlotBatimentsLibres( slotTemp);
-		t.ecrireDansConsole("Slot libre : " + slotTemp);
-		t.ecrireDansConsole("Fin chargerBatiment");
+		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
+		t.ecrireDansConsole("Fin chargerBatiment", true);
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1270,7 +1270,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public int monterChamps(Travian t, int g) {
 		try {
-		t.ecrireDansConsole("Debut monterChamps");
+		t.ecrireDansConsole("Debut monterChamps", true);
 		
 		Village village = t.villageEnCours();
 		int valchampMinBaf = champMin;
@@ -1332,7 +1332,7 @@ public class Village {
 
 
 									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (e > 0)) { // decalage
-										t.ecrireDansConsole("Decalage Cereales actif");
+										t.ecrireDansConsole("Decalage Cereales actif", true);
 										decalageToken = true;
 										
 
@@ -1341,7 +1341,7 @@ public class Village {
 								
 								if(type.toLowerCase().contains("ferme")) {
 									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (e > 0)) { // decalage
-										t.ecrireDansConsole("Decalage Cereales effectué");
+										t.ecrireDansConsole("Decalage Cereales effectué", true);
 										g++;
 										continue;
 
@@ -1366,7 +1366,7 @@ public class Village {
 							int argileNecessaire = 0;
 							int ferNecessaire = 0;
 							int cerealesNecessaire = 0;
-							t.ecrireDansConsole("try lien==chamPmin : lien : " + lien + "   champMin : " + champMin + "    valchampMinBaf : " + valchampMinBaf);
+							t.ecrireDansConsole("try lien==chamPmin : lien : " + lien + "   champMin : " + champMin + "    valchampMinBaf : " + valchampMinBaf, true);
 
 							// survol souris du champs = a champMin
 							Actions builder = new Actions(t.getCompte().getDriver());
@@ -1391,7 +1391,7 @@ public class Village {
 								retrytoken = true;
 							}
 							if (retrytoken == true) {
-								t.ecrireDansConsole("Retry hover");
+								t.ecrireDansConsole("Retry hover", true);
 
 								Actions retry = new Actions(t.getCompte().getDriver());
 								retry.moveToElement(listeWebelementChampsBis.get(g), 0, 0); //retry.moveToElement(listeWebelementChamps.get(g+1), 0, 0);
@@ -1410,7 +1410,7 @@ public class Village {
 								argileNecessaire = Integer.parseInt(ressourcesNecessaires.get(1).getText());
 								ferNecessaire = Integer.parseInt(ressourcesNecessaires.get(2).getText());
 								cerealesNecessaire = Integer.parseInt(ressourcesNecessaires.get(3).getText());
-								t.ecrireDansConsole("parse ok");
+								t.ecrireDansConsole("parse ok", true);
 							}
 							// On fait la comparaison des ressources avec le
 							// stock du village en cours
@@ -1423,7 +1423,7 @@ public class Village {
 
 							// si ressources ok
 							if (stockBois >= boisNecessaire && stockArgile >= argileNecessaire && stockFer >= ferNecessaire && stockCereales >= cerealesNecessaire) {
-								t.ecrireDansConsole("ressource ok");
+								t.ecrireDansConsole("ressource ok", true);
 								// go la page si //*[@id="stockBarFreeCrop"]
 
 								listeWebelementChamps.get(g).click();
@@ -1434,7 +1434,7 @@ public class Village {
 								try {
 									bouttonvert = t.getCompte().getDriver().findElement(By.xpath("//button[@class=\"green build\"]"));
 								} catch (Exception e) {
-									t.ecrireDansConsole("Bouton vert non present => Batiment en cour probable ou pas de cereales dispo pour la construction");
+									t.ecrireDansConsole("Bouton vert non present => Batiment en cour probable ou pas de cereales dispo pour la construction", true);
 									t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf1.php");
 									t.randomsleep.classic();
 									int cropSlot = Integer.parseInt(t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarFreeCrop\"]")).getText().replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "").trim());
@@ -1446,19 +1446,19 @@ public class Village {
 								t.randomsleep.classic();
 								if (bouttonvert != null) {
 									bouttonvert.click();
-									t.ecrireDansConsole("Lancement d'un Champ de (valeur g) " + g + " (g-1) sur le Slot " + (g + 1) + "");
+									t.ecrireDansConsole("Lancement d'un Champ de (valeur g) " + g + " (g-1) sur le Slot " + (g + 1) + "", true);
 									t.randomsleep.court();
 								}
 
 							} else {
-								t.ecrireDansConsole("ressource manquante");
+								t.ecrireDansConsole("ressource manquante", true);
 							}
 						} // fin if lien== champMin
 						g++;
 						
 					} // fin if token de verification
 					else {
-						t.ecrireDansConsole(construEnCours +"construction en cours");
+						t.ecrireDansConsole(construEnCours +"construction en cours", true);
 						decalageToken = false;
 						break;
 					}
@@ -1471,10 +1471,10 @@ public class Village {
 		} // fin if token <2
 		village.voirListeDeConstruction(t);
 		}catch (Exception e) {
-			t.ecrireDansConsole("Erreur");
+			t.ecrireDansConsole("Erreur", true);
 			return g;
 		}
-		t.ecrireDansConsole("fin monterChamps");
+		t.ecrireDansConsole("fin monterChamps", true);
 		return -1;
 	}// fin monterchamps
 
@@ -1492,7 +1492,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t) {
-		t.ecrireDansConsole("debut construireBatiments");
+		t.ecrireDansConsole("debut construireBatiments", true);
 		//t.randomsleep.court();
 
 		// if (!compte.getDriver().getCurrentUrl().contains("dorf2.php"))
@@ -1581,7 +1581,7 @@ public class Village {
 								cerealesNecessaire = Integer.parseInt(
 										as.getAttribute("alt").split("r4\" src=\"img/x.gif\" />")[1].split("</span>")[0]
 												.trim());
-								t.ecrireDansConsole("[construireBatiment]parse ok");
+								t.ecrireDansConsole("[construireBatiment]parse ok", true);
 
 								// on fais la comparaison des ressources avec le
 								// stock du village en cours
@@ -1593,7 +1593,7 @@ public class Village {
 								// si ressources ok
 								if (stockBois >= boisNecessaire && stockArgile >= argileNecessaire
 										&& stockFer >= ferNecessaire && stockCereales >= cerealesNecessaire) {
-									t.ecrireDansConsole("[construireBatiment] Ressources ok");
+									t.ecrireDansConsole("[construireBatiment] Ressources ok", true);
 									// go la page
 
 									if(as.getAttribute("alt").contains("Mur")) { //TODO rendre compatible les races
@@ -1625,7 +1625,7 @@ public class Village {
 
 										}
 									} catch (Exception e) {
-										t.ecrireDansConsole("bug :)");
+										t.ecrireDansConsole("bug :)", true);
 									}
 
 									// cliquer sur le bouton vert
@@ -1633,7 +1633,7 @@ public class Village {
 									try {
 										bouttonvert = t.getCompte().getDriver().findElement(By.xpath("//button[@class=\"green build\"]"));
 									} catch (Exception e) {
-										t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable => WorkAround Construction Bloquée pour ce tour"); //=> WORKAROUND on ajoute des token
+										t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable => WorkAround Construction Bloquée pour ce tour", true); //=> WORKAROUND on ajoute des token
 										//village.setConstructionsEnCours(t.limiteDeConstruction); //WORKAROUND on ajoute des token
 										village.bloquerConstructionBatiment = true;
 										possibleOuPas = false;
@@ -1644,25 +1644,25 @@ public class Village {
 
 									if (bouttonvert != null) {
 										bouttonvert.click();
-										t.ecrireDansConsole("[construireBatiment] Lancement " + batimentAConstruire);
+										t.ecrireDansConsole("[construireBatiment] Lancement " + batimentAConstruire, true);
 										possibleOuPas = true;
 										t.randomsleep.court();
 										listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 										break;
 									}
 								} else {
-									t.ecrireDansConsole("[construireBatiment] Pas assez de Ressources pour faire un/une "+ batimentAConstruire);
+									t.ecrireDansConsole("[construireBatiment] Pas assez de Ressources pour faire un/une "+ batimentAConstruire, true);
 								}
 							}
 
 						} // break;}
 					} catch (Exception e) {
-						t.ecrireDansConsole("[construireBatiment] Batiment de niveau deja en construction ou deja au level demande "+ batimentAConstruire);
+						t.ecrireDansConsole("[construireBatiment] Batiment de niveau deja en construction ou deja au level demande "+ batimentAConstruire, true);
 						voirListeDeConstruction(t);
 					}
 
 				} else {
-					t.ecrireDansConsole("[construireBatiment] " + batimentAConstruire + " deja a 20");
+					t.ecrireDansConsole("[construireBatiment] " + batimentAConstruire + " deja a 20", true);
 					possibleOuPas = false;
 				}
 
@@ -1670,7 +1670,7 @@ public class Village {
 
 		}
 		voirListeDeConstruction(t);
-		t.ecrireDansConsole("fin construireBatiments");
+		t.ecrireDansConsole("fin construireBatiments", true);
 		return possibleOuPas;
 
 	}
@@ -1706,7 +1706,7 @@ public class Village {
 					try {
 						boutons = t.getCompte().getDriver().findElements(By.xpath("//*[@value=\"Organiser\"]"));
 					} catch (Exception e) {
-						t.ecrireDansConsole("[Fete] Erreure de listage des boutons Fete ");
+						t.ecrireDansConsole("[Fete] Erreure de listage des boutons Fete ", true);
 					}
 
 					// on verifie si des boutons de lancement de fetes sont
@@ -1716,7 +1716,7 @@ public class Village {
 						try {
 							if (boutons.get(1).getText().contains("Organiser")) {
 								boutons.get(1).click();
-								t.ecrireDansConsole("[Fete] Grande fete lancee");
+								t.ecrireDansConsole("[Fete] Grande fete lancee", true);
 								t.randomsleep.court();
 							}
 						} catch (Exception e) {
@@ -1725,14 +1725,14 @@ public class Village {
 						try {
 							if (boutons.get(0).getText().contains("Organiser")) {
 								boutons.get(0).click();
-								t.ecrireDansConsole("[Fete] Petite fete lancee");
+								t.ecrireDansConsole("[Fete] Petite fete lancee", true);
 								t.randomsleep.court();
 							}
 						} catch (Exception e) {
 						}
 
 					} else {
-						t.ecrireDansConsole("[Fete] Une Fete Est Deja en cours");
+						t.ecrireDansConsole("[Fete] Une Fete Est Deja en cours", true);
 					}
 
 					break;
@@ -1740,10 +1740,10 @@ public class Village {
 
 			}
 			if (hotelNonPresent == 1) {
-				t.ecrireDansConsole("[Fete] Pas D'hotel de ville");
+				t.ecrireDansConsole("[Fete] Pas D'hotel de ville", true);
 			}
 		} catch (Exception e) {
-			t.ecrireDansConsole("[Fete] echec lancer fete interne");
+			t.ecrireDansConsole("[Fete] echec lancer fete interne", true);
 		}
 
 		// on retourne sur la page des champs pour le village suivant
@@ -1778,7 +1778,7 @@ public class Village {
 
 		if(t.bot.monterChamps == true || village.getVillageCapitale() && t.bot.monterChampsCapitale == true ) {
 
-			if (t.bot.monterChampsCapitale == false){t.ecrireDansConsole("Monter champs Capitale > 10 désactivé... ");}
+			if (t.bot.monterChampsCapitale == false){t.ecrireDansConsole("Monter champs Capitale > 10 désactivé... ", true);}
 
 			if (champMin < 10 || village.getVillageCapitale() && t.bot.monterChampsCapitale == true) {
 
@@ -1791,15 +1791,15 @@ public class Village {
 						erreurChamps++;
 						
 					}
-					t.ecrireDansConsole("erreurChamps : " + erreurChamps + " g : " + g);
+					t.ecrireDansConsole("erreurChamps : " + erreurChamps + " g : " + g, true);
 				}else {
-					t.ecrireDansConsole("monterChamps desactivé par le regime du village...");
+					t.ecrireDansConsole("monterChamps desactivé par le regime du village...", true);
 				}
 
 
 			}
 		}else {
-			t.ecrireDansConsole("monterChamps desactivé sur le compte...");
+			t.ecrireDansConsole("monterChamps desactivé sur le compte...", true);
 		}
 
 
@@ -1815,7 +1815,7 @@ public class Village {
 					if(village.bloquerConstructionBatiment == false) {
 						if(village.getTemplate().getAutoriserAPoserBatiment() == true) {
 							creationBatiment(t, village); 
-						}else {t.ecrireDansConsole("Ce Stade n'a pas le droit de poser lui meme les batiments...");}
+						}else {t.ecrireDansConsole("Ce Stade n'a pas le droit de poser lui meme les batiments...", true);}
 					}
 
 					for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction; i++) {
@@ -1851,7 +1851,7 @@ public class Village {
 							////// inexistant sur le village
 
 							if (trouver == false) {
-								t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> pas trouve (Dans les conditions du Template en cours)");// PAS
+								t.ecrireDansConsole(batimentDuTemplate.getNomBatiment() + " ---> pas trouve (Dans les conditions du Template en cours)", true);// PAS
 
 							} // fin trouver == false
 						} // fin du for (Batiment batimentDuTemplate :
@@ -1863,10 +1863,10 @@ public class Village {
 				// on pose les batiment apres les upgrade
 				//creationBatiment(t, village);  // 1/10/2017
 			}else {
-				t.ecrireDansConsole("construction Desactivees... Par le regime du village");
+				t.ecrireDansConsole("construction Desactivees... Par le regime du village", true);
 			}
 		}else {
-			t.ecrireDansConsole("construction de batiments Desactivees sur le compte...");
+			t.ecrireDansConsole("construction de batiments Desactivees sur le compte...", true);
 		}
 	}
 
@@ -1884,7 +1884,7 @@ public class Village {
 		chargerBatiments(t);
 		int tokenDeChangement = 0;
 		if(village.getConstructionsEnCours() < t.limiteDeConstruction){
-			t.ecrireDansConsole("Essai de création de batiments :");
+			t.ecrireDansConsole("Essai de création de batiments :", true);
 			boolean trouver = false;
 			boolean slotDispo = false;
 			String nomBat = null;
@@ -1894,7 +1894,7 @@ public class Village {
 				// on regarde si un slot est dispo pour plus tard, au cas ou. 
 				if (slot.getNomBatiment().contains("Site de construction")) {
 					slotDispo = true;	
-					t.ecrireDansConsole("Slot libre = oui");
+					t.ecrireDansConsole("Slot libre = oui", true);
 				}
 			}
 
@@ -1918,7 +1918,7 @@ public class Village {
 
 
 				if(trouver == true){
-					t.ecrireDansConsole(nomBat+" trouvé dans le village.");
+					t.ecrireDansConsole(nomBat+" trouvé dans le village.", true);
 					batimentDuTemplate.setPresent(true);
 				}
 
@@ -1936,7 +1936,7 @@ public class Village {
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
 				if( nomBat.equals(TemplatesDeVillages.tailleur)|| nomBat.contains(TemplatesDeVillages.grandSilo) || nomBat.contains(TemplatesDeVillages.grandDepot) || nomBat.contains(TemplatesDeVillages.cdt)|| nomBat.contains(TemplatesDeVillages.palais) ){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||  
-					t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire");				
+					t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire", true);				
 				}else {
 					if(batimentDuTemplate.getPresent() == false  ){
 						// on test les cas *Beta*
@@ -1975,11 +1975,11 @@ public class Village {
 								}
 						}
 						if(nombreConditionsRemplies == nombreConditionsRequises) {
-							t.ecrireDansConsole(nomBat+" Conditions remplies : " +nombreConditionsRemplies+" sur "+ nombreConditionsRequises);	
+							t.ecrireDansConsole(nomBat+" Conditions remplies : " +nombreConditionsRemplies+" sur "+ nombreConditionsRequises, true);	
 						
 							 possibleDePoserUnBatiment = true;
 						}else {
-							t.ecrireDansConsole(nomBat+" Conditions non remplies : " +nombreConditionsRemplies+" sur "+ nombreConditionsRequises);
+							t.ecrireDansConsole(nomBat+" Conditions non remplies : " +nombreConditionsRemplies+" sur "+ nombreConditionsRequises, true);
 						}
 
 					}
@@ -2028,7 +2028,7 @@ public class Village {
 						if (possibleDePoserUnBatiment == true) {
 							if(i2> 1 && i2 <= listOngletsBats.size()){
 								listOngletsBats.get(i2-1).click();
-								t.ecrireDansConsole("---------Changement d'onglet---------");
+								t.ecrireDansConsole("---------Changement d'onglet---------", true);
 								//on recharge les onglets de la nouvelle page
 								listOngletsBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"tabItem\"]"));
 							} 
@@ -2037,7 +2037,7 @@ public class Village {
 							for(Batiment batimentDuTemplate : village.getBatimentsDuTemplateDuVillage()){
 								nomBat = batimentDuTemplate.getNomBatiment();
 								if( nomBat.equals(TemplatesDeVillages.tailleur)|| nomBat.contains(TemplatesDeVillages.grandSilo) || nomBat.contains(TemplatesDeVillages.grandDepot) || nomBat.contains(TemplatesDeVillages.cdt)|| nomBat.contains(TemplatesDeVillages.palais) ){ //nomBat.equals("Résidence") || nomBat.equals("Palais") ||
-									t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire 2 "); 
+									t.ecrireDansConsole(nomBat+" trouvé dans le template. -> ne rien faire 2 ", true); 
 
 								}else {
 
@@ -2052,7 +2052,7 @@ public class Village {
 
 											String titre = webBat.getText().split("\\n")[0]; 
 											if (titre.toLowerCase().contains(nomBat.toLowerCase())) {
-												t.ecrireDansConsole(nomBat+" ////////// tentative pour contruction"); 
+												t.ecrireDansConsole(nomBat+" ////////// tentative pour contruction", true); 
 												try {
 													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire') and contains(., \""+ titre +"\")]//div[@class='button-content']")); // //*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ titre +"\")]//div[@class='button-content']"
 
@@ -2060,30 +2060,30 @@ public class Village {
 														t.randomsleep.court();
 														boutton.click();
 														possibleDePoserUnBatiment = false;
-														t.ecrireDansConsole(nomBat +" lancé. Debug : Par titre");
+														t.ecrireDansConsole(nomBat +" lancé. Debug : Par titre", true);
 														break;
 													}
 
 												}catch (Exception e) {
-													t.ecrireDansConsole("Echec par Titre");
+													t.ecrireDansConsole("Echec par Titre", true);
 													try {
 														WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire') and contains(., \""+ nomBat +"\")]//div[@class='button-content']"));// //*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ nomBat +"\")]//div[@class='button-content']"
 														if (boutton.getText().contains("Construire")) {
 															t.randomsleep.court();
 															boutton.click();
 															possibleDePoserUnBatiment = false;
-															t.ecrireDansConsole(nomBat +" lancé. Debug : Par nomBat");
+															t.ecrireDansConsole(nomBat +" lancé. Debug : Par nomBat", true);
 															break;
 														}
 													}catch (Exception e1) {
-														t.ecrireDansConsole("Echec par nomBat");
-														t.ecrireDansConsole(nomBat + " --> echec Pas dispo a la construction sur page manque ressources ou prerequis "+ i2 +" Debug info : "+" nomBat ="+nomBat+" Titre.toLowerCase ="+ titre.toLowerCase() +" Titre normal ="+ titre );
+														t.ecrireDansConsole("Echec par nomBat", true);
+														t.ecrireDansConsole(nomBat + " --> echec Pas dispo a la construction sur page manque ressources ou prerequis "+ i2 +" Debug info : "+" nomBat ="+nomBat+" Titre.toLowerCase ="+ titre.toLowerCase() +" Titre normal ="+ titre, true );
 													}
 												}//fin catch
-											}else {t.ecrireDansConsole(nomBat +" pas dispo sur ce webB ");} //fin if
+											}else {t.ecrireDansConsole(nomBat +" pas dispo sur ce webB ", true);} //fin if
 
 										} //fin for webBat
-										if (possibleDePoserUnBatiment == true){t.ecrireDansConsole(nomBat +" pas dispo sur l'onglet "+i2);}
+										if (possibleDePoserUnBatiment == true){t.ecrireDansConsole(nomBat +" pas dispo sur l'onglet "+i2, true);}
 										//if(trouver == true){break;}
 
 									} //else {t.ecrireDansConsole(nomBat +" pas dispo sur les 3 onglets");}
@@ -2104,12 +2104,12 @@ public class Village {
 						//		}
 					} // fin while
 					if (possibleDePoserUnBatiment == true && i2>=4){ // si trouver ==false  on quitte la fenetre pour se remmetre sur la page batiments du village pour les autre fonctions
-						t.ecrireDansConsole("Aucun batiments dispo sur les 3 onglets");
+						t.ecrireDansConsole("Aucun batiments dispo sur les 3 onglets", true);
 						// on se remet sur la page du village pour les autre fonctions
 						try {
 							t.getCompte().getDriver().findElement(By.xpath("//*[@id='closeContentButton']")).click();//*[@id="closeContentButton"]
-						}catch (Exception e){ t.ecrireDansConsole("Echec //*[@id='closeContentButton'] ");}
-					} else {t.ecrireDansConsole("Terminé");}
+						}catch (Exception e){ t.ecrireDansConsole("Echec //*[@id='closeContentButton'] ", true);}
+					} else {t.ecrireDansConsole("Terminé", true);}
 				}//fin if  trouver == false
 				//on reset le trouver pour les autre batiments du template
 				possibleDePoserUnBatiment = true;

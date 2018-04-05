@@ -29,7 +29,7 @@ public class Randomsleep {
 		Date maDate = new Date();
 	
 		// affichage:
-		if (verbose == true){t.ecrireDansConsole(maDate.toString());}
+		if (verbose == true){t.ecrireDansConsole(maDate.toString(), true);}
 		return maDate;
 	}
 
@@ -48,14 +48,14 @@ public class Randomsleep {
 		Random random = new Random();
 		int myRandomNumber = random.nextInt(MAX_VALUE1 - MIN_VALUE1) + MIN_VALUE1;
 		if (t.bot.afficherAttente == true) {
-			t.ecrireDansConsole("[Attente classic :" + myRandomNumber + "]");
+			t.ecrireDansConsole("[Attente classic :" + myRandomNumber + "]", true);
 		}
 		try {
 			enAttente = true;
 			Thread.sleep(myRandomNumber);
 			enAttente = false;
 		} catch (InterruptedException e) {
-			t.ecrireDansConsole("Pause annulee");
+			t.ecrireDansConsole("Pause annulee", true);
 			enAttente = false;
 		}
 	}
@@ -69,14 +69,14 @@ public class Randomsleep {
 		Random random = new Random();
 		int myRandomNumber = random.nextInt(MAX_VALUE5 - MIN_VALUE5) + MIN_VALUE5;
 		if (t.bot.afficherAttente == true) {
-			t.ecrireDansConsole("[Attente :" + myRandomNumber + "]");
+			t.ecrireDansConsole("[Attente :" + myRandomNumber + "]", true);
 		}
 		try {
 			enAttente = true;
 			Thread.sleep(myRandomNumber);
 			enAttente = false;
 		} catch (InterruptedException e) {
-			t.ecrireDansConsole("Pause annulee");
+			t.ecrireDansConsole("Pause annulee", true);
 			enAttente = false;
 		}
 	}
@@ -89,9 +89,9 @@ public class Randomsleep {
 
 		Random random = new Random();
 		int myRandomNumber = random.nextInt(MAX_VALUE2 - MIN_VALUE2) + MIN_VALUE2;
-			try{t.detectionAttaqueSimple(false);}catch(Exception e) {t.ecrireDansConsole("echec detection attaquesimple");}
+			try{t.detectionAttaqueSimple(false);}catch(Exception e) {t.ecrireDansConsole("echec detection attaquesimple", true);}
 		if (t.bot.afficherAttente == true) {
-			t.ecrireDansConsole("[Attente :" + myRandomNumber + "]");
+			t.ecrireDansConsole("[Attente :" + myRandomNumber + "]", true);
 		}
 
 		try {
@@ -99,7 +99,7 @@ public class Randomsleep {
 			Thread.sleep(myRandomNumber);
 			enAttente = false;
 		} catch (InterruptedException e) {
-			t.ecrireDansConsole("Pause annulee");
+			t.ecrireDansConsole("Pause annulee", true);
 			enAttente = false;
 			return true;
 		}
@@ -116,13 +116,13 @@ public class Randomsleep {
 		date(true);
 		t.ecrireDansConsole("Attente de : " + myRandomNumber / 1000 / 60 + "minutes "
 				+ (myRandomNumber / 1000 - (myRandomNumber / 1000 / 60) * 60)
-				+ "sec. et le chiffre de base en milliseconde " + myRandomNumber);
+				+ "sec. et le chiffre de base en milliseconde " + myRandomNumber, true);
 		try {
 			enAttente = true;
 			Thread.sleep(myRandomNumber);
 			enAttente = false;
 		} catch (InterruptedException e) {
-			t.ecrireDansConsole("Pause annulee");
+			t.ecrireDansConsole("Pause annulee", true);
 			enAttente = false;
 		}
 	}
@@ -137,13 +137,13 @@ public class Randomsleep {
 		
 		t.ecrireDansConsole("Attente :" + myRandomNumber / 1000 / 60 + "minutes "
 				+ (myRandomNumber / 1000 - (myRandomNumber / 1000 / 60) * 60)
-				+ "sec. et le chiffre de base en milliseconde " + myRandomNumber);
+				+ "sec. et le chiffre de base en milliseconde " + myRandomNumber, true);
 		try {
 			enAttente = true;
 			Thread.sleep(myRandomNumber);
 			enAttente = false;
 		} catch (InterruptedException e) {
-			t.ecrireDansConsole("Pause annulee");
+			t.ecrireDansConsole("Pause annulee", true);
 			enAttente = false;
 		}
 	}
@@ -156,13 +156,13 @@ public class Randomsleep {
 	public void specialclassic() {
 		Random random = new Random();
 		int myRandomNumber = random.nextInt(MAX_VALUE1 - MIN_VALUE1) + MIN_VALUE1;
-		t.ecrireDansConsole("[Attente :" + myRandomNumber + "]");
+		t.ecrireDansConsole("[Attente :" + myRandomNumber + "]", true);
 		try {
 			enAttente = true;
 			Thread.sleep(myRandomNumber);
 			enAttente = false;
 		} catch (InterruptedException e) {
-			t.ecrireDansConsole("Pause annulee");
+			t.ecrireDansConsole("Pause annulee", true);
 			enAttente = false;
 		}
 	}

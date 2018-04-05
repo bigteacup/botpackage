@@ -112,7 +112,7 @@ public class Travian extends Thread {
 		compte.setDriver(driver);
 		while (allume) {
 			principale();
-			ecrireDansConsole("dans le while");
+			ecrireDansConsole("dans le while", true);
 
 
 		}
@@ -120,14 +120,14 @@ public class Travian extends Thread {
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onb");
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
 		t.fxFenetreController.boutonOn.getStyleClass().add("onb");
-		ecrireDansConsole("sortie du run");
+		ecrireDansConsole("sortie du run", true);
 		try {t.getCompte().getDriver().close();}catch (Exception e) {}
 		try {t.getCompte().getDriver().quit();}catch (Exception e) {}
 
-		ecrireDansConsole(t.getName());
-		ecrireDansConsole(t.getState().toString());
+		ecrireDansConsole(t.getName(), true);
+		ecrireDansConsole(t.getState().toString(), true);
 		
-		ecrireDansConsole("********* Bot eteind ************");
+		ecrireDansConsole("********* Bot eteind ************", true);
 		System.out.println("********* Bot eteind ************");
 		
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("ona");
@@ -142,8 +142,8 @@ public class Travian extends Thread {
 
 	}
 
-	public void ecrireDansConsole(String string){
-		try {fxFenetreController.console.flux.envoyer(fxFenetreController, string);} catch (IOException e) {e.printStackTrace();}
+	public void ecrireDansConsole(String string, boolean retourALaLigne){
+		try {fxFenetreController.console.flux.envoyer(fxFenetreController, string, true);} catch (IOException e) {e.printStackTrace();}
 	}
 
 
@@ -209,7 +209,7 @@ public class Travian extends Thread {
 
 				boot();
 			} catch (Exception e) {
-				ecrireDansConsole("Echec boot");
+				ecrireDansConsole("Echec boot", true);
 				echecDeBoot++;
 				restartSurErreure();
 			}
@@ -220,15 +220,15 @@ public class Travian extends Thread {
 				prendrePhoto("Connexion");
 				try {
 					eviterSurvey();
-				}catch (Exception e) {ecrireDansConsole("Echec eviterSurvey");
+				}catch (Exception e) {ecrireDansConsole("Echec eviterSurvey", true);
 				}
 				try {
 					enMaintenance();
-				}catch (Exception e) {ecrireDansConsole("Echec enMaintenance");
+				}catch (Exception e) {ecrireDansConsole("Echec enMaintenance", true);
 				}
 				try {
 					messageSystem();
-				}catch (Exception e) {ecrireDansConsole("Echec messageSystem");
+				}catch (Exception e) {ecrireDansConsole("Echec messageSystem", true);
 				}
 				
 				randomsleep.court();
@@ -240,7 +240,7 @@ public class Travian extends Thread {
 				try {
 					listerVillages();
 				} catch (Exception e) {
-					ecrireDansConsole("Echec listerVillages");
+					ecrireDansConsole("Echec listerVillages", true);
 					echecDeBoot++;
 					restartSurErreure();
 
@@ -259,9 +259,9 @@ public class Travian extends Thread {
 				randomsleep.court();
 				try {
 					majVillagesPlus();
-				} catch (Exception e) {ecrireDansConsole("Echec MajVillagePlus et NPC");
+				} catch (Exception e) {ecrireDansConsole("Echec MajVillagePlus et NPC", true);
 				fermerFenetre();
-				t.ecrireDansConsole("Conclusion pas de compte + ou bug");
+				t.ecrireDansConsole("Conclusion pas de compte + ou bug", true);
 			   
 				}
 
@@ -270,15 +270,15 @@ public class Travian extends Thread {
 				try {
 					for (Village village : listeDeVillages) {
 					if(besoinDePasserSurLeVillage(village, true) == 1) {
-						t.ecrireDansConsole(village.getNom() +": intégré à la rotation.");
+						t.ecrireDansConsole(village.getNom() +": intégré à la rotation.", true);
 					}else { 
-						t.ecrireDansConsole(village.getNom() + ": rejeté de la rotation.");
+						t.ecrireDansConsole(village.getNom() + ": rejeté de la rotation.", true);
 					}
 					
 					
 					
 					}
-				} catch (Exception e2) {ecrireDansConsole("Echec prevision");}
+				} catch (Exception e2) {ecrireDansConsole("Echec prevision", true);}
 
 				//t.fonderVillage();
 				/*	
@@ -291,8 +291,8 @@ public class Travian extends Thread {
 				try {
 					if (t.bot.rotationVillage == true){
 						rotationVillage();			
-					}else {t.ecrireDansConsole("Rotation désactivée");}
-				} catch (Exception e) {ecrireDansConsole("Echec rotation");
+					}else {t.ecrireDansConsole("Rotation désactivée", true);}
+				} catch (Exception e) {ecrireDansConsole("Echec rotation", true);
 				echecDeBoot++;
 				restartSurErreure();
 				}
@@ -306,8 +306,8 @@ public class Travian extends Thread {
 				try {
 					if(t.bot.optimiserProdHero == true){
 						gestionHero();			
-					}else {t.ecrireDansConsole("Optimisation Hero desactivée");}
-				} catch (Exception e) {ecrireDansConsole("Echec gestionHero()");
+					}else {t.ecrireDansConsole("Optimisation Hero desactivée", true);}
+				} catch (Exception e) {ecrireDansConsole("Echec gestionHero()", true);
 				}
 				randomsleep.court();
 				if (allume == false){break;}	
@@ -317,9 +317,9 @@ public class Travian extends Thread {
 				try {
 					if (t.bot.faireAventures	 == true){
 						aventureHero();			
-					}else {t.ecrireDansConsole("Aventures désactivées");}
+					}else {t.ecrireDansConsole("Aventures désactivées", true);}
 							
-				} catch (Exception e) {ecrireDansConsole("Echec gestionHero2");
+				} catch (Exception e) {ecrireDansConsole("Echec gestionHero2", true);
 				}
 				randomsleep.court();
 				if (allume == false){break;}
@@ -354,20 +354,20 @@ public class Travian extends Thread {
 				
 				t.ecrireDansConsole("Durée de la session :" + milliEcartDate / 1000 / 60 + "minutes "
 						+ (milliEcartDate / 1000 - (milliEcartDate / 1000 / 60) * 60)
-						+ "sec. et le chiffre de base en milliseconde " + milliEcartDate);
+						+ "sec. et le chiffre de base en milliseconde " + milliEcartDate, true);
 				
 				fxFenetreController.console.ligne.getUndoManager().forgetHistory(); // on efface l'historique à la fin de la rotation
 				randomsleep.treslent();
 				//	randomsleep.court();
 
-				ecrireDansConsole("******************************************************************************************************");
-				ecrireDansConsole("**********REBOOT*******************REBOOT*******************REBOOT************************************");
-				ecrireDansConsole("******************************************************************************************************");
+				ecrireDansConsole("******************************************************************************************************", true);
+				ecrireDansConsole("**********REBOOT*******************REBOOT*******************REBOOT************************************", true);
+				ecrireDansConsole("******************************************************************************************************", true);
 				if (allume == false){break;}
 				try {
 					boot();
-					ecrireDansConsole("Reboot : " + compteurDeBoot);
-				} catch (Exception e) {ecrireDansConsole("Echec Reboot : " + compteurDeBoot);
+					ecrireDansConsole("Reboot : " + compteurDeBoot, true);
+				} catch (Exception e) {ecrireDansConsole("Echec Reboot : " + compteurDeBoot, true);
 				echecDeBoot++;
 				restartSurErreure();}
 
@@ -391,7 +391,7 @@ public class Travian extends Thread {
 			nI++;
 		}
 		t.tokenForcerMarcheDeLaRotation = 0;
-		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenForcerMarcheDeLaRotation +" Et bloquage des constructions levés");
+		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenForcerMarcheDeLaRotation +" Et bloquage des constructions levés", true);
 	
 
 	}
@@ -442,7 +442,7 @@ public class Travian extends Thread {
 			randomsleep.court();
 
 		} catch (Exception e) {
-			ecrireDansConsole("deja connecte");;
+			ecrireDansConsole("deja connecte", true);;
 
 
 		}
@@ -452,8 +452,8 @@ public class Travian extends Thread {
 		// compte.getDriver().get(compte.getServer());
 		// Open
 
-		t.ecrireDansConsole(t.getName());
-	    t.ecrireDansConsole(t.getState().toString());
+		t.ecrireDansConsole(t.getName(), true);
+	    t.ecrireDansConsole(t.getState().toString(), true);
 	   
 		driver.get(compte.getServer()+"dorf1.php");
 		randomsleep.court();
@@ -471,7 +471,7 @@ public class Travian extends Thread {
 			randomsleep.court();
 
 		} catch (Exception e) {
-			ecrireDansConsole("deja connecte");
+			ecrireDansConsole("deja connecte", true);
 
 		}
 	}
@@ -481,7 +481,7 @@ public class Travian extends Thread {
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
 		driver = new ChromeDriver();
 		compte.setDriver(driver);
-		ecrireDansConsole("Rallumage du navigateur");
+		ecrireDansConsole("Rallumage du navigateur", true);
 
 	}
 	//////////////////////////////////////////////////////////////////////////////
@@ -501,39 +501,39 @@ public class Travian extends Thread {
 			compte.getDriver().close();
 			compte.getDriver().quit();
 
-			ecrireDansConsole("**************************************************************************");
-			ecrireDansConsole("***************   BUG erreur 404 : REDEMARRAGE   *************************");
-			ecrireDansConsole("**************  (Ou un boulet joue en meme temps que le bot) *************");
-			ecrireDansConsole("**************************************************************************");
-			t.ecrireDansConsole(t.getName());
-		    t.ecrireDansConsole(t.getState().toString());
+			ecrireDansConsole("**************************************************************************", true);
+			ecrireDansConsole("***************   BUG erreur 404 : REDEMARRAGE   *************************", true);
+			ecrireDansConsole("**************  (Ou un boulet joue en meme temps que le bot) *************", true);
+			ecrireDansConsole("**************************************************************************", true);
+			t.ecrireDansConsole(t.getName(), true);
+		    t.ecrireDansConsole(t.getState().toString(), true);
 		    
 			if(echecDeBoot <= 4){
 				randomsleep.lent();}
-			else {ecrireDansConsole("Ca merde trop --> Attente longue");randomsleep.treslent();}
+			else {ecrireDansConsole("Ca merde trop --> Attente longue", true);randomsleep.treslent();}
 
 
-			ecrireDansConsole("Reboot : " + compteurDeBoot);
+			ecrireDansConsole("Reboot : " + compteurDeBoot, true);
 			redemarrerNavigateur();
 			principale();
 
 
 		}catch (Exception e) {
 
-			ecrireDansConsole("**************************************************************************");
-			ecrireDansConsole("***************   BUG navigateur ferme ! : REDEMARRAGE   *****************");
-			ecrireDansConsole("**************************************************************************");
-			t.ecrireDansConsole(t.getName());
-		    t.ecrireDansConsole(t.getState().toString());
+			ecrireDansConsole("**************************************************************************", true);
+			ecrireDansConsole("***************   BUG navigateur ferme ! : REDEMARRAGE   *****************", true);
+			ecrireDansConsole("**************************************************************************", true);
+			t.ecrireDansConsole(t.getName(), true);
+		    t.ecrireDansConsole(t.getState().toString(), true);
 		    
 			if(echecDeBoot <= 4){
 				randomsleep.court();}
-			else {ecrireDansConsole("BUG navigateur ferme  --> Attente courte");randomsleep.court();}
+			else {ecrireDansConsole("BUG navigateur ferme  --> Attente courte", true);randomsleep.court();}
 
 
-			ecrireDansConsole("Reboot : " + compteurDeBoot);
+			ecrireDansConsole("Reboot : " + compteurDeBoot, true);
 
-			try{compte.getDriver().quit();}catch (Exception e1){t.ecrireDansConsole("echec : compte.getDriver().quit() 2");}
+			try{compte.getDriver().quit();}catch (Exception e1){t.ecrireDansConsole("echec : compte.getDriver().quit() 2", true);}
 			redemarrerNavigateur();
 			principale();
 
@@ -668,9 +668,9 @@ public class Travian extends Thread {
 		}
 		for(Village villagePerdu : listeDeVillagesPerdus) {
 			 listeDeVillages.remove( villagePerdu);
-		ecrireDansConsole("Village perdu ou detruit : " + villagePerdu.getNom() );
+		ecrireDansConsole("Village perdu ou detruit : " + villagePerdu.getNom(), true );
 		}
-		ecrireDansConsole("Nombre de Villages = " + listeDeVillages.size());
+		ecrireDansConsole("Nombre de Villages = " + listeDeVillages.size(), true);
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -738,7 +738,7 @@ public class Travian extends Thread {
 				if (village != villageEnCours()){
 					//compte.getDriver().get(village.getUrl());
 					compte.getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
-					ecrireDansConsole("=============================== Changement de village : "+village.getNom()+" ===============================");
+					ecrireDansConsole("=============================== Changement de village : "+village.getNom()+" ===============================", true);
 					randomsleep.classic();
 				}
 				//TODO Remonter chargerchamp pour rendre le NPC effectif des la premiere co
@@ -770,9 +770,9 @@ public class Travian extends Thread {
 					if(bot.pillage == true){
 						if(village.getRegimePillage() == true){
 						village.voirTroupesDuVillage(t);
-						}else{ecrireDansConsole("Pillages Desactives... Par le regime du village");}
-					}else{ecrireDansConsole("Pillages Desactives...");}
-				}catch(Exception e){ecrireDansConsole("Echec pillage ");}
+						}else{ecrireDansConsole("Pillages Desactives... Par le regime du village", true);}
+					}else{ecrireDansConsole("Pillages Desactives...", true);}
+				}catch(Exception e){ecrireDansConsole("Echec pillage ", true);}
 				
 				
 
@@ -784,8 +784,8 @@ public class Travian extends Thread {
 					if (village.getBesoinDeNpc() == true && village.getVillageCapitale()==true  ){
 						npcNegatif();
 					}
-					}else {t.ecrireDansConsole("NPC désactivé par le regime du village");}
-				}else {t.ecrireDansConsole("NPC désactivé");}
+					}else {t.ecrireDansConsole("NPC désactivé par le regime du village", true);}
+				}else {t.ecrireDansConsole("NPC désactivé", true);}
 
 				if (allume == false){break;}
 				
@@ -793,7 +793,7 @@ public class Travian extends Thread {
 				//	if ( village.getRegimeConstruction() == true ) {
 					if (village.getConstructionsEnCours() < limiteDeConstruction ){ 
 						gestionBatiments();
-					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours");}
+					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours", true);}
 				//	}else {t.ecrireDansConsole("construction Desactivees... Par le regime du village");}
 			//	}else {t.ecrireDansConsole("construction Desactivees...");}
 				
@@ -805,12 +805,12 @@ public class Travian extends Thread {
 						if(bat.getNomBatiment().toLowerCase().contains("march")) {
 						village.setNombreDeMarchands(bat.getLevelBatiment());
 						village.setNombreDeMarchandsMax(bat.getLevelBatiment());
-						t.ecrireDansConsole("Forcage estimation nombre de marchand par level marché : "+ bat.getLevelBatiment());
+						t.ecrireDansConsole("Forcage estimation nombre de marchand par level marché : "+ bat.getLevelBatiment(), true);
 						break;
 						}
 					}	
 				}
-				}catch(Exception e) {t.ecrireDansConsole("Echec Forcage estimation nombre de marchand par level marché");}
+				}catch(Exception e) {t.ecrireDansConsole("Echec Forcage estimation nombre de marchand par level marché", true);}
 
 
 				if (allume == false){break;}
@@ -822,14 +822,14 @@ public class Travian extends Thread {
 				if (bot.evacuerSurplusRessources == true){
 					try {
 						marche.evacuerSurplusRessources(t, village, listeDeVillages);
-						}catch(Exception e) {ecrireDansConsole("[Marché] evacuerSurplusRessources Echec"); }
-				}else{ecrireDansConsole("Evacuation ressources Desactives...");}
+						}catch(Exception e) {ecrireDansConsole("[Marché] evacuerSurplusRessources Echec", true); }
+				}else{ecrireDansConsole("Evacuation ressources Desactives...", true);}
 
 				if (allume == false){break;}
 				
 				if (bot.approPetitsVillages == true){
 					marche.approPetitVillage(t, village, listeDeVillages);
-				}else{ecrireDansConsole("Appro petits villages Desactives...");}
+				}else{ecrireDansConsole("Appro petits villages Desactives...", true);}
 
 	
 
@@ -840,20 +840,20 @@ public class Travian extends Thread {
 						if (village.getChampMin() >= 10 && village.getBesoinDeFete() == 1){ 
 							if (village.getBois() >= 6400 && village.getArgile() >= 6650 && village.getFer() >= 5940 && village.getCereales() >= 1340 ){
 								village.lancerFete(t);
-							} else {ecrireDansConsole("[Fete] Pas assez de ressources pour faire une fete");}
-						} else {ecrireDansConsole("[Fete] Pas besoin de fete ou pas d'hotel de ville");}
-						}else {ecrireDansConsole("[Fete] fetes Desactivees... Par le regime du village.");}
-					}else {ecrireDansConsole("[Fete] fetes Desactivees...");}
-				}catch(Exception e){ecrireDansConsole("echec fete ");}
+							} else {ecrireDansConsole("[Fete] Pas assez de ressources pour faire une fete", true);}
+						} else {ecrireDansConsole("[Fete] Pas besoin de fete ou pas d'hotel de ville", true);}
+						}else {ecrireDansConsole("[Fete] fetes Desactivees... Par le regime du village.", true);}
+					}else {ecrireDansConsole("[Fete] fetes Desactivees...", true);}
+				}catch(Exception e){ecrireDansConsole("echec fete ", true);}
 				
 				//test
 				if(bot.acheterAuMarché == true){
 					if(village.getRegimeAcheterAuMarché() == true){
-						try {	marche.acheterAuMarché(t, village);}catch(Exception e) { ecrireDansConsole("[Marché] acheterAuMarché Echec");}
-					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.");}
-				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...");}
+						try {	marche.acheterAuMarché(t, village);}catch(Exception e) { ecrireDansConsole("[Marché] acheterAuMarché Echec", true);}
+					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.", true);}
+				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...", true);}
 			}//fin for
-		}else {ecrireDansConsole(village.getNom() + " Village Exclu de la rotation...");}
+		}else {ecrireDansConsole(village.getNom() + " Village Exclu de la rotation...", true);}
 	  }
 	}
 
@@ -907,13 +907,13 @@ public class Travian extends Thread {
 			heroSurVillage = compte.getDriver().findElement(By.xpath("//*[@class=\"tip-contents\"]")).getText().split("revient au village ")[1].split("\\.")[0]; //("rattachement de ")
 			hero.setVillageAffecte(heroSurVillage);
 		}catch (Exception e){
-			t.ecrireDansConsole("[gestionHeroProd] Hero en mouvement ou echec lecture de l'infobulle : garde l'ancienne valeur -code 1");}
+			t.ecrireDansConsole("[gestionHeroProd] Hero en mouvement ou echec lecture de l'infobulle : garde l'ancienne valeur -code 1", true);}
 		
 		try {
 			heroSurVillage = compte.getDriver().findElement(By.xpath("//*[@class=\"tip-contents\"]")).getText().split("rattachement ")[1].split("\\.")[0]; //("rattachement de ")
 			hero.setVillageAffecte(heroSurVillage);
 		}catch (Exception e){
-			t.ecrireDansConsole("[gestionHeroProd] Hero en mouvement ou echec lecture de l'infobulle : garde l'ancienne valeur -code 2");}
+			t.ecrireDansConsole("[gestionHeroProd] Hero en mouvement ou echec lecture de l'infobulle : garde l'ancienne valeur -code 2", true);}
 
 		
 		
@@ -982,15 +982,15 @@ public class Travian extends Thread {
 					randomsleep.court();
 					compte.getDriver().findElement(By.xpath("//*[@id=\"saveHeroAttributes\"]/div/div[2]")).click();
 					randomsleep.court();
-					ecrireDansConsole("[gestionHeroProd] Hero boost : " + min.getKey().toString());
+					ecrireDansConsole("[gestionHeroProd] Hero boost : " + min.getKey().toString(), true);
 					while(iterator1.hasNext()) {
 						Map.Entry me2 = (Map.Entry)iterator1.next();
-						     t.ecrireDansConsole(("|" + me2.getKey() + ": " + me2.getValue() + "|")); 
+						     t.ecrireDansConsole(("|" + me2.getKey() + ": " + me2.getValue() + "|"), true); 
 					}
 					//  ecrireDansConsole(""); 
 					compte.getDriver().get(compte.getServer()+"dorf1.php");
 					randomsleep.court(); 
-				}else {ecrireDansConsole("[gestionHeroProd] Hero boost deja  la bonne ressource : " +hero.getModeProduction()) ;}
+				}else {ecrireDansConsole("[gestionHeroProd] Hero boost deja  la bonne ressource : " +hero.getModeProduction(), true) ;}
 
 			}
 		}
@@ -1015,7 +1015,7 @@ public class Travian extends Thread {
 			lienAventures = compte.getDriver().findElement(By.xpath("//*[contains(@class, 'adventureWhite')]"));//button-container addHoverClick//*[@class=\"speechBubbleContent\"]
 		}catch  (Exception e) {
 			lienAventures= null;
-			ecrireDansConsole("[Aventure] Pas de quetes :( -code 0");} //deprecated
+			ecrireDansConsole("[Aventure] Pas de quetes :( -code 0", true);} //deprecated
 		try {
 			heroStatus = compte.getDriver().findElement(By.xpath("//*[@id=\"sidebarBoxHero\"]/div[2]/div[2]/div[1]"));
 			if (heroStatus.getText().contains("déplacement")){
@@ -1023,7 +1023,7 @@ public class Travian extends Thread {
 			}
 		}catch  (Exception e) {
 			lienAventures= null;
-			ecrireDansConsole("[Aventure] Pas de quetes :( -code 1");}
+			ecrireDansConsole("[Aventure] Pas de quetes :( -code 1", true);}
 		
 
 		if (lienAventures != null && heroEnDeplacement == false){ 
@@ -1053,16 +1053,16 @@ public class Travian extends Thread {
 							compte.getDriver().findElement(By.xpath("//*[@class=\"gotoAdventure arrow\"]")).click();
 							randomsleep.court();
 							compte.getDriver().findElement(By.xpath("//*[@class=\"green \"]")).click();
-							ecrireDansConsole("[Aventure] Quete lance : dead line dans moins de " + h + " heures" );
+							ecrireDansConsole("[Aventure] Quete lance : dead line dans moins de " + h + " heures", true );
 							randomsleep.court();
 						}
-					}catch  (Exception e) {ecrireDansConsole("Quetes Annoncee non presente ou Hero Absent  : Echec ");}
+					}catch  (Exception e) {ecrireDansConsole("Quetes Annoncee non presente ou Hero Absent  : Echec ", true);}
 
 
 				}
-			}catch  (Exception e) {ecrireDansConsole("Pas de quetes :( -code 2");}
+			}catch  (Exception e) {ecrireDansConsole("Pas de quetes :( -code 2", true);}
 		}
-		else {ecrireDansConsole("[Aventure] Hero en deplacement ou echec");}
+		else {ecrireDansConsole("[Aventure] Hero en deplacement ou echec", true);}
 
 
 
@@ -1189,13 +1189,13 @@ public class Travian extends Thread {
 		if(compteurDeBoot % rythmePillage == 0){
 			try { //   //*[@id="list1076"] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]
 			List<WebElement> btnLancerPillage = compte.getDriver().findElements(By.xpath("//*[@class='listEntry' and contains(., '" + t.villageEnCours().getNom() + "')  and contains(., '" + t.bot.motCleListeDePillage1 + "')] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]"));
-			ecrireDansConsole("Boutton-s trouvé-s : "+btnLancerPillage.size()+""); 
+			ecrireDansConsole("Boutton-s trouvé-s : "+btnLancerPillage.size()+"", true); 
 			btnLancerPillage.get(0).click();
 			}catch (Exception e) {
-				ecrireDansConsole("echec trouver ou cliquer bouton de pillage");
+				ecrireDansConsole("echec trouver ou cliquer bouton de pillage", true);
 			}
 		//	compte.getDriver().findElement(By.xpath("//*[text()[contains( .,'Lancer pillage')]]")).click();  //   Lancement
-			ecrireDansConsole(compteurDeBoot + " --> Pillage --> MODE IMPRUDENT (Multiple de 1)"  );
+			ecrireDansConsole(compteurDeBoot + " --> Pillage --> MODE IMPRUDENT (Multiple de 1)", true  );
 		}
 
 		else {
@@ -1217,8 +1217,8 @@ public class Travian extends Thread {
 			if (compteurDeFrigoSansAttaque >= 6){
 				//on lance la liste de pillage
 				compte.getDriver().findElement(By.xpath("//*[text()[contains( .,'lancer pillage')]]")).click();        
-				ecrireDansConsole("Lancement sur " + compteurDeFrigoSansAttaque + "Frigos");
-				ecrireDansConsole(compteurDeBoot + " --> Pillage --> MODE prudent"  );
+				ecrireDansConsole("Lancement sur " + compteurDeFrigoSansAttaque + "Frigos", true);
+				ecrireDansConsole(compteurDeBoot + " --> Pillage --> MODE prudent", true  );
 			}
 		}
 		randomsleep.court();
@@ -1343,7 +1343,7 @@ public class Travian extends Thread {
 			randomsleep.court();
 			//WebElement  lien = compte.getDriver().findElement(By.className("button-content")).getText().contains("Récompense");//*[@id="button5533e89cab960"]/div/div[2]
 		}catch (Exception e) {
-			ecrireDansConsole("Pas de Cadeaux 1");} 
+			ecrireDansConsole("Pas de Cadeaux 1", true);} 
 
 	}
 
@@ -1369,10 +1369,10 @@ public class Travian extends Thread {
 		randomsleep.court();
 		donneesGlobales = compte.getDriver().findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr"));
 		randomsleep.court();
-		try{determinerBesoinDeConstructions();}catch(Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeConstructions");}
+		try{determinerBesoinDeConstructions();}catch(Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeConstructions", true);}
 		try{updateMarchandSansComptePlus(t);//pour redonder en fonction de la possession du compte + ou non
 		}catch(Exception e){
-			t.ecrireDansConsole("Echec updateMarchandSansComptePlus => Estimation nombre Marchands par level de marche"); 
+			t.ecrireDansConsole("Echec updateMarchandSansComptePlus => Estimation nombre Marchands par level de marche", true); 
 			t.tokenForcerMarcheDeLaRotation = 1;}
 		
 		
@@ -1389,7 +1389,7 @@ public class Travian extends Thread {
 		randomsleep.court();
 		donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody/tr"));
 		randomsleep.court();
-		updateRessourcesPlus(t);} catch (Exception e) {t.ecrireDansConsole("Echec update ressources compte plus");
+		updateRessourcesPlus(t);} catch (Exception e) {t.ecrireDansConsole("Echec update ressources compte plus", true);
 		 }
 
 		// 	compte.getDriver().get("http://ts4.travian.fr/dorf3.php?s=2");
@@ -1408,7 +1408,7 @@ public class Travian extends Thread {
 		donneesRessourcesPourcentage = compte.getDriver().findElements(By.xpath("//*[@id=\"warehouse\"]/tbody/tr"));
 		randomsleep.court();
 		determinerBesoinDeNpc();
-		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeNpc");}
+		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeNpc", true);}
 
 		randomsleep.court();
 
@@ -1425,10 +1425,10 @@ public class Travian extends Thread {
 
 		determinerBesoinDeFetes();
 		majSlot();
-		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeFetes ou slot");
+		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeFetes ou slot", true);
 		//pour finir, fermer la fenetre de pub travian
 		fermerFenetre();
-		t.ecrireDansConsole("Conclusion pas de compte + ou bug");
+		t.ecrireDansConsole("Conclusion pas de compte + ou bug", true);
 		}
 
 
@@ -1446,7 +1446,7 @@ public class Travian extends Thread {
 					village.setNombreDeMarchands(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[0].replaceAll("\\W", "")));
 					village.setNombreDeMarchandsMax(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[1].replaceAll("\\W", "")));
 
-					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax());
+					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax(), true);
 
 					trouver = true;
 					i = 0;
@@ -1457,7 +1457,7 @@ public class Travian extends Thread {
 					village.setNombreDeMarchands(0);
 					village.setNombreDeMarchandsMax(0);
 					
-					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax());
+					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax(), true);
 					trouver = true;
 					i = 0;
 				}
@@ -1493,7 +1493,7 @@ public class Travian extends Thread {
 					//	JavascriptExecutor executor = (JavascriptExecutor)compte.getDriver();
 					//	 String text= (String) executor.executeScript("document.getElementById('versionInfo').innerHTML");
 					//village.setMaxStockDepot(Integer.parseInt(pageSource.split("80000")[0].toString()));
-					ecrireDansConsole("Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax());
+					ecrireDansConsole("Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax(), true);
 
 					trouver = true;
 					i = 0;
@@ -1547,8 +1547,8 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		try {
 			String tribut = compte.getDriver().findElement(By.xpath("//*[@id=\"sidebarBoxHero\"]/div[2]/div[1]/div/a[1]/img")).getAttribute("alt");
 			compte.setTribut(tribut);
-			t.ecrireDansConsole("Tribut : " + tribut);
-		}catch (Exception e){t.ecrireDansConsole("echec detection tribut");}
+			t.ecrireDansConsole("Tribut : " + tribut, true);
+		}catch (Exception e){t.ecrireDansConsole("echec detection tribut", true);}
 	}
 	
 	private void detectionSlotDeVillageDuCompte(){
@@ -1560,8 +1560,8 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			int intSlot2 = Integer.parseInt(txt2);
 			int result = intSlot2 - intSlot1;
 			compte.setSlotDeVillageDuCompte(result);
-			t.ecrireDansConsole("Slot de Village Du Compte: " + intSlot1 +" sur "+ intSlot2 + " Slot Libre : " +result);
-		}catch (Exception e){t.ecrireDansConsole("echec detection slot De Village Du Compte");}
+			t.ecrireDansConsole("Slot de Village Du Compte: " + intSlot1 +" sur "+ intSlot2 + " Slot Libre : " +result, true);
+		}catch (Exception e){t.ecrireDansConsole("echec detection slot De Village Du Compte", true);}
 	}
 
 
@@ -1584,7 +1584,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		randomsleep.court();
 		//randomsleep.court();
 		compte.getDriver().findElement(By.xpath("//button[contains(@id, 'npc_market_button')]")).click();
-		ecrireDansConsole("Npc pour eviter la famine");
+		ecrireDansConsole("Npc pour eviter la famine", true);
 		randomsleep.court();
 
 
@@ -1619,7 +1619,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 						i = 0;	
 						}
 						catch (Exception e) {trouver = true; i = 0; village.setBesoinDeFete(besoinDeFete);}
-					t.ecrireDansConsole(village.getNom()+ " : " +" besoinFete == " + besoinDeFete);	
+					t.ecrireDansConsole(village.getNom()+ " : " +" besoinFete == " + besoinDeFete, true);	
 					}else {i++;}
 				
 			}
@@ -1659,11 +1659,11 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 						i = 0;	
 						}catch (Exception e) {
 							trouver = true;
-							t.ecrireDansConsole("echec lecture des slots");
+							t.ecrireDansConsole("echec lecture des slots", true);
 							i = 0;
 							
 							}
-					t.ecrireDansConsole(village.getNom()+ " : " +" Slot de Village disponible == " + villageSlot );	
+					t.ecrireDansConsole(village.getNom()+ " : " +" Slot de Village disponible == " + villageSlot, true );	
 					}else {
 						i++;
 						}
@@ -1689,7 +1689,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 						village.getListeDeBatimentsEnCoursDeConstruction().add(new Batiment(nomBat));
 					}
 
-					t.ecrireDansConsole(village.getNom()+ " : " +" setConstructionsEnCours == " + donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
+					t.ecrireDansConsole(village.getNom()+ " : " +" setConstructionsEnCours == " + donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size(), true);
 					trouver = true;
 					i = 0;
 				} else {
@@ -1717,11 +1717,11 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		//	if(village.getTemplateDuVillage().toString().equals("listeDeBatimentsDuTeamplate4") ){}
 			if (resteAConstruire < 1 && !village.getBatiments().isEmpty() ){
 				village.setBesoinDeConstruction(false);
-				ecrireDansConsole(village.getNom()+" : Template Fini");
+				ecrireDansConsole(village.getNom()+" : Template Fini", true);
 				resteAConstruire = 0;
 			}else {
 				village.setBesoinDeConstruction(true);
-				ecrireDansConsole(village.getNom()+" : Template Non Fini");
+				ecrireDansConsole(village.getNom()+" : Template Non Fini", true);
 				resteAConstruire = 0;
 			}
 		}
@@ -1763,11 +1763,11 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 					if (enNegatif==true){texte="Famine";}else{texte="Debordement";}
 					if (delaisAvantFamineOuDebordement < 1 && enNegatif==true ) {
 						village.setBesoinDeNpc(true);
-						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif );
+						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
 						i++;
 					}else {
 						village.setBesoinDeNpc(false);
-						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif );
+						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
 						i++;
 					}
 					}catch (Exception e) {
@@ -1778,7 +1778,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 							texte="Debordement";
 							enNegatif=false;
 							village.setBesoinDeNpc(false);
-							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En Debordement* En Negatif = "+enNegatif );
+							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En Debordement* En Negatif = "+enNegatif, true );
 							i++;
 						}
 						else{
@@ -1786,7 +1786,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 							enNegatif=true;
 							village.setBesoinDeNpc(true);
 							village.setCropDeath(true);
-							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En CropDeath* En Negatif = "+enNegatif );
+							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En CropDeath* En Negatif = "+enNegatif, true );
 
 							i++;
 						}
@@ -1815,27 +1815,31 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	private int besoinDePasserSurLeVillage(Village village, boolean verbose) {
 		int besoin = 0;
 		int besoin2 = 0;
-		
-	
+		ArrayList<Integer> listeDeBesoin = new ArrayList<Integer>();	
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
-		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction && (bot.monterChamps == true && village.regimeMonterChamps == true)){besoin = 1;}
-		if ( village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0){besoin = 2;}
-		if ( village.getBesoinDeFete() == 1 &&  bot.faireFete == true && village.regimeFete == true){besoin = 3;}
-		if ( village.getVillageCapitale() == true ){besoin = 4;}
-		if (village.getVillagePillage() == true ){besoin = 5;}
-		if ( village.getCropDeath() == true ){besoin = 6;}
-		if ( village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true ){besoin = 7;}//&& village.getSlotBatimentsLibres() > 0
-		if ( village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 8;}
-		if ( village.getArgile() >= village.getMaxStockDepot()*90/100 &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 9;}
-		if ( village.getFer() >= village.getMaxStockDepot()*90/100    &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 10;}
-		if ( village.getCereales() >= village.getMaxStockSilo()*90/100 && (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 11;}
-		if ( compteurDeBoot == 1)	{besoin = 12;}
+		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction && (bot.monterChamps == true && village.regimeMonterChamps == true)){besoin = 1;listeDeBesoin.add(besoin);}
+		if ( village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0){besoin = 2;listeDeBesoin.add(besoin);}
+		if ( village.getBesoinDeFete() == 1 &&  bot.faireFete == true && village.regimeFete == true){besoin = 3;listeDeBesoin.add(besoin);}
+		if ( village.getVillageCapitale() == true ){besoin = 4;listeDeBesoin.add(besoin);}
+		if (village.getVillagePillage() == true ){besoin = 5;listeDeBesoin.add(besoin);}
+		if ( village.getCropDeath() == true ){besoin = 6;listeDeBesoin.add(besoin);}
+		if ( village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true ){besoin = 7;listeDeBesoin.add(besoin);}//&& village.getSlotBatimentsLibres() > 0
+		if ( village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 8;listeDeBesoin.add(besoin);}
+		if ( village.getArgile() >= village.getMaxStockDepot()*90/100 &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 9;listeDeBesoin.add(besoin);}
+		if ( village.getFer() >= village.getMaxStockDepot()*90/100    &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 10;listeDeBesoin.add(besoin);}
+		if ( village.getCereales() >= village.getMaxStockSilo()*90/100 && (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 11;listeDeBesoin.add(besoin);}
+		if ( compteurDeBoot == 1)	{besoin = 12;listeDeBesoin.add(besoin);}
 
 		if ( besoin >= 1 ) {
 			besoin2 = 1;
 		}
+		Iterator<Integer> b = listeDeBesoin.iterator();
 		if (verbose==true) {
-			ecrireDansConsole("");
+			while(b.hasNext()) {
+				int c = b.next();
+		        //b.set(element + "+")
+			ecrireDansConsole("Besoin : " + c, true);
+			}
 		}
 		return besoin2 ;
 
@@ -1854,10 +1858,10 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			if (boutonContinuer == true) {
 				prendrePhoto("eviterSurvey---ifboutonContinueregaltrue");
 				compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]/p[1]/a")).click();
-				ecrireDansConsole("Eviter Sondage fait");
+				ecrireDansConsole("Eviter Sondage fait", true);
 			}
 		}catch (Exception e) {
-			ecrireDansConsole("Pas de sondage a eviter");
+			ecrireDansConsole("Pas de sondage a eviter", true);
 
 		}
 
@@ -1868,12 +1872,12 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			boolean messageSystem = compte.getDriver().findElement(By.xpath("//*[@id=\"sysmsg\"]")).isDisplayed();
 			if (messageSystem == true) {
 				prendrePhoto("messageSystem");
-				ecrireDansConsole("messageSystem");
+				ecrireDansConsole("messageSystem", true);
 			}else {
-				ecrireDansConsole("Pas de messageSystem");	
+				ecrireDansConsole("Pas de messageSystem", true);	
 			}
 		}catch(Exception e1) {
-			ecrireDansConsole("pas de messageSystem / messageArte etc...");
+			ecrireDansConsole("pas de messageSystem / messageArte etc...", true);
 		}
 	
 	//enMaintenance //*[@id="content"]
@@ -1885,12 +1889,12 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 				boolean maintenance = compte.getDriver().findElement(By.xpath("//*[@id=\"content\"]")).getText().toLowerCase().contains("maintenance");
 				if (maintenance == true) {
 					prendrePhoto("Maintenance");
-					ecrireDansConsole("En maintenance");
+					ecrireDansConsole("En maintenance", true);
 				}else {
-					ecrireDansConsole("Pas de maintenance");	
+					ecrireDansConsole("Pas de maintenance", true);	
 				}
 			}catch(Exception e1) {
-				ecrireDansConsole("Lecture maintenance Echec");
+				ecrireDansConsole("Lecture maintenance Echec", true);
 			}
 		
 		//enMaintenance //*[@id="content"]
@@ -1905,7 +1909,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		try {
 		String[] repertoire = new java.io.File(userPath).list();
 		
-		ecrireDansConsole(String.valueOf(repertoire.length)+ " Photos dans le dossier");
+		ecrireDansConsole(String.valueOf(repertoire.length)+ " Photos dans le dossier", true);
 		
 		////////////// desactivé
 	/*
@@ -1934,7 +1938,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			}
 		}
 	}catch (Exception e) {
-		ecrireDansConsole("Dossier vide.");
+		ecrireDansConsole("Dossier vide.", true);
 	}
 
 		////////////
@@ -1942,7 +1946,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			File scrFile = ((TakesScreenshot)compte.getDriver()).getScreenshotAs(OutputType.FILE); 
 			FileUtils.copyFile(scrFile, new File(userPath + "\\"  +nom+"-"+numeroDePhoto+".jpg"));
 		}catch (Exception e) {
-			ecrireDansConsole("Photo ratee");
+			ecrireDansConsole("Photo ratee", true);
 		}
 	} 
 
@@ -1967,12 +1971,12 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			for(String strCroix : lststrCroix){
 				if(v.getNom().contains( strCroix )){ 
 					//traitement pour v attaqué 
-					t.ecrireDansConsole("Attaque sur "+ strCroix ); 
+					t.ecrireDansConsole("Attaque sur "+ strCroix, true ); 
 				}
 				else{
 					v.heureDeGuet = new Date(); 
 					if (verbose == true ){
-						t.ecrireDansConsole(v.getNom()+" : " + v.heureDeGuet);
+						t.ecrireDansConsole(v.getNom()+" : " + v.heureDeGuet, true);
 			}
 
 		}
@@ -1981,7 +1985,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 					}else{ // si liste null
 						v.heureDeGuet = new Date(); 
 						if (verbose == true){
-							t.ecrireDansConsole(v.getNom()+" : " + v.heureDeGuet);
+							t.ecrireDansConsole(v.getNom()+" : " + v.heureDeGuet, true);
 				}
 
 			}
@@ -2030,9 +2034,9 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	public void fermerFenetre() {
 		try {
 			t.driver.findElement(By.xpath("//*[@id=\"dialogCancelButton\"]")).click();
-			ecrireDansConsole("fenetre fermée");
+			ecrireDansConsole("fenetre fermée", true);
 			randomsleep.court();
-		}catch(Exception e ) {ecrireDansConsole("echec fermer fenetre");}
+		}catch(Exception e ) {ecrireDansConsole("echec fermer fenetre", true);}
 		}
 	
 	
@@ -2060,11 +2064,11 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	        //   Actions builder = new Actions(t.getCompte().getDriver());
 	        //    builder.contextClick(btn);
 	        //    builder.perform();
-			ecrireDansConsole("Colons lancés sur : "+ x +" " + y) ;
+			ecrireDansConsole("Colons lancés sur : "+ x +" " + y, true) ;
 	            t.compte.listeCompteCoordoneesPourColoniser.remove(0);
 	            village.setColons(0);
 		}catch (Exception e) {
-			ecrireDansConsole("echec lancement colons") ;
+			ecrireDansConsole("echec lancement colons", true) ;
 		}
 	}
 

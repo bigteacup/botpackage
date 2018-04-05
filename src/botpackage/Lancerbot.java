@@ -287,8 +287,8 @@ public void lancerTravian(String nomDeCompte, String serveur, String userName, S
 		travian.setFxFenetreController(fxFenetreController);
 		travian.start();
 		travian.allume = true;
-		travian.ecrireDansConsole(travian.getName());
-	    travian.ecrireDansConsole(travian.getState().toString());
+		travian.ecrireDansConsole(travian.getName(), true);
+	    travian.ecrireDansConsole(travian.getState().toString(), true);
 //	}
 	    
 
@@ -299,8 +299,8 @@ public void lancerTravian(String nomDeCompte, String serveur, String userName, S
 		travian.setFxFenetreController(fxFenetreController);
 		travian.start();
 		travian.allume = true;
-		travian.ecrireDansConsole(travian.getName());
-	    travian.ecrireDansConsole(travian.getState().toString());} //if (!travian.isAlive()){
+		travian.ecrireDansConsole(travian.getName(), true);
+	    travian.ecrireDansConsole(travian.getState().toString(), true);} //if (!travian.isAlive()){
 	}
 	
 	//else {	travian.allume = true; travian.notify();}
@@ -314,12 +314,12 @@ public void lancerTravian(String nomDeCompte, String serveur, String userName, S
 }
 
 public void reprendreTravian(){
-		travian.ecrireDansConsole(travian.getName());
-    travian.ecrireDansConsole(travian.getState().toString());
+		travian.ecrireDansConsole(travian.getName(), true);
+    travian.ecrireDansConsole(travian.getState().toString(), true);
 
 		travian.resume();
-		travian.ecrireDansConsole(travian.getName());
-	    travian.ecrireDansConsole(travian.getState().toString());
+		travian.ecrireDansConsole(travian.getName(), true);
+	    travian.ecrireDansConsole(travian.getState().toString(), true);
 
 	}
 public synchronized void pause(){
