@@ -41,7 +41,7 @@ public class GestionnaireDeComptes {
          
          
 		try {
-			url = new URL("https://chromedriver.storage.googleapis.com/2.32/chromedriver_win32.zip");
+			url = new URL("https://chromedriver.storage.googleapis.com/2.37/chromedriver_win32.zip");
 	         String fileName = System.getProperty("user.home") + "\\botpackage\\chromedriver_win32.zip";
 	         try {
 	        	if(!chrome.exists()) { 
