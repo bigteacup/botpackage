@@ -92,7 +92,7 @@ public void envoyer(FxFenetreController fxFenetreController, String ligne, boole
         r.setFraction(0.75);
 *
 */
-		String rall = "\\n";
+		String rall = "\n";
 		if (retourALaLigne == true) {
 			 rall = "\n";
 		}else {

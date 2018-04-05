@@ -143,7 +143,7 @@ public class Travian extends Thread {
 	}
 
 	public void ecrireDansConsole(String string, boolean retourALaLigne){
-		try {fxFenetreController.console.flux.envoyer(fxFenetreController, string, true);} catch (IOException e) {e.printStackTrace();}
+		try {fxFenetreController.console.flux.envoyer(fxFenetreController, string, retourALaLigne);} catch (IOException e) {e.printStackTrace();}
 	}
 
 
