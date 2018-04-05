@@ -206,12 +206,14 @@ public class Travian extends Thread {
 
 		if (allume){
 			try {
+
 				boot();
 			} catch (Exception e) {
 				ecrireDansConsole("Echec boot");
 				echecDeBoot++;
 				restartSurErreure();
 			}
+		
 
 			while (allume) {
 				t.bot.fxFenetreController.ona(t);
@@ -265,8 +267,18 @@ public class Travian extends Thread {
 
 				randomsleep.court();
 				if (allume == false){break;}
-				
-				
+				try {
+					for (Village village : listeDeVillages) {
+					if(besoinDePasserSurLeVillage(village, true) == 1) {
+						t.ecrireDansConsole(village.getNom() +": intégré à la rotation.");
+					}else { 
+						t.ecrireDansConsole(village.getNom() + ": rejeté de la rotation.");
+					}
+					
+					
+					
+					}
+				} catch (Exception e2) {ecrireDansConsole("Echec prevision");}
 
 				//t.fonderVillage();
 				/*	
@@ -413,10 +425,13 @@ public class Travian extends Thread {
 		randomsleep.court();
 		compte.getDriver().get(compte.getServer()+"dorf1.php");
 		randomsleep.court();
+
 		try {
 			// Name
 			compte.getDriver().findElement(By.name("name")).clear();
 			compte.getDriver().findElement(By.name("name")).sendKeys(compte.getUserName());
+			//compte.getDriver().findElement(By.xpath("//*[@name=\"name\"]")).clear();
+			//compte.getDriver().findElement(By.xpath("//*[@name=\"name\"]")).sendKeys(compte.getUserName());
 			randomsleep.court();
 			// Pass
 			compte.getDriver().findElement(By.name("password")).clear();
@@ -427,7 +442,7 @@ public class Travian extends Thread {
 			randomsleep.court();
 
 		} catch (Exception e) {
-			ecrireDansConsole("deja connecte");
+			ecrireDansConsole("deja connecte");;
 
 
 		}
@@ -718,7 +733,7 @@ public class Travian extends Thread {
 			if(village.getExclureVillage() == false) {
 
 			if (allume == false){break;}
-			if (besoinDePasserSurLeVillage(village) == 1 ){
+			if (besoinDePasserSurLeVillage(village, false) == 1 ){
 				randomsleep.classic();
 				if (village != villageEnCours()){
 					//compte.getDriver().get(village.getUrl());
@@ -1797,31 +1812,31 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//determiner le besoin de se connecter au village
-	private int besoinDePasserSurLeVillage(Village village) {
+	private int besoinDePasserSurLeVillage(Village village, boolean verbose) {
 		int besoin = 0;
 		int besoin2 = 0;
 		
 	
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
-		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction && (bot.monterChamps == true && village.regimeMonterChamps == true)
-				|| village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0
-				|| village.getBesoinDeFete() == 1 &&  bot.faireFete == true && village.regimeFete == true
-				|| village.getVillageCapitale() == true 
-				|| village.getVillagePillage() == true 
-				|| village.getCropDeath() == true 
-				|| village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true //&& village.getSlotBatimentsLibres() > 0
-				|| village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
-				|| village.getArgile() >= village.getMaxStockDepot()*90/100 &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
-				|| village.getFer() >= village.getMaxStockDepot()*90/100    &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
-				|| village.getCereales() >= village.getMaxStockSilo()*90/100 && (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )
-				|| compteurDeBoot == 1)	{
-			besoin = 1;
-		}
+		if (village.getChampsFinis() == false && village.getConstructionsEnCours() < limiteDeConstruction && (bot.monterChamps == true && village.regimeMonterChamps == true)){besoin = 1;}
+		if ( village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0){besoin = 2;}
+		if ( village.getBesoinDeFete() == 1 &&  bot.faireFete == true && village.regimeFete == true){besoin = 3;}
+		if ( village.getVillageCapitale() == true ){besoin = 4;}
+		if (village.getVillagePillage() == true ){besoin = 5;}
+		if ( village.getCropDeath() == true ){besoin = 6;}
+		if ( village.getConstructionsEnCours() < limiteDeConstruction && village.getBesoinDeConstruction() == true ){besoin = 7;}//&& village.getSlotBatimentsLibres() > 0
+		if ( village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 8;}
+		if ( village.getArgile() >= village.getMaxStockDepot()*90/100 &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 9;}
+		if ( village.getFer() >= village.getMaxStockDepot()*90/100    &&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 10;}
+		if ( village.getCereales() >= village.getMaxStockSilo()*90/100 && (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 11;}
+		if ( compteurDeBoot == 1)	{besoin = 12;}
 
-		if ( besoin == 1 ) {
+		if ( besoin >= 1 ) {
 			besoin2 = 1;
 		}
-
+		if (verbose==true) {
+			ecrireDansConsole("");
+		}
 		return besoin2 ;
 
 	}

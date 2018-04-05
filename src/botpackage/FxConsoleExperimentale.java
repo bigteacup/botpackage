@@ -37,7 +37,7 @@ public class FxConsoleExperimentale  { //extends Thread
 
 		ArrayList<String> motsaTester = new ArrayList<String>();
 		String l1 [] = {"Attente", "echec", "Template Non Fini","Template Fini","Bois","Argile","Fer","Cereales","construireBatiment", "Fete","En Negatif = true",
-						"Echec", "En Negatif = false", "Marché", "Marchands Dispos", "Ordre", "En Debordement" , "Debug", "gestionHeroProd", "Aventure"};
+						"Echec", "En Negatif = false", "Marché", "Marchands Dispos", "Ordre", "En Debordement" , "Debug", "gestionHeroProd", "Aventure", "intégré", "rejeté"};
 		
 		volatile	StyleClassedTextArea ligne = new StyleClassedTextArea();
 		
@@ -365,8 +365,17 @@ public class FxConsoleExperimentale  { //extends Thread
 				String classeCss = "console0";
 					return classeCss;}
 
+		
+
+			if( str.contains("rejeté")){
+				String classeCss = "console3";
+					return classeCss;}
 
 
+			if( str.contains("intégré")){
+				String classeCss = "console4";
+					return classeCss;}
+			
 			if( str.contains("En Negatif = false")){
 				String classeCss = "console1";
 					return classeCss;}
