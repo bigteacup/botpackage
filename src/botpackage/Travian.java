@@ -1838,7 +1838,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			while(b.hasNext()) {
 				int c = b.next();
 		        //b.set(element + "+")
-			ecrireDansConsole("Besoin : " + c, true);
+			ecrireDansConsole("Besoin : " + c + "  |", false);
 			}
 		}
 		return besoin2 ;
