@@ -348,11 +348,11 @@ public void eteindreTravian(){
 //	if (travian.isAlive()){
 try {
 		travian.allume = false;
-	if (travian.isAlive() == true) {console.flux.envoyer(fxFenetreController, "********* Arret Demande ************ Arret Demande ************** Arret Demande *************");}
-	else {console.flux.envoyer(fxFenetreController, "Rien n'est lancé...");}
+	if (travian.isAlive() == true) {console.flux.envoyer(fxFenetreController, "********* Arret Demande ************ Arret Demande ************** Arret Demande *************", true);}
+	else {console.flux.envoyer(fxFenetreController, "Rien n'est lancé...", true);}
 	
 }catch(Exception e) {
-	try {console.flux.envoyer(fxFenetreController, "Travian non lancé");}catch(Exception e1) {}
+	try {console.flux.envoyer(fxFenetreController, "Travian non lancé", true);}catch(Exception e1) {}
 	System.out.println("Travian non lancé");}		
 
 

@@ -527,7 +527,7 @@ public class FxFenetreController extends ScrollPane {
 			boutonOn.getStyleClass().removeAll("onc"); 
 			//	boutonOn.getStyleClass().clear();
 			boutonOn.getStyleClass().add("onc");
-			console.flux.envoyer(fxFenetreController, "Pas de compte selectionne... Veuillez selectionner un compte.");
+			console.flux.envoyer(fxFenetreController, "Pas de compte selectionne... Veuillez selectionner un compte.", true);
 		} catch (IOException e) {
 			// 
 			e.printStackTrace();
@@ -943,13 +943,13 @@ public class FxFenetreController extends ScrollPane {
 			ifxChargerComptes = 1;
 			
 			try {
-				console.flux.envoyer(fxFenetreController, "fxChargerComptes creation");
+				console.flux.envoyer(fxFenetreController, "fxChargerComptes creation", true);
 			} catch (IOException e) {}
 			fxChargerComptes();
 		} else {
 			ifxChargerComptes = 0;
 			try {
-				console.flux.envoyer(fxFenetreController, "fxChargerComptes sortie");
+				console.flux.envoyer(fxFenetreController, "fxChargerComptes sortie", true);
 			} catch (IOException e) {}
 			comptesTilePane.getChildren().clear();
 			
@@ -977,13 +977,13 @@ public class FxFenetreController extends ScrollPane {
 		if (ifaireTemplate == 0) {
 			ifaireTemplate = 1;
 			try {
-				console.flux.envoyer(fxFenetreController, "faireOngletTemplate creation");
+				console.flux.envoyer(fxFenetreController, "faireOngletTemplate creation", true);
 			} catch (IOException e) {}
 			faireOngletTemplate();
 		} else {
 			ifaireTemplate = 0;
 			try {
-				console.flux.envoyer(fxFenetreController, "faireOngletTemplate sortie");
+				console.flux.envoyer(fxFenetreController, "faireOngletTemplate sortie", true);
 			} catch (IOException e) {}
 			fxTemplate.getChildren().clear();
 			tokenSpecial = 0;
@@ -1006,13 +1006,13 @@ public class FxFenetreController extends ScrollPane {
 		if (ipeupler == 0) {
 			ipeupler = 1;
 			try {
-				console.flux.envoyer(fxFenetreController, "peupleractif creation");
+				console.flux.envoyer(fxFenetreController, "peupleractif creation", true);
 			} catch (Exception e) {}
 			peupleractif();
 		} else {
 			ipeupler = 0;
 			try {
-				console.flux.envoyer(fxFenetreController, "peupleractif sortie");
+				console.flux.envoyer(fxFenetreController, "peupleractif sortie", true);
 			} catch (IOException e) {}
 			villageAnchorPane.getChildren().clear();
 		}
@@ -1028,18 +1028,18 @@ public class FxFenetreController extends ScrollPane {
 		if (iColonisation == 0) {
 			iColonisation = 1;
 			try {
-				console.flux.envoyer(fxFenetreController, "faireOngletColonisationSwitch creation");
+				console.flux.envoyer(fxFenetreController, "faireOngletColonisationSwitch creation", true);
 			} catch (Exception e) {}
 			try {
 				faireOngletColonisation();
 				
 		} catch (Exception e) {
-			try {console.flux.envoyer(fxFenetreController, "pas de données chargées");} catch (IOException e1) {}
+			try {console.flux.envoyer(fxFenetreController, "pas de données chargées", true);} catch (IOException e1) {}
 			}
 			} else {
 			iColonisation = 0;
 			try {
-				console.flux.envoyer(fxFenetreController, "faireOngletColonisationSwitch sortie");
+				console.flux.envoyer(fxFenetreController, "faireOngletColonisationSwitch sortie", true);
 			} catch (IOException e) {}
 			fxOngletColonisation.getChildren().clear();
 		}
@@ -1106,7 +1106,7 @@ public class FxFenetreController extends ScrollPane {
 
 					} catch (Exception e) {
 						try {
-							console.flux.envoyer(fxFenetreController, "pas de village chargés");
+							console.flux.envoyer(fxFenetreController, "pas de village chargés", true);
 					 
 
 						} catch (IOException e1) {
@@ -1525,7 +1525,7 @@ public class FxFenetreController extends ScrollPane {
 		if (ifaireOngletVillageTemplate == 0) {
 			ifaireOngletVillageTemplate = 1;
 			try {
-				console.flux.envoyer(fxFenetreController, "faireOngletVillageTemplate creation");
+				console.flux.envoyer(fxFenetreController, "faireOngletVillageTemplate creation", true);
 			} catch (IOException e) {}
 			VBox vbv= new VBox();
 			//village
@@ -1547,7 +1547,7 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			ifaireOngletVillageTemplate = 0;
 			try {
-				console.flux.envoyer(fxFenetreController, "faireOngletVillageTemplate sortie");
+				console.flux.envoyer(fxFenetreController, "faireOngletVillageTemplate sortie", true);
 			} catch (IOException e) {}
 			tab.setContent(null);
 		}
@@ -2637,7 +2637,7 @@ public void faireOngletColonisation() {
 				fxOngletColonisation.getChildren().clear();
 				faireOngletColonisation();
 				try {
-					console.flux.envoyer(fxFenetreController, "faireOngletColonisation : Pas de compte chargé ou format chiffres incorrect");
+					console.flux.envoyer(fxFenetreController, "faireOngletColonisation : Pas de compte chargé ou format chiffres incorrect", true);
 				} catch (IOException e1) {}
 			}
 			
