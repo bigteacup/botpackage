@@ -30,6 +30,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 //import org.openqa.selenium.chrome.ChromeOptions;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.firefox.FirefoxProfile;
@@ -106,9 +107,17 @@ public class Travian extends Thread {
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("ona");
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onb");
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
-		t.fxFenetreController.boutonOn.getStyleClass().add("onb");	
+		t.fxFenetreController.boutonOn.getStyleClass().add("onb");
+		
+	      ChromeOptions chromeOptions = new ChromeOptions();
+	      chromeOptions.addArguments("--headless");
+	      chromeOptions.addArguments("start-maximized");
+	      chromeOptions.addArguments("--disable-gpu");
+	      chromeOptions.addArguments("--disable-extensions");
+	      
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(chromeOptions);
+		
 		compte.setDriver(driver);
 		while (allume) {
 			principale();
@@ -1815,7 +1824,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 	private int besoinDePasserSurLeVillage(Village village, boolean verbose) {
 		int besoin = 0;
 		int besoin2 = 0;
-		int minimumRessourcePourPasser = 5*village.getMaxStockDepot()/100; //TODO passer le parametre en facultatif et en parametrable
+		int minimumRessourcePourPasser = 10*village.getMaxStockDepot()/100; //TODO passer le parametre en facultatif et en parametrable
 		ArrayList<Integer> listeDeBesoin = new ArrayList<Integer>();	
 		
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
