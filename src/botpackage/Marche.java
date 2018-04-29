@@ -360,7 +360,22 @@ public class Marche {
 		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Fin", true);
 	}
 
-
+///////////////////////////////////////////////////////
+	//////////////////////////////////////////////////
+	/////////////////////////////////////////////////
+	
+	
+	
+	//////////////////////////////////////////////////
+	/////////////////////////////////////////////////
+	//////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
 
 	//TODO revoir la facon de placer les calculs et les indication de temps et distance et sur calculsTravian
 	//Selection du village cible pour chaque ordre
@@ -972,8 +987,109 @@ public class Marche {
 		t.ecrireDansConsole("[Marché] ApproPetitVillage Fin", true);
 
 	}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void approUrgenceFamine(Travian t, Village village, ArrayList<Village> listeDeVillages){
+		t.ecrireDansConsole("[Marché] approUrgenceFamine Début", true);
+		try {
+			if (village.getEnNegatif()==true){
+				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
+				int pourcentageApproPetitVillage = t.bot.pourcentageApproPetitVillageFx;
+				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceFx;
+				int DepotMiniPourAider = t.bot.DepotMiniPourAiderFx;
+				boolean continuer = true;
+
+				boolean manqueC = true; //  village.getCereales() <= village.getMaxStockSilo()/100*1
 
 
+				int manqC = 5000; //village.getMaxStockSilo() - village.getCereales();
+
+
+				if(manqueC){
+
+					for (Village villageCandidat : listeDeVillages) {
+						if(villageCandidat.getNom().equals(village.getNom())) {
+							continue;
+						}
+						//Check de la distance 
+						double distance = t.calculs.calculDeDistance(villageCandidat.getX(), villageCandidat.getY(), village.getX(), village.getY(),false);
+						double	distanceMax = t.bot.distanceMaxPourMarchands; //en cases
+						if(distance < distanceMax ){
+
+							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 10 && villageCandidat.getEnNegatif() == false){ //TODO verifier de ne pas prendre le meme village 
+								if(villageCandidat.getCereales() > ressourcesMiniSurVillageSource 
+										){
+
+									int nombreDeBesoin = 0 ; // on remet a zero //par default
+
+									if (manqueC){nombreDeBesoin++;}		
+
+									int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands()/nombreDeBesoin;
+
+
+									int mC = marchandsMaxAllouesParRessource;
+
+
+
+									////Cereales
+									if(manqueC){
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
+											mC--;
+										}
+										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC){mC++;}
+									}
+
+
+									t.randomsleep.court();
+									t.getCompte().getDriver().get(villageCandidat.getUrl());
+									t.randomsleep.court();
+									//on va sur le marché
+									allerDansLeMarché(t);
+									changementOngletMarche(t, villageCandidat, 0, "Envoi");
+									t.randomsleep.court();
+
+									int compteurCereales = 0;
+
+									//Cereales
+									if(manqueC){
+										for(int clic=0; clic < mC; clic++){
+											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).click();
+											compteurCereales =  mC*villageCandidat.getQuantiteMaxTransporteeParMarchands();
+											t.randomsleep.tcourt();
+										}}
+									//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
+									if(envoyerMarchands(t, village.getNom())){
+										t.ecrireDansConsole("[Marché][approUrgenceFamine Villages]"+ t.villageEnCours().getNom() + " envoi : " +compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+									}
+									t.randomsleep.court();
+									t.getCompte().getDriver().get(village.getUrl());
+									t.randomsleep.court();
+
+									//TODO Changement de page a changer en mode secure et non en get
+									break;
+
+
+								}
+							}
+
+						}else {
+
+							t.ecrireDansConsole("[Marché] " + villageCandidat.getNom() + " est trop eloigné. ", true );
+						}
+
+
+
+					}
+				}
+			}
+		}catch (Exception e){t.ecrireDansConsole("echec approUrgenceFamine", true);}
+		t.ecrireDansConsole("[Marché] approUrgenceFamine Fin", true);
+
+	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1403,8 +1519,11 @@ public class Marche {
 	}
 
 
-private void eviterFamine(Travian t, Village village) {
+private void eviterFamineSansNpc(Travian t, Village village) {
 	if(village.getCropDeath() == true) {
+	//t.donneesRessources.
+		allerDansLeMarché(t);
+	
 		
 		
 	}

@@ -110,8 +110,8 @@ public class Travian extends Thread {
 		t.fxFenetreController.boutonOn.getStyleClass().add("onb");
 		
 	      ChromeOptions chromeOptions = new ChromeOptions();
-	      chromeOptions.addArguments("--headless");
-	      chromeOptions.addArguments("start-maximized");
+	  //    chromeOptions.addArguments("--headless");
+	   //   chromeOptions.addArguments("start-maximized");
 	      chromeOptions.addArguments("--disable-gpu");
 	      chromeOptions.addArguments("--disable-extensions");
 	      
@@ -1741,102 +1741,117 @@ public class Travian extends Thread {
 	}
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	private void determinerBesoinDeNpc() {
-		//npcNegatif();
-		int delaisAvantFamineOuDebordement  = 9999;
-		boolean enNegatif;
-		int i = 0;
-		String texte = "famine";
-
-
-
-		for (Village village : listeDeVillages){
-
-			//reset valeurs
-			village.setBesoinDeNpc(false);
-			village.setCropDeath(false);
-			village.setEnNegatif(false);
-			village.setDebordement(false);
-			//
-			boolean trouver = false;
-			while(trouver == false){
-try {
-
-
-				if ( village.getUrl().contains(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+(i+1)+"]/td[1]/a")).getAttribute("href").split("php")[1] ) ){
-
-					try{ 
-						delaisAvantFamineOuDebordement  = Integer.parseInt(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[7]")).getText().split(":")[0]);
-					try { 
-						enNegatif = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr[" +(i+1)+ "]/td[7]//*[contains(@class, 'crit')]")).isDisplayed();
-						}catch (Exception e){
-						enNegatif=false;
-						}
-					if (enNegatif==true){
-						texte="Famine";
-						village.setEnNegatif(true);
-						}else{
-							texte="Debordement";
-							village.setDebordement(true);
-							}
-					if (delaisAvantFamineOuDebordement < 1 && enNegatif==true ) {
-						village.setBesoinDeNpc(true);
-						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
-						//i++;
-					}else {
-						village.setBesoinDeNpc(false);
-						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
-						//i++;
-					}
-					}catch (Exception e) {
-						String string100pourcent = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().replaceAll("\\W", "");
-
-
-						if (string100pourcent.contains("100")){
-							texte="Debordement";
+		private void determinerBesoinDeNpc() {
+			//npcNegatif();
+			int delaisAvantFamineOuDebordement  = 9999;
+			boolean enNegatif;
+			int i = 0;
+			String texte = "famine";
+	
+	
+	
+			for (Village village : listeDeVillages){
+	
+				//reset valeurs
+				village.setBesoinDeNpc(false);
+				village.setCropDeath(false);
+				village.setEnNegatif(false);
+				village.setDebordement(false);
+				//
+				boolean trouver = false;
+				while(trouver == false){
+	//try {
+	
+	
+					if ( village.getUrl().contains(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+(i+1)+"]/td[1]/a")).getAttribute("href").split("php")[1] ) ){
+	
+						try{ 
+							delaisAvantFamineOuDebordement  = Integer.parseInt(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[7]")).getText().split(":")[0]);
+						try { 
+							enNegatif = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr[" +(i+1)+ "]/td[7]//*[contains(@class, 'crit')]")).isDisplayed();
+							}catch (Exception e){
 							enNegatif=false;
+							}
+						if (enNegatif==true){
+							texte="Famine";
+							village.setEnNegatif(true);
+							}else{
+								texte="Debordement";
+								village.setDebordement(true);
+								}
+						if (delaisAvantFamineOuDebordement < 1 && enNegatif==true ) {
+							village.setBesoinDeNpc(true);
+							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
+							
+							t.marche.approUrgenceFamine(t, village, listeDeVillages); // test
+							try {
+								randomsleep.court();
+								compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(1).click();  // si dans une alliance
+							}catch (Exception e){compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(0).click(); } //sans alliance
+							randomsleep.court();
+							compte.getDriver().findElement(By.xpath("//a[contains(@id, 'villageOverViewTab3')]")).click();
+							donneesRessourcesPourcentage = compte.getDriver().findElements(By.xpath("//*[@id=\"warehouse\"]/tbody/tr"));
+							
+							//i++;
+						}else {
 							village.setBesoinDeNpc(false);
-							village.setCropDeath(false);
-							village.setEnNegatif(false);
-							village.setDebordement(true);
-							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En Debordement* En Negatif = "+enNegatif, true );
+							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
 							//i++;
 						}
-						else{
-							texte="Famine Veritable";
-							enNegatif=true;
-							village.setEnNegatif(true);
-							village.setDebordement(false);
-							village.setBesoinDeNpc(true);
-							village.setCropDeath(true);
-							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En CropDeath* En Negatif = "+enNegatif, true );
-
-						//	i++;
+						}catch (Exception e) {
+							String string100pourcent = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().replaceAll("\\W", "");
+	
+	
+							if (string100pourcent.contains("100")){
+								texte="Debordement";
+								enNegatif=false;
+								village.setBesoinDeNpc(false);
+								village.setCropDeath(false);
+								village.setEnNegatif(false);
+								village.setDebordement(true);
+								ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En Debordement* En Negatif = "+enNegatif, true );
+								//i++;
+							}
+							else{
+								texte="Famine Veritable";
+								enNegatif=true;
+								village.setEnNegatif(true);
+								village.setDebordement(false);
+								village.setBesoinDeNpc(true);
+								village.setCropDeath(true);
+								ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En CropDeath* En Negatif = "+enNegatif, true );
+								t.marche.approUrgenceFamine(t, village, listeDeVillages); // test
+								try {
+									randomsleep.court();
+									compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(1).click();  // si dans une alliance
+								}catch (Exception ea){compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(0).click(); } //sans alliance
+								randomsleep.court();
+								compte.getDriver().findElement(By.xpath("//a[contains(@id, 'villageOverViewTab3')]")).click();
+								donneesRessourcesPourcentage = compte.getDriver().findElements(By.xpath("//*[@id=\"warehouse\"]/tbody/tr"));
+					
+							//	i++;
+							}
 						}
+	
+	
+	
+						trouver = true;
+						i= i + 1; // modif i = 0;
 					}
-
-
-
-					trouver = true;
-					i= i + 1; // modif i = 0;
+					else {
+						i ++;
+					}
+			//	}catch(Exception e) {
+					//i = 0;
+			//	}
 				}
-				else {
-					i ++;
-				}
-			}catch(Exception e) {
-				i = 0;
 			}
-			}
+			//TODO fairele chargermnt des depot et silo par ici
+			//String pageSource = compte.getDriver().findElement(By.id("lum")).getAttribute("innerHTML");//outerHTML //innerHTML
+			//	String elemHtml = driver.findElement(By.className("hl")).getAttribute("innerHTML");// innerHTML
+			//String pageSource = compte.getDriver().getPageSource() ; //outerHTML //innerHTML
+			//	 String elemHtml = driver.findElement(By.xpath("//*")).getAttribute("outerHTML");
 		}
-		//TODO fairele chargermnt des depot et silo par ici
-		//String pageSource = compte.getDriver().findElement(By.id("lum")).getAttribute("innerHTML");//outerHTML //innerHTML
-		//	String elemHtml = driver.findElement(By.className("hl")).getAttribute("innerHTML");// innerHTML
-		//String pageSource = compte.getDriver().getPageSource() ; //outerHTML //innerHTML
-		//	 String elemHtml = driver.findElement(By.xpath("//*")).getAttribute("outerHTML");
-	}
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
