@@ -1451,6 +1451,7 @@ public class Travian extends Thread {
 			boolean trouver = false;
 			while(trouver == false){
 				try {
+				
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
 					village.setNombreDeMarchands(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[0].replaceAll("\\W", "")));
 					village.setNombreDeMarchandsMax(Integer.parseInt(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[5]/a")).getText().split("/")[1].replaceAll("\\W", "")));
@@ -1458,10 +1459,13 @@ public class Travian extends Thread {
 					ecrireDansConsole("[Debug] SANS COMPTE PLUS  Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax(), true);
 
 					trouver = true;
-					i = 0;
+					i = i + 1; // modif i = 0;
 
 				}
-				else {i++;}
+				else {
+					i++;
+					}
+
 				}catch(Exception e) {
 					village.setNombreDeMarchands(0);
 					village.setNombreDeMarchandsMax(0);
@@ -1483,9 +1487,14 @@ public class Travian extends Thread {
 		int i = 0;
 
 		for (Village village	: listeDeVillages){
+			
 			boolean trouver = false;
 			while(trouver == false){
-				if (village.getUrl().contains(donneesRessources.get(i).findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
+				try {
+					
+
+				String textUrl = donneesRessources.get(i).findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1];
+				if (village.getUrl().contains(textUrl)){
 
 					village.setBois(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[2]")).getText().replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));//replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
 					village.setArgile(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[3]")).getText().replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
@@ -1494,56 +1503,23 @@ public class Travian extends Thread {
 					village.setNombreDeMarchands(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().split("/")[0].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
 					village.setNombreDeMarchandsMax(Integer.parseInt(compte.getDriver().findElement(By.xpath("//*[@id=\"ressources\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().split("/")[1].replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "")));
 					
-					//String pageSource = compte.getDriver().findElement(By.id("lum")).getAttribute("innerHTML");
-					//	String elemHtml = driver.findElement(By.className("clay")).getAttribute("innerHTML");
-					//String pageSource = compte.getDriver().getPageSource() ;
-					//String page1 = pageSource;//split("vil fc")[1];
-					//ecrireDansConsole(""+ pageSource);
-					//	JavascriptExecutor executor = (JavascriptExecutor)compte.getDriver();
-					//	 String text= (String) executor.executeScript("document.getElementById('versionInfo').innerHTML");
-					//village.setMaxStockDepot(Integer.parseInt(pageSource.split("80000")[0].toString()));
+
 					ecrireDansConsole("Village: " +village.getNom()+ ":  Bois : " +village.getBois()+ " Argile : " +village.getArgile()+ " Fer : " +village.getFer()+ " Cereales : " +village.getCereales()+" Marchands Dispos : "+village.getNombreDeMarchands() + " sur " + village.getNombreDeMarchandsMax(), true);
 
 					trouver = true;
-					i = 0;
-					//TODO charger depot silot par pagesource et analyse de page ou par souris hover
-					//	String maxDepot = t.getCompte().getDriver().findElement(By.xpath("/html/body/div[1]/div")).getText().replace(" ", "");
-					//	int maxStockDepot = Integer.parseInt(maxDepot);
+					i = i + 1; // modif i = 0;
 
-					/*		//survol souris du champs = a champMin
-					Actions builder = new Actions(t.getCompte().getDriver());
-					builder.moveToElement(listeWebelementChamps.get(g));		
-					builder.perform();
-					t.randomsleep.court();
-
-					//choper le tableau des ressources necessaires pour le champs en cours
-					List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g+1).findElements(By.xpath("//*[@class='showCosts']/span"));
-esnecessaire "+ ressourcesNecessaires.get(1).getText());
-					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(2).getText());
-					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(3).getText());*/
-					////////////////////////////////////
-					////////////////////////////////////
-					/*
-
-					String maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(" ", "");
-					int maxStockDepot = Integer.parseInt(maxDepot);
-
-					String maxSilo = t.getCompte().getDriver().findElement(By.xpath("
-					//	ecrireDansConsole("valeur ressourcesnecessaire "+ ressourcesNecessaires.get(0).getText());
-					//	ecrireDansConsole("valeur ressourc//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
-					int maxStockSilo = Integer.parseInt(maxSilo);
-
-					village.setMaxStockDepot(maxStockDepot);
-					village.setMaxStockSilo(maxStockSilo);
-
-					ecrireDansConsole("Update Ressources de : " +village.getNom());
-
-					 */
 
 
 
 				}
-				else {i++;}
+				else {
+					i++;
+				}
+				
+				}catch(Exception e) {
+					i = 0;
+				}
 			}
 		}
 
@@ -1615,6 +1591,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			besoinDeFete = 0;
 			boolean trouver = false;
 			while(trouver == false){
+				try {
 				
 					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
 						try {
@@ -1625,11 +1602,22 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 						}else {village.setBesoinDeFete(besoinDeFete);} 
 						
 						trouver = true;
-						i = 0;	
+						i = i + 1; // modif i = 0;
 						}
-						catch (Exception e) {trouver = true; i = 0; village.setBesoinDeFete(besoinDeFete);}
+						catch (Exception e) {
+							trouver = true;
+							i = i + 1; // modif i = 0;
+							village.setBesoinDeFete(besoinDeFete);
+							}
 					t.ecrireDansConsole(village.getNom()+ " : " +" besoinFete == " + besoinDeFete, true);	
-					}else {i++;}
+					}else {
+						i++;
+
+						}
+				}catch(Exception e) {
+					i = 0;
+				}
+					
 				
 			}
 		}
@@ -1649,6 +1637,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		
 			boolean trouver = false;
 			while(trouver == false){
+				try {
 				
 					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
 						
@@ -1665,7 +1654,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 			
 						
 						trouver = true;
-						i = 0;	
+						i = i + 1; // modif i = 0;
 						}catch (Exception e) {
 							trouver = true;
 							t.ecrireDansConsole("echec lecture des slots", true);
@@ -1676,6 +1665,9 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 					}else {
 						i++;
 						}
+				}catch(Exception e) {
+					i = 0;
+				}
 				
 			}
 		}
@@ -1690,6 +1682,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 		for (Village village : listeDeVillages) {
 			boolean trouver = false;
 			while(trouver == false){
+				try {
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
 					village.setConstructionsEnCours(donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
 					village.getListeDeBatimentsEnCoursDeConstruction().clear();
@@ -1700,9 +1693,13 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 
 					t.ecrireDansConsole(village.getNom()+ " : " +" setConstructionsEnCours == " + donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size(), true);
 					trouver = true;
-					i = 0;
+					i = i + 1; // modif i = 0;
 				} else {
 					i++;
+					
+				}
+				}catch(Exception e) {
+					i = 0;
 				}
 
 			}
@@ -1760,8 +1757,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 
 			boolean trouver = false;
 			while(trouver == false){
-
-
+try {
 
 
 				if ( village.getUrl().contains(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+(i+1)+"]/td[1]/a")).getAttribute("href").split("php")[1] ) ){
@@ -1773,11 +1769,11 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 					if (delaisAvantFamineOuDebordement < 1 && enNegatif==true ) {
 						village.setBesoinDeNpc(true);
 						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
-						i++;
+						//i++;
 					}else {
 						village.setBesoinDeNpc(false);
 						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
-						i++;
+						//i++;
 					}
 					}catch (Exception e) {
 						String string100pourcent = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[6]")).getText().replaceAll("\\W", "");
@@ -1788,7 +1784,7 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 							enNegatif=false;
 							village.setBesoinDeNpc(false);
 							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En Debordement* En Negatif = "+enNegatif, true );
-							i++;
+							//i++;
 						}
 						else{
 							texte="Famine Veritable";
@@ -1797,16 +1793,21 @@ esnecessaire "+ ressourcesNecessaires.get(1).getText());
 							village.setCropDeath(true);
 							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En CropDeath* En Negatif = "+enNegatif, true );
 
-							i++;
+						//	i++;
 						}
 					}
 
 
 
 					trouver = true;
-					i=0;
+					i= i + 1; // modif i = 0;
 				}
-				else {i ++;}
+				else {
+					i ++;
+				}
+			}catch(Exception e) {
+				i = 0;
+			}
 			}
 		}
 		//TODO fairele chargermnt des depot et silo par ici
