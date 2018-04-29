@@ -1755,6 +1755,12 @@ public class Travian extends Thread {
 
 		for (Village village : listeDeVillages){
 
+			//reset valeurs
+			village.setBesoinDeNpc(false);
+			village.setCropDeath(false);
+			village.setEnNegatif(false);
+			village.setDebordement(false);
+			//
 			boolean trouver = false;
 			while(trouver == false){
 try {
@@ -1762,10 +1768,20 @@ try {
 
 				if ( village.getUrl().contains(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+(i+1)+"]/td[1]/a")).getAttribute("href").split("php")[1] ) ){
 
-					try{ delaisAvantFamineOuDebordement  = Integer.parseInt(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[7]")).getText().split(":")[0]);
-					try { enNegatif = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr[" +(i+1)+ "]/td[7]//*[contains(@class, 'crit')]")).isDisplayed();}catch (Exception e){
-						enNegatif=false;}
-					if (enNegatif==true){texte="Famine";}else{texte="Debordement";}
+					try{ 
+						delaisAvantFamineOuDebordement  = Integer.parseInt(donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr["+ (i+1) +"]/td[7]")).getText().split(":")[0]);
+					try { 
+						enNegatif = donneesRessourcesPourcentage.get(i).findElement(By.xpath("//*[@id=\"warehouse\"]/tbody/tr[" +(i+1)+ "]/td[7]//*[contains(@class, 'crit')]")).isDisplayed();
+						}catch (Exception e){
+						enNegatif=false;
+						}
+					if (enNegatif==true){
+						texte="Famine";
+						village.setEnNegatif(true);
+						}else{
+							texte="Debordement";
+							village.setDebordement(true);
+							}
 					if (delaisAvantFamineOuDebordement < 1 && enNegatif==true ) {
 						village.setBesoinDeNpc(true);
 						ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
@@ -1783,12 +1799,17 @@ try {
 							texte="Debordement";
 							enNegatif=false;
 							village.setBesoinDeNpc(false);
+							village.setCropDeath(false);
+							village.setEnNegatif(false);
+							village.setDebordement(true);
 							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En Debordement* En Negatif = "+enNegatif, true );
 							//i++;
 						}
 						else{
 							texte="Famine Veritable";
 							enNegatif=true;
+							village.setEnNegatif(true);
+							village.setDebordement(false);
 							village.setBesoinDeNpc(true);
 							village.setCropDeath(true);
 							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : *En CropDeath* En Negatif = "+enNegatif, true );

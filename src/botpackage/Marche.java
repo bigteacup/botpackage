@@ -1403,7 +1403,12 @@ public class Marche {
 	}
 
 
-
+private void eviterFamine(Travian t, Village village) {
+	if(village.getCropDeath() == true) {
+		
+		
+	}
+}
 
 
 }// Fin de classe 

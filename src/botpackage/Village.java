@@ -422,6 +422,11 @@ public class Village {
 	private int druides;
 	private int colons;
 	private boolean cropDeath;
+	private boolean enNegatif;
+	private boolean debordement;
+
+
+
 	private boolean besoinDeConstruction;
 	private List<Batiment> batimentsDuTemplateDuVillage = new ArrayList<Batiment>();
 	private List<Batiment> listeDeBatimentsEnCoursDeConstruction = new ArrayList<Batiment>();
@@ -602,6 +607,21 @@ public class Village {
 		this.template = template;
 	}
 
+	public boolean getEnNegatif() {
+		return enNegatif;
+	}
+
+	public void setEnNegatif(boolean enNegatif) {
+		this.enNegatif = enNegatif;
+	}
+
+	public boolean getDebordement() {
+		return debordement;
+	}
+
+	public void setDebordement(boolean debordement) {
+		this.debordement = debordement;
+	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
