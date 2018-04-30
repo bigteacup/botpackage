@@ -48,10 +48,15 @@ public class Attaque extends Thread {
 	
 	public Attaque(Travian travian, Verifierdate verifDate) throws AWTException {
 		
+		
+		
 		///// POUR PROFIL CHROME
+		
+		
 	//	ChromeOptions options = new ChromeOptions();
 		//options.addArguments("user-data-dir=/ProfilChromePourBot/profil");
 		WebDriver driver = new ChromeDriver();//options
+		
 		//C:/Users/timseven/AppData/Local/Google/Chrome/User Data/
 		
 		this.listeDeVillages = travian.getListeDeVillages();

@@ -73,9 +73,27 @@ public class FxOngletParametresController {
     
     @FXML 
     private TextField idPourcentageDeclenchementAcheterContreVillage;
+    
+    
+    // approUrgenceFamine :
+    @FXML 
+    private TextField distanceMaxPourMarchandsApproUrgenceFamineFx;
+    
+    @FXML
+    private TextField pourcentageApproUrgenceFamineFx;
+
+    @FXML
+    private TextField ressourcesMiniSurVillageSourceApproUrgenceFamineFx;
+    
+    @FXML
+    private TextField  depotMiniPourFonctionnerApproUrgenceFamineFx;
+    
+    @FXML
+    private TextField  marchandsMinPourFonctionnerApproUrgenceFamine;
+   
    
     //@FXML
- //   comptesVBox ;
+ //   comptesVBox ;  
 
     @FXML
     void initialize() {
@@ -181,8 +199,30 @@ public class FxOngletParametresController {
     
     //motCleListeDesPertes
    
+    // approUrgenceFamine
+    @FXML
+    private void distanceMaxPourMarchandsApproUrgenceFamine(ActionEvent event) {
+    	bot.distanceMaxPourMarchandsApproUrgenceFamine = Integer.parseInt(distanceMaxPourMarchandsApproUrgenceFamineFx.getText()) ; 
+    }
+    @FXML
+    private void pourcentageApproUrgenceFamineFx(ActionEvent event) {
+    	bot.pourcentageApproPetitVillageFx = Integer.parseInt(pourcentageApproUrgenceFamineFx.getText()) ; 
+    }
     
+    @FXML
+    private void depotMiniPourFonctionnerApproUrgenceFamineFx(ActionEvent event) {
+    	bot.depotMiniPourAiderApproUrgenceFamineFx = Integer.parseInt(depotMiniPourFonctionnerApproUrgenceFamineFx.getText()) ; 
+    }
     
+    @FXML
+    private void ressourcesMiniSurVillageSourceApproUrgenceFamineFx(ActionEvent event) {
+    	bot.ressourcesMiniSurVillageSourceApproUrgenceFamineFx = Integer.parseInt(ressourcesMiniSurVillageSourceApproUrgenceFamineFx.getText()) ; 
+    }
+    @FXML
+    private void  marchandsMinPourFonctionnerApproUrgenceFamine(ActionEvent event) {
+    	bot.marchandsMinPourFonctionnerApproUrgenceFamine = Integer.parseInt(marchandsMinPourFonctionnerApproUrgenceFamine.getText()) ; 
+    }
+   
     public void setBot(Lancerbot bot){
     	this.bot = bot;
     }

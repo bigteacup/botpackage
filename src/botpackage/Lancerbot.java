@@ -51,6 +51,13 @@ import org.openqa.selenium.WebDriver;
 	public int vitesseMarchands = 16; //gaulois = 24 romains = 16 germains = 12
 	public int DepotMiniPourAiderFx = 5000;
 	
+	//ApproUrgenceFamine
+	public int pourcentageApproUrgenceFamineFx = 30;
+	public int ressourcesMiniSurVillageSourceApproUrgenceFamineFx = 5000;
+	public int depotMiniPourAiderApproUrgenceFamineFx = 40000;
+	public int distanceMaxPourMarchandsApproUrgenceFamine = 12;
+	public int marchandsMinPourFonctionnerApproUrgenceFamine = 10;
+	
 	//achetermarché
 	int tempsMax = 6; // temps en heure
 	//int marchandsMinPourAcheter = 10;
@@ -66,6 +73,7 @@ import org.openqa.selenium.WebDriver;
 	boolean pillage = true;
 	boolean faireFete = true;
 	boolean evacuerSurplusRessources = true;
+	boolean approUrgenceFamine = true;
 	boolean approPetitsVillages = true;
 	boolean construireBatiments = true;
 	public boolean optimiserProdHero = true;

@@ -71,6 +71,11 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
+                        <CheckBox fx:id="caseApproUrgenceFamine" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseApproUrgenceFamine" selected="true" text="Appro Famine et Neg">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
                         <CheckBox fx:id="caseNpc" contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseNpc" selected="true" text="Auto NPC">
                            <FlowPane.margin>
                               <Insets />

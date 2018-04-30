@@ -892,7 +892,7 @@ public class Marche {
 											mB--;
 
 										}
-										if(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqB){mB++;}
+										if(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqB && mB < 20){mB++;}
 									}
 
 									///Argile
@@ -900,22 +900,22 @@ public class Marche {
 										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA){
 											mA--;
 										}
-										if(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqA){mA++;}
+										if(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqA && mA < 20){mA++;}
 									}
 									///Fer
 									if(manqueF){
 										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF){
 											mF--;
 										}
-										if(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqF){mF++;}
+										if(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqF && mF < 20){mF++;}
 									}
 
 									////Cereales
 									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC ){
 											mC--;
 										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC){mC++;}
+										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < 20){mC++;}
 									}
 
 
@@ -993,20 +993,22 @@ public class Marche {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//TODO ajouter un horodate ou une lecture du marché avant d'envoyer trop de ressources 
 	public void approUrgenceFamine(Travian t, Village village, ArrayList<Village> listeDeVillages){
 		t.ecrireDansConsole("[Marché] approUrgenceFamine Début", true);
 		try {
 			if (village.getEnNegatif()==true){
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
-				int pourcentageApproPetitVillage = t.bot.pourcentageApproPetitVillageFx;
-				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceFx;
-				int DepotMiniPourAider = t.bot.DepotMiniPourAiderFx;
+				int pourcentageApproPetitVillage = t.bot.pourcentageApproUrgenceFamineFx;
+				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceApproUrgenceFamineFx;
+				int DepotMiniPourAider = t.bot.depotMiniPourAiderApproUrgenceFamineFx;
+				int nbreMarchandsMiniPourFonctionner = t.bot.marchandsMinPourFonctionnerApproUrgenceFamine;
 				boolean continuer = true;
 
 				boolean manqueC = true; //  village.getCereales() <= village.getMaxStockSilo()/100*1
 
 
-				int manqC = 5000; //village.getMaxStockSilo() - village.getCereales();
+				int manqC = village.getMaxStockSilo() - village.getCereales();
 
 
 				if(manqueC){
@@ -1017,31 +1019,16 @@ public class Marche {
 						}
 						//Check de la distance 
 						double distance = t.calculs.calculDeDistance(villageCandidat.getX(), villageCandidat.getY(), village.getX(), village.getY(),false);
-						double	distanceMax = t.bot.distanceMaxPourMarchands; //en cases
+						double	distanceMax = t.bot.distanceMaxPourMarchandsApproUrgenceFamine; //en cases
 						if(distance < distanceMax ){
 
-							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 10 && villageCandidat.getEnNegatif() == false){ //TODO verifier de ne pas prendre le meme village 
-								if(villageCandidat.getCereales() > ressourcesMiniSurVillageSource 
-										){
+							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > nbreMarchandsMiniPourFonctionner && villageCandidat.getEnNegatif() == false){ //TODO verifier de ne pas prendre le meme village 
+								if(villageCandidat.getCereales() > ressourcesMiniSurVillageSource ){
 
 									int nombreDeBesoin = 0 ; // on remet a zero //par default
-
 									if (manqueC){nombreDeBesoin++;}		
-
 									int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands()/nombreDeBesoin;
-
-
 									int mC = marchandsMaxAllouesParRessource;
-
-
-
-									////Cereales
-									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
-											mC--;
-										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC){mC++;}
-									}
 
 
 									t.randomsleep.court();
@@ -1051,9 +1038,20 @@ public class Marche {
 									allerDansLeMarché(t);
 									changementOngletMarche(t, villageCandidat, 0, "Envoi");
 									t.randomsleep.court();
-
+									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
+									
+									////Cereales
+									if(manqueC){
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
+											mC--;
+										}
+										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < 20 ){
+											mC++;
+											}
+									}
+									
 									int compteurCereales = 0;
-
+									
 									//Cereales
 									if(manqueC){
 										for(int clic=0; clic < mC; clic++){
@@ -1061,10 +1059,17 @@ public class Marche {
 											compteurCereales =  mC*villageCandidat.getQuantiteMaxTransporteeParMarchands();
 											t.randomsleep.tcourt();
 										}}
-									//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
+									//corection calcul en mode flemmard , à changer :
+									if((villageCandidat.getCereales() < compteurCereales) && mC > 0){
+										compteurCereales = villageCandidat.getCereales();												
+									}
+									
+									
 									if(envoyerMarchands(t, village.getNom())){
 										t.ecrireDansConsole("[Marché][approUrgenceFamine Villages]"+ t.villageEnCours().getNom() + " envoi : " +compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+										village.memoireMarcheDeLaRotation[3] =	village.memoireMarcheDeLaRotation[3] + compteurCereales;
 									}
+									updateNombreDeMarchandsDispo(t, villageCandidat);
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(village.getUrl());
 									t.randomsleep.court();

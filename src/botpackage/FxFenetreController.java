@@ -135,6 +135,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private CheckBox caseApproPetitsVillages;
+	
+	@FXML
+	private CheckBox caseApproUrgenceFamine;
 
 	@FXML
 	private CheckBox caseNpc;
@@ -242,6 +245,12 @@ public class FxFenetreController extends ScrollPane {
 		} else {
 			caseApproPetitsVillages.setSelected(false);}
 		raffraichirCase (caseApproPetitsVillages);
+		
+		if (bot.approUrgenceFamine == true) {
+			caseApproUrgenceFamine.setSelected(true);
+		} else {
+			caseApproUrgenceFamine.setSelected(false);}
+		raffraichirCase (caseApproUrgenceFamine);
 
 		if (bot.optimiserProdHero == true) {
 			caseOptimiserProdHero.setSelected(true);
@@ -391,6 +400,16 @@ public class FxFenetreController extends ScrollPane {
 			bot.approPetitsVillages = true;
 		}
 		raffraichirCase (caseApproPetitsVillages);
+	}
+	
+	@FXML
+	private void caseApproUrgenceFamine() {
+		if (bot.approUrgenceFamine == true) {
+			bot.approUrgenceFamine = false;
+		} else {
+			bot.approUrgenceFamine = true;
+		}
+		raffraichirCase (caseApproUrgenceFamine);
 	}
 
 	@FXML
