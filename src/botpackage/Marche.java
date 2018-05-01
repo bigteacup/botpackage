@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class Marche {
@@ -1012,9 +1013,13 @@ public class Marche {
 
 
 				if(manqueC){
-
+					int pourcentage = 90;
+					while(continuer == true) {
+						t.ecrireDansConsole("[Marché] ApproUrgenceFamine recherche les villages ayant les silos remplis à " + pourcentage + " % et + ", true );
+					
 					for (Village villageCandidat : listeDeVillages) {
-						if(villageCandidat.getNom().equals(village.getNom())) {
+						if(villageCandidat.getNom().equals(village.getNom()) || villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage) {
+							//t.ecrireDansConsole("[Marché] "+ villageCandidat.getNom() + " exclu à ce tour, ApproUrgenceFamine recherche les villages ayant les silos remplis à " + pourcentage + " % et +  ", true );
 							continue;
 						}
 						//Check de la distance 
@@ -1025,9 +1030,8 @@ public class Marche {
 							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > nbreMarchandsMiniPourFonctionner && villageCandidat.getEnNegatif() == false){ //TODO verifier de ne pas prendre le meme village 
 								if(villageCandidat.getCereales() > ressourcesMiniSurVillageSource ){
 
-									int nombreDeBesoin = 0 ; // on remet a zero //par default
-									if (manqueC){nombreDeBesoin++;}		
-									int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands()/nombreDeBesoin;
+		
+									int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands();
 									int mC = marchandsMaxAllouesParRessource;
 
 
@@ -1039,6 +1043,23 @@ public class Marche {
 									changementOngletMarche(t, villageCandidat, 0, "Envoi");
 									t.randomsleep.court();
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
+									// marchands arrivants  //*[@id="merchantsOnTheWay"]/table[1]/tbody/tr[2]/td/span/text()[5]  partants : //*[@id="merchantsOnTheWay"]/table[2]/tbody/tr[2]/td/span/text()[4]
+									// lire 
+									List<WebElement> listeMarchandsArrivants = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"merchantsOnTheWay\"]/table"));
+									int i = 0;
+									int arrivageInt = 0;
+									for(WebElement arrivage : listeMarchandsArrivants) {
+										int delaisAvantArrivage  = Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[1]/td/div[1]/span")).getText().replaceAll(":", ""));
+										if(!arrivage.getText().contains("Transport vers")  && delaisAvantArrivage < 5900) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
+										 arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[3].trim()); 
+										}
+										 manqC =  manqC - arrivageInt;
+										//./tbody/tr[2]/td/span/text()[5]
+									//	JavascriptExecutor js = (JavascriptExecutor)t.getCompte().getDriver();  
+									//	Object load= js.executeScript("var value = document.evaluate(\"//*[@id=\"merchantsOnTheWay\"]/table[1]/tbody/tr[2]/td/span/text()[5]\",document, null, XPathResult.STRING_TYPE, null ); return value.stringValue;"); 
+									//	System.out.println("Load Number : "+ load.toString());
+									}	
+									
 									
 									////Cereales
 									if(manqueC){
@@ -1066,7 +1087,8 @@ public class Marche {
 									
 									
 									if(envoyerMarchands(t, village.getNom())){
-										t.ecrireDansConsole("[Marché][approUrgenceFamine Villages]"+ t.villageEnCours().getNom() + " envoi : " +compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+										t.ecrireDansConsole("[Marché][approUrgenceFamine] "+ t.villageEnCours().getNom() + " envoi : " +compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+										continuer = false;
 										village.memoireMarcheDeLaRotation[3] =	village.memoireMarcheDeLaRotation[3] + compteurCereales;
 									}
 									updateNombreDeMarchandsDispo(t, villageCandidat);
@@ -1088,7 +1110,16 @@ public class Marche {
 
 
 
+						}
+					if(continuer == true) {
+						pourcentage = pourcentage - 10;
+						}else {
+						break;
 					}
+					if (pourcentage < 0) {
+						break;
+					}
+					}//fin while
 				}
 			}
 		}catch (Exception e){t.ecrireDansConsole("echec approUrgenceFamine", true);}
