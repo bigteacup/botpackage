@@ -999,9 +999,9 @@ public class Marche {
 		try {
 			if (village.getEnNegatif()==true){
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
-				int pourcentageApproPetitVillage = t.bot.pourcentageApproUrgenceFamineFx;
-				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceApproUrgenceFamineFx;
-				int DepotMiniPourAider = t.bot.depotMiniPourAiderApproUrgenceFamineFx;
+				int pourcentageApproPetitVillage = t.bot.pourcentageApproUrgenceFamine;
+				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceApproUrgenceFamine;
+				int DepotMiniPourAider = t.bot.depotMiniPourFonctionnerApproUrgenceFamine;
 				int nbreMarchandsMiniPourFonctionner = t.bot.marchandsMinPourFonctionnerApproUrgenceFamine;
 				boolean continuer = true;
 

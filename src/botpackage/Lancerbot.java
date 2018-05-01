@@ -52,10 +52,10 @@ import org.openqa.selenium.WebDriver;
 	public int DepotMiniPourAiderFx = 5000;
 	
 	//ApproUrgenceFamine
-	public int pourcentageApproUrgenceFamineFx = 30;
-	public int ressourcesMiniSurVillageSourceApproUrgenceFamineFx = 5000;
-	public int depotMiniPourAiderApproUrgenceFamineFx = 40000;
-	public int distanceMaxPourMarchandsApproUrgenceFamine = 12;
+	public int pourcentageApproUrgenceFamine = 15;
+	public int ressourcesMiniSurVillageSourceApproUrgenceFamine = 10000;
+	public int depotMiniPourFonctionnerApproUrgenceFamine = 30000;
+	public int distanceMaxPourMarchandsApproUrgenceFamine = 10;
 	public int marchandsMinPourFonctionnerApproUrgenceFamine = 10;
 	
 	//achetermarché

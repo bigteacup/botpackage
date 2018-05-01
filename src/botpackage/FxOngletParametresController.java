@@ -89,7 +89,7 @@ public class FxOngletParametresController {
     private TextField  depotMiniPourFonctionnerApproUrgenceFamineFx;
     
     @FXML
-    private TextField  marchandsMinPourFonctionnerApproUrgenceFamine;
+    private TextField  marchandsMinPourFonctionnerApproUrgenceFamineFx;
    
    
     //@FXML
@@ -111,7 +111,53 @@ public class FxOngletParametresController {
         assert idPourcentageDeclenchementAcheterContre != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
         assert idPourcentageDeclenchementAcheterContreMoyenne  != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
         assert idPourcentageDeclenchementAcheterContreVillage != null : "fx:id=\"rythmePillage\" was not injected: check your FXML file 'fxOngletParametres.fxml'.";
+       try { 
+    	   textInit();
+       }catch(Exception e) {
+    	   
+       }
+       
     }
+    
+    
+    
+    
+    
+    //initialisation
+	@FXML
+	public void textInit() {
+		
+		delaisAventures.setText(String.valueOf(bot.delaisAventures)); 
+		evacuerAPartirDe.setText(String.valueOf(bot.evacuerAPartirDe)); 
+		pourcentageNePasLaisserLeVillageSourceEnDessousDe.setText(String.valueOf(bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe)); 
+		pourcentageApproPetitVillageFx.setText(String.valueOf(bot.pourcentageApproPetitVillageFx)); 
+		ressourcesMiniSurVillageSourceFx.setText(String.valueOf(bot.ressourcesMiniSurVillageSourceFx)); 
+		rythmePillage.setText(String.valueOf(bot.rythmePillage)); 
+		distanceMaxPourMarchands.setText(String.valueOf(bot.distanceMaxPourMarchands)); 
+		vitesseMarchands.setText(String.valueOf(bot.vitesseMarchands)); 
+		idDeLaListeDePillage.setText(String.valueOf(bot.idDeLaListeDePillage)); 
+		motCleListeDesPertes.setText(String.valueOf(bot.motCleListeDesPertes)); 
+		motCleListeDePillage1.setText(String.valueOf(bot.motCleListeDePillage1)); 
+		idTempsMax.setText(String.valueOf(bot.tempsMax)); 
+		idMarchandsMinPourFonctionner.setText(String.valueOf(bot.marchandsMinPourFonctionner)); 
+		idMarchandsAllouésPourAchat.setText(String.valueOf(bot.marchandsAllouésPourAchat)); 
+		idPourcentageDeclenchementAcheter.setText(String.valueOf(bot.delaisAventures)); 
+		idPourcentageDeclenchementAcheterContre.setText(String.valueOf(bot.pourcentageDeclenchementAcheter)); 
+		idPourcentageDeclenchementAcheterContreMoyenne.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContreMoyenne)); 
+		idPourcentageDeclenchementAcheterContreVillage.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContreVillage)); 
+		
+		distanceMaxPourMarchandsApproUrgenceFamineFx.setText(String.valueOf(bot.distanceMaxPourMarchandsApproUrgenceFamine)); 
+		pourcentageApproUrgenceFamineFx.setText(String.valueOf(bot.pourcentageApproUrgenceFamine)); 
+		depotMiniPourFonctionnerApproUrgenceFamineFx.setText(String.valueOf(bot.depotMiniPourFonctionnerApproUrgenceFamine)); 
+		ressourcesMiniSurVillageSourceApproUrgenceFamineFx.setText(String.valueOf(bot.ressourcesMiniSurVillageSourceApproUrgenceFamine)); 
+		marchandsMinPourFonctionnerApproUrgenceFamineFx.setText(String.valueOf(bot.marchandsMinPourFonctionnerApproUrgenceFamine)); 
+	//	delaisAventures.setText(String.valueOf(bot.delaisAventures)); 
+    
+    
+    
+	}
+    
+    
     
     @FXML
     private void delaisAventures(ActionEvent event) {
@@ -211,16 +257,16 @@ public class FxOngletParametresController {
     
     @FXML
     private void depotMiniPourFonctionnerApproUrgenceFamineFx(ActionEvent event) {
-    	bot.depotMiniPourAiderApproUrgenceFamineFx = Integer.parseInt(depotMiniPourFonctionnerApproUrgenceFamineFx.getText()) ; 
+    	bot.depotMiniPourFonctionnerApproUrgenceFamine = Integer.parseInt(depotMiniPourFonctionnerApproUrgenceFamineFx.getText()) ; 
     }
     
     @FXML
     private void ressourcesMiniSurVillageSourceApproUrgenceFamineFx(ActionEvent event) {
-    	bot.ressourcesMiniSurVillageSourceApproUrgenceFamineFx = Integer.parseInt(ressourcesMiniSurVillageSourceApproUrgenceFamineFx.getText()) ; 
+    	bot.ressourcesMiniSurVillageSourceApproUrgenceFamine = Integer.parseInt(ressourcesMiniSurVillageSourceApproUrgenceFamineFx.getText()) ; 
     }
     @FXML
     private void  marchandsMinPourFonctionnerApproUrgenceFamine(ActionEvent event) {
-    	bot.marchandsMinPourFonctionnerApproUrgenceFamine = Integer.parseInt(marchandsMinPourFonctionnerApproUrgenceFamine.getText()) ; 
+    	bot.marchandsMinPourFonctionnerApproUrgenceFamine = Integer.parseInt(marchandsMinPourFonctionnerApproUrgenceFamineFx.getText()) ; 
     }
    
     public void setBot(Lancerbot bot){

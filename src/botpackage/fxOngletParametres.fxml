@@ -228,7 +228,7 @@
             <TextField fx:id="depotMiniPourFonctionnerApproUrgenceFamineFx" onAction="#depotMiniPourFonctionnerApproUrgenceFamineFx" text="25000" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label prefHeight="17.0" prefWidth="440.0" text="Dépot minimun pour aider :" GridPane.rowIndex="4" />
             <Label prefHeight="17.0" prefWidth="464.0" text="Nombre de marchands minimum pour fonctionner :" GridPane.rowIndex="5" />
-            <TextField fx:id="marchandsMinPourFonctionnerApproUrgenceFamine" onAction="#marchandsMinPourFonctionnerApproUrgenceFamine" text="10" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="marchandsMinPourFonctionnerApproUrgenceFamineFx" onAction="#marchandsMinPourFonctionnerApproUrgenceFamine" text="10" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

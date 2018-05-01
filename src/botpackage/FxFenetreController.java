@@ -979,8 +979,30 @@ public class FxFenetreController extends ScrollPane {
 
 	}
 
+	int ifxTextInit = 0;
+	@FXML
+	private void fxTextInitSwitch() {
+		
+		if (ifxTextInit == 0) {
+			ifxTextInit = 1;
+			
+			try {
+				console.flux.envoyer(fxFenetreController, "fxTextInit creation", true);
+			} catch (IOException e) {}
+			fxOngletParametresController.textInit();
+		} else {
+			ifxTextInit = 0;
+			try {
+				console.flux.envoyer(fxFenetreController, "fxTextInit sortie", true);
+			} catch (IOException e) {}
+			//comptesTilePane.getChildren().clear();
+			
+			
+		}
+		
+		
 
-
+	}
 
 
 
