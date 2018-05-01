@@ -1117,7 +1117,13 @@ public class Marche {
 						break;
 					}
 					if (pourcentage < 0) {
+					/*	if (t.bot.augmenterRayonDeRechercheApproUrgenceFamine == true) {
+					 * 
+							
+						}
+					*/
 						break;
+					
 					}
 					}//fin while
 				}
