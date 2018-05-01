@@ -1327,6 +1327,9 @@ public class Village {
 
 						if (t.bot.decalageCereales == true) {
 							if (regimeDecalageCereales == true) {
+								int decalageCerealesLevelDebut = t.bot.decalageCerealesLevelDebut;
+								int decalageCerealesLevelFin = t.bot.decalageCerealesLevelFin;
+								//t.bot.decalageCereales == true
 
 								//TODO Decalage faire un systeme plus clair et parametrable
 							
@@ -1351,7 +1354,7 @@ public class Village {
 									int e = a + b + c;
 
 
-									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (e > 0)) { // decalage
+									if(lien >= decalageCerealesLevelDebut && valchampMinBaf < decalageCerealesLevelFin && valchampMinBaf >= decalageCerealesLevelDebut && (e > 0)) { // decalage
 										t.ecrireDansConsole("Decalage Cereales actif", true);
 										decalageToken = true;
 										
@@ -1360,7 +1363,7 @@ public class Village {
 
 								
 								if(type.toLowerCase().contains("ferme")) {
-									if(lien >= 8 && valchampMinBaf < 10 && valchampMinBaf >= 8 && (e > 0)) { // decalage
+									if(lien >= decalageCerealesLevelDebut && valchampMinBaf < decalageCerealesLevelFin && valchampMinBaf >= decalageCerealesLevelDebut && (e > 0)) { // decalage
 										t.ecrireDansConsole("Decalage Cereales effectué", true);
 										g++;
 										continue;

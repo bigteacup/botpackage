@@ -45,6 +45,7 @@ import org.openqa.selenium.WebDriver;
 	public int evacuerAPartirDe = 80;
 	public int pourcentageNePasLaisserLeVillageSourceEnDessousDe = 20;
 	public int champMinFx = 9;
+	
 	public int pourcentageApproPetitVillageFx = 30;
 	public int ressourcesMiniSurVillageSourceFx = 5000;
 	public int distanceMaxPourMarchands = 24; 
@@ -57,6 +58,11 @@ import org.openqa.selenium.WebDriver;
 	public int depotMiniPourFonctionnerApproUrgenceFamine = 30000;
 	public int distanceMaxPourMarchandsApproUrgenceFamine = 10;
 	public int marchandsMinPourFonctionnerApproUrgenceFamine = 10;
+	
+	//decalageCereales
+	public int decalageCerealesLevelDebut = 8 ;
+	public int decalageCerealesLevelFin = 10 ;
+	
 	
 	//achetermarché
 	int tempsMax = 6; // temps en heure
@@ -96,6 +102,7 @@ import org.openqa.selenium.WebDriver;
 	public TemplatesDeVillages templateLancerBot;
 	
 	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
+
 
 
 

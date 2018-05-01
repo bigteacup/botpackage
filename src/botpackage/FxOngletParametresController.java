@@ -90,6 +90,12 @@ public class FxOngletParametresController {
     
     @FXML
     private TextField  marchandsMinPourFonctionnerApproUrgenceFamineFx;
+    
+    @FXML
+    private TextField  decalageCerealesLevelDebutFx;
+    
+    @FXML
+    private TextField  decalageCerealesLevelFinFx;
    
    
     //@FXML
@@ -151,6 +157,9 @@ public class FxOngletParametresController {
 		depotMiniPourFonctionnerApproUrgenceFamineFx.setText(String.valueOf(bot.depotMiniPourFonctionnerApproUrgenceFamine)); 
 		ressourcesMiniSurVillageSourceApproUrgenceFamineFx.setText(String.valueOf(bot.ressourcesMiniSurVillageSourceApproUrgenceFamine)); 
 		marchandsMinPourFonctionnerApproUrgenceFamineFx.setText(String.valueOf(bot.marchandsMinPourFonctionnerApproUrgenceFamine)); 
+		
+		decalageCerealesLevelDebutFx.setText(String.valueOf(bot.decalageCerealesLevelDebut)); 
+		decalageCerealesLevelFinFx.setText(String.valueOf(bot.decalageCerealesLevelFin)); 
 	//	delaisAventures.setText(String.valueOf(bot.delaisAventures)); 
     
     
@@ -267,6 +276,15 @@ public class FxOngletParametresController {
     @FXML
     private void  marchandsMinPourFonctionnerApproUrgenceFamine(ActionEvent event) {
     	bot.marchandsMinPourFonctionnerApproUrgenceFamine = Integer.parseInt(marchandsMinPourFonctionnerApproUrgenceFamineFx.getText()) ; 
+    }
+    
+    @FXML
+    private void decalageCerealesLevelDebutFx(ActionEvent event) {
+    	bot.decalageCerealesLevelDebut = Integer.parseInt(decalageCerealesLevelDebutFx.getText()) ; 
+    }
+    @FXML
+    private void  decalageCerealesLevelFinFx(ActionEvent event) {
+    	bot.decalageCerealesLevelFin = Integer.parseInt(decalageCerealesLevelFinFx.getText()) ; 
     }
    
     public void setBot(Lancerbot bot){
