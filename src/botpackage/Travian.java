@@ -1157,12 +1157,12 @@ public class Travian extends Thread {
 		compte.getDriver().get(compte.getServer()+"build.php?tt=99&id=39");
 		randomsleep.court(); 
 		//todo : listes de listes de pillages
-		//List<WebElement> raidListes = compte.getDriver().findElements(By.xpath("//*[@id=\"list568\"]"));  //*[@id=\"raidList\"]/div
-		if (t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"list"+t.bot.idDeLaListeDePillage+"\"]/form/div[1]")).getText().contains(t.villageEnCours().getNom())){//*[@id="list6025"]/form/div[1] //Depecrated
+		//List<WebElement> raidListes = compte.getDriver().findElements(By.xpath("//*[@id=\"list468\"]"));  //*[@id=\"raidList\"]/div
+		if (t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"list"+t.bot.idDeLaListeDePillage+"\"]/form/div[1]")).getText().contains(t.villageEnCours().getNom())){//*[@id="list4025"]/form/div[1] //Depecrated
 
 	
 
-			//*[@class='listEntry' and contains(., 't.villageEnCours().getNom()')  and contains(., 'perte')]
+			//*[@class='listEntry' and contains(., 't.villageEnCours().getNom()')  and contains(., '')]
 
 		//On remet les IDs des frigo a jours a cause du rechargement de page
 		for (String frigoIdString : chargerfrigo(t.bot.motCleListeDePillage1)){
@@ -1196,7 +1196,7 @@ public class Travian extends Thread {
 
 
 		if(compteurDeBoot % rythmePillage == 0){
-			try { //   //*[@id="list1076"] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]
+			try { //   //*[@id="list1020"] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]
 			List<WebElement> btnLancerPillage = compte.getDriver().findElements(By.xpath("//*[@class='listEntry' and contains(., '" + t.villageEnCours().getNom() + "')  and contains(., '" + t.bot.motCleListeDePillage1 + "')] //button //*[text()[contains( .,'pillage')  or contains( .,'lancer') or contains( .,'Lancer')  or contains( .,'Pillage')]]"));
 			ecrireDansConsole("Boutton-s trouvé-s : "+btnLancerPillage.size()+"", true); 
 			btnLancerPillage.get(0).click();
@@ -1239,7 +1239,7 @@ public class Travian extends Thread {
 			//////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////
-			//*[@class='listEntry' and contains(., 't.villageEnCours().getNom()')  and contains(., 'perte')]
+			//*[@class='listEntry' and contains(., 't.villageEnCours().getNom()')  and contains(., '')]
 			
 			//On remet les IDs des frigo a jours a cause du rechargement de page
 		for (String frigoIdString : chargerfrigo(t.bot.motCleListeDesPertes)){
@@ -1271,41 +1271,6 @@ public class Travian extends Thread {
 	//	compte.getDriver().findElement(By.xpath("//*[@class='listEntry' and contains(., '"+t.villageEnCours().getNom()+"')  and contains(., '"+t.bot.motCleListeDesPertes+"')]//div[@class='markAll']")).click();  //Pour test de la selction des check box
 		}
 
-
-		/////////////////////////////////////////////////	
-		//	MODE 1 lancement prudent puis un Imprudent :
-		/*	
-		//Si le compteur est impair on lance en mode prudent
-		if(compteur % 2 != 0) {
-		//On decoche si il y a deja une attaque en cours : MODE PRUDENT
-		for (String frigoIdString : chargerfrigo()){
-			try {
-				if(compte.getDriver().findElement(By.xpath("//*[@id=\""+frigoIdString+"\"]//*[@class=\"attack att2\"]")).isDisplayed()){
-					//ecrireDansConsole("Deja une attaque sur " + frigoIdString);
-					compte.getDriver().findElement(By.xpath("//*[@id=\""+frigoIdString+"\"]//*[@type=\"checkbox\"]")).click();
-				}
-			}catch (Exception e) {ecrireDansConsole("Pas dattaque en cours sur " + frigoIdString);}
-		 }
-		//on lance la liste de pillage
-		randomsleep.court();
-		compte.getDriver().findElement(By.xpath("//*[text()[contains( .,'lancer pillage')]]")).click();
-		ecrireDansConsole(compteur + " --> Pillage --> MODE PRUDENT (Impair)" );
-		randomsleep.court();
-		}
-
-	//	//Si le compteur est pair on lance en Mode Imprudent
-	//	if (compteur % 2 == 0){
-	//		//On lance de force 
-	//	}
-
-		//on lance la liste de pillage
-		else { 
-		compte.getDriver().findElement(By.xpath("//*[text()[contains( .,'lancer pillage')]]")).click();
-		ecrireDansConsole(compteur + " --> Pillage --> MODE IMPRUDENT (Pair)"  );
-		randomsleep.court();
-		}
-		 */	
-		/////////////////////////////////////////////////////////////////////////////////////////////////	
 
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////
