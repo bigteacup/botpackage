@@ -1152,6 +1152,7 @@ public class Marche {
 		int pourcentageDeclenchementAcheterContre = t.bot.pourcentageDeclenchementAcheterContre;
 		int pourcentageDeclenchementAcheterContreMoyenne = t.bot.pourcentageDeclenchementAcheterContreMoyenne;
 		int pourcentageDeclenchementAcheterContreVillage =t.bot.pourcentageDeclenchementAcheterContreVillage;
+		int pourcentageCorrecteurSiVillageEnNegatif = t.bot.pourcentageCorrecteurSiVillageEnNegatif;
 		int marchandsConsomés = 0;
 
 
@@ -1182,8 +1183,11 @@ public class Marche {
 
 		}
 		
-		
-		
+		// on corrige les jalons de vente des cereales en cas de negatifs
+		int correctionSiVillageEnNegatif = 0;
+		if(village.getEnNegatif() == true) {
+		correctionSiVillageEnNegatif = pourcentageCorrecteurSiVillageEnNegatif;
+		}
 		/* 
 		int moyenneB = (totalBois ) / t.getListeDeVillages().size();
 		int moyenneA = (totalArgile) / t.getListeDeVillages().size();
@@ -1296,7 +1300,7 @@ public class Marche {
 			}
 	}
 			if(totalCereales > (moyenne + (moyenne/100*pourcentageDeclenchementAcheterContreMoyenne) )){
-			if(totalCereales > (village.getMaxStockSilo()/100*pourcentageDeclenchementAcheterContreVillage)){
+			if(totalCereales > ( village.getMaxStockSilo()/100*(pourcentageDeclenchementAcheterContreVillage + correctionSiVillageEnNegatif) )){
 				acheterContreDuCereales = true;
 				acheterContre = 4;
 				tableauAcheterContre.add(acheterContre);

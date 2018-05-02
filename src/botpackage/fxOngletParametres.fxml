@@ -150,6 +150,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
                     <Label opacity="0.75" text="Acheter au marché">
@@ -171,6 +172,8 @@
             <TextField fx:id="idPourcentageDeclenchementAcheterContre" onAction="#idPourcentageDeclenchementAcheterContre" promptText="50" text="50" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="idPourcentageDeclenchementAcheterContreMoyenne" onAction="#idPourcentageDeclenchementAcheterContreMoyenne" promptText="50" text="50" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="idPourcentageDeclenchementAcheterContreVillage" onAction="#idPourcentageDeclenchementAcheterContreVillage" promptText="25" text="25" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="Pourcentage de correction en cas de negatif sur le village " GridPane.rowIndex="8" />
+            <TextField fx:id="idPourcentageCorrecteurSiVillageEnNegatif" onAction="#idPourcentageCorrecteurSiVillageEnNegatif" GridPane.columnIndex="1" GridPane.rowIndex="8" />
              </children>
       </GridPane>
       <GridPane maxWidth="-Infinity" prefHeight="128.0" prefWidth="789.0">

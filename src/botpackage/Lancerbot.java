@@ -73,6 +73,8 @@ import org.openqa.selenium.WebDriver;
 	int pourcentageDeclenchementAcheterContre = 50;
 	int pourcentageDeclenchementAcheterContreMoyenne = 50;
 	int pourcentageDeclenchementAcheterContreVillage = 25;
+	public int pourcentageCorrecteurSiVillageEnNegatif = 50;
+
 	
 	
 	boolean decalageCereales = true;

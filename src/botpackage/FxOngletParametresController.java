@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 
 public class FxOngletParametresController {
 	public Lancerbot bot;
@@ -73,7 +74,9 @@ public class FxOngletParametresController {
     
     @FXML 
     private TextField idPourcentageDeclenchementAcheterContreVillage;
-    
+
+    @FXML 
+    private TextField idPourcentageCorrecteurSiVillageEnNegatif;
     
     // approUrgenceFamine :
     @FXML 
@@ -98,7 +101,7 @@ public class FxOngletParametresController {
     private TextField  decalageCerealesLevelFinFx;
    
    
-    //@FXML
+    //@FXML            
  //   comptesVBox ;  
 
     @FXML
@@ -151,6 +154,7 @@ public class FxOngletParametresController {
 		idPourcentageDeclenchementAcheterContre.setText(String.valueOf(bot.pourcentageDeclenchementAcheter)); 
 		idPourcentageDeclenchementAcheterContreMoyenne.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContreMoyenne)); 
 		idPourcentageDeclenchementAcheterContreVillage.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContreVillage)); 
+		idPourcentageCorrecteurSiVillageEnNegatif.setText(String.valueOf(bot.pourcentageCorrecteurSiVillageEnNegatif)); 
 		
 		distanceMaxPourMarchandsApproUrgenceFamineFx.setText(String.valueOf(bot.distanceMaxPourMarchandsApproUrgenceFamine)); 
 		pourcentageApproUrgenceFamineFx.setText(String.valueOf(bot.pourcentageApproUrgenceFamine)); 
@@ -252,7 +256,12 @@ public class FxOngletParametresController {
     	bot.pourcentageDeclenchementAcheterContreVillage = Integer.parseInt(idPourcentageDeclenchementAcheterContreVillage.getText()) ; 
     }
     
-    //motCleListeDesPertes
+    @FXML
+    private void idPourcentageCorrecteurSiVillageEnNegatif(ActionEvent event) {
+    	bot.pourcentageCorrecteurSiVillageEnNegatif = Integer.parseInt(idPourcentageCorrecteurSiVillageEnNegatif.getText()) ; 
+    }
+    
+    //motCleListeDesPertes           
    
     // approUrgenceFamine
     @FXML
