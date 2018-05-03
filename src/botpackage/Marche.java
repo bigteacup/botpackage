@@ -860,7 +860,7 @@ public class Marche {
 				int manqC =village.getMaxStockSilo() - village.getCereales();
 
 
-				if(manqueB || manqueA || manqueF ||manqueC){
+				if(manqueB || manqueA || manqueF ||manqueC){ 
 
 					for (Village villageCandidat : listeDeVillages) {
 						if(villageCandidat.getNom().equals(village.getNom())) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
@@ -879,11 +879,24 @@ public class Marche {
 										&& villageCandidat.getCereales() > ressourcesMiniSurVillageSource 
 										){
 
+
+
+
+									t.randomsleep.court();
+									t.getCompte().getDriver().get(villageCandidat.getUrl());
+									t.randomsleep.court();
+									//on va sur le marché
+									allerDansLeMarché(t);
+									changementOngletMarche(t, villageCandidat, 0, "Envoi");
+									t.randomsleep.court();
+									
+									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
+									
 									int nombreDeBesoin = 0 ; // on remet a zero //par default
 									if (manqueB){nombreDeBesoin++;}
 									if (manqueA){nombreDeBesoin++;}
 									if (manqueF){nombreDeBesoin++;}
-									if (manqueC){nombreDeBesoin++;}		
+									if (manqueC){nombreDeBesoin++;}	
 
 									int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands()/nombreDeBesoin;
 
@@ -933,15 +946,9 @@ public class Marche {
 											mC++;
 											}
 									}
-
-
-									t.randomsleep.court();
-									t.getCompte().getDriver().get(villageCandidat.getUrl());
-									t.randomsleep.court();
-									//on va sur le marché
-									allerDansLeMarché(t);
-									changementOngletMarche(t, villageCandidat, 0, "Envoi");
-									t.randomsleep.court();
+									
+									
+									
 									int compteurBois = 0;
 									int compteurArgile = 0;
 									int compteurFer = 0;
