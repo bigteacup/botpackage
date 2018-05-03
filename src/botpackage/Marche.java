@@ -863,6 +863,9 @@ public class Marche {
 				if(manqueB || manqueA || manqueF ||manqueC){
 
 					for (Village villageCandidat : listeDeVillages) {
+						if(villageCandidat.getNom().equals(village.getNom())) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
+							continue;
+						}
 
 						//Check de la distance 
 						double distance = t.calculs.calculDeDistance(villageCandidat.getX(), villageCandidat.getY(), village.getX(), village.getY(),false);
