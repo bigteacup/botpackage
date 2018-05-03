@@ -147,15 +147,18 @@ public class FxOngletParametresController {
 		idDeLaListeDePillage.setText(String.valueOf(bot.idDeLaListeDePillage)); 
 		motCleListeDesPertes.setText(String.valueOf(bot.motCleListeDesPertes)); 
 		motCleListeDePillage1.setText(String.valueOf(bot.motCleListeDePillage1)); 
+		
+		//acheter au marché
 		idTempsMax.setText(String.valueOf(bot.tempsMax)); 
 		idMarchandsMinPourFonctionner.setText(String.valueOf(bot.marchandsMinPourFonctionner)); 
 		idMarchandsAllouésPourAchat.setText(String.valueOf(bot.marchandsAllouésPourAchat)); 
-		idPourcentageDeclenchementAcheter.setText(String.valueOf(bot.delaisAventures)); 
-		idPourcentageDeclenchementAcheterContre.setText(String.valueOf(bot.pourcentageDeclenchementAcheter)); 
+		idPourcentageDeclenchementAcheter.setText(String.valueOf(bot.pourcentageDeclenchementAcheter)); 
+		idPourcentageDeclenchementAcheterContre.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContre)); 
 		idPourcentageDeclenchementAcheterContreMoyenne.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContreMoyenne)); 
 		idPourcentageDeclenchementAcheterContreVillage.setText(String.valueOf(bot.pourcentageDeclenchementAcheterContreVillage)); 
 		idPourcentageCorrecteurSiVillageEnNegatif.setText(String.valueOf(bot.pourcentageCorrecteurSiVillageEnNegatif)); 
 		
+		//approUrgenceFamine
 		distanceMaxPourMarchandsApproUrgenceFamineFx.setText(String.valueOf(bot.distanceMaxPourMarchandsApproUrgenceFamine)); 
 		pourcentageApproUrgenceFamineFx.setText(String.valueOf(bot.pourcentageApproUrgenceFamine)); 
 		depotMiniPourFonctionnerApproUrgenceFamineFx.setText(String.valueOf(bot.depotMiniPourFonctionnerApproUrgenceFamine)); 

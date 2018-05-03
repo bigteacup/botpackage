@@ -743,6 +743,7 @@ public class Travian extends Thread {
 
 			if (allume == false){break;}
 			if (besoinDePasserSurLeVillage(village, false) == 1 ){
+				
 				randomsleep.classic();
 				if (village != villageEnCours()){
 					//compte.getDriver().get(village.getUrl());
@@ -861,7 +862,11 @@ public class Travian extends Thread {
 						try {	marche.acheterAuMarché(t, village);}catch(Exception e) { ecrireDansConsole("[Marché] acheterAuMarché Echec", true);}
 					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.", true);}
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...", true);}
+			
+				village.updateRessources(t);
+			
 			}//fin for
+			
 		}else {ecrireDansConsole(village.getNom() + " Village Exclu de la rotation...", true);}
 	  }
 	}

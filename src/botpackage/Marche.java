@@ -631,11 +631,14 @@ public class Marche {
 				t.randomsleep.court();
 				Village village = t.villageEnCours();
 				updateNombreDeMarchandsDispo(t, village);
+				village.updateRessources(t);
 				//	t.ecrireDansConsole("[Marché]"+ t.villageEnCours().getNom() + " envoi : "+totalRessourcesEnvoyees+ " de type "+ " sur "  +villageCibleNom);
 				ok = true;
 
 			} catch (Exception e) {
+				Village village = t.villageEnCours();
 				t.ecrireDansConsole("echec envoyerMarchand", true);
+				village.updateRessources(t);
 			}	
 		}
 		return ok;
@@ -893,7 +896,9 @@ public class Marche {
 											mB--;
 
 										}
-										if(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqB && mB < 20){mB++;}
+										if(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqB && mB < marchandsMaxAllouesParRessource){
+											mB++;
+
 									}
 
 									///Argile
@@ -901,14 +906,19 @@ public class Marche {
 										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA){
 											mA--;
 										}
-										if(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqA && mA < 20){mA++;}
+										if(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqA && mA < marchandsMaxAllouesParRessource){
+											mA++;
+											}
+										}
 									}
 									///Fer
 									if(manqueF){
 										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF){
 											mF--;
 										}
-										if(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqF && mF < 20){mF++;}
+										if(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqF && mF < marchandsMaxAllouesParRessource){
+											mF++;
+											}
 									}
 
 									////Cereales
@@ -916,7 +926,9 @@ public class Marche {
 										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC ){
 											mC--;
 										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < 20){mC++;}
+										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < marchandsMaxAllouesParRessource){
+											mC++;
+											}
 									}
 
 
@@ -998,6 +1010,7 @@ public class Marche {
 	public void approUrgenceFamine(Travian t, Village village, ArrayList<Village> listeDeVillages){
 		t.ecrireDansConsole("[Marché] approUrgenceFamine Début", true);
 		try {
+			boolean tokenNPC = false;
 			if (village.getEnNegatif()==true){
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
 				int pourcentageApproPetitVillage = t.bot.pourcentageApproUrgenceFamine;
@@ -1114,9 +1127,11 @@ public class Marche {
 					if(continuer == true) {
 						pourcentage = pourcentage - 10;
 						}else {
+							
 						break;
 					}
 					if (pourcentage < 0) {
+						 tokenNPC = true;
 					/*	if (t.bot.augmenterRayonDeRechercheApproUrgenceFamine == true) {
 					 * 
 							
