@@ -886,8 +886,11 @@ public class Marche {
 
 
 				if(manqueB || manqueA || manqueF ||manqueC){ 
+					t.randomsleep.court();
 					allerDansLeMarché(t);
+					t.randomsleep.court();
 					changementOngletMarche(t, village, 0, "Envoi");
+					t.randomsleep.court();
 					int arrivageIntBois = lireArrivageMarche(t, village, 0, 15900, 0); //cereales 1h59minutes entrant 
 					int arrivageIntArgile = lireArrivageMarche(t, village, 1, 15900, 0);
 					int arrivageIntFer = lireArrivageMarche(t, village, 2, 15900, 0);
@@ -1085,6 +1088,15 @@ public class Marche {
 
 
 				if(manqueC){
+					t.randomsleep.court();
+					//on va sur le marché
+					allerDansLeMarché(t);
+					t.randomsleep.court();
+					changementOngletMarche(t, village, 0, "Envoi");
+					t.randomsleep.court();
+					int arrivageInt = lireArrivageMarche(t, village, 3, 15900, 0); //cereales 1h59minutes entrant 
+					 manqC =  manqC - arrivageInt;
+					 
 					int pourcentage = 90;
 					while(continuer == true) {
 						t.ecrireDansConsole("[Marché] ApproUrgenceFamine recherche les villages ayant les silos remplis à " + pourcentage + " % et + ", true );
@@ -1137,8 +1149,7 @@ public class Marche {
 									*/
 									
 									
-									int arrivageInt = lireArrivageMarche(t, village, 3, 15900, 0); //cereales 1h59minutes entrant 
-									 manqC =  manqC - arrivageInt;
+									
 									 
 									 
 									 
@@ -1229,6 +1240,7 @@ public class Marche {
 	//0 PourArrivage 
 	//1 PourEnSortie
 	public int lireArrivageMarche(Travian t, Village village, int typeRessourceALire, int dureeRestanteAvantArriveeLimite, int sens) {
+		String ressourceString="erreur";
 		String sensString = "";
 		String EnArrivage = "Transport vers";
 		String EnSortie = "Transport de";
@@ -1250,8 +1262,14 @@ public class Marche {
 			}
 			
 			//./tbody/tr[2]/td/span/text()[5]
+			
+			if(typeRessourceALire == 0) {ressourceString = "Bois";}
+			if(typeRessourceALire == 1) {ressourceString = "Argile";}
+			if(typeRessourceALire == 2) {ressourceString = "Fer";}
+			if(typeRessourceALire == 3) {ressourceString = "Cereales";}
+			
 		}	
-		
+		t.ecrireDansConsole("[Marché] lire marché :   " + ressourceString + "  : "+ arrivageInt +"" , true);
 		return arrivageInt;
 	}
 	
