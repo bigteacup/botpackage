@@ -900,6 +900,13 @@ public class Marche {
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
 									villageCandidat.updateRessources(t);
 									
+									int dureeALire = 15900;
+									int arrivageBoisInt = lireArrivageMarche(t, village, 0, dureeALire, 0); // 1h59minutes entrant 
+									int arrivageArgileInt = lireArrivageMarche(t, village, 1, dureeALire, 0);
+									int arrivageFerInt = lireArrivageMarche(t, village, 2, dureeALire, 0);
+									int arrivageCerealesInt = lireArrivageMarche(t, village, 3, dureeALire, 0);
+									
+									
 									int nombreDeBesoin = 0 ; // on remet a zero //par default
 									if (manqueB){nombreDeBesoin++;}
 									if (manqueA){nombreDeBesoin++;}
@@ -916,7 +923,7 @@ public class Marche {
 									//Bois
 									if(manqueB){
 
-										while(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqB){
+										while(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqB - arrivageBoisInt){
 											mB--;
 
 										}
@@ -927,7 +934,7 @@ public class Marche {
 
 									///Argile
 									if(manqueA){
-										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA){
+										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA - arrivageArgileInt){
 											mA--;
 										}
 										if(mA < marchandsMaxAllouesParRessource && mA < 1){
@@ -937,7 +944,7 @@ public class Marche {
 									
 									///Fer
 									if(manqueF){
-										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF){
+										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF - arrivageFerInt){
 											mF--;
 										}
 										if(mF < marchandsMaxAllouesParRessource && mF < 1){
@@ -947,7 +954,7 @@ public class Marche {
 
 									////Cereales
 									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC ){
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageCerealesInt){
 											mC--;
 										}
 										if(mC < marchandsMaxAllouesParRessource && mC < 1){
@@ -1075,7 +1082,12 @@ public class Marche {
 									t.randomsleep.court();
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
 									// marchands arrivants  //*[@id="merchantsOnTheWay"]/table[1]/tbody/tr[2]/td/span/text()[5]  partants : //*[@id="merchantsOnTheWay"]/table[2]/tbody/tr[2]/td/span/text()[4]
-									// lire 
+								
+									
+									
+									
+								/*	
+									// lire arrivage cc
 									List<WebElement> listeMarchandsArrivants = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"merchantsOnTheWay\"]/table"));
 									int i = 0;
 									int arrivageInt = 0;
@@ -1084,14 +1096,20 @@ public class Marche {
 										if(!arrivage.getText().contains("Transport vers")  && delaisAvantArrivage < 5900) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
 										 arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[3].trim()); 
 										}
-										 manqC =  manqC - arrivageInt;
+										
 										//./tbody/tr[2]/td/span/text()[5]
-									//	JavascriptExecutor js = (JavascriptExecutor)t.getCompte().getDriver();  
-									//	Object load= js.executeScript("var value = document.evaluate(\"//*[@id=\"merchantsOnTheWay\"]/table[1]/tbody/tr[2]/td/span/text()[5]\",document, null, XPathResult.STRING_TYPE, null ); return value.stringValue;"); 
-									//	System.out.println("Load Number : "+ load.toString());
 									}	
+
+									*/
 									
 									
+									int arrivageInt = lireArrivageMarche(t, village, 3, 15900, 0); //cereales 1h59minutes entrant 
+									 manqC =  manqC - arrivageInt;
+									 
+									 
+									 
+									 
+									 
 									////Cereales
 									if(manqueC){
 										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
@@ -1166,6 +1184,47 @@ public class Marche {
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	//sens
+	//0 PourArrivage 
+	//1 PourEnSortie
+	public int lireArrivageMarche(Travian t, Village village, int typeRessourceALire, int dureeRestanteAvantArriveeLimite, int sens) {
+		String sensString = "";
+		String EnArrivage = "Transport vers";
+		String EnSortie = "Transport de";
+		if(sens == 0) {
+			sensString = EnArrivage;
+		}else {
+			sensString = EnSortie;
+		}
+		
+		// typeRessourceALire : 0 bois 1 argile 2 Fer 3 cereale
+		// lire arrivage
+		List<WebElement> listeMarchandsArrivants = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"merchantsOnTheWay\"]/table"));
+		
+		int arrivageInt = 0;
+		for(WebElement arrivage : listeMarchandsArrivants) {
+			int dureeRestanteAvantArrivage  = Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[1]/td/div[1]/span")).getText().replaceAll(":", ""));
+			if(!arrivage.getText().contains(sensString)  && dureeRestanteAvantArrivage < dureeRestanteAvantArriveeLimite) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
+			 arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[typeRessourceALire].trim()); 
+			}
+			
+			//./tbody/tr[2]/td/span/text()[5]
+		}	
+		
+		return arrivageInt;
+	}
+	
+	
+	
+	
+	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
