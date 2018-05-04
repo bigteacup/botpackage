@@ -920,27 +920,27 @@ public class Marche {
 											mB--;
 
 										}
-										if(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqB && mB < marchandsMaxAllouesParRessource){
+										if(mB < marchandsMaxAllouesParRessource && mB < 1){
 											mB++;
-
-									}
+											} 
+										}
 
 									///Argile
 									if(manqueA){
 										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA){
 											mA--;
 										}
-										if(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqA && mA < marchandsMaxAllouesParRessource){
+										if(mA < marchandsMaxAllouesParRessource && mA < 1){
 											mA++;
 											}
 										}
-									}
+									
 									///Fer
 									if(manqueF){
 										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF){
 											mF--;
 										}
-										if(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqF && mF < marchandsMaxAllouesParRessource){
+										if(mF < marchandsMaxAllouesParRessource && mF < 1){
 											mF++;
 											}
 									}
@@ -950,7 +950,7 @@ public class Marche {
 										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC ){
 											mC--;
 										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < marchandsMaxAllouesParRessource){
+										if(mC < marchandsMaxAllouesParRessource && mC < 1){
 											mC++;
 											}
 									}
