@@ -245,6 +245,7 @@ public class Marche {
 			int pourcentageArgileMin = t.bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe;
 			int pourcentageFerMin = t.bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe;
 			int pourcentageCerealesMin = t.bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe;
+			int pourcentageDepotSiloMaxPonctionnable = t.bot.pourcentageDepotSiloMaxPonctionnable;
 			if (village.regimeGeneral == false){
 				//max vider quand
 				pourcentageBois = village.getRegimeMarcheBoisMax();
@@ -290,7 +291,7 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourBois = marchandsAllouesParRessource;
-						while (village.getBois() - (marchandsAllouesPourBois*quantite) <   village.getMaxStockDepot()/100*pourcentageBoisMin){
+						while (village.getBois() - (marchandsAllouesPourBois*quantite) <   village.getMaxStockDepot()/100*pourcentageBoisMin && marchandsAllouesPourBois*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourBois--;
 
 						}
@@ -308,7 +309,7 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources //TODO reflechir a cela
 						int marchandsAllouesPourArgile = marchandsAllouesParRessource;
-						while (village.getArgile() - (marchandsAllouesPourArgile*quantite) < village.getMaxStockDepot()/100*pourcentageArgileMin){
+						while (village.getArgile() - (marchandsAllouesPourArgile*quantite) < village.getMaxStockDepot()/100*pourcentageArgileMin && marchandsAllouesPourArgile*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourArgile--;
 						}
 						//
@@ -325,7 +326,7 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourFer = marchandsAllouesParRessource;
-						while (village.getFer() - (marchandsAllouesPourFer*quantite) < village.getMaxStockDepot()/100*pourcentageFerMin){
+						while (village.getFer() - (marchandsAllouesPourFer*quantite) < village.getMaxStockDepot()/100*pourcentageFerMin && marchandsAllouesPourFer*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourFer--;
 						}
 						//
@@ -343,7 +344,7 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourCereales = marchandsAllouesParRessource;
-						while (village.getCereales() - (marchandsAllouesPourCereales*quantite) < village.getMaxStockSilo()/100*pourcentageCerealesMin){
+						while (village.getCereales() - (marchandsAllouesPourCereales*quantite) < village.getMaxStockSilo()/100*pourcentageCerealesMin && marchandsAllouesPourCereales*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourCereales--;
 						}
 						//
@@ -856,6 +857,10 @@ public class Marche {
 				int pourcentageApproPetitVillage = t.bot.pourcentageApproPetitVillageFx;
 				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceFx;
 				int DepotMiniPourAider = t.bot.DepotMiniPourAiderFx;
+				//en cas de negatif : parametres
+				int pourcentageSiloMiniPourAutoriserAAider = t.bot.pourcentageSiloMiniPourAutoriserAAider; // doit avoir au moins 50% de remplissage
+				int pourcentageSiloMaxPonctionnable = t.bot.pourcentageSiloMaxPonctionnable ; // prend 10% de ressources
+				
 				boolean continuer = true;
 				boolean manqueB = village.getBois() <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
 				boolean manqueA = village.getArgile() <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
@@ -869,9 +874,7 @@ public class Marche {
 
 
 				if(manqueB || manqueA || manqueF ||manqueC){ 
-					//en cas de negatif : parametres
-					int pourcentageSiloMiniPourAutoriserAAider = 50 ; // doit avoir au moins 50% de remplissage
-					int pourcentageSiloMaxPonctionnable = 10 ; // prend 10% de ressources
+
 
 					for (Village villageCandidat : listeDeVillages) {
 						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider))  ) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage

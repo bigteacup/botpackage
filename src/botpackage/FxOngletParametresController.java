@@ -21,11 +21,22 @@ public class FxOngletParametresController {
     @FXML
     private TextField delaisAventures;
 
+    
+    
+    
+    
     @FXML
     private TextField evacuerAPartirDe;
 
     @FXML
-    private TextField pourcentageNePasLaisserLeVillageSourceEnDessousDe;
+    private TextField pourcentageNePasLaisserLeVillageSourceEnDessousDe; 
+    
+    @FXML
+    private TextField pourcentageDepotSiloMaxPonctionnableFx;
+    
+    
+    
+    
 
     @FXML
     private TextField champMinFx;
@@ -35,6 +46,17 @@ public class FxOngletParametresController {
 
     @FXML
     private TextField ressourcesMiniSurVillageSourceFx;
+    
+    @FXML
+    private TextField pourcentageSiloMiniPourAutoriserAAiderFx;
+    @FXML
+    private TextField  pourcentageSiloMaxPonctionnableFx;
+    
+
+    
+    
+    
+    
 
     @FXML
     private TextField rythmePillage;
@@ -45,6 +67,9 @@ public class FxOngletParametresController {
     @FXML
     private TextField vitesseMarchands; 
     
+    
+    
+    
     @FXML
     private TextField idDeLaListeDePillage; 
     
@@ -53,6 +78,9 @@ public class FxOngletParametresController {
     
     @FXML 
     private TextField motCleListeDePillage1;
+    
+    
+    
     
     @FXML
     private TextField idTempsMax;
@@ -78,6 +106,10 @@ public class FxOngletParametresController {
     @FXML 
     private TextField idPourcentageCorrecteurSiVillageEnNegatif;
     
+    
+    
+    
+    
     // approUrgenceFamine :
     @FXML 
     private TextField distanceMaxPourMarchandsApproUrgenceFamineFx;
@@ -93,6 +125,10 @@ public class FxOngletParametresController {
     
     @FXML
     private TextField  marchandsMinPourFonctionnerApproUrgenceFamineFx;
+    
+    
+    
+    
     
     @FXML
     private TextField  decalageCerealesLevelDebutFx;
@@ -130,17 +166,27 @@ public class FxOngletParametresController {
     
     
     
-    
+
     
     //initialisation
 	@FXML
-	public void textInit() {
+	public void textInit() {  
 		
 		delaisAventures.setText(String.valueOf(bot.delaisAventures)); 
+	
 		evacuerAPartirDe.setText(String.valueOf(bot.evacuerAPartirDe)); 
-		pourcentageNePasLaisserLeVillageSourceEnDessousDe.setText(String.valueOf(bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe)); 
+		pourcentageNePasLaisserLeVillageSourceEnDessousDe.setText(String.valueOf(bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe));
+		pourcentageDepotSiloMaxPonctionnableFx.setText(String.valueOf(bot.pourcentageDepotSiloMaxPonctionnable)); 
+		
+		
 		pourcentageApproPetitVillageFx.setText(String.valueOf(bot.pourcentageApproPetitVillageFx)); 
 		ressourcesMiniSurVillageSourceFx.setText(String.valueOf(bot.ressourcesMiniSurVillageSourceFx)); 
+		pourcentageSiloMiniPourAutoriserAAiderFx.setText(String.valueOf(bot.pourcentageSiloMiniPourAutoriserAAider)); 
+		pourcentageSiloMaxPonctionnableFx.setText(String.valueOf(bot.pourcentageSiloMaxPonctionnable)); 
+		
+		
+		
+		
 		rythmePillage.setText(String.valueOf(bot.rythmePillage)); 
 		distanceMaxPourMarchands.setText(String.valueOf(bot.distanceMaxPourMarchands)); 
 		vitesseMarchands.setText(String.valueOf(bot.vitesseMarchands)); 
@@ -179,6 +225,10 @@ public class FxOngletParametresController {
     private void delaisAventures(ActionEvent event) {
     	bot.delaisAventures = Integer.parseInt(delaisAventures.getText()) ; 
     }
+    
+    
+    
+    
     @FXML
     private void evacuerAPartirDe(ActionEvent event) {
     	bot.evacuerAPartirDe = Integer.parseInt(evacuerAPartirDe.getText()) ; 
@@ -188,9 +238,22 @@ public class FxOngletParametresController {
     	bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe = Integer.parseInt(pourcentageNePasLaisserLeVillageSourceEnDessousDe.getText()) ; 
     }
     @FXML
+    private void pourcentageDepotSiloMaxPonctionnable(ActionEvent event) {
+    	bot.pourcentageDepotSiloMaxPonctionnable = Integer.parseInt(pourcentageDepotSiloMaxPonctionnableFx.getText()) ; 
+    }
+    
+    
+    
+    
+    @FXML
     private void champMinFx(ActionEvent event) {
     	bot.champMinFx = Integer.parseInt(champMinFx.getText()) ; 
     }
+    
+    
+    
+
+    
     @FXML
     private void pourcentageApproPetitVillageFx(ActionEvent event) {
     	bot.pourcentageApproPetitVillageFx = Integer.parseInt(pourcentageApproPetitVillageFx.getText()) ; 
@@ -199,6 +262,20 @@ public class FxOngletParametresController {
     private void ressourcesMiniSurVillageSourceFx(ActionEvent event) {
     	bot.ressourcesMiniSurVillageSourceFx = Integer.parseInt(ressourcesMiniSurVillageSourceFx.getText()) ; 
     }
+    @FXML
+    private void pourcentageSiloMiniPourAutoriserAAider(ActionEvent event) {
+    	bot.pourcentageSiloMiniPourAutoriserAAider = Integer.parseInt(pourcentageSiloMiniPourAutoriserAAiderFx.getText()) ; 
+    }
+    @FXML
+    private void pourcentageSiloMaxPonctionnable(ActionEvent event) {
+    	bot.pourcentageSiloMaxPonctionnable = Integer.parseInt(pourcentageSiloMaxPonctionnableFx.getText()) ; 
+    }
+    
+    
+    
+    
+    
+    
     @FXML
     private void rythmePillage(ActionEvent event) {
     	bot.rythmePillage = Integer.parseInt(rythmePillage.getText()) ; 

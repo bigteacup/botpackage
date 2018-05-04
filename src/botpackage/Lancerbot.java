@@ -44,6 +44,7 @@ import org.openqa.selenium.WebDriver;
 	public int rythmePillage = 1;
 	public int evacuerAPartirDe = 80;
 	public int pourcentageNePasLaisserLeVillageSourceEnDessousDe = 20;
+	public int pourcentageDepotSiloMaxPonctionnable = 25;
 	public int champMinFx = 9;
 	
 	public int pourcentageApproPetitVillageFx = 30;
@@ -51,7 +52,10 @@ import org.openqa.selenium.WebDriver;
 	public int distanceMaxPourMarchands = 24; 
 	public int vitesseMarchands = 16; //gaulois = 24 romains = 16 germains = 12
 	public int DepotMiniPourAiderFx = 5000;
-	
+	public int pourcentageSiloMiniPourAutoriserAAider = 50;
+	public int pourcentageSiloMaxPonctionnable = 10 ;
+
+			
 	//ApproUrgenceFamine
 	public int pourcentageApproUrgenceFamine = 15;
 	public int ressourcesMiniSurVillageSourceApproUrgenceFamine = 10000;
