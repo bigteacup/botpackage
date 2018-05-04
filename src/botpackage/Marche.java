@@ -999,6 +999,11 @@ public class Marche {
 									}
 									
 									
+									//re test des manquant apres observation
+									 manqueB = village.getBois() + arrivageIntBois <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
+									 manqueA = village.getArgile() + arrivageIntArgile <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
+									 manqueF = village.getFer() + arrivageIntFer <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
+									 manqueC = village.getCereales() + arrivageIntCereales <= village.getMaxStockSilo()/100*pourcentageApproPetitVillage;
 									
 									int compteurBois = 0;
 									int compteurArgile = 0;
@@ -1033,8 +1038,12 @@ public class Marche {
 											t.randomsleep.tcourt();
 										}}
 									//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
+									if(manqueB == true || manqueA == true || manqueF== true || manqueC== true) {
 									if(envoyerMarchands(t, village.getNom())){
 										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+									}
+									}else {
+										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " devait sur "  +village.getNom() + " mais ceci est annulé apres analyse précise", true);
 									}
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(village.getUrl());
@@ -1095,7 +1104,7 @@ public class Marche {
 					changementOngletMarche(t, village, 0, "Envoi");
 					t.randomsleep.court();
 					int arrivageInt = lireArrivageMarche(t, village, 3, 15900, 0); //cereales 1h59minutes entrant 
-					 manqC =  manqC - arrivageInt;
+					 
 					 
 					int pourcentage = 90;
 					while(continuer == true) {
@@ -1157,10 +1166,10 @@ public class Marche {
 									 
 									////Cereales
 									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageInt){
 											mC--;
 										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < 1 ){
+										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC  && arrivageInt == 0  && mC < 1 ){ // 
 											mC++;
 											}
 									}
