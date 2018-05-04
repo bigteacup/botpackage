@@ -291,10 +291,13 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourBois = marchandsAllouesParRessource;
-						while (village.getBois() - (marchandsAllouesPourBois*quantite) <   village.getMaxStockDepot()/100*pourcentageBoisMin && marchandsAllouesPourBois*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
+						
+						while (village.getBois() - (marchandsAllouesPourBois*quantite) <   village.getMaxStockDepot()/100*pourcentageBoisMin){
 							marchandsAllouesPourBois--;
-
 						}
+						while ( marchandsAllouesPourBois*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
+							marchandsAllouesPourBois--;
+									}
 						//
 						String nomOrdre = "Bois";
 						Ordre ordreDeBois = new Ordre(); 
@@ -309,7 +312,10 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources //TODO reflechir a cela
 						int marchandsAllouesPourArgile = marchandsAllouesParRessource;
-						while (village.getArgile() - (marchandsAllouesPourArgile*quantite) < village.getMaxStockDepot()/100*pourcentageArgileMin && marchandsAllouesPourArgile*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
+						while (village.getArgile() - (marchandsAllouesPourArgile*quantite) < village.getMaxStockDepot()/100*pourcentageArgileMin){
+							marchandsAllouesPourArgile--;
+						}
+						while (marchandsAllouesPourArgile*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourArgile--;
 						}
 						//
@@ -326,7 +332,10 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourFer = marchandsAllouesParRessource;
-						while (village.getFer() - (marchandsAllouesPourFer*quantite) < village.getMaxStockDepot()/100*pourcentageFerMin && marchandsAllouesPourFer*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
+						while (village.getFer() - (marchandsAllouesPourFer*quantite) < village.getMaxStockDepot()/100*pourcentageFerMin){
+							marchandsAllouesPourFer--;
+						}
+						while (marchandsAllouesPourFer*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourFer--;
 						}
 						//
@@ -344,7 +353,10 @@ public class Marche {
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourCereales = marchandsAllouesParRessource;
-						while (village.getCereales() - (marchandsAllouesPourCereales*quantite) < village.getMaxStockSilo()/100*pourcentageCerealesMin && marchandsAllouesPourCereales*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
+						while (village.getCereales() - (marchandsAllouesPourCereales*quantite) < village.getMaxStockSilo()/100*pourcentageCerealesMin){
+							marchandsAllouesPourCereales--;
+						}
+						while (marchandsAllouesPourCereales*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourCereales--;
 						}
 						//
