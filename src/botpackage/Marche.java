@@ -154,12 +154,14 @@ public class Marche {
 		String nombreMarchandDispoString;
 		int nombreMarchandDispoInteger = 20;
 		try {
+			village = t.villageEnCours();
 			webElementmarchandDispo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"build\"]/div[2]/div[10]/span"));
 			nombreMarchandDispoString = webElementmarchandDispo.getText().replaceAll("\\W", "");
 			nombreMarchandDispoInteger = Integer.valueOf(nombreMarchandDispoString); 
 			village.setNombreDeMarchands(nombreMarchandDispoInteger);
 		} catch (Exception e) {
 			try {
+				village = t.villageEnCours();
 				webElementmarchandDispo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"build\"]/div[4]")); //*[@id="build"]/div[4]/text()[1]
 				nombreMarchandDispoString = webElementmarchandDispo.getText().split("\n")[0].split("/")[0].split(": ‭")[1];
 				nombreMarchandDispoString = nombreMarchandDispoString.replaceAll("\\W", "").replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
@@ -179,12 +181,14 @@ public class Marche {
 		token = token + 1;
 
 		try {
+			village = t.villageEnCours();
 			quantiteMaxParMarchandString = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).getText().replaceAll("\\W", "");
 			quantiteMaxParMarchandInteger = Integer.valueOf(quantiteMaxParMarchandString);
 			village.setQuantiteMaxTransporteeParMarchands(quantiteMaxParMarchandInteger);
 			t.ecrireDansConsole("reussite updateQuantiteMaxTransporteParMarchand valeur : " + quantiteMaxParMarchandInteger, true ); 
 		} catch (Exception e) {
 			if(token <= 6) {
+				village = t.villageEnCours();
 				changementOngletMarche(t, village, token, "Envoi");
 				quantiteMaxParMarchandInteger = updateQuantiteMaxTransporteParMarchand(t, village, token);
 			}else {
@@ -842,8 +846,11 @@ public class Marche {
 	//TODO REafctorer pour utiliser le systeme d'ordre plutot que cela // Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que tant de marchands de chaque par ressource
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
 		t.ecrireDansConsole("[Marché] ApproPetitVillage Début", true);
+		village = t.villageEnCours();
+		village.updateRessources(t);
 		try {
 			if (village.getChampMin() <= t.bot.champMinFx){
+				
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
 				int pourcentageApproPetitVillage = t.bot.pourcentageApproPetitVillageFx;
 				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceFx;
@@ -872,7 +879,7 @@ public class Marche {
 						double	distanceMax = t.bot.distanceMaxPourMarchands; //en cases
 						if(distance < distanceMax ){
 
-							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4){ //TODO verifier de ne pas prendre le meme village 
+							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4){ 
 								if(villageCandidat.getBois() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getArgile() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getFer() > ressourcesMiniSurVillageSource 
@@ -891,6 +898,7 @@ public class Marche {
 									t.randomsleep.court();
 									
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
+									villageCandidat.updateRessources(t);
 									
 									int nombreDeBesoin = 0 ; // on remet a zero //par default
 									if (manqueB){nombreDeBesoin++;}

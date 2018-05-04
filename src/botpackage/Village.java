@@ -813,7 +813,7 @@ public class Village {
 		int stockCereales;
 
 		try {
-
+			village = t.villageEnCours();
 			bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
 			stockBois = Integer.parseInt(bois);
 			argile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l2\"]")).getText().replaceAll("[\\u202D\\u202C.]", "").replace(".", "").replace(" ", "");
@@ -824,7 +824,7 @@ public class Village {
 			stockCereales = Integer.parseInt(cereales);
 
 		}catch(Exception e) {
-
+			village = t.villageEnCours();
 			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
 			bois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"l1\"]")).getText().replace(" ", "");
 			stockBois = Integer.parseInt(bois);
@@ -848,9 +848,11 @@ public class Village {
 		String maxDepot;
 		int maxStockDepot;
 		try {
+			village = t.villageEnCours();
 			maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replaceAll("[\\u202D\\u202C.]", ""); // code correspondant au whitespace causé par left to right \\u202D \\u202C
 			maxStockDepot = Integer.parseInt(maxDepot);
 		}catch(Exception e) {
+			village = t.villageEnCours();
 			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
 			maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replace(" ", "");
 			maxStockDepot = Integer.parseInt(maxDepot);
@@ -860,9 +862,11 @@ public class Village {
 		String maxSilo;
 		int maxStockSilo;
 		try {
+			village = t.villageEnCours();
 			maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replaceAll("[\\u202D\\u202C.]", "");
 			maxStockSilo = Integer.parseInt(maxSilo);
 		}catch (Exception e) {
+			village = t.villageEnCours();
 			//Methode ancienne, gardée pour voir sil change regulierement ce code pour deranger les bots
 			maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replace(" ", "");
 			maxStockSilo = Integer.parseInt(maxSilo);
