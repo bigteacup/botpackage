@@ -844,6 +844,7 @@ public class Marche {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//TODO REafctorer pour utiliser le systeme d'ordre plutot que cela // Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que tant de marchands de chaque par ressource
+	//Ici les village en negatif peuvent etre prit dans certaine conditions
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
 		t.ecrireDansConsole("[Marché] ApproPetitVillage Début", true);
 		village = t.villageEnCours();
@@ -868,9 +869,12 @@ public class Marche {
 
 
 				if(manqueB || manqueA || manqueF ||manqueC){ 
+					//en cas de negatif : parametres
+					int pourcentageSiloMiniPourAutoriserAAider = 50 ; // doit avoir au moins 50% de remplissage
+					int pourcentageSiloMaxPonctionnable = 10 ; // prend 10% de ressources
 
 					for (Village villageCandidat : listeDeVillages) {
-						if(villageCandidat.getNom().equals(village.getNom())) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
+						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider))  ) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
 							continue;
 						}
 
@@ -879,7 +883,8 @@ public class Marche {
 						double	distanceMax = t.bot.distanceMaxPourMarchands; //en cases
 						if(distance < distanceMax ){
 
-							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4){ 
+							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4 ){ 
+
 								if(villageCandidat.getBois() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getArgile() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getFer() > ressourcesMiniSurVillageSource 
@@ -887,7 +892,7 @@ public class Marche {
 										){
 
 
-
+									
 
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(villageCandidat.getUrl());
@@ -954,8 +959,14 @@ public class Marche {
 
 									////Cereales
 									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageCerealesInt){
-											mC--;
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageCerealesInt  ){
+											mC--;								
+										}
+										//Correcteur en cas de negatif
+										if(villageCandidat.getEnNegatif()== true) {
+											while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > villageCandidat.getMaxStockSilo()/100*pourcentageSiloMaxPonctionnable) {
+												mC--;
+											}
 										}
 										if(mC < marchandsMaxAllouesParRessource && mC < 1){
 											mC++;
@@ -1032,6 +1043,7 @@ public class Marche {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//TODO ajouter un horodate ou une lecture du marché avant d'envoyer trop de ressources 
+	//Ici on ne prends pas les village en negatif
 	public void approUrgenceFamine(Travian t, Village village, ArrayList<Village> listeDeVillages){
 		t.ecrireDansConsole("[Marché] approUrgenceFamine Début", true);
 		try {

@@ -1526,7 +1526,7 @@ public class Village {
 		// {compte.getDriver().get(compte.getServer() + "dorf2.php");}
 		// randomsleep.court();
 		Village village = t.villageEnCours();
-		updateRessources(t);
+		//updateRessources(t);
 
 		int boisNecessaire = 0;
 		int argileNecessaire = 0;
@@ -1576,7 +1576,7 @@ public class Village {
 				int level = construire1.getLevelBatiment();
 
 				if (level < levelVoulu && village.getConstructionsEnCours() < t.limiteDeConstruction) {
-
+		
 					// Parse
 					try {
 
