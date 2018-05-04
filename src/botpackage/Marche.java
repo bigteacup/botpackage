@@ -287,7 +287,7 @@ public class Marche {
 
 					//on fait une liste//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					if(tropBois){
-						t.randomsleep.tcourt(); //test
+				//		t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourBois = marchandsAllouesParRessource;
@@ -308,7 +308,7 @@ public class Marche {
 					}
 
 					if(tropArgile){
-						t.randomsleep.tcourt(); //test
+				//		t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources //TODO reflechir a cela
 						int marchandsAllouesPourArgile = marchandsAllouesParRessource;
@@ -328,7 +328,7 @@ public class Marche {
 					}
 
 					if(tropFer){
-						t.randomsleep.tcourt(); //test
+					//	t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourFer = marchandsAllouesParRessource;
@@ -349,7 +349,7 @@ public class Marche {
 					}
 
 					if(tropCereales){
-						t.randomsleep.tcourt(); //test
+					//	t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourCereales = marchandsAllouesParRessource;
@@ -886,8 +886,15 @@ public class Marche {
 
 
 				if(manqueB || manqueA || manqueF ||manqueC){ 
-
-
+					allerDansLeMarché(t);
+					changementOngletMarche(t, village, 0, "Envoi");
+					int arrivageIntBois = lireArrivageMarche(t, village, 0, 15900, 0); //cereales 1h59minutes entrant 
+					int arrivageIntArgile = lireArrivageMarche(t, village, 1, 15900, 0);
+					int arrivageIntFer = lireArrivageMarche(t, village, 2, 15900, 0);
+					int arrivageIntCereales = lireArrivageMarche(t, village, 3, 15900, 0);
+					//manqC =  manqC - arrivageInt;
+					 
+					 
 					for (Village villageCandidat : listeDeVillages) {
 						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider))  ) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
 							continue;
@@ -919,13 +926,13 @@ public class Marche {
 									
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
 									villageCandidat.updateRessources(t);
-									
+							/*		
 									int dureeALire = 15900;
 									int arrivageBoisInt = lireArrivageMarche(t, village, 0, dureeALire, 0); // 1h59minutes entrant 
 									int arrivageArgileInt = lireArrivageMarche(t, village, 1, dureeALire, 0);
 									int arrivageFerInt = lireArrivageMarche(t, village, 2, dureeALire, 0);
 									int arrivageCerealesInt = lireArrivageMarche(t, village, 3, dureeALire, 0);
-									
+									*/
 									
 									int nombreDeBesoin = 0 ; // on remet a zero //par default
 									if (manqueB){nombreDeBesoin++;}
@@ -943,7 +950,7 @@ public class Marche {
 									//Bois
 									if(manqueB){
 
-										while(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqB - arrivageBoisInt){
+										while(mB*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqB - arrivageIntBois){
 											mB--;
 
 										}
@@ -954,7 +961,7 @@ public class Marche {
 
 									///Argile
 									if(manqueA){
-										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA - arrivageArgileInt){
+										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA - arrivageIntArgile){
 											mA--;
 										}
 										if(mA < marchandsMaxAllouesParRessource && mA < 1){
@@ -964,7 +971,7 @@ public class Marche {
 									
 									///Fer
 									if(manqueF){
-										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF - arrivageFerInt){
+										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF - arrivageIntFer){
 											mF--;
 										}
 										if(mF < marchandsMaxAllouesParRessource && mF < 1){
@@ -974,7 +981,7 @@ public class Marche {
 
 									////Cereales
 									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageCerealesInt  ){
+										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageIntCereales  ){
 											mC--;								
 										}
 										//Correcteur en cas de negatif
