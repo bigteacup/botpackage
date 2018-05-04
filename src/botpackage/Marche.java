@@ -957,7 +957,7 @@ public class Marche {
 											mB--;
 
 										}
-										if(mB < marchandsMaxAllouesParRessource && mB < 1){
+										if(mB < marchandsMaxAllouesParRessource && arrivageIntBois == 0 && mB < 1){ // si on envoi zero marchand et qu'aucun arrivage de la ressource arrive alors on ajoute un marchand pour remplir un eventuel depot silo de bas niveau
 											mB++;
 											} 
 										}
@@ -967,7 +967,7 @@ public class Marche {
 										while(mA*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqA - arrivageIntArgile){
 											mA--;
 										}
-										if(mA < marchandsMaxAllouesParRessource && mA < 1){
+										if(mA < marchandsMaxAllouesParRessource && arrivageIntArgile == 0 && mA < 1){
 											mA++;
 											}
 										}
@@ -977,7 +977,7 @@ public class Marche {
 										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF - arrivageIntFer){
 											mF--;
 										}
-										if(mF < marchandsMaxAllouesParRessource && mF < 1){
+										if(mF < marchandsMaxAllouesParRessource && arrivageIntFer == 0 && mF < 1){
 											mF++;
 											}
 									}
@@ -993,7 +993,7 @@ public class Marche {
 												mC--;
 											}
 										}
-										if(mC < marchandsMaxAllouesParRessource && mC < 1){
+										if(mC < marchandsMaxAllouesParRessource && arrivageIntCereales == 0 && mC < 1){
 											mC++;
 											}
 									}
