@@ -1097,7 +1097,7 @@ public class Marche {
 										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC){
 											mC--;
 										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < 20 ){
+										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC && mC < 1 ){
 											mC++;
 											}
 									}
