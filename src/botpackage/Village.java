@@ -1518,6 +1518,29 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public boolean trouverBatiment(Travian t, Village village, String nomBatiment) {
+	
+	boolean estPresent = false;
+	for	(Batiment bat : village.getBatiments()) {
+	if (bat.getNomBatiment().toLowerCase().equals(nomBatiment.toLowerCase()) ) {
+	estPresent = true;
+	break;
+}
+
+}
+	return estPresent;
+	}
+	
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	
 	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t) {
 		t.ecrireDansConsole("debut construireBatiments", true);
 		//t.randomsleep.court();
@@ -1596,18 +1619,10 @@ public class Village {
 							if (as.getAttribute("alt").replace("&#39;", "'").contains(construire1.getNomBatiment())
 									&& as.getAttribute("href").split("id=")[1].contains(construire1.getSlotBatiment())
 									&& village.getConstructionsEnCours() < t.limiteDeConstruction) {
-								boisNecessaire = Integer.parseInt(
-										as.getAttribute("alt").split("r1\" src=\"img/x.gif\" />")[1].split("</span>")[0]
-												.trim());
-								argileNecessaire = Integer.parseInt(
-										as.getAttribute("alt").split("r2\" src=\"img/x.gif\" />")[1].split("</span>")[0]
-												.trim());
-								ferNecessaire = Integer.parseInt(
-										as.getAttribute("alt").split("r3\" src=\"img/x.gif\" />")[1].split("</span>")[0]
-												.trim());
-								cerealesNecessaire = Integer.parseInt(
-										as.getAttribute("alt").split("r4\" src=\"img/x.gif\" />")[1].split("</span>")[0]
-												.trim());
+								boisNecessaire = Integer.parseInt(as.getAttribute("alt").split("r1\" src=\"img/x.gif\" />")[1].split("</span>")[0].trim());
+								argileNecessaire = Integer.parseInt(as.getAttribute("alt").split("r2\" src=\"img/x.gif\" />")[1].split("</span>")[0].trim());
+								ferNecessaire = Integer.parseInt(as.getAttribute("alt").split("r3\" src=\"img/x.gif\" />")[1].split("</span>")[0].trim());
+								cerealesNecessaire = Integer.parseInt(as.getAttribute("alt").split("r4\" src=\"img/x.gif\" />")[1].split("</span>")[0].trim());
 								t.ecrireDansConsole("[construireBatiment]parse ok", true);
 
 								// on fais la comparaison des ressources avec le
