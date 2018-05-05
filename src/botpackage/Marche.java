@@ -1098,6 +1098,10 @@ public class Marche {
 
 				if(manqueC){
 					t.randomsleep.court();
+					if (village != t.villageEnCours()){
+						t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
+						t.randomsleep.court();
+					}
 					//on va sur le marché
 					allerDansLeMarché(t);
 					t.randomsleep.court();
@@ -1249,7 +1253,7 @@ public class Marche {
 	//0 PourArrivage 
 	//1 PourEnSortie
 	public int lireArrivageMarche(Travian t, Village village, int typeRessourceALire, int dureeRestanteAvantArriveeLimite, int sens) {
-		String ressourceString="erreur";
+		String ressourceString="Aucun arrivage";
 		String sensString = "";
 		String EnArrivage = "Transport vers";
 		String EnSortie = "Transport de";

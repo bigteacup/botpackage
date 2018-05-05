@@ -40,7 +40,7 @@ import org.openqa.selenium.WebDriver;
 	/// reglages recupérés par le bot et l'interface
 	boolean faireDefiler = true;
 
-	public int delaisAventures = 150;
+	public int delaisAventures = 165;
 	public int rythmePillage = 1;
 	public int evacuerAPartirDe = 80;
 	public int pourcentageNePasLaisserLeVillageSourceEnDessousDe = 20;

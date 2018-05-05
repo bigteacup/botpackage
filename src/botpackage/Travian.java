@@ -584,7 +584,7 @@ public class Travian extends Thread {
 	// lister village par la liste de droite.
 	private void listerVillages() {
 		//	compte.getDriver().get(compte.getServer()+"dorf1.php"); //a virer apres correction de monter village echec
-
+		ArrayList<Village> listeDeVillagesTemporaire = new ArrayList<Village>();
 		List<WebElement> urls = compte.getDriver().findElements(By.xpath("//*[@id=\"sidebarBoxVillagelist\"]/div[2]/div[2]/ul/li/a"));
 		List<WebElement> coordxy = compte.getDriver().findElements(By.cssSelector("span.coordinateX"));
 
@@ -625,6 +625,7 @@ public class Travian extends Thread {
 					if(!village.getNom().equals(url.findElement(By.className("name")).getText())){
 						village.setNom(url.findElement(By.className("name")).getText());	
 					}
+					listeDeVillagesTemporaire.add(village);
 					break;
 				}
 
@@ -639,7 +640,8 @@ public class Travian extends Thread {
 				newVillage.setY(coordY);
 				// "").replaceAll ("\\s+$",""));
 
-				listeDeVillages.add(newVillage);
+			//	listeDeVillages.add(newVillage);
+				listeDeVillagesTemporaire.add(newVillage);
 				//TODO important --> gerer les comptes speed etc X2 X3 etc
 				if (compte.getTribut().equals("Gaulois")) {newVillage.setQuantiteMaxTransporteeParMarchands(750);}
 				if (compte.getTribut().equals("Romains")) {newVillage.setQuantiteMaxTransporteeParMarchands(500);}
@@ -648,6 +650,7 @@ public class Travian extends Thread {
 			}
 
 		}
+
 		
 		///on suprime les villages perdus
 		if(listeDeVillages.size() > urls.size()  ) {
@@ -679,7 +682,13 @@ public class Travian extends Thread {
 			 listeDeVillages.remove( villagePerdu);
 		ecrireDansConsole("Village perdu ou detruit : " + villagePerdu.getNom(), true );
 		}
+		// on reattribue la liste dans le bon ordre
+		listeDeVillages = listeDeVillagesTemporaire;
 		ecrireDansConsole("Nombre de Villages = " + listeDeVillages.size(), true);
+	
+		
+	
+		
 	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
