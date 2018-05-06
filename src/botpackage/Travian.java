@@ -753,26 +753,42 @@ public class Travian extends Thread {
 			if (allume == false){break;}
 			if (besoinDePasserSurLeVillage(village, false) == 1 ){
 				
-				randomsleep.classic();
+				
+				
+				
+			//	randomsleep.classic();
+				
+				
 				if (village != villageEnCours()){
 					//compte.getDriver().get(village.getUrl());
 					compte.getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
 					ecrireDansConsole("=============================== Changement de village : "+village.getNom()+" ===============================", true);
 					randomsleep.classic();
 				}
+				
+				
+				
+				
+				
 				//TODO Remonter chargerchamp pour rendre le NPC effectif des la premiere co
 				village.updateRessources(t); 
 				if (allume == false){break;}
 				
 				
 
+				
+				
+				
 				village.voirTroupesCivilesDuVillage(t);
-				if(t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0) { //TODO Faire un bouton dans la GUI
-					
+				if(t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0) { //TODO Faire un bouton dans la GUI				
 					if(village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3) {
 				colonisationPlanifiee(village);
 					}
 				}
+				
+				
+				
+				
 				
 				if (allume == false){break;}
 				village.voirListeDeConstruction(t);
@@ -782,21 +798,25 @@ public class Travian extends Thread {
 				
 
 				
+				
+				
+				
 				try { 
-					
 					if (allume == false){break;}
-					
 					if(bot.pillage == true){
 						if(village.getRegimePillage() == true){
 						village.voirTroupesDuVillage(t);
 						}else{ecrireDansConsole("Pillages Desactives... Par le regime du village", true);}
 					}else{ecrireDansConsole("Pillages Desactives...", true);}
 				}catch(Exception e){ecrireDansConsole("Echec pillage ", true);}
-				
-				
-
-				
 				if (allume == false){break;}
+				
+				
+				
+				
+				
+				
+				
 				
 				if(t.bot.npc == true   ){ 
 					if(village.getRegimeNPC() == true) {
@@ -805,13 +825,17 @@ public class Travian extends Thread {
 					}
 					}else {t.ecrireDansConsole("NPC désactivé par le regime du village", true);}
 				}else {t.ecrireDansConsole("NPC désactivé", true);}
-
 				if (allume == false){break;}
 				
 			//	if ( bot.construireBatiments == true ) {
 				//	if ( village.getRegimeConstruction() == true ) {
 				
 	
+				
+				
+				
+				
+				
 					if (village.getConstructionsEnCours() < limiteDeConstruction ){ 
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours", true);}
@@ -819,7 +843,13 @@ public class Travian extends Thread {
 			//	}else {t.ecrireDansConsole("construction Desactivees...");}
 				
 				
-				try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur
+				
+					
+					
+					
+					
+					
+					try {//si pas de compte plus, ou si echec prise de valeur dans le chargeur
 				if(tokenForcerMarcheDeLaRotation == 1) {
 					village.chargerBatiments(t);
 					for (Batiment bat : village.getBatiments()) { 
@@ -832,27 +862,42 @@ public class Travian extends Thread {
 					}	
 				}
 				}catch(Exception e) {t.ecrireDansConsole("Echec Forcage estimation nombre de marchand par level marché", true);}
-
-
 				if (allume == false){break;}
 				
+				
+				
+				
+				
+				
 				marche.etablirBesoinEnRessources(t, village, listeDeVillages);
-
 				if (allume == false){break;}
+				
+				
+				
+				
+				
+				
 				
 				if (bot.evacuerSurplusRessources == true){
 					try {
 						marche.evacuerSurplusRessources(t, village, listeDeVillages);
 						}catch(Exception e) {ecrireDansConsole("[Marché] evacuerSurplusRessources Echec", true); }
 				}else{ecrireDansConsole("Evacuation ressources Desactives...", true);}
-
 				if (allume == false){break;}
+				
+				
+				
+				
+				
+				
 				
 				if (bot.approPetitsVillages == true){
 					marche.approPetitVillage(t, village, listeDeVillages);
 				}else{ecrireDansConsole("Appro petits villages Desactives...", true);}
 
 	
+				
+				
 
 				try { 
 					if (allume == false){break;}
@@ -866,6 +911,9 @@ public class Travian extends Thread {
 						}else {ecrireDansConsole("[Fete] fetes Desactivees... Par le regime du village.", true);}
 					}else {ecrireDansConsole("[Fete] fetes Desactivees...", true);}
 				}catch(Exception e){ecrireDansConsole("echec fete ", true);}
+				
+				
+				
 				
 				//test
 				if(bot.acheterAuMarché == true){
@@ -1349,7 +1397,7 @@ public class Travian extends Thread {
 		Village village = villageEnCours();
 
 
-		randomsleep.court();
+		//randomsleep.court();
 
 		//donnees globlales
 		// compte.getDriver().get("http://ts4.travian.fr/dorf3.php");
@@ -1358,7 +1406,7 @@ public class Travian extends Thread {
 		}catch (Exception e){compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(0).click(); } //sans alliance
 		randomsleep.court();
 		donneesGlobales = compte.getDriver().findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr"));
-		randomsleep.court();
+	//	randomsleep.court();
 		try{determinerBesoinDeConstructions();}catch(Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeConstructions", true);}
 		try{updateMarchandSansComptePlus(t);//pour redonder en fonction de la possession du compte + ou non
 		}catch(Exception e){
@@ -1369,8 +1417,6 @@ public class Travian extends Thread {
 		// 	compte.getDriver().get("http://ts4.travian.fr/dorf3.php?s=2");
 		//	donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody"));
 
-		randomsleep.court();
-
 
 		//donnees ressources
 		// compte.getDriver().get("http://ts4.travian.fr/dorf3.php");
@@ -1378,7 +1424,7 @@ public class Travian extends Thread {
 		compte.getDriver().findElement(By.xpath("//a[contains(@id, 'villageOverViewTab2')]")).click();
 		randomsleep.court();
 		donneesRessources = compte.getDriver().findElements(By.xpath("//*[@id=\"ressources\"]/tbody/tr"));
-		randomsleep.court();
+	//	randomsleep.court();
 		updateRessourcesPlus(t);} catch (Exception e) {t.ecrireDansConsole("Echec update ressources compte plus", true);
 		 }
 
@@ -1396,7 +1442,7 @@ public class Travian extends Thread {
 		compte.getDriver().findElement(By.xpath("//a[contains(@id, 'villageOverViewTab3')]")).click();
 		randomsleep.court();
 		donneesRessourcesPourcentage = compte.getDriver().findElements(By.xpath("//*[@id=\"warehouse\"]/tbody/tr"));
-		randomsleep.court();
+	//	randomsleep.court();
 		determinerBesoinDeNpc();
 		} catch (Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeNpc", true);}
 
@@ -1406,12 +1452,10 @@ public class Travian extends Thread {
 
 		//compte.getDriver().findElement(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green  ')]")).click();
 		try {
-		randomsleep.court();
 		compte.getDriver().findElement(By.xpath("//*[@id=\"villageOverViewTab4\"]")).click();
 		randomsleep.court();
 		donneesPointsDeCulture = compte.getDriver().findElements(By.xpath("//*[@id=\"culture_points\"]/tbody/tr"));
-
-		randomsleep.court();
+	//	randomsleep.court();
 
 		determinerBesoinDeFetes();
 		majSlot();
