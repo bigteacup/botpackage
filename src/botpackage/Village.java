@@ -1590,7 +1590,7 @@ public class Village {
 
 	
 	
-	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t) {
+	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t, boolean besoinMiseAJour) {
 		t.ecrireDansConsole("debut construireBatiments", true);
 		//t.randomsleep.court();
 
@@ -1676,14 +1676,15 @@ public class Village {
 
 								// on fais la comparaison des ressources avec le
 								// stock du village en cours
+							if(besoinMiseAJour== true) {
 								updateRessources(t);
+							}
 								int stockBois = village.getBois();
 								int stockArgile = village.getArgile();
 								int stockFer = village.getFer();
 								int stockCereales = village.getCereales();
 								// si ressources ok
-								if (stockBois >= boisNecessaire && stockArgile >= argileNecessaire
-										&& stockFer >= ferNecessaire && stockCereales >= cerealesNecessaire) {
+								if (stockBois >= boisNecessaire && stockArgile >= argileNecessaire && stockFer >= ferNecessaire && stockCereales >= cerealesNecessaire) {
 									t.ecrireDansConsole("[construireBatiment] Ressources ok", true);
 									// go la page
 
@@ -1760,7 +1761,7 @@ public class Village {
 			}
 
 		}
-		voirListeDeConstruction(t);
+		//voirListeDeConstruction(t);
 		t.ecrireDansConsole("fin construireBatiments", true);
 		return possibleOuPas;
 
@@ -1910,11 +1911,12 @@ public class Village {
 						}else {t.ecrireDansConsole("Ce Stade n'a pas le droit de poser lui meme les batiments...", true);}
 					}
 
-			//		for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction; i++) { // repetition desactivée
-
+					for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction  && village.getTypeBatimentsEnConstruction() < 2; i++) { // pour faire 2 fois le meme batiment au cas ou
+						t.ecrireDansConsole("Tour de construction : "+ (i+1) , true);
 
 						for (Batiment batimentDuTemplate : village.getTemplateDuVillage()) {
 							boolean trouver = false;
+							boolean besoinMiseAJour = false;
 							// on se remet sur la page au cas ou un echec des boucles
 							// plus bas
 							if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
@@ -1931,7 +1933,13 @@ public class Village {
 								if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.bloquerConstructionBatiment  == false) {
 									
 										if (batimentDuVillage.getLevelBatiment() < batimentDuTemplate.getLevelBatiment()) {
-											construireBatiments(batimentDuTemplate.getNomBatiment(), batimentDuTemplate.getLevelBatiment(), t);
+											if(construireBatiments(batimentDuTemplate.getNomBatiment(), batimentDuTemplate.getLevelBatiment(), t, besoinMiseAJour)) {
+												besoinMiseAJour = true;
+												if(besoinMiseAJour== true) {
+													updateRessources(t);
+													voirListeDeConstruction(t);
+												}
+											}
 
 										}
 									
@@ -1950,7 +1958,7 @@ public class Village {
 						// village.getTemplateDuVillage()){
 						// }catch (Exception e) {t.ecrireDansConsole(": Batiment absent
 						// sur palier 1");}
-			//		}
+					}
 				}else {
 					t.ecrireDansConsole("construction Desactivees... "+village.getConstructionsEnCours()  + "constructions en cours dont" +village.getTypeBatimentsEnConstruction()+ " batiments", true);
 				}
