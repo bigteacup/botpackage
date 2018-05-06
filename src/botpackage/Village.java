@@ -1604,7 +1604,7 @@ public class Village {
 		int argileNecessaire = 0;
 		int ferNecessaire = 0;
 		int cerealesNecessaire = 0;
-		boolean possibleOuPas = true;
+		boolean reussite = false;
 
 		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 		List<Batiment> batimentsDeLaPage = new ArrayList<Batiment>(); //TODO verifier que ca n'add pas des villages sur la meme liste au court des rotation et session
@@ -1728,7 +1728,7 @@ public class Village {
 										t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable => WorkAround Construction Bloquée pour ce tour", true); //=> WORKAROUND on ajoute des token
 										//village.setConstructionsEnCours(t.limiteDeConstruction); //WORKAROUND on ajoute des token
 										village.bloquerConstructionBatiment = true;
-										possibleOuPas = false;
+										reussite = false;
 										t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 										t.randomsleep.classic();
 										break;
@@ -1737,7 +1737,7 @@ public class Village {
 									if (bouttonvert != null) {
 										bouttonvert.click();
 										t.ecrireDansConsole("[construireBatiment] Lancement " + batimentAConstruire, true);
-										possibleOuPas = true;
+										reussite = true;
 										t.randomsleep.court();
 										listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 										break;
@@ -1755,7 +1755,7 @@ public class Village {
 
 				} else {
 					t.ecrireDansConsole("[construireBatiment] " + batimentAConstruire + " deja a "+levelVoulu, true);
-					possibleOuPas = false;
+					reussite = false;
 				}
 
 			}
@@ -1763,7 +1763,7 @@ public class Village {
 		}
 		//voirListeDeConstruction(t);
 		t.ecrireDansConsole("fin construireBatiments", true);
-		return possibleOuPas;
+		return reussite;
 
 	}
 
