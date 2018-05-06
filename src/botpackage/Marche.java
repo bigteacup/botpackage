@@ -1114,7 +1114,7 @@ public class Marche {
 										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
 									}
 									}else {
-										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " devait sur "  +village.getNom() + " mais ceci est annulé apres analyse précise", true);
+										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " devait envoyer sur "  +village.getNom() + " mais ceci est annulé apres analyse précise", true);
 									}
 									t.randomsleep.court();
 									t.getCompte().getDriver().get(village.getUrl());

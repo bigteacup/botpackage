@@ -810,6 +810,8 @@ public class Travian extends Thread {
 				
 			//	if ( bot.construireBatiments == true ) {
 				//	if ( village.getRegimeConstruction() == true ) {
+				
+	
 					if (village.getConstructionsEnCours() < limiteDeConstruction ){ 
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours", true);}

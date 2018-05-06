@@ -60,7 +60,7 @@ import org.openqa.selenium.WebDriver;
 	public int pourcentageApproUrgenceFamine = 15;
 	public int ressourcesMiniSurVillageSourceApproUrgenceFamine = 10000;
 	public int depotMiniPourFonctionnerApproUrgenceFamine = 30000;
-	public int distanceMaxPourMarchandsApproUrgenceFamine = 10;
+	public int distanceMaxPourMarchandsApproUrgenceFamine = 20;
 	public int marchandsMinPourFonctionnerApproUrgenceFamine = 10;
 	
 	//decalageCereales

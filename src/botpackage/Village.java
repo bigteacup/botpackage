@@ -369,7 +369,22 @@ public class Village {
 	public void setListeDeBatimentsEnCoursDeConstruction(List<Batiment> listeDeBatimentsEnCoursDeConstruction) {
 		this.listeDeBatimentsEnCoursDeConstruction = listeDeBatimentsEnCoursDeConstruction;
 	}
+	public int getTypeBatimentsEnConstruction() {
+		return typeBatimentsEnConstruction;
+	}
 
+	public void setTypeBatimentsEnConstruction(int typeBatimentsEnConstruction) {
+		this.typeBatimentsEnConstruction = typeBatimentsEnConstruction;
+	}
+
+	public int getTypeChampsEnConstruction() {
+		return typeChampsEnConstruction;
+	}
+
+	public void setTypeChampsEnConstruction(int typeChampsEnConstruction) {
+		this.typeChampsEnConstruction = typeChampsEnConstruction;
+	}
+	
 
 	// TODO maxstock de base a corriger
 	public int[] memoireMarcheDeLaRotation = { 0, 0, 0, 0 };
@@ -430,6 +445,9 @@ public class Village {
 	private boolean besoinDeConstruction;
 	private List<Batiment> batimentsDuTemplateDuVillage = new ArrayList<Batiment>();
 	private List<Batiment> listeDeBatimentsEnCoursDeConstruction = new ArrayList<Batiment>();
+	public int typeBatimentsEnConstruction = 0;
+	public int typeChampsEnConstruction = 0;
+
 
 
 	private int champMin;
@@ -965,6 +983,8 @@ public class Village {
 			village.getListeDeBatimentsEnCoursDeConstruction().add(new Batiment(nomBat));
 				
 			}
+			
+			analyseTypeDesConstructionsEnCours(t, village);
 
 
 		} catch (Exception e) {
@@ -972,6 +992,35 @@ public class Village {
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void analyseTypeDesConstructionsEnCours(Travian t, Village village) {
+		int typeChamps = 0;
+		int typeBatiment = 0;
+		for (Batiment batTest : village.getListeDeBatimentsEnCoursDeConstruction()) {
+
+			
+			if ( 	   batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsBucheron) 
+					|| batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsCarriereDArgile) 
+					|| batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsMineDeFer) 
+					|| batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsFerme)) {
+				typeChamps++;
+			
+		}else {
+			typeBatiment++;
+			
+		}
+		}
+		village.setTypeBatimentsEnConstruction(typeBatiment) ;
+		village.setTypeChampsEnConstruction(typeChamps);
+		
+		t.ecrireDansConsole("Batiments en cours : "+typeBatiment, true);
+		t.ecrireDansConsole("Champs en cours : "+typeChamps, true);
+}
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1303,7 +1352,7 @@ public class Village {
 		//*[@id="village_map"]/div
 		int construEnCours = village.getConstructionsEnCours();
 
-		if (construEnCours < t.limiteDeConstruction) {
+		if (construEnCours < t.limiteDeConstruction && village.getTypeChampsEnConstruction() < 2) {
 			//try { // secu anti rechargement
 				// Lancer construction champs
 				// trouver lien du premier plus petit
@@ -1320,7 +1369,7 @@ public class Village {
 					// necessaire
 
 
-					if (construEnCours < t.limiteDeConstruction ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
+					if (construEnCours < t.limiteDeConstruction && village.getTypeChampsEnConstruction() < 2 ) { //|| t.getCompte().getTribut().equals("Romains") && token < 3
 						// On recharge la liste apres un eventuel rechargement
 						listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 						listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
@@ -1485,7 +1534,7 @@ public class Village {
 						
 					} // fin if token de verification
 					else {
-						t.ecrireDansConsole(construEnCours +"construction en cours", true);
+						t.ecrireDansConsole(construEnCours +"construction en cours dont "+village.getTypeChampsEnConstruction()+ " champs", true);
 						decalageToken = false;
 						break;
 					}
@@ -1699,12 +1748,12 @@ public class Village {
 
 						} // break;}
 					} catch (Exception e) {
-						t.ecrireDansConsole("[construireBatiment] Batiment de niveau deja en construction ou deja au level demande "+ batimentAConstruire, true);
+						t.ecrireDansConsole(" echec modifier ce commentaire : [construireBatiment] Batiment de niveau deja en construction ou deja au level demande "+ batimentAConstruire, true);
 						voirListeDeConstruction(t);
 					}
 
 				} else {
-					t.ecrireDansConsole("[construireBatiment] " + batimentAConstruire + " deja a 20", true);
+					t.ecrireDansConsole("[construireBatiment] " + batimentAConstruire + " deja a "+levelVoulu, true);
 					possibleOuPas = false;
 				}
 
@@ -1848,8 +1897,9 @@ public class Village {
 		if ( t.bot.construireBatiments == true ) {
 			if ( village.getRegimeConstruction() == true ) {
 
-				if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getChampMin() <= 10
-						|| village.getConstructionsEnCours() < t.limiteDeConstruction && village.getVillageCapitale() == true) {
+			/*	if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.getChampMin() <= 10
+						|| village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.getVillageCapitale() == true) {*/
+				if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2) {
 					chargerBatiments(t);
 					// try {
 
@@ -1860,7 +1910,7 @@ public class Village {
 						}else {t.ecrireDansConsole("Ce Stade n'a pas le droit de poser lui meme les batiments...", true);}
 					}
 
-					for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction; i++) {
+			//		for (int i = 0; i <= 1 && village.getConstructionsEnCours() < t.limiteDeConstruction; i++) { // repetition desactivée
 
 
 						for (Batiment batimentDuTemplate : village.getTemplateDuVillage()) {
@@ -1876,17 +1926,17 @@ public class Village {
 
 							//puis on lances les upgrade de batiments presents
 							for (Batiment batimentDuVillage : village.getBatiments()) {
-								if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.bloquerConstructionBatiment  == false) {
-									if (batimentDuVillage.getNomBatiment().equals(batimentDuTemplate.getNomBatiment())) {
-										trouver = true;
+								if (batimentDuVillage.getNomBatiment().equals(batimentDuTemplate.getNomBatiment())) {
+									trouver = true;
+								if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.bloquerConstructionBatiment  == false) {
+									
 										if (batimentDuVillage.getLevelBatiment() < batimentDuTemplate.getLevelBatiment()) {
-											construireBatiments(batimentDuTemplate.getNomBatiment(),
-													batimentDuTemplate.getLevelBatiment(), t);
+											construireBatiments(batimentDuTemplate.getNomBatiment(), batimentDuTemplate.getLevelBatiment(), t);
 
 										}
-									}
+									
+								}else {	t.ecrireDansConsole("Upgrade batiment impossible..."+village.getConstructionsEnCours()  + "constructions en cours dont" +village.getTypeBatimentsEnConstruction()+ " batiments", true);}
 								}
-
 							}
 
 							////// TODO Module de construction de batiments du template
@@ -1900,7 +1950,9 @@ public class Village {
 						// village.getTemplateDuVillage()){
 						// }catch (Exception e) {t.ecrireDansConsole(": Batiment absent
 						// sur palier 1");}
-					}
+			//		}
+				}else {
+					t.ecrireDansConsole("construction Desactivees... "+village.getConstructionsEnCours()  + "constructions en cours dont" +village.getTypeBatimentsEnConstruction()+ " batiments", true);
 				}
 				// on pose les batiment apres les upgrade
 				//creationBatiment(t, village);  // 1/10/2017
@@ -1923,7 +1975,7 @@ public class Village {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void creationBatiment(Travian t, Village village) {
-		chargerBatiments(t);
+	//	chargerBatiments(t);
 		int tokenDeChangement = 0;
 		if(village.getConstructionsEnCours() < t.limiteDeConstruction){
 			t.ecrireDansConsole("Essai de création de batiments :", true);
