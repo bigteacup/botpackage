@@ -1943,7 +1943,7 @@ public class Village {
 
 										}
 									
-								}else {	t.ecrireDansConsole("Upgrade batiment impossible..."+village.getConstructionsEnCours()  + "constructions en cours dont" +village.getTypeBatimentsEnConstruction()+ " batiments", true);}
+								}else {	t.ecrireDansConsole("Upgrade batiment impossible... "+village.getConstructionsEnCours()  + " constructions en cours dont " +village.getTypeBatimentsEnConstruction()+ " batiments", true);}
 								}
 							}
 
@@ -1960,7 +1960,7 @@ public class Village {
 						// sur palier 1");}
 					}
 				}else {
-					t.ecrireDansConsole("construction Desactivees... "+village.getConstructionsEnCours()  + "constructions en cours dont" +village.getTypeBatimentsEnConstruction()+ " batiments", true);
+					t.ecrireDansConsole("construction Desactivees... "+village.getConstructionsEnCours()  + " constructions en cours dont " +village.getTypeBatimentsEnConstruction()+ " batiments", true);
 				}
 				// on pose les batiment apres les upgrade
 				//creationBatiment(t, village);  // 1/10/2017

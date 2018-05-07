@@ -397,10 +397,12 @@ public class Travian extends Thread {
 			village.memoireMarcheDeLaRotation[2] = 0;
 			village.memoireMarcheDeLaRotation[3] = 0;
 			village.bloquerConstructionBatiment=false;
+			village.setTypeChampsEnConstruction(0);
+			village.setTypeBatimentsEnConstruction(0);
 			nI++;
 		}
 		t.tokenForcerMarcheDeLaRotation = 0;
-		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées et tokens vidés :"+ t.tokenForcerMarcheDeLaRotation +" Et bloquage des constructions levés", true);
+		t.ecrireDansConsole("Fin du tour -------> " + nI +" Memoires epehemeres des rotations vidées, tokens et TypeBatiments vidés :"+ t.tokenForcerMarcheDeLaRotation +" Et bloquage des constructions levés", true);
 	
 
 	}
@@ -1908,11 +1910,11 @@ public class Travian extends Thread {
 		//if() {}
 		
 		//TODO Important! -> gerer si le village a besoin du marché pour evacuer	(apparement deja fait pour cereales)  
-		if (village.getChampsFinis() == false && village.getTypeChampsEnConstruction() < 2 &&  village.getConstructionsEnCours() < limiteDeConstruction  && (bot.monterChamps == true && village.regimeMonterChamps == true)){besoin = 1;listeDeBesoin.add(besoin);} //
+		if ( village.getChampsFinis() == false && village.getTypeChampsEnConstruction() < 2 &&  village.getConstructionsEnCours() < limiteDeConstruction  && (bot.monterChamps == true && village.regimeMonterChamps == true)){besoin = 1;listeDeBesoin.add(besoin);} //
 		if ( village.getVillageSlot() > 0 && t.compte.getSlotDeVillageDuCompte() > 0 && village.getColons() >= 3 && t.getCompte().listeCompteCoordoneesPourColoniser.size() > 0){besoin = 2;listeDeBesoin.add(besoin);}
 		if ( village.getBesoinDeFete() == 1 &&  bot.faireFete == true && village.regimeFete == true && ressourcesMiniPourFeteTest== true   ){besoin = 3;listeDeBesoin.add(besoin);}
 		if ( village.getVillageCapitale() == true ){besoin = 4;listeDeBesoin.add(besoin);}
-		if (village.getVillagePillage() == true && (village.regimePillage == true || bot.pillage==true)  ){besoin = 5;listeDeBesoin.add(besoin);}
+		if ( village.getVillagePillage() == true && (village.regimePillage == true && bot.pillage==true)  ){besoin = 5;listeDeBesoin.add(besoin);}
 		if ( village.getCropDeath() == true ){besoin = 6;listeDeBesoin.add(besoin);}
 		if ( (village.getConstructionsEnCours() < limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.getBesoinDeConstruction() == true) || village.attaquesSubies.size()>=1 ) {besoin = 7;listeDeBesoin.add(besoin);}//&& village.getSlotBatimentsLibres() > 0
 		if ( village.getBois() >= village.getMaxStockDepot()*90/100 	&&  (  (bot.acheterAuMarché == true && village.regimeAcheterAuMarché == true) || (bot.evacuerSurplusRessources == true) || (bot.npc==true && village.regimeNPC == true)  )){besoin = 8;listeDeBesoin.add(besoin);}
