@@ -116,10 +116,10 @@ public String mur(Travian t) {
 	}
 
 	//correspondances de noms
-	static String bois ="Bûcheron";
-	static String cereale = "Ferme";
-	static String fer= "fer";
-	static String terre= "argile";
+//	static String bois ="Bûcheron";
+	//static String cereale = "Ferme";
+//	static String fer= "fer";
+//	static String terre= "argile";
 	
 	
 	static String ChampsBucheron ="Bûcheron";
@@ -511,22 +511,22 @@ public void prerequis() {
 	
 	 batBoulangerie.add( (new Batiment(batiment_principal, 5) )) ;
 	 batBoulangerie.add( (new Batiment(moulin, 5) )) ;
-	 batBoulangerie.add( (new Batiment(cereale, 10) )) ;
+	 batBoulangerie.add( (new Batiment(ChampsFerme, 10) )) ;
 	 
 
 	 batFonderie.add( (new Batiment(batiment_principal, 5) )) ;
-	 batFonderie.add( (new Batiment(fer, 10) )) ;
+	 batFonderie.add( (new Batiment(ChampsMineDeFer, 10) )) ;
 	 
 
 	 batScierie.add( (new Batiment(batiment_principal, 5) )) ;
-	 batScierie.add( (new Batiment(bois, 10) )) ;
+	 batScierie.add( (new Batiment(ChampsBucheron, 10) )) ;
 	 
 
 	 batPoterie.add( (new Batiment(batiment_principal, 5) )) ;
-	 batPoterie.add( (new Batiment(terre, 10) )) ;
+	 batPoterie.add( (new Batiment(ChampsCarriereDArgile, 10) )) ;
 	 
 
-	 batMoulin.add( (new Batiment(cereale, 5) )) ;
+	 batMoulin.add( (new Batiment(ChampsFerme, 5) )) ;
 	 
 	 //ArrayList<Batiment> hv = new ArrayList<Batiment>();
 	 //hv.add( (new Batiment(batiment_principal, 10) )) ;
