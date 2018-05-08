@@ -750,7 +750,7 @@ public class Travian extends Thread {
 
 	public void rotationVillage() {
 		for(Village village : listeDeVillages ){
-			if(village.getExclureVillage() == false) {
+			if(village.getExclureVillage() == false && t.bot.rotationVillage == true || t.compteurDeBoot== 1) {
 
 			if (allume == false){break;}
 			if (besoinDePasserSurLeVillage(village, false) == 1 ){
@@ -838,7 +838,7 @@ public class Travian extends Thread {
 				
 				
 				
-					if (village.getConstructionsEnCours() < limiteDeConstruction ){ 
+					if (village.getConstructionsEnCours() < limiteDeConstruction ){ // || village.getBatiments().isEmpty()
 						gestionBatiments();
 					}else{ecrireDansConsole("Deja "+ limiteDeConstruction +" construction en cours", true);}
 				//	}else {t.ecrireDansConsole("construction Desactivees... Par le regime du village");}
@@ -846,7 +846,11 @@ public class Travian extends Thread {
 				
 				
 				
-					
+				if(village.getBatiments().isEmpty() && village.getListeBatimentsVideDejaVerifiee() == false ) {
+					ecrireDansConsole("Tour "+ t.compteurDeBoot +" : Liste de batiments vide : "+village.getBatiments().isEmpty()  +" Liste De Batiments verifiée :" +  village.getListeBatimentsVideDejaVerifiee() , true);
+					village.chargerBatiments(t);
+					ecrireDansConsole("Tour "+ t.compteurDeBoot +" : Liste de batiments vide : "+village.getBatiments().isEmpty()  +" Liste De Batiments verifiée :" +  village.getListeBatimentsVideDejaVerifiee() , true);
+				}
 					
 					
 					
@@ -1396,6 +1400,7 @@ public class Travian extends Thread {
 	////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void majVillagesPlus(){
+		ecrireDansConsole("MajVillagePlus debut :", true);
 		Village village = villageEnCours();
 
 
@@ -1467,7 +1472,7 @@ public class Travian extends Thread {
 		t.ecrireDansConsole("Conclusion pas de compte + ou bug", true);
 		}
 
-
+		ecrireDansConsole("MajVillagePlus fin :", true);
 
 
 	}
@@ -1511,6 +1516,7 @@ public class Travian extends Thread {
 		
 
 	void updateRessourcesPlus(Travian t) {
+		ecrireDansConsole("updateRessourcesPlus debut :", true);
 		int i = 0;
 
 		for (Village village	: listeDeVillages){
@@ -1550,7 +1556,7 @@ public class Travian extends Thread {
 			}
 		}
 
-
+		ecrireDansConsole("updateRessourcesPlus fin :", true);
 
 	}
 
@@ -1610,6 +1616,7 @@ public class Travian extends Thread {
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void determinerBesoinDeFetes() {
+		ecrireDansConsole("determinerBesoinDeFetes debut :", true);
 		int besoinDeFete = 0;
 		int i = 0;
 
@@ -1648,6 +1655,7 @@ public class Travian extends Thread {
 				
 			}
 		}
+		ecrireDansConsole("determinerBesoinDeFetes fin :", true);
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1769,6 +1777,7 @@ public class Travian extends Thread {
 
 
 		private void determinerBesoinDeNpc() {
+			ecrireDansConsole("determinerBesoinDeNpc debut :", true);
 			//npcNegatif();
 			int delaisAvantFamineOuDebordement  = 9999;
 			boolean enNegatif;
@@ -1873,6 +1882,7 @@ public class Travian extends Thread {
 			//	}
 				}
 			}
+			ecrireDansConsole("determinerBesoinDeNpc fin :", true);
 			//TODO fairele chargermnt des depot et silo par ici
 			//String pageSource = compte.getDriver().findElement(By.id("lum")).getAttribute("innerHTML");//outerHTML //innerHTML
 			//	String elemHtml = driver.findElement(By.className("hl")).getAttribute("innerHTML");// innerHTML

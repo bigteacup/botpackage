@@ -954,7 +954,7 @@ public class Marche {
 					int arrivageIntCereales =  0;
 
 					
-					if(village.trouverBatiment(t, village, TemplatesDeVillages.marche) == true) {
+					if(village.trouverBatiment(t, village, TemplatesDeVillages.marche) == true || village.getNombreDeMarchandsMax() > 0 || village.getNombreDeMarchands() > 0 ) {
 						
 					
 					t.randomsleep.court();

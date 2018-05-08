@@ -440,6 +440,9 @@ public class Village {
 	private boolean enNegatif;
 	private boolean debordement;
 
+	public boolean listeBatimentsVideDejaVerifiee = false; 
+
+	
 
 
 	private boolean besoinDeConstruction;
@@ -492,7 +495,13 @@ public class Village {
 	public void setSlotBatimentsLibres(int slotBatimentsLibres) {
 		this.slotBatimentsLibres = slotBatimentsLibres;
 	}
+	public boolean getListeBatimentsVideDejaVerifiee() {
+		return listeBatimentsVideDejaVerifiee;
+	}
 
+	public void setListeBatimentsVideDejaVerifiee(boolean listeBatimentsVideDejaVerifiee) {
+		this.listeBatimentsVideDejaVerifiee = listeBatimentsVideDejaVerifiee;
+	}
 
 	//Liste de Templates du village
 	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
@@ -1332,6 +1341,7 @@ public class Village {
 			}
 		}
 		village.setSlotBatimentsLibres( slotTemp);
+		village.setListeBatimentsVideDejaVerifiee(true);
 		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
 		t.ecrireDansConsole("Fin chargerBatiment", true);
 	}
