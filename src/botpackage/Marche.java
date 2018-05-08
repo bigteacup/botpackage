@@ -954,7 +954,7 @@ public class Marche {
 					int arrivageIntCereales =  0;
 
 					
-					if(village.trouverBatiment(t, village, TemplatesDeVillages.marche) == true || village.getNombreDeMarchandsMax() > 0 || village.getNombreDeMarchands() > 0 ) {
+			//		if(village.trouverBatiment(t, village, TemplatesDeVillages.marche) == true || village.getNombreDeMarchandsMax() > 0 || village.getNombreDeMarchands() > 0 ) {
 						
 					
 					t.randomsleep.court();
@@ -967,7 +967,7 @@ public class Marche {
 					arrivageIntFer = lireArrivageMarche(t, village, 2, 15900, 0);
 					arrivageIntCereales = lireArrivageMarche(t, village, 3, 15900, 0);
 					//manqC =  manqC - arrivageInt;
-					} 
+				//	} 
 					 
 					for (Village villageCandidat : listeDeVillages) {
 						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider))  ) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage

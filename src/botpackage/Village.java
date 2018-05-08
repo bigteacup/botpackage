@@ -1341,7 +1341,11 @@ public class Village {
 			}
 		}
 		village.setSlotBatimentsLibres( slotTemp);
-		village.setListeBatimentsVideDejaVerifiee(true);
+		if(village.getBatiments().isEmpty()) {
+			village.setListeBatimentsVideDejaVerifiee(true);
+		}else {
+			village.setListeBatimentsVideDejaVerifiee(false);
+		}
 		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
 		t.ecrireDansConsole("Fin chargerBatiment", true);
 	}
