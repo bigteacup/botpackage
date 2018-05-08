@@ -847,9 +847,9 @@ public class Travian extends Thread {
 				
 				
 				if(village.getBatiments().isEmpty() && village.getListeBatimentsVideDejaVerifiee() == false ) {
-					ecrireDansConsole("Tour "+ t.compteurDeBoot +" : Liste de batiments vide : "+village.getBatiments().isEmpty()  +" Liste De Batiments verifiée :" +  village.getListeBatimentsVideDejaVerifiee() , true);
+					ecrireDansConsole("Tour "+ t.compteurDeBoot +" : Liste de batiments vide : "+village.getBatiments().isEmpty()  +" Liste De Batiments vides verifiée :" +  village.getListeBatimentsVideDejaVerifiee() , true);
 					village.chargerBatiments(t);
-					ecrireDansConsole("Tour "+ t.compteurDeBoot +" : Liste de batiments vide : "+village.getBatiments().isEmpty()  +" Liste De Batiments verifiée :" +  village.getListeBatimentsVideDejaVerifiee() , true);
+					ecrireDansConsole("Tour "+ t.compteurDeBoot +" : Liste de batiments vide : "+village.getBatiments().isEmpty()  +" Liste De Batiments vides verifiée :" +  village.getListeBatimentsVideDejaVerifiee() , true);
 				}
 					
 					
