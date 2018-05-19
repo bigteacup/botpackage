@@ -242,15 +242,45 @@ public class Marche {
 		try {
 			t.ecrireDansConsole("ChangementOnglet " + token, true );
 			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
-			for (WebElement tabGestion : listeDesTabs) {
+			
+			try {
+				WebElement ongletActuel = t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'container active')]")) ;
+				if(ongletActuel.getText().toLowerCase().trim().contains(titreOnglet.toLowerCase())) {
+					t.ecrireDansConsole("Nous somme deja sur le bon onglet : "  + titreOnglet, true);
+				} else {
+					
+					for (WebElement tabGestion : listeDesTabs) {
+						if (tabGestion.getText().contains(titreOnglet)) { 
 
-				if (tabGestion.getText().contains(titreOnglet)) {      
-					tabGestion.click();
-					t.randomsleep.court();
-					break;
+							tabGestion.click();
+							t.randomsleep.court();
+							break;
+						}
+
+					}
+					
+					
 				}
+				
+			
+					 
+				
+				
+			}catch(Exception e3) {
+				for (WebElement tabGestion : listeDesTabs) {
+					if (tabGestion.getText().contains(titreOnglet)) { 
 
+						tabGestion.click();
+						t.randomsleep.court();
+						break;
+					}
+
+				}
+				
+				
 			}
+			
+
 
 		}catch (Exception e1) {
 			t.ecrireDansConsole("echec changementOngletMarche  "  + token, true); 
@@ -879,9 +909,24 @@ public class Marche {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void allerDansLeMarché(Travian t){
 		try {// on vas sur le marché
-			t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
-			t.randomsleep.court();
-		} catch (Exception e) {
+			WebElement titre;
+			String titreString = "";
+			try {
+			titre = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"content\"]/h1"));
+			titreString = titre.getText().trim();
+			}catch (Exception ea) {
+				
+			}
+			if(!titreString.toLowerCase().contains(TemplatesDeVillages.marche.toLowerCase())) {
+				t.ecrireDansConsole("Nous ne sommes pas déja dans le marché --> on y va...", true);
+				t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
+				t.randomsleep.court();
+				}else {
+					t.ecrireDansConsole("Nous sommes déja dans le marché ", true);
+				}
+			
+		
+		} catch (Exception eb) {
 			t.ecrireDansConsole("Pas de compte + ou pas de marché Passage en force", true);
 
 			try{
@@ -991,7 +1036,8 @@ public class Marche {
 									
 
 									t.randomsleep.court();
-									t.getCompte().getDriver().get(villageCandidat.getUrl());
+									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + villageCandidat.getId() + "&')]")).click();
+								//	t.getCompte().getDriver().get(villageCandidat.getUrl());
 									t.randomsleep.court();
 									//on va sur le marché
 									allerDansLeMarché(t);
@@ -1117,7 +1163,8 @@ public class Marche {
 										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " devait envoyer sur "  +village.getNom() + " mais ceci est annulé apres analyse précise", true);
 									}
 									t.randomsleep.court();
-									t.getCompte().getDriver().get(village.getUrl());
+									//t.getCompte().getDriver().get(village.getUrl());
+									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
 									t.randomsleep.court();
 
 									//TODO Changement de page a changer en mode secure et non en get
@@ -1204,7 +1251,8 @@ public class Marche {
 
 
 									t.randomsleep.court();
-									t.getCompte().getDriver().get(villageCandidat.getUrl());
+									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + villageCandidat.getId() + "&')]")).click();
+								//	t.getCompte().getDriver().get(villageCandidat.getUrl());
 									t.randomsleep.court();
 									//on va sur le marché
 									allerDansLeMarché(t);
@@ -1271,7 +1319,8 @@ public class Marche {
 									}
 									updateNombreDeMarchandsDispo(t, villageCandidat);
 									t.randomsleep.court();
-									t.getCompte().getDriver().get(village.getUrl());
+									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
+								//	t.getCompte().getDriver().get(village.getUrl());
 									t.randomsleep.court();
 
 									//TODO Changement de page a changer en mode secure et non en get

@@ -871,15 +871,23 @@ public class Travian extends Thread {
 				if (allume == false){break;}
 				
 				
-				
+				try { 
+					if (allume == false){break;}
+					if(bot.faireFete == true){
+						if(village.getRegimeFete() == true){
+						if (village.getChampMin() >= 10 && village.getBesoinDeFete() == 1){ 
+							if (village.getBois() >= 6400 && village.getArgile() >= 6650 && village.getFer() >= 5940 && village.getCereales() >= 1340 ){
+								village.lancerFete(t);
+							} else {ecrireDansConsole("[Fete] Pas assez de ressources pour faire une fete", true);}
+						} else {ecrireDansConsole("[Fete] Pas besoin de fete ou pas d'hotel de ville", true);}
+						}else {ecrireDansConsole("[Fete] fetes Desactivees... Par le regime du village.", true);}
+					}else {ecrireDansConsole("[Fete] fetes Desactivees...", true);}
+				}catch(Exception e){ecrireDansConsole("echec fete ", true);}		
 				
 				
 				
 				marche.etablirBesoinEnRessources(t, village, listeDeVillages);
 				if (allume == false){break;}
-				
-				
-				
 				
 				
 				
@@ -904,20 +912,13 @@ public class Travian extends Thread {
 	
 				
 				
+				//	if(bot. == true){
+				if(village.getCereales() <  village.getMaxStockSilo()/100*t.bot.pourcentageApproUrgenceFamine && village.getEnNegatif()==true) {		
+					t.marche.approUrgenceFamine(t, village, listeDeVillages); 
+					ecrireDansConsole("[ApproFamineUrgenceVillage] terminé", true);
+					}	
 
-				try { 
-					if (allume == false){break;}
-					if(bot.faireFete == true){
-						if(village.getRegimeFete() == true){
-						if (village.getChampMin() >= 10 && village.getBesoinDeFete() == 1){ 
-							if (village.getBois() >= 6400 && village.getArgile() >= 6650 && village.getFer() >= 5940 && village.getCereales() >= 1340 ){
-								village.lancerFete(t);
-							} else {ecrireDansConsole("[Fete] Pas assez de ressources pour faire une fete", true);}
-						} else {ecrireDansConsole("[Fete] Pas besoin de fete ou pas d'hotel de ville", true);}
-						}else {ecrireDansConsole("[Fete] fetes Desactivees... Par le regime du village.", true);}
-					}else {ecrireDansConsole("[Fete] fetes Desactivees...", true);}
-				}catch(Exception e){ecrireDansConsole("echec fete ", true);}
-				
+				//TODO faire comblerManque TBF comme approUrgenceFamine
 				
 				
 				
@@ -927,7 +928,12 @@ public class Travian extends Thread {
 						try {	marche.acheterAuMarché(t, village);}catch(Exception e) { ecrireDansConsole("[Marché] acheterAuMarché Echec", true);}
 					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.", true);}
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...", true);}
-			
+				
+				
+				
+				
+
+				
 				village.updateRessources(t);
 			
 			}//fin for
@@ -1520,9 +1526,12 @@ public class Travian extends Thread {
 		int i = 0;
 
 		for (Village village	: listeDeVillages){
-			
+			int failCompte = 0;
 			boolean trouver = false;
 			while(trouver == false){
+				if (failCompte > listeDeVillages.size() * 2) {
+					break;
+				}
 				try {
 					
 
@@ -1552,6 +1561,7 @@ public class Travian extends Thread {
 				
 				}catch(Exception e) {
 					i = 0;
+					failCompte++;
 				}
 			}
 		}
@@ -1623,8 +1633,12 @@ public class Travian extends Thread {
 
 		for (Village village : listeDeVillages) {
 			besoinDeFete = 0;
+			int failCompte = 0;
 			boolean trouver = false;
 			while(trouver == false){
+				if (failCompte > listeDeVillages.size() * 2 ) {
+					break;
+				}
 				try {
 				
 					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
@@ -1650,6 +1664,7 @@ public class Travian extends Thread {
 						}
 				}catch(Exception e) {
 					i = 0;
+					failCompte++;
 				}
 					
 				
@@ -1815,6 +1830,7 @@ public class Travian extends Thread {
 								texte="Debordement";
 								village.setDebordement(true);
 								}
+						
 						if (delaisAvantFamineOuDebordement < 1 && enNegatif==true ) {
 							village.setBesoinDeNpc(true);
 							ecrireDansConsole(village.getNom() +": Delais avant "+texte+" : "+delaisAvantFamineOuDebordement+" En Negatif = "+enNegatif, true );
