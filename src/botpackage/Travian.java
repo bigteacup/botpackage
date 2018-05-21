@@ -930,7 +930,7 @@ public class Travian extends Thread {
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...", true);}
 				
 				try {
-				marche.creerRouteDeCommerce(t, village);
+				//marche.creerRouteDeCommerce(t, village);
 				}catch(Exception e) { ecrireDansConsole("[Marché] CréerRouteDeCommerce Echec", true);}
 
 				
