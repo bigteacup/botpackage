@@ -929,10 +929,12 @@ public class Travian extends Thread {
 					}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees... Par le regime du village.", true);}
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...", true);}
 				
+				
+				if(bot.creerRouteDeCommerce == true){	
 				try {
-				//marche.creerRouteDeCommerce(t, village);
+				marche.creerRouteDeCommerce(t, village);
 				}catch(Exception e) { ecrireDansConsole("[Marché] CréerRouteDeCommerce Echec", true);}
-
+				}else {ecrireDansConsole("[Marché] CréerRouteDeCommerce Desactivees...", true);}
 				
 				village.updateRessources(t);
 			

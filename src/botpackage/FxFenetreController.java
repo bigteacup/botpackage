@@ -147,6 +147,9 @@ public class FxFenetreController extends ScrollPane {
 
 	@FXML
 	private CheckBox caseFaireAventures;
+	
+	@FXML
+	private CheckBox caseCreerRouteDeCommerce;
 
 	@FXML
 	private TabPane tabbedPane;
@@ -306,18 +309,22 @@ public class FxFenetreController extends ScrollPane {
 		
 		
 		if (bot.faireDefiler == true) {
-			// casePillage.isSelected();
 			caseFaireDefiler.setSelected(true);
 		} else {
 			caseFaireDefiler.setSelected(false);}
 		raffraichirCase (caseFaireDefiler);
 
+		if (bot.creerRouteDeCommerce == true) {
+			caseCreerRouteDeCommerce.setSelected(true);
+		} else {
+			caseCreerRouteDeCommerce.setSelected(false);}
+		raffraichirCase (caseCreerRouteDeCommerce);
 		
 		
 	}
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////LOGIN SERVER  ETC 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////LOGIN SERVER  ETC  
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////// caseRotationVillage  
@@ -462,12 +469,22 @@ public class FxFenetreController extends ScrollPane {
 		}
 		raffraichirCase (caseDecalageCereales);
 	}
+	
+	@FXML
+	private void caseCreerRouteDeCommerce(){
+		if (bot.creerRouteDeCommerce == true) {
+			bot.creerRouteDeCommerce = false;
+		}else {
+			bot.creerRouteDeCommerce = true;
+		}
+		raffraichirCase (caseCreerRouteDeCommerce);
+	}
 
 	
 	
 	
 	
-	//les regimes speciaux de village
+	//les regimes speciaux de village   
 	private void switcherCaseRegimePillage(Village village){
 		if (village.getRegimePillage() == true) {
 			village.setRegimePillage(false)  ;
@@ -515,6 +532,8 @@ public class FxFenetreController extends ScrollPane {
 		}
 		
 	}
+	
+
 	
 	
 	

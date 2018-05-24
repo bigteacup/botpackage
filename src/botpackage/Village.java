@@ -478,6 +478,7 @@ public class Village {
 	public boolean regimeMonterChamps = true;
 	public boolean regimeNPC = true;
 	public boolean regimeAcheterAuMarché = true;
+
 	//fin regime
 
 	public Date marchéLastDate;
@@ -2239,6 +2240,8 @@ public class Village {
 		} // fin if token < 2
 		//	else {break;}
 	} //fin
+
+
 
 
 	public void creerNouveauTemplate(String nom) {

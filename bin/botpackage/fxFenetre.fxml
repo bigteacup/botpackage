@@ -116,6 +116,11 @@
                               <Insets />
                            </FlowPane.margin>
                         </CheckBox>
+                         <CheckBox fx:id="caseCreerRouteDeCommerce"   contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" onAction="#caseCreerRouteDeCommerce"  selected="true" text="Creer RdC">
+                           <FlowPane.margin>
+                              <Insets />
+                           </FlowPane.margin>
+                        </CheckBox>
                                                 <CheckBox  contentDisplay="RIGHT" graphicTextGap="2.0" mnemonicParsing="false" selected="true" text="">
                            <FlowPane.margin>
                               <Insets />

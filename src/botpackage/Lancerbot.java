@@ -95,7 +95,13 @@ import org.openqa.selenium.WebDriver;
 	public boolean npc = true;
 	public boolean rotationVillage = true;
 	public boolean acheterAuMarché = true;
+	public boolean creerRouteDeCommerce = true;
 	
+
+
+
+
+
 	public boolean afficherAttente = false;
 	public ArrayList<File> listeFichiers = new ArrayList<File>();
 	public Properties fichierTemplatesProperties;
@@ -108,6 +114,7 @@ import org.openqa.selenium.WebDriver;
 	public TemplatesDeVillages templateLancerBot;
 	
 	GestionnaireDeComptes gestionnaireDeComptes = new GestionnaireDeComptes();
+
 
 
 
