@@ -1876,33 +1876,45 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 	*/
 	
 
-
-	// en attendant 
+/*
+	// en attendant
+	///////////////////////////////////////////////////
 	for(Village v : t.getListeDeVillages()) {
 		RouteDeCommerce rdcTest = new RouteDeCommerce();
 		rdcTest.setCereales(2000);
-		rdcTest.setCible("TonVillage");
+		rdcTest.setCible("02 - Fluffy pas Plop");
 		rdcTest.setHeureDepart(0);
 		rdcTest.setIncrement(2);
 		rdcTest.setRepetition(12);
 		v.getListeRouteDeCommerceACreer().add(rdcTest);
 		
 	}
-
+///////////////////////////////////////////////////
 	
-	
+	*/
+	if(village.routeDeCommerceDejaListeesAvecSucce == false) {
+		allerDansLeMarché(t);
+		changementOngletMarche(t, village, 0, "Gestion");
+		t.randomsleep.court();
+		listerRouteDeCommerce(t, village);
+		
+	} 
 	
 	for(RouteDeCommerce rdcACreer : village.getListeRouteDeCommerceACreer()) {
 		int i= 0;
-		while(i < rdcACreer.getRepetition()) {
 		
-		trouver = false;
 		int cereales = rdcACreer.getCereales() ;
 		String cibleString = rdcACreer.getCible() ;                  //*[@id="r4"]
 		int intBase  = rdcACreer.getHeureDepart();
 		int increment = rdcACreer.getIncrement();
 		int intResult = intBase;
 		String h = String.valueOf(intResult);
+		
+		
+		while(i < rdcACreer.getRepetition()) {
+		
+		trouver = false;
+
 		
 		
 		
@@ -2103,6 +2115,7 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 	
 	
 	tempListeRdc.clear();
+	v.setRouteDeCommerceDejaListeesAvecSucce(true);
 	
 }
 

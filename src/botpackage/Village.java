@@ -441,7 +441,7 @@ public class Village {
 	private boolean debordement;
 
 	public boolean listeBatimentsVideDejaVerifiee = false; 
-
+	public boolean routeDeCommerceDejaListeesAvecSucce = false;
 	
 
 
@@ -478,8 +478,11 @@ public class Village {
 	public boolean regimeMonterChamps = true;
 	public boolean regimeNPC = true;
 	public boolean regimeAcheterAuMarché = true;
+	
 
 	//fin regime
+
+
 
 	public Date marchéLastDate;
 	public int marchédureeDuDernierAchat=0;
@@ -489,6 +492,15 @@ public class Village {
 	public int slotBatimentsLibres = 22;
 	public ArrayList<RouteDeCommerce> listeRouteDeCommerce = new ArrayList<RouteDeCommerce>();
 	public ArrayList<RouteDeCommerce> listeRouteDeCommerceACreer = new ArrayList<RouteDeCommerce>();
+	
+	public boolean isRouteDeCommerceDejaListeesAvecSucce() {
+		return routeDeCommerceDejaListeesAvecSucce;
+	}
+
+	public void setRouteDeCommerceDejaListeesAvecSucce(boolean routeDeCommerceDejaListeesAvecSucce) {
+		this.routeDeCommerceDejaListeesAvecSucce = routeDeCommerceDejaListeesAvecSucce;
+	}
+
 
 	public ArrayList<RouteDeCommerce> getListeRouteDeCommerceACreer() {
 		return listeRouteDeCommerceACreer;
