@@ -487,7 +487,24 @@ public class Village {
 	public List<AttaqueEntrante> attaquesSubies = new ArrayList<AttaqueEntrante>();
 	public boolean bloquerConstructionBatiment = false;
 	public int slotBatimentsLibres = 22;
+	public ArrayList<RouteDeCommerce> listeRouteDeCommerce = new ArrayList<RouteDeCommerce>();
+	public ArrayList<RouteDeCommerce> listeRouteDeCommerceACreer = new ArrayList<RouteDeCommerce>();
 
+	public ArrayList<RouteDeCommerce> getListeRouteDeCommerceACreer() {
+		return listeRouteDeCommerceACreer;
+	}
+
+	public void setListeRouteDeCommerceACreer(ArrayList<RouteDeCommerce> listeRouteDeCommerceACreer) {
+		this.listeRouteDeCommerceACreer = listeRouteDeCommerceACreer;
+	}
+
+	public ArrayList<RouteDeCommerce> getListeRouteDeCommerce() {
+		return listeRouteDeCommerce;
+	}
+
+	public void setListeRouteDeCommerce(ArrayList<RouteDeCommerce> listeRouteDeCommerce) {
+		this.listeRouteDeCommerce = listeRouteDeCommerce;
+	}
 
 	public int getSlotBatimentsLibres() {
 		return slotBatimentsLibres;

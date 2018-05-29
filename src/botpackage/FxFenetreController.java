@@ -149,7 +149,7 @@ public class FxFenetreController extends ScrollPane {
 	private CheckBox caseFaireAventures;
 	
 	@FXML
-	private CheckBox caseCreerRouteDeCommerce;
+	private CheckBox caseGererRouteDeCommerce;
 
 	@FXML
 	private TabPane tabbedPane;
@@ -314,11 +314,11 @@ public class FxFenetreController extends ScrollPane {
 			caseFaireDefiler.setSelected(false);}
 		raffraichirCase (caseFaireDefiler);
 
-		if (bot.creerRouteDeCommerce == true) {
-			caseCreerRouteDeCommerce.setSelected(true);
+		if (bot.gererRouteDeCommerce == true) {
+			caseGererRouteDeCommerce.setSelected(true);
 		} else {
-			caseCreerRouteDeCommerce.setSelected(false);}
-		raffraichirCase (caseCreerRouteDeCommerce);
+			caseGererRouteDeCommerce.setSelected(false);}
+		raffraichirCase (caseGererRouteDeCommerce);
 		
 		
 	}
@@ -471,13 +471,13 @@ public class FxFenetreController extends ScrollPane {
 	}
 	
 	@FXML
-	private void caseCreerRouteDeCommerce(){
-		if (bot.creerRouteDeCommerce == true) {
-			bot.creerRouteDeCommerce = false;
+	private void caseGererRouteDeCommerce(){
+		if (bot.gererRouteDeCommerce == true) {
+			bot.gererRouteDeCommerce = false;
 		}else {
-			bot.creerRouteDeCommerce = true;
+			bot.gererRouteDeCommerce = true;
 		}
-		raffraichirCase (caseCreerRouteDeCommerce);
+		raffraichirCase (caseGererRouteDeCommerce);
 	}
 
 	

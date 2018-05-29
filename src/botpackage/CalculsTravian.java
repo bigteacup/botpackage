@@ -112,7 +112,7 @@ public class CalculsTravian {
 		if(secondes <=9 ){secondesString = "0"+secondes;} else {secondesString = ""+secondes;}
 
 		String heureTravian = heuresString +":"+ minutesString +":"+ secondesString ;
-		if(verbose ==true){	t.ecrireDansConsole("Temps de trajet : "+heureTravian+"   et chriffre de base : "+a, true);}
+		if(verbose ==true){	t.ecrireDansConsole("Temps de trajet : "+heureTravian+" et chiffre de base : "+a, true);}
 
 		return a;
 

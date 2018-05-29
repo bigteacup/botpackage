@@ -95,7 +95,7 @@ import org.openqa.selenium.WebDriver;
 	public boolean npc = true;
 	public boolean rotationVillage = true;
 	public boolean acheterAuMarché = true;
-	public boolean creerRouteDeCommerce = true;
+	public boolean gererRouteDeCommerce = true;
 	
 
 

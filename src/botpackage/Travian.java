@@ -930,11 +930,17 @@ public class Travian extends Thread {
 				}else {ecrireDansConsole("[Marché] acheterAuMarché Desactivees...", true);}
 				
 				
-				if(bot.creerRouteDeCommerce == true){	
+				if(bot.gererRouteDeCommerce == true && village.getChampsFinis() == true && village.getNombreDeMarchandsMax() == 20){	 // temporaire
+					if(village.getListeRouteDeCommerce().size() > 0 == false){	
+					
 				try {
-				marche.creerRouteDeCommerce(t, village);
-				}catch(Exception e) { ecrireDansConsole("[Marché] CréerRouteDeCommerce Echec", true);}
-				}else {ecrireDansConsole("[Marché] CréerRouteDeCommerce Desactivees...", true);}
+				marche.gererRouteDeCommerce(t, village);
+				}catch(Exception e) { ecrireDansConsole("[Marché] gererRouteDeCommerce Echec", true);}
+					}else {
+						ecrireDansConsole("[Marché] gererRouteDeCommerce RDC deja creées", true);
+						ecrireDansConsole("[Marché] RDC : "+ village.getListeRouteDeCommerce().size(), true);
+					}
+				}else {ecrireDansConsole("[Marché] gererRouteDeCommerce Desactivees...", true);}
 				
 				village.updateRessources(t);
 			
@@ -1681,7 +1687,7 @@ public class Travian extends Thread {
 	
 	public void  majSlot(){
 		int villageSlot = 0 ;
-	
+		int failCompte = 0;
 		int i = 0;
 
 
@@ -1689,6 +1695,9 @@ public class Travian extends Thread {
 		
 			boolean trouver = false;
 			while(trouver == false){
+				if (failCompte > listeDeVillages.size() * 2 ) {
+					break;
+				}
 				try {
 				
 					if (village.getUrl().contains(donneesPointsDeCulture.get(i).findElement(By.xpath("//*[@id=\"culture_points\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])) {
@@ -1719,6 +1728,9 @@ public class Travian extends Thread {
 						}
 				}catch(Exception e) {
 					i = 0;
+					failCompte++;
+					//i++;
+					//donneesPointsDeCulture = compte.getDriver().findElements(By.xpath("//*[@id=\"culture_points\"]/tbody/tr"));
 				}
 				
 			}
