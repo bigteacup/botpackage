@@ -2049,7 +2049,7 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 		
 		
 		try {
-			nameV =	route.findElement(By.xpath("../tr[1]/td[2]/a")).getText();
+			nameV =	route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/a")).getText();
 			heureV = route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[3]")).getText().split(":")[0];
 		}catch(Exception e) {
 		//	if(listeDeRoutesDuVillage.size() > 0 && !(route.getText().toLowerCase().contains("aucune"))) {
