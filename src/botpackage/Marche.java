@@ -9,6 +9,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.server.handler.FindElement;
 
 public class Marche {
 	//	CalculsTravian calculs = new CalculsTravian();
@@ -1863,6 +1864,7 @@ private void eviterFamineSansNpc(Travian t, Village village) {
 public  void gererRouteDeCommerce(Travian t, Village village) {
 	
 	boolean trouver = false;
+	boolean besoinEditer = false;
 	/*
 	for(RouteDeCommerce rdcACreer : village.getListeRouteDeCommerceACreer()) {
 	for(RouteDeCommerce oldRdc : village.getListeRouteDeCommerce()) {
@@ -1903,18 +1905,18 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 	for(RouteDeCommerce rdcACreer : village.getListeRouteDeCommerceACreer()) {
 		int i= 0;
 		
-		int cereales = rdcACreer.getCereales() ;
 		String cibleString = rdcACreer.getCible() ;                  //*[@id="r4"]
 		int intBase  = rdcACreer.getHeureDepart();
 		int increment = rdcACreer.getIncrement();
 		int intResult = intBase;
 		String h = String.valueOf(intResult);
-		
+		int positionRdcAEditer =0;
 		
 		while(i < rdcACreer.getRepetition()) {
 		
 		trouver = false;
-
+		besoinEditer = false;
+		positionRdcAEditer =0;
 		
 		
 		
@@ -1924,8 +1926,15 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 			
 			if(oldRdc.getCible().equals(cibleString) && oldRdc.getHeureDepart() == intResult ) {
 				trouver = true;
+				if(oldRdc.getArgile() + oldRdc.getBois() + oldRdc.getFer() + oldRdc.getCereales() != rdcACreer.getBois() + rdcACreer.getBois() + rdcACreer.getFer() + rdcACreer.getCereales()   ) {
+					besoinEditer = true;
+					positionRdcAEditer = oldRdc.getPositionDansLaListe();
+					}
+				
 				break;
-			}
+				
+				}
+			
 		}
 		
 		
@@ -1935,12 +1944,12 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 		
 		
 		
-			if (trouver == false) {
+			if (trouver == false || besoinEditer == true) {
 				allerDansLeMarché(t);
 				changementOngletMarche(t, village, 0, "Gestion");
 				t.randomsleep.court();
 				listerRouteDeCommerce(t, village);
-		 creerRouteDeCommerce(t, cibleString, cereales, h);
+		 creerOuEditerRouteDeCommerce(t, rdcACreer, cibleString, rdcACreer.getBois(), rdcACreer.getArgile(), rdcACreer.getFer(), rdcACreer.getCereales(), h, besoinEditer, positionRdcAEditer);
 		 i++;
 		 intResult = intResult + increment;
 		 h = String.valueOf(intResult);
@@ -1978,8 +1987,10 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public void creerRouteDeCommerce(Travian t, String cibleString, int cereales, String h) {
+public void creerOuEditerRouteDeCommerce(Travian t, RouteDeCommerce rdc, String cibleString, int bois, int argile, int fer, int cereales, String heureString, boolean editer, int positionRdcAEditer	) {
 	t.randomsleep.court();
+
+	if(editer == false) {
 	//listedestination selection
 try {
 	t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"build\"]/p[2]/a")).get(0).click();  
@@ -1995,29 +2006,97 @@ if (option.getText().toLowerCase().contains(cibleString.toLowerCase()) == true) 
 	option.click();	
 }
 }
+}else { //../tr[1]/td[5]/a
+	t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr["+  (positionRdcAEditer+1) + "]/td[5]/a")).click();
+}
+
+
 
 t.randomsleep.court();
 
-// ecriture dans textField
-WebElement textFieldCereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r4\"]"));//.click();
+//ecriture dans textField bois
+WebElement textFieldBois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r1\"]")); ////*[@id="r1"]
+int boisInt = 0;
+try {
+	boisInt = Integer.parseInt(textFieldBois.getAttribute("value"));
+}catch(Exception e) { 
+	boisInt = 0;
+}
+if(bois > 0 || bois != boisInt) {
+textFieldBois.click();
+t.randomsleep.court();
+textFieldBois.clear();
+t.randomsleep.court();
+textFieldBois.sendKeys(String.valueOf(bois));
+t.randomsleep.court();
+}
+
+//ecriture dans textField argile 
+WebElement textFieldArgile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r2\"]"));
+int argileInt = 0;
+try {
+	argileInt = Integer.parseInt(textFieldArgile.getAttribute("value"));
+}catch(Exception e) { 
+	argileInt = 0;
+}
+if(argile > 0 || argile != argileInt ) {
+textFieldArgile.click();
+t.randomsleep.court();
+textFieldArgile.clear();
+t.randomsleep.court();
+textFieldArgile.sendKeys(String.valueOf(argile));
+t.randomsleep.court();
+}
+
+//ecriture dans textField fer
+WebElement textFieldFer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r3\"]"));
+int ferInt = 0;
+try {
+	ferInt = Integer.parseInt(textFieldFer.getAttribute("value"));
+}catch(Exception e) { 
+	ferInt = 0;
+}
+if(fer > 0 || fer != ferInt ) {
+textFieldFer.click();
+t.randomsleep.court();
+textFieldFer.clear();
+t.randomsleep.court();
+textFieldFer.sendKeys(String.valueOf(fer));
+t.randomsleep.court();
+}
+
+//ecriture dans textField cc
+WebElement textFieldCereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r4\"]"));
+int cerealesInt = 0;
+try {
+	cerealesInt = Integer.parseInt(textFieldCereales.getAttribute("value"));//getText());
+}catch(Exception e) { 
+	cerealesInt = 0;
+}
+if (cereales > 0 || fer != cerealesInt ) {
 textFieldCereales.click();
 t.randomsleep.court();
 textFieldCereales.clear();
 t.randomsleep.court();
 textFieldCereales.sendKeys(String.valueOf(cereales));
 t.randomsleep.court();
+}
 
 
+
+if(editer == false ) {
+	
 // Selection heure depart
 List<WebElement> listeHeureDepart = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"userHour\"]/option"));
 for(WebElement option : listeHeureDepart ) {
-if (option.getText().toLowerCase().contentEquals(h)) {
+if (option.getText().toLowerCase().contentEquals(heureString)) {
 	option.click();
 	
 	break;
 }
 }
 
+}
 
 
 
@@ -2037,6 +2116,10 @@ if (option.getText().toLowerCase().contentEquals(h)) {
 public void listerRouteDeCommerce(Travian t, Village v) {
 	String nameV = null;
 	String heureV = null;
+	int boisV= 0;
+	int argileV= 0;
+	int ferV= 0;
+	int cerealesV= 0;
 	int i = 0;
 	ArrayList<RouteDeCommerce> tempListeRdc = new ArrayList<RouteDeCommerce>();
 
@@ -2045,12 +2128,20 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 	for(WebElement route : listeDeRoutesDuVillage) {
 		nameV = null;
 		heureV = null;
+		boisV= 0;
+		argileV= 0;
+		ferV= 0;
+		cerealesV= 0;
 		boolean trouver = false;
 		
 		
 		try {
 			nameV =	route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/a")).getText();
 			heureV = route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[3]")).getText().split(":")[0];
+			boisV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[1]")).getText().trim());
+			argileV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[2]")).getText().trim());
+			ferV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[3]")).getText().trim());
+			cerealesV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[4]")).getText().trim());
 		}catch(Exception e) {
 		//	if(listeDeRoutesDuVillage.size() > 0 && !(route.getText().toLowerCase().contains("aucune"))) {
 		//		t.ecrireDansConsole("Echec lecture RDC ou pas de RDC", true);
@@ -2062,6 +2153,11 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 		tempRdc.setCible(nameV);
 		tempRdc.setHeureDepart(Integer.parseInt(heureV));
 		tempRdc.setSource(v);
+		tempRdc.setBois(boisV);
+		tempRdc.setArgile(argileV);
+		tempRdc.setFer(ferV);
+		tempRdc.setCereales(cerealesV);
+		tempRdc.setPositionDansLaListe(i);
 		tempListeRdc.add(tempRdc);
 		
 		
@@ -2070,7 +2166,12 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 			
 			if(oldRdc.getCible().equals(nameV) && oldRdc.getHeureDepart() == Integer.parseInt(heureV) ) {
 				trouver = true;
-				t.ecrireDansConsole("[Marché] RDC : vers " + oldRdc.getCible() +" depart : " + oldRdc.getHeureDepart() +" h", true);
+				t.ecrireDansConsole("[Marché] RDC --> De : " + v.getNom() + " vers " + oldRdc.getCible() +" depart : " + oldRdc.getHeureDepart() +" h" + " --> Bois : " + boisV + " Argile : "+ argileV + " Fer : "+ ferV +" Cereales : " + cerealesV, true);
+				//si edition, on met à jour les valeurs
+				oldRdc.setBois(boisV);
+				oldRdc.setArgile(argileV);
+				oldRdc.setFer(ferV);
+				oldRdc.setCereales(cerealesV);
 				break;
 			}
 		}
@@ -2082,8 +2183,13 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 		newRdc.setCible(nameV);
 		newRdc.setHeureDepart(Integer.parseInt(heureV));
 		newRdc.setSource(v);
+		newRdc.setBois(boisV);
+		newRdc.setArgile(argileV);
+		newRdc.setFer(ferV);
+		newRdc.setCereales(cerealesV);
+		newRdc.setPositionDansLaListe(i);
 		v.getListeRouteDeCommerce().add(newRdc);
-		t.ecrireDansConsole("[Marché] RDC : vers " +newRdc.getCible() +" depart : " + newRdc.getHeureDepart() +" h", true);
+		t.ecrireDansConsole("[Marché] RDC --> De : " + v.getNom() + " vers " +newRdc.getCible() +" depart : " + newRdc.getHeureDepart() +" h" + " --> Bois : " + boisV + " Argile : "+ argileV + " Fer : "+ ferV +" Cereales : " + cerealesV, true);
 		
 		}	
 		
@@ -2095,13 +2201,13 @@ public void listerRouteDeCommerce(Travian t, Village v) {
 	
 	//////////////////////////////////////////
 	//////////////////////////////////////////
-	//Suppression des listes non presentes
+	//Suppression des listes non presentes 
 	for(RouteDeCommerce oldRdc : v.getListeRouteDeCommerce()) {
 		boolean trouver = false;
 		
 		for(RouteDeCommerce tempRdc : tempListeRdc) {
 			if(oldRdc.getSource().equals(tempRdc.getSource()) &&  oldRdc.getHeureDepart() == tempRdc.getHeureDepart() ) {
-				trouver = true;
+				trouver = true;			
 				continue;
 			}
 		}

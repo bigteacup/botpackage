@@ -107,8 +107,16 @@ public class RouteDeCommerce {
 	int heureDepart = 0;
 	int increment = 2;
 	int repetition = 12 ;
-	
+	int positionDansLaListe = 0;
 
+
+	public int getPositionDansLaListe() {
+		return positionDansLaListe;
+	}
+
+	public void setPositionDansLaListe(int positionDansLaListe) {
+		this.positionDansLaListe = positionDansLaListe;
+	}
 
 	String cible = null;
 	Village source = null;
