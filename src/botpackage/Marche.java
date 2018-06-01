@@ -1973,9 +1973,11 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 		}
 		
 
-	
-	
-	
+	//pour finir on refait la liste
+	allerDansLeMarché(t);
+	changementOngletMarche(t, village, 0, "Gestion");
+	t.randomsleep.court();
+	listerRouteDeCommerce(t, village);	
 }
 
 
