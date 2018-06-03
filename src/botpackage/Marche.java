@@ -27,13 +27,13 @@ public class Marche {
 	int totalRessourcesEnvoyees;
 	int compteurDeBootMemoire = 0;
 
-	
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//TODO faire cette analyse pour tout les village en meme temps par le compte +
 	public void etablirBesoinEnRessources(Travian t, Village village, ArrayList<Village> listeDeVillages) {
@@ -92,11 +92,11 @@ public class Marche {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -132,11 +132,11 @@ public class Marche {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//ne pas utiliser code faux
 	//definir longlet favori  //*[contains(@class, 'favorActive')] https://ts4.travian.fr/build.php?t=5&id=37 //*[not(contains(@class,'Active'))] //*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]
@@ -164,11 +164,11 @@ public class Marche {
 	}
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	////////dans la page marche  try{ allerSurPageEnvoi(t);}catch(Exception e) {t.ecrireDansConsole("Echec aller sur la page envoi du marché  :)");}
 	public int updateNombreDeMarchandsDispo(Travian t, Village village){ 
@@ -198,12 +198,12 @@ public class Marche {
 		return nombreMarchandDispoInteger;
 	}
 
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public int updateQuantiteMaxTransporteParMarchand(Travian t, Village village, int token){
 		//TODO gerer la quantité en cas d'echec de prise de la valeur
@@ -232,24 +232,24 @@ public class Marche {
 
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	public void changementOngletMarche(Travian t,Village village, int token, String titreOnglet) {
 		try {
 			t.ecrireDansConsole("ChangementOnglet " + token, true );
 			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
-			
+
 			try {
 				WebElement ongletActuel = t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'container active')]")) ;
 				if(ongletActuel.getText().toLowerCase().trim().contains(titreOnglet.toLowerCase())) {
 					t.ecrireDansConsole("Nous somme deja sur le bon onglet : "  + titreOnglet, true);
 				} else {
-					
+
 					for (WebElement tabGestion : listeDesTabs) {
 						if (tabGestion.getText().contains(titreOnglet)) { 
 
@@ -259,14 +259,14 @@ public class Marche {
 						}
 
 					}
-					
-					
+
+
 				}
-				
-			
-					 
-				
-				
+
+
+
+
+
 			}catch(Exception e3) {
 				for (WebElement tabGestion : listeDesTabs) {
 					if (tabGestion.getText().contains(titreOnglet)) { 
@@ -277,10 +277,10 @@ public class Marche {
 					}
 
 				}
-				
-				
+
+
 			}
-			
+
 
 
 		}catch (Exception e1) {
@@ -289,11 +289,11 @@ public class Marche {
 
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -358,17 +358,17 @@ public class Marche {
 
 					//on fait une liste//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 					if(tropBois){
-				//		t.randomsleep.tcourt(); //test
+						//		t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourBois = marchandsAllouesParRessource;
-						
+
 						while (village.getBois() - (marchandsAllouesPourBois*quantite) <   village.getMaxStockDepot()/100*pourcentageBoisMin){
 							marchandsAllouesPourBois--;
 						}
 						while ( marchandsAllouesPourBois*quantite > (village.getMaxStockDepot()/100*pourcentageDepotSiloMaxPonctionnable) ){
 							marchandsAllouesPourBois--;
-									}
+						}
 						//
 						String nomOrdre = "Bois";
 						Ordre ordreDeBois = new Ordre(); 
@@ -379,7 +379,7 @@ public class Marche {
 					}
 
 					if(tropArgile){
-				//		t.randomsleep.tcourt(); //test
+						//		t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources //TODO reflechir a cela
 						int marchandsAllouesPourArgile = marchandsAllouesParRessource;
@@ -399,7 +399,7 @@ public class Marche {
 					}
 
 					if(tropFer){
-					//	t.randomsleep.tcourt(); //test
+						//	t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourFer = marchandsAllouesParRessource;
@@ -420,7 +420,7 @@ public class Marche {
 					}
 
 					if(tropCereales){
-					//	t.randomsleep.tcourt(); //test
+						//	t.randomsleep.tcourt(); //test
 						int i=0;
 						//on s'assure de ne pas envoyer plus de tant de pourcents d'une ressources
 						int marchandsAllouesPourCereales = marchandsAllouesParRessource;
@@ -449,27 +449,27 @@ public class Marche {
 		t.ecrireDansConsole("[Marché] evacuerSurPlusRessources Fin", true);
 	}
 
-///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
 	//////////////////////////////////////////////////
 	/////////////////////////////////////////////////
-	
-	
-	
-	//////////////////////////////////////////////////
-	/////////////////////////////////////////////////
-	//////////////////////////////////////////////////
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
-	
-	
-	
-	
+
+
+	//////////////////////////////////////////////////
+	/////////////////////////////////////////////////
+	//////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 	//TODO revoir la facon de placer les calculs et les indication de temps et distance et sur calculsTravian
 	//Selection du village cible pour chaque ordre
@@ -613,12 +613,12 @@ public class Marche {
 
 	}
 
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 	// cliquer en regroupant les Ordre ayant la meme cible
@@ -706,11 +706,11 @@ public class Marche {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//fonction envoyer sur une cible
 	public boolean envoyerMarchands(Travian t, String villageCibleNom) {
@@ -905,28 +905,28 @@ public class Marche {
 
 
 	 */
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void allerDansLeMarché(Travian t){
 		try {// on vas sur le marché
 			WebElement titre;
 			String titreString = "";
 			try {
-			titre = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"content\"]/h1"));
-			titreString = titre.getText().trim();
+				titre = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"content\"]/h1"));
+				titreString = titre.getText().trim();
 			}catch (Exception ea) {
-				
+
 			}
 			if(!titreString.toLowerCase().contains(TemplatesDeVillages.marche.toLowerCase())) {
 				t.ecrireDansConsole("Nous ne sommes pas déja dans le marché --> on y va...", true);
 				t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
 				t.randomsleep.court();
-				}else {
-					t.ecrireDansConsole("Nous sommes déja dans le marché ", true);
-				}
-			
-		
+			}else {
+				t.ecrireDansConsole("Nous sommes déja dans le marché ", true);
+			}
+
+
 		} catch (Exception eb) {
 			t.ecrireDansConsole("Pas de compte + ou pas de marché Passage en force", true);
 
@@ -954,15 +954,15 @@ public class Marche {
 
 
 	}
-	
-	 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//TODO REafctorer pour utiliser le systeme d'ordre plutot que cela // Modifier Appro Petit Village pour envoyer le max de resources possibles plutot que tant de marchands de chaque par ressource
 	//Ici les village en negatif peuvent etre prit dans certaine conditions
 	public void approPetitVillage(Travian t, Village village, ArrayList<Village> listeDeVillages){
@@ -971,7 +971,7 @@ public class Marche {
 		village.updateRessources(t);
 		try {
 			if (village.getChampMin() <= t.bot.champMinFx){
-				
+
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
 				int pourcentageApproPetitVillage = t.bot.pourcentageApproPetitVillageFx;
 				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceFx;
@@ -979,7 +979,7 @@ public class Marche {
 				//en cas de negatif : parametres
 				int pourcentageSiloMiniPourAutoriserAAider = t.bot.pourcentageSiloMiniPourAutoriserAAider; // doit avoir au moins 50% de remplissage
 				int pourcentageSiloMaxPonctionnable = t.bot.pourcentageSiloMaxPonctionnable ; // prend 10% de ressources
-				
+
 				boolean continuer = true;
 				boolean manqueB = village.getBois() <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
 				boolean manqueA = village.getArgile() <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
@@ -993,16 +993,16 @@ public class Marche {
 
 
 				if(manqueB || manqueA || manqueF ||manqueC){
-			
+
 					int arrivageIntBois = 0;
 					int arrivageIntArgile = 0;
 					int arrivageIntFer =  0;
 					int arrivageIntCereales =  0;
 
-					
-			//		if(village.trouverBatiment(t, village, TemplatesDeVillages.marche) == true || village.getNombreDeMarchandsMax() > 0 || village.getNombreDeMarchands() > 0 ) {
-						
-					
+
+					//		if(village.trouverBatiment(t, village, TemplatesDeVillages.marche) == true || village.getNombreDeMarchandsMax() > 0 || village.getNombreDeMarchands() > 0 ) {
+
+
 					t.randomsleep.court();
 					allerDansLeMarché(t);
 					t.randomsleep.court();
@@ -1013,8 +1013,8 @@ public class Marche {
 					arrivageIntFer = lireArrivageMarche(t, village, 2, 15900, 0);
 					arrivageIntCereales = lireArrivageMarche(t, village, 3, 15900, 0);
 					//manqC =  manqC - arrivageInt;
-				//	} 
-					 
+					//	} 
+
 					for (Village villageCandidat : listeDeVillages) {
 						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider))  ) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
 							continue;
@@ -1034,27 +1034,27 @@ public class Marche {
 										){
 
 
-									
+
 
 									t.randomsleep.court();
 									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + villageCandidat.getId() + "&')]")).click();
-								//	t.getCompte().getDriver().get(villageCandidat.getUrl());
+									//	t.getCompte().getDriver().get(villageCandidat.getUrl());
 									t.randomsleep.court();
 									//on va sur le marché
 									allerDansLeMarché(t);
 									changementOngletMarche(t, villageCandidat, 0, "Envoi");
 									t.randomsleep.court();
-									
+
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
 									villageCandidat.updateRessources(t);
-							/*		
+									/*		
 									int dureeALire = 15900;
 									int arrivageBoisInt = lireArrivageMarche(t, village, 0, dureeALire, 0); // 1h59minutes entrant 
 									int arrivageArgileInt = lireArrivageMarche(t, village, 1, dureeALire, 0);
 									int arrivageFerInt = lireArrivageMarche(t, village, 2, dureeALire, 0);
 									int arrivageCerealesInt = lireArrivageMarche(t, village, 3, dureeALire, 0);
-									*/
-									
+									 */
+
 									int nombreDeBesoin = 0 ; // on remet a zero //par default
 									if (manqueB){nombreDeBesoin++;}
 									if (manqueA){nombreDeBesoin++;}
@@ -1077,8 +1077,8 @@ public class Marche {
 										}
 										if(mB < marchandsMaxAllouesParRessource && arrivageIntBois == 0 && mB < 1){ // si on envoi zero marchand et qu'aucun arrivage de la ressource arrive alors on ajoute un marchand pour remplir un eventuel depot silo de bas niveau
 											mB++;
-											} 
-										}
+										} 
+									}
 
 									///Argile
 									if(manqueA){
@@ -1087,9 +1087,9 @@ public class Marche {
 										}
 										if(mA < marchandsMaxAllouesParRessource && arrivageIntArgile == 0 && mA < 1){
 											mA++;
-											}
 										}
-									
+									}
+
 									///Fer
 									if(manqueF){
 										while(mF*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqF - arrivageIntFer){
@@ -1097,7 +1097,7 @@ public class Marche {
 										}
 										if(mF < marchandsMaxAllouesParRessource && arrivageIntFer == 0 && mF < 1){
 											mF++;
-											}
+										}
 									}
 
 									////Cereales
@@ -1113,16 +1113,16 @@ public class Marche {
 										}
 										if(mC < marchandsMaxAllouesParRessource && arrivageIntCereales == 0 && mC < 1){
 											mC++;
-											}
+										}
 									}
-									
-									
+
+
 									//re test des manquant apres observation
-									 manqueB = village.getBois() + arrivageIntBois <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
-									 manqueA = village.getArgile() + arrivageIntArgile <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
-									 manqueF = village.getFer() + arrivageIntFer <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
-									 manqueC = village.getCereales() + arrivageIntCereales <= village.getMaxStockSilo()/100*pourcentageApproPetitVillage;
-									
+									manqueB = village.getBois() + arrivageIntBois <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
+									manqueA = village.getArgile() + arrivageIntArgile <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
+									manqueF = village.getFer() + arrivageIntFer <= village.getMaxStockDepot()/100*pourcentageApproPetitVillage;
+									manqueC = village.getCereales() + arrivageIntCereales <= village.getMaxStockSilo()/100*pourcentageApproPetitVillage;
+
 									int compteurBois = 0;
 									int compteurArgile = 0;
 									int compteurFer = 0;
@@ -1157,9 +1157,9 @@ public class Marche {
 										}}
 									//	t.ecrireDansConsole("[Marché] ApproPetitVillage");
 									if(manqueB == true || manqueA == true || manqueF== true || manqueC== true) {
-									if(envoyerMarchands(t, village.getNom())){
-										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
-									}
+										if(envoyerMarchands(t, village.getNom())){
+											t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " envoi : "+compteurBois + " Bois "+compteurArgile + " Argile "+compteurFer + " Fer "+compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+										}
 									}else {
 										t.ecrireDansConsole("[Marché][Appro Petits Villages]"+ t.villageEnCours().getNom() + " devait envoyer sur "  +village.getNom() + " mais ceci est annulé apres analyse précise", true);
 									}
@@ -1189,12 +1189,12 @@ public class Marche {
 		t.ecrireDansConsole("[Marché] ApproPetitVillage Fin", true);
 
 	}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//TODO ajouter un horodate ou une lecture du marché avant d'envoyer trop de ressources 
 	//Ici on ne prends pas les village en negatif
 	public void approUrgenceFamine(Travian t, Village village, ArrayList<Village> listeDeVillages){
@@ -1227,45 +1227,45 @@ public class Marche {
 					changementOngletMarche(t, village, 0, "Envoi");
 					t.randomsleep.court();
 					int arrivageInt = lireArrivageMarche(t, village, 3, 15900, 0); //cereales 1h59minutes entrant 
-					 
-					 
+
+
 					int pourcentage = 90;
 					while(continuer == true) {
 						t.ecrireDansConsole("[Marché] ApproUrgenceFamine recherche les villages ayant les silos remplis à " + pourcentage + " % et + ", true );
-					
-					for (Village villageCandidat : listeDeVillages) {
-						if(villageCandidat.getNom().equals(village.getNom()) || villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage) {
-							//t.ecrireDansConsole("[Marché] "+ villageCandidat.getNom() + " exclu à ce tour, ApproUrgenceFamine recherche les villages ayant les silos remplis à " + pourcentage + " % et +  ", true );
-							continue;
-						}
-						//Check de la distance 
-						double distance = t.calculs.calculDeDistance(villageCandidat.getX(), villageCandidat.getY(), village.getX(), village.getY(),false);
-						double	distanceMax = t.bot.distanceMaxPourMarchandsApproUrgenceFamine; //en cases
-						if(distance < distanceMax ){
 
-							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > nbreMarchandsMiniPourFonctionner && villageCandidat.getEnNegatif() == false){ //TODO verifier de ne pas prendre le meme village 
-								if(villageCandidat.getCereales() > ressourcesMiniSurVillageSource ){
+						for (Village villageCandidat : listeDeVillages) {
+							if(villageCandidat.getNom().equals(village.getNom()) || villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage) {
+								//t.ecrireDansConsole("[Marché] "+ villageCandidat.getNom() + " exclu à ce tour, ApproUrgenceFamine recherche les villages ayant les silos remplis à " + pourcentage + " % et +  ", true );
+								continue;
+							}
+							//Check de la distance 
+							double distance = t.calculs.calculDeDistance(villageCandidat.getX(), villageCandidat.getY(), village.getX(), village.getY(),false);
+							double	distanceMax = t.bot.distanceMaxPourMarchandsApproUrgenceFamine; //en cases
+							if(distance < distanceMax ){
 
-		
-									int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands();
-									int mC = marchandsMaxAllouesParRessource;
+								if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > nbreMarchandsMiniPourFonctionner && villageCandidat.getEnNegatif() == false){ //TODO verifier de ne pas prendre le meme village 
+									if(villageCandidat.getCereales() > ressourcesMiniSurVillageSource ){
 
 
-									t.randomsleep.court();
-									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + villageCandidat.getId() + "&')]")).click();
-								//	t.getCompte().getDriver().get(villageCandidat.getUrl());
-									t.randomsleep.court();
-									//on va sur le marché
-									allerDansLeMarché(t);
-									changementOngletMarche(t, villageCandidat, 0, "Envoi");
-									t.randomsleep.court();
-									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
-									// marchands arrivants  //*[@id="merchantsOnTheWay"]/table[1]/tbody/tr[2]/td/span/text()[5]  partants : //*[@id="merchantsOnTheWay"]/table[2]/tbody/tr[2]/td/span/text()[4]
-								
-									
-									
-									
-								/*	
+										int marchandsMaxAllouesParRessource = villageCandidat.getNombreDeMarchands();
+										int mC = marchandsMaxAllouesParRessource;
+
+
+										t.randomsleep.court();
+										t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + villageCandidat.getId() + "&')]")).click();
+										//	t.getCompte().getDriver().get(villageCandidat.getUrl());
+										t.randomsleep.court();
+										//on va sur le marché
+										allerDansLeMarché(t);
+										changementOngletMarche(t, villageCandidat, 0, "Envoi");
+										t.randomsleep.court();
+										updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
+										// marchands arrivants  //*[@id="merchantsOnTheWay"]/table[1]/tbody/tr[2]/td/span/text()[5]  partants : //*[@id="merchantsOnTheWay"]/table[2]/tbody/tr[2]/td/span/text()[4]
+
+
+
+
+										/*	
 									// lire arrivage cc
 									List<WebElement> listeMarchandsArrivants = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"merchantsOnTheWay\"]/table"));
 									int i = 0;
@@ -1275,86 +1275,86 @@ public class Marche {
 										if(!arrivage.getText().contains("Transport vers")  && delaisAvantArrivage < 5900) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
 										 arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[3].trim()); 
 										}
-										
+
 										//./tbody/tr[2]/td/span/text()[5]
 									}	
 
-									*/
-									
-									
-									
-									 
-									 
-									 
-									 
-									 
-									////Cereales
-									if(manqueC){
-										while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageInt){
-											mC--;
-										}
-										if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC  && arrivageInt == 0  && mC < 1 ){ // 
-											mC++;
+										 */
+
+
+
+
+
+
+
+
+										////Cereales
+										if(manqueC){
+											while(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() > manqC - arrivageInt){
+												mC--;
 											}
-									}
-									
-									int compteurCereales = 0;
-									
-									//Cereales
-									if(manqueC){
-										for(int clic=0; clic < mC; clic++){
-											t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).click();
-											compteurCereales =  mC*villageCandidat.getQuantiteMaxTransporteeParMarchands();
-											t.randomsleep.tcourt();
-										}}
-									//corection calcul en mode flemmard , à changer :
-									if((villageCandidat.getCereales() < compteurCereales) && mC > 0){
-										compteurCereales = villageCandidat.getCereales();												
-									}
-									
-									
-									if(envoyerMarchands(t, village.getNom())){
-										t.ecrireDansConsole("[Marché][approUrgenceFamine] "+ t.villageEnCours().getNom() + " envoi : " +compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
-										continuer = false;
-										village.memoireMarcheDeLaRotation[3] =	village.memoireMarcheDeLaRotation[3] + compteurCereales;
-									}
-									updateNombreDeMarchandsDispo(t, villageCandidat);
-									t.randomsleep.court();
-									t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
-								//	t.getCompte().getDriver().get(village.getUrl());
-									t.randomsleep.court();
+											if(mC*villageCandidat.getQuantiteMaxTransporteeParMarchands() < manqC  && arrivageInt == 0  && mC < 1 ){ // 
+												mC++;
+											}
+										}
 
-									//TODO Changement de page a changer en mode secure et non en get
-									break;
+										int compteurCereales = 0;
+
+										//Cereales
+										if(manqueC){
+											for(int clic=0; clic < mC; clic++){
+												t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"addRessourcesLink4\"]")).click();
+												compteurCereales =  mC*villageCandidat.getQuantiteMaxTransporteeParMarchands();
+												t.randomsleep.tcourt();
+											}}
+										//corection calcul en mode flemmard , à changer :
+										if((villageCandidat.getCereales() < compteurCereales) && mC > 0){
+											compteurCereales = villageCandidat.getCereales();												
+										}
 
 
+										if(envoyerMarchands(t, village.getNom())){
+											t.ecrireDansConsole("[Marché][approUrgenceFamine] "+ t.villageEnCours().getNom() + " envoi : " +compteurCereales + " Cereales "+ " sur "  +village.getNom(), true);
+											continuer = false;
+											village.memoireMarcheDeLaRotation[3] =	village.memoireMarcheDeLaRotation[3] + compteurCereales;
+										}
+										updateNombreDeMarchandsDispo(t, villageCandidat);
+										t.randomsleep.court();
+										t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href,'?" + village.getId() + "&')]")).click();
+										//	t.getCompte().getDriver().get(village.getUrl());
+										t.randomsleep.court();
+
+										//TODO Changement de page a changer en mode secure et non en get
+										break;
+
+
+									}
 								}
+
+							}else {
+
+								t.ecrireDansConsole("[Marché] " + villageCandidat.getNom() + " est trop eloigné. ", true );
 							}
 
+
+
+						}
+						if(continuer == true) {
+							pourcentage = pourcentage - 10;
 						}else {
 
-							t.ecrireDansConsole("[Marché] " + villageCandidat.getNom() + " est trop eloigné. ", true );
+							break;
 						}
-
-
+						if (pourcentage < 0) {
+							tokenNPC = true;
+							/*	if (t.bot.augmenterRayonDeRechercheApproUrgenceFamine == true) {
+							 * 
 
 						}
-					if(continuer == true) {
-						pourcentage = pourcentage - 10;
-						}else {
-							
-						break;
-					}
-					if (pourcentage < 0) {
-						 tokenNPC = true;
-					/*	if (t.bot.augmenterRayonDeRechercheApproUrgenceFamine == true) {
-					 * 
-							
+							 */
+							break;
+
 						}
-					*/
-						break;
-					
-					}
 					}//fin while
 				}
 			}
@@ -1363,14 +1363,14 @@ public class Marche {
 
 	}
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	//sens
 	//0 PourArrivage 
 	//1 PourEnSortie
@@ -1384,40 +1384,40 @@ public class Marche {
 		}else {
 			sensString = EnSortie;
 		}
-		
+
 		// typeRessourceALire : 0 bois 1 argile 2 Fer 3 cereale
 		// lire arrivage
 		List<WebElement> listeMarchandsArrivants = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"merchantsOnTheWay\"]/table"));
-		
+
 		int arrivageInt = 0;
 		for(WebElement arrivage : listeMarchandsArrivants) {
 			int dureeRestanteAvantArrivage  = Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[1]/td/div[1]/span")).getText().replaceAll(":", ""));
 			if(!arrivage.getText().contains(sensString)  && dureeRestanteAvantArrivage < dureeRestanteAvantArriveeLimite) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
-			 arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[typeRessourceALire].trim()); 
+				arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[typeRessourceALire].trim()); 
 			}
-			
+
 			//./tbody/tr[2]/td/span/text()[5]
-			
+
 			if(typeRessourceALire == 0) {ressourceString = "Bois";}
 			if(typeRessourceALire == 1) {ressourceString = "Argile";}
 			if(typeRessourceALire == 2) {ressourceString = "Fer";}
 			if(typeRessourceALire == 3) {ressourceString = "Cereales";}
-			
+
 		}	
 		t.ecrireDansConsole("[Marché] lire marché :   " + ressourceString + "  : "+ arrivageInt +"" , true);
 		return arrivageInt;
 	}
-	
-	
-	
-	
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//TODO limiter les achats afin de ne pas causer un manque sur une autre ressource, bref pas compatible avec les petits villages
 	// faire un limiteur par la taille du village, ou des depot, ou le calcul complet
@@ -1461,11 +1461,11 @@ public class Marche {
 			totalCereales = totalCereales +v.getCereales();
 
 		}
-		
+
 		// on corrige les jalons de vente des cereales en cas de negatifs
 		int correctionSiVillageEnNegatif = 0;
 		if(village.getEnNegatif() == true) {
-		correctionSiVillageEnNegatif = pourcentageCorrecteurSiVillageEnNegatif;
+			correctionSiVillageEnNegatif = pourcentageCorrecteurSiVillageEnNegatif;
 		}
 		/* 
 		int moyenneB = (totalBois ) / t.getListeDeVillages().size();
@@ -1473,10 +1473,10 @@ public class Marche {
 		int moyenneF = (totalFer ) / t.getListeDeVillages().size();
 		int moyenneC = (+ totalCereales) / t.getListeDeVillages().size();
 		 */
-		
+
 		//on deteremine une mediane et on declare les besoins 
 		int moyenne = (totalBois + totalArgile + totalFer + totalCereales) / 4;
-		
+
 
 		if((totalBois < (moyenne/100*pourcentageDeclenchementAcheter)) ){ //&& (village.getMaxStockDepot() > (moyenne) ) // && (village.getBois() < (moyenne))
 			acheterBois = true;
@@ -1556,35 +1556,35 @@ public class Marche {
 			boolean acheterContreDuCereales = false;
 			int acheterContre = 0;
 
-			
+
 			if(totalBois > (moyenne + (moyenne/100*pourcentageDeclenchementAcheterContreMoyenne) )){
 				if(village.getBois() > (village.getMaxStockDepot()/100*pourcentageDeclenchementAcheterContreVillage)){
-				acheterContreDuBois = true;
-				acheterContre = 1;
-				tableauAcheterContre.add(acheterContre);
-			}
+					acheterContreDuBois = true;
+					acheterContre = 1;
+					tableauAcheterContre.add(acheterContre);
+				}
 			}
 			if(totalArgile > (moyenne + (moyenne/100*pourcentageDeclenchementAcheterContreMoyenne) )){
-			if(totalArgile > (village.getMaxStockDepot()/100*pourcentageDeclenchementAcheterContreVillage)){
-				acheterContreDuArgile = true;
-				acheterContre = 2;
-				tableauAcheterContre.add(acheterContre);
+				if(totalArgile > (village.getMaxStockDepot()/100*pourcentageDeclenchementAcheterContreVillage)){
+					acheterContreDuArgile = true;
+					acheterContre = 2;
+					tableauAcheterContre.add(acheterContre);
+				}
 			}
-		}
 			if(totalFer > (moyenne + (moyenne/100*pourcentageDeclenchementAcheterContreMoyenne) )){
-			if(totalFer > (village.getMaxStockDepot()/100*pourcentageDeclenchementAcheterContreVillage)){
-				acheterContreDuFer = true;
-				acheterContre = 3;
-				tableauAcheterContre.add(acheterContre);
+				if(totalFer > (village.getMaxStockDepot()/100*pourcentageDeclenchementAcheterContreVillage)){
+					acheterContreDuFer = true;
+					acheterContre = 3;
+					tableauAcheterContre.add(acheterContre);
+				}
 			}
-	}
 			if(totalCereales > (moyenne + (moyenne/100*pourcentageDeclenchementAcheterContreMoyenne) )){
-			if(totalCereales > ( village.getMaxStockSilo()/100*(pourcentageDeclenchementAcheterContreVillage + correctionSiVillageEnNegatif) )){
-				acheterContreDuCereales = true;
-				acheterContre = 4;
-				tableauAcheterContre.add(acheterContre);
+				if(totalCereales > ( village.getMaxStockSilo()/100*(pourcentageDeclenchementAcheterContreVillage + correctionSiVillageEnNegatif) )){
+					acheterContreDuCereales = true;
+					acheterContre = 4;
+					tableauAcheterContre.add(acheterContre);
+				}
 			}
-}
 
 
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
@@ -1671,18 +1671,18 @@ public class Marche {
 		t.ecrireDansConsole("[Marché] acheterAuMarché Fin ", true);
 	}//fin methode acheter au marché
 
-	
-	
-	
-	
-	
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public int accepterOffre(Travian t, Village village, int marchandsAllouésPourAchat, int marchandsMinPourFonctionner, int tempsMax, int marchandsConsomés, int marchandsD) {
 		boolean continuer = true;
 
@@ -1691,194 +1691,194 @@ public class Marche {
 				List<WebElement> offres = null;
 				offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]")); //offres   
 				if(!offres.isEmpty()) {
-				int i = 0;
-				for(WebElement offre : offres) {
+					int i = 0;
+					for(WebElement offre : offres) {
 						offres = t.getCompte().getDriver().findElements(By.xpath("//button[contains(., 'Accepter')]"));
 
-			updateNombreDeMarchandsDispo(t, village); //6
-			marchandsConsomés = marchandsConsomés + (marchandsD - village.getNombreDeMarchands());
-			if(marchandsConsomés < marchandsAllouésPourAchat){
-				if(village.getNombreDeMarchands() >= marchandsMinPourFonctionner){ 
-					
-					
-					
-					try {
-				
-						
-						
-						
-						
-						
-						
-					
-						String tempstrajet =	offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
-						if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
-						String[] decoupage = tempstrajet.split(":");
-						t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage[0]+" "+decoupage[1]+" "+decoupage[2], true);
-						int heures = Integer.parseInt(decoupage[0]);
-						int minutes = Integer.parseInt(decoupage[1]);
-						int secondes = Integer.parseInt(decoupage[2]);
-						int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
-						
-						
-						
-						
-						
-						
-						if(durationEnMilli <= (tempsMax*3600)*1000 ){
-							
-							
-							boolean tokenBanj = true;
-							try {
-								String liste = t.getCompte().fichierProperties.getProperty("banmarchejoueur");
-								ArrayList<String> banJ = new ArrayList<String>(Arrays.asList(liste.split(",")));
-							for(String exclu : banJ) { //Ogodai
-								//TODO Faire une listeNoire + gui
-								if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains(exclu))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
-								village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
-								offres.get(i).click(); // on accepte loffre !
-								t.ecrireDansConsole("1 achat effectué au marché", true);
-								Date lastDate = t.randomsleep.date(true);
-								village.setMarchéLastDate(lastDate);
-								 tokenBanj = false;
-								t.randomsleep.court();
-								}else {
-									t.ecrireDansConsole("Joueur en liste noire...", true);
-									
-								}
-								}
-							
-							}catch(Exception e) {
-								t.ecrireDansConsole("liste noire vide ou echec ===> on autorise par default", true);
-								tokenBanj = true; // on autorise par default
-							}
-							
-							if(tokenBanj = true) {
-							village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
-							offres.get(i).click(); // on accepte loffre !
-							t.ecrireDansConsole("1 achat effectué au marché", true);
-							Date lastDate = t.randomsleep.date(true);
-							village.setMarchéLastDate(lastDate);
+						updateNombreDeMarchandsDispo(t, village); //6
+						marchandsConsomés = marchandsConsomés + (marchandsD - village.getNombreDeMarchands());
+						if(marchandsConsomés < marchandsAllouésPourAchat){
+							if(village.getNombreDeMarchands() >= marchandsMinPourFonctionner){ 
 
-							t.randomsleep.court();
+
+
+								try {
+
+
+
+
+
+
+
+
+									String tempstrajet =	offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'dur')]")).getText();//button[contains(., 'accepter')]/../..//td[contains(@class, 'dur')]     -------------------      //button[contains(., 'accepter')]//../..//td[contains(@class, 'dur')]
+									if (tempstrajet.length() < 8){tempstrajet = "0"+tempstrajet;}
+									String[] decoupage = tempstrajet.split(":");
+									t.ecrireDansConsole("[Debug] String[] decoupage : "+ decoupage[0]+" "+decoupage[1]+" "+decoupage[2], true);
+									int heures = Integer.parseInt(decoupage[0]);
+									int minutes = Integer.parseInt(decoupage[1]);
+									int secondes = Integer.parseInt(decoupage[2]);
+									int durationEnMilli = (3600 * heures) *1000 + (60 * minutes)*1000 + (secondes)*1000;
+
+
+
+
+
+
+									if(durationEnMilli <= (tempsMax*3600)*1000 ){
+
+
+										boolean tokenBanj = true;
+										try {
+											String liste = t.getCompte().fichierProperties.getProperty("banmarchejoueur");
+											ArrayList<String> banJ = new ArrayList<String>(Arrays.asList(liste.split(",")));
+											for(String exclu : banJ) { //Ogodai
+												//TODO Faire une listeNoire + gui
+												if(!(offres.get(i).findElement(By.xpath(".//../..//td[contains(@class, 'pla')]")).getText().contains(exclu))) {  // Alphabet  Ogodai      .//../..//td[contains(@class, 'pla')]      //button[contains(., 'Accepter')]/../..//td[contains(@class, 'pla')]
+													village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
+													offres.get(i).click(); // on accepte loffre !
+													t.ecrireDansConsole("1 achat effectué au marché", true);
+													Date lastDate = t.randomsleep.date(true);
+													village.setMarchéLastDate(lastDate);
+													tokenBanj = false;
+													t.randomsleep.court();
+												}else {
+													t.ecrireDansConsole("Joueur en liste noire...", true);
+
+												}
+											}
+
+										}catch(Exception e) {
+											t.ecrireDansConsole("liste noire vide ou echec ===> on autorise par default", true);
+											tokenBanj = true; // on autorise par default
+										}
+
+										if(tokenBanj = true) {
+											village.setMarchédureeDuDernierAchat(durationEnMilli*2); //on double le temps pour l'aller et le retour
+											offres.get(i).click(); // on accepte loffre !
+											t.ecrireDansConsole("1 achat effectué au marché", true);
+											Date lastDate = t.randomsleep.date(true);
+											village.setMarchéLastDate(lastDate);
+
+											t.randomsleep.court();
+										}
+
+									}else {
+										t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure", true );
+									}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								}catch (Exception e) {
+									continuer = false;
+									t.ecrireDansConsole("echec accepter offre", true);
+								}
+
+
+
+
+
+
+
+
+
+
+
+
+
+							}else {
+								continuer = false;
+								t.ecrireDansConsole("Plus assez de marchands dispo pour acheter", true);
 							}
-							
 						}else {
-							t.ecrireDansConsole("offre trop eloignée : + de :" + tempsMax +" heure", true );
+							continuer = false;
+							t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés", true);
 						}
-						
-						
-						
-						
-						
-				
-						
-						
-						
-						
-						
-						
 
 
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						}catch (Exception e) {
-						continuer = false;
-						t.ecrireDansConsole("echec accepter offre", true);
+
+
+						i++;
+
 					}
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+					continuer = false;
+					t.ecrireDansConsole("fin du parcour des offres du marché", true);
 
 				}else {
 					continuer = false;
-					t.ecrireDansConsole("Plus assez de marchands dispo pour acheter", true);
+					t.ecrireDansConsole("pas d'offre trouvée", true);
 				}
-			}else {
-				continuer = false;
-				t.ecrireDansConsole("Tout les marchands alloués pour la tache ont été consommés", true);
-			}
-			
-			
-			
-			
-			i++;
-			
-				}
-				continuer = false;
-				t.ecrireDansConsole("fin du parcour des offres du marché", true);
-
-			}else {
-				continuer = false;
-				t.ecrireDansConsole("pas d'offre trouvée", true);
-			}
 			}catch (Exception e) {
 				continuer = false;
 				t.ecrireDansConsole("echec accepter offre", true);
 			}
-			
-			
+
+
 		}
 		return marchandsConsomés;
 
 	}
 
 
-private void eviterFamineSansNpc(Travian t, Village village) {
-	if(village.getCropDeath() == true) {
-	//t.donneesRessources.
-		allerDansLeMarché(t);
-	
-		
-		
+	private void eviterFamineSansNpc(Travian t, Village village) {
+		if(village.getCropDeath() == true) {
+			//t.donneesRessources.
+			allerDansLeMarché(t);
+
+
+
+		}
 	}
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-public  void gererRouteDeCommerce(Travian t, Village village) {
-	
-	boolean trouver = false;
-	boolean besoinEditer = false;
-	/*
+	public  void gererRouteDeCommerce(Travian t, Village village) {
+
+		boolean trouver = false;
+		boolean besoinEditer = false;
+		/*
 	for(RouteDeCommerce rdcACreer : village.getListeRouteDeCommerceACreer()) {
 	for(RouteDeCommerce oldRdc : village.getListeRouteDeCommerce()) {
-			
+
 			if(oldRdc.getCible().equals(cibleString) && oldRdc.getHeureDepart() == intResult ) {
 				trouver = true;
 				break;
 			}
 		}
 	}
-	*/
-	
+		 */
 
-/*
+
+		/*
 	// en attendant
 	///////////////////////////////////////////////////
 	for(Village v : t.getListeDeVillages()) {
@@ -1889,369 +1889,382 @@ public  void gererRouteDeCommerce(Travian t, Village village) {
 		rdcTest.setIncrement(2);
 		rdcTest.setRepetition(12);
 		v.getListeRouteDeCommerceACreer().add(rdcTest);
-		
+
 	}
 ///////////////////////////////////////////////////
-	
-	*/
-	if(village.routeDeCommerceDejaListeesAvecSucce == false) {
-		allerDansLeMarché(t);
-		changementOngletMarche(t, village, 0, "Gestion");
-		t.randomsleep.court();
-		listerRouteDeCommerce(t, village);
-		
-	} 
-	
-	for(RouteDeCommerce rdcACreer : village.getListeRouteDeCommerceACreer()) {
-		int i= 0;
-		
-		String cibleString = rdcACreer.getCible() ;                  //*[@id="r4"]
-		int intBase  = rdcACreer.getHeureDepart();
-		int increment = rdcACreer.getIncrement();
-		int intResult = intBase;
-		String h = String.valueOf(intResult);
-		int positionRdcAEditer =0;
-		
-		while(i < rdcACreer.getRepetition()) {
-		
-		trouver = false;
-		besoinEditer = false;
-		positionRdcAEditer =0;
-		
-		
-		
-		
-		
-		for(RouteDeCommerce oldRdc : village.getListeRouteDeCommerce()) {
-			
-			if(oldRdc.getCible().equals(cibleString) && oldRdc.getHeureDepart() == intResult ) {
-				trouver = true;
-				if(oldRdc.getArgile() + oldRdc.getBois() + oldRdc.getFer() + oldRdc.getCereales() != rdcACreer.getBois() + rdcACreer.getBois() + rdcACreer.getFer() + rdcACreer.getCereales()   ) {
-					besoinEditer = true;
-					positionRdcAEditer = oldRdc.getPositionDansLaListe();
+
+		 */
+		if(village.routeDeCommerceDejaListeesAvecSucce == false) {
+			allerDansLeMarché(t);
+			changementOngletMarche(t, village, 0, "Gestion");
+			t.randomsleep.court();
+			listerRouteDeCommerce(t, village, true);
+
+		} 
+
+		for(RouteDeCommerce rdcACreer : village.getListeRouteDeCommerceACreer()) {
+			int i= 0;
+
+			String cibleString = rdcACreer.getCible() ;                  //*[@id="r4"]
+			int intBase  = rdcACreer.getHeureDepart();
+			int increment = rdcACreer.getIncrement();
+			int intResult = intBase;
+			String h = String.valueOf(intResult);
+			int positionRdcAEditer =0;
+
+			while(i < rdcACreer.getRepetition()) {
+
+				trouver = false;
+				besoinEditer = false;
+				positionRdcAEditer =0;
+
+
+
+
+
+				for(RouteDeCommerce oldRdc : village.getListeRouteDeCommerce()) {
+
+					if(oldRdc.getCible().equals(cibleString) && oldRdc.getHeureDepart() == intResult ) {
+						trouver = true;
+						if(oldRdc.getArgile() + oldRdc.getBois() + oldRdc.getFer() + oldRdc.getCereales() != rdcACreer.getBois() + rdcACreer.getBois() + rdcACreer.getFer() + rdcACreer.getCereales()   ) {
+							besoinEditer = true;
+							positionRdcAEditer = oldRdc.getPositionDansLaListe();
+						}
+
+						break;
+
 					}
-				
-				break;
-				
+
 				}
-			
+
+
+
+
+
+
+
+
+				if (trouver == false || besoinEditer == true) {
+					allerDansLeMarché(t);
+					changementOngletMarche(t, village, 0, "Gestion");
+				//	t.randomsleep.court();
+					//listerRouteDeCommerce(t, village, false);
+					creerOuEditerRouteDeCommerce(t, rdcACreer, cibleString, rdcACreer.getBois(), rdcACreer.getArgile(), rdcACreer.getFer(), rdcACreer.getCereales(), h, besoinEditer, positionRdcAEditer);
+					i++;
+					intResult = intResult + increment;
+					h = String.valueOf(intResult);
+					t.randomsleep.court();
+					t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"tradeSaveButton\"]/div/div[2]")).click();
+					t.randomsleep.court();
+					//pour finir on refait la liste
+					listerRouteDeCommerce(t, village, true);	
+				}else {
+					i++;
+					intResult = intResult + increment;
+					h = String.valueOf(intResult);
+				}
+
+
+
+
+
+
+
+			}	
+
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-			if (trouver == false || besoinEditer == true) {
-				allerDansLeMarché(t);
-				changementOngletMarche(t, village, 0, "Gestion");
-				t.randomsleep.court();
-				listerRouteDeCommerce(t, village);
-		 creerOuEditerRouteDeCommerce(t, rdcACreer, cibleString, rdcACreer.getBois(), rdcACreer.getArgile(), rdcACreer.getFer(), rdcACreer.getCereales(), h, besoinEditer, positionRdcAEditer);
-		 i++;
-		 intResult = intResult + increment;
-		 h = String.valueOf(intResult);
-		 t.randomsleep.court();
-		 t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"tradeSaveButton\"]/div/div[2]")).click();
-		 t.randomsleep.court();
-			}else {
-				 i++;
-				 intResult = intResult + increment;
-				 h = String.valueOf(intResult);
+
+
+
+	}
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void creerOuEditerRouteDeCommerce(Travian t, RouteDeCommerce rdc, String cibleString, int bois, int argile, int fer, int cereales, String heureString, boolean editer, int positionRdcAEditer	) {
+		t.randomsleep.court();
+
+		if(editer == false) {
+			//listedestination selection
+			try {
+				t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"build\"]/p[2]/a")).get(0).click();  
+			}catch (Exception e) {
+				t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"build\"]/p[3]/a")).get(0).click();
 			}
-		 
-			
-			
-			
-			
-			
-			
-	}	
-			
+			t.randomsleep.court();
+			List<WebElement> listeDestination = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"did_dest\"]/option"));
+			t.randomsleep.court();
+
+			for(WebElement option : listeDestination) {
+				if (option.getText().toLowerCase().contains(cibleString.toLowerCase()) == true) {
+					option.click();	
+				}
+			}
+		}else { //../tr[1]/td[5]/a
+			t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr["+  (positionRdcAEditer+1) + "]/td[5]/a")).click();
 		}
-		
-
-	//pour finir on refait la liste
-	allerDansLeMarché(t);
-	changementOngletMarche(t, village, 0, "Gestion");
-	t.randomsleep.court();
-	listerRouteDeCommerce(t, village);	
-}
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		t.randomsleep.court();
 
-public void creerOuEditerRouteDeCommerce(Travian t, RouteDeCommerce rdc, String cibleString, int bois, int argile, int fer, int cereales, String heureString, boolean editer, int positionRdcAEditer	) {
-	t.randomsleep.court();
-
-	if(editer == false) {
-	//listedestination selection
-try {
-	t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"build\"]/p[2]/a")).get(0).click();  
-}catch (Exception e) {
-	 t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"build\"]/p[3]/a")).get(0).click();
-}
-t.randomsleep.court();
-List<WebElement> listeDestination = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"did_dest\"]/option"));
-t.randomsleep.court();
-
-for(WebElement option : listeDestination) {
-if (option.getText().toLowerCase().contains(cibleString.toLowerCase()) == true) {
-	option.click();	
-}
-}
-}else { //../tr[1]/td[5]/a
-	t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr["+  (positionRdcAEditer+1) + "]/td[5]/a")).click();
-}
-
-
-
-t.randomsleep.court();
-
-//ecriture dans textField bois
-WebElement textFieldBois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r1\"]")); ////*[@id="r1"]
-int boisInt = 0;
-try {
-	boisInt = Integer.parseInt(textFieldBois.getAttribute("value"));
-}catch(Exception e) { 
-	boisInt = 0;
-}
-if(bois > 0 || bois != boisInt) {
-textFieldBois.click();
-t.randomsleep.court();
-textFieldBois.clear();
-t.randomsleep.court();
-textFieldBois.sendKeys(String.valueOf(bois));
-t.randomsleep.court();
-}
-
-//ecriture dans textField argile 
-WebElement textFieldArgile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r2\"]"));
-int argileInt = 0;
-try {
-	argileInt = Integer.parseInt(textFieldArgile.getAttribute("value"));
-}catch(Exception e) { 
-	argileInt = 0;
-}
-if(argile > 0 || argile != argileInt ) {
-textFieldArgile.click();
-t.randomsleep.court();
-textFieldArgile.clear();
-t.randomsleep.court();
-textFieldArgile.sendKeys(String.valueOf(argile));
-t.randomsleep.court();
-}
-
-//ecriture dans textField fer
-WebElement textFieldFer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r3\"]"));
-int ferInt = 0;
-try {
-	ferInt = Integer.parseInt(textFieldFer.getAttribute("value"));
-}catch(Exception e) { 
-	ferInt = 0;
-}
-if(fer > 0 || fer != ferInt ) {
-textFieldFer.click();
-t.randomsleep.court();
-textFieldFer.clear();
-t.randomsleep.court();
-textFieldFer.sendKeys(String.valueOf(fer));
-t.randomsleep.court();
-}
-
-//ecriture dans textField cc
-WebElement textFieldCereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r4\"]"));
-int cerealesInt = 0;
-try {
-	cerealesInt = Integer.parseInt(textFieldCereales.getAttribute("value"));//getText());
-}catch(Exception e) { 
-	cerealesInt = 0;
-}
-if (cereales > 0 || fer != cerealesInt ) {
-textFieldCereales.click();
-t.randomsleep.court();
-textFieldCereales.clear();
-t.randomsleep.court();
-textFieldCereales.sendKeys(String.valueOf(cereales));
-t.randomsleep.court();
-}
-
-
-
-if(editer == false ) {
-	
-// Selection heure depart
-List<WebElement> listeHeureDepart = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"userHour\"]/option"));
-for(WebElement option : listeHeureDepart ) {
-if (option.getText().toLowerCase().contentEquals(heureString)) {
-	option.click();
-	
-	break;
-}
-}
-
-}
-
-
-
-}
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-public void listerRouteDeCommerce(Travian t, Village v) {
-	String nameV = null;
-	String heureV = null;
-	int boisV= 0;
-	int argileV= 0;
-	int ferV= 0;
-	int cerealesV= 0;
-	int i = 0;
-	ArrayList<RouteDeCommerce> tempListeRdc = new ArrayList<RouteDeCommerce>();
-
-	
-	List<WebElement> listeDeRoutesDuVillage =  t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr"));
-	for(WebElement route : listeDeRoutesDuVillage) {
-		nameV = null;
-		heureV = null;
-		boisV= 0;
-		argileV= 0;
-		ferV= 0;
-		cerealesV= 0;
-		boolean trouver = false;
-		
-		
+		//ecriture dans textField bois
+		WebElement textFieldBois = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r1\"]")); ////*[@id="r1"]
+		int boisInt = 0;
 		try {
-			nameV =	route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/a")).getText();
-			heureV = route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[3]")).getText().split(":")[0];
-			boisV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[1]")).getText().trim());
-			argileV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[2]")).getText().trim());
-			ferV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[3]")).getText().trim());
-			cerealesV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[4]")).getText().trim());
-		}catch(Exception e) {
-		//	if(listeDeRoutesDuVillage.size() > 0 && !(route.getText().toLowerCase().contains("aucune"))) {
-		//		t.ecrireDansConsole("Echec lecture RDC ou pas de RDC", true);
-		//		}
+			boisInt = Integer.parseInt(textFieldBois.getAttribute("value"));
+		}catch(Exception e) { 
+			boisInt = 0;
+		}
+		if(bois > 0 || bois != boisInt) {
+			textFieldBois.click();
+			t.randomsleep.court();
+			textFieldBois.clear();
+			t.randomsleep.court();
+			textFieldBois.sendKeys(String.valueOf(bois));
+			t.randomsleep.court();
+		}
+
+		//ecriture dans textField argile 
+		WebElement textFieldArgile = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r2\"]"));
+		int argileInt = 0;
+		try {
+			argileInt = Integer.parseInt(textFieldArgile.getAttribute("value"));
+		}catch(Exception e) { 
+			argileInt = 0;
+		}
+		if(argile > 0 || argile != argileInt ) {
+			textFieldArgile.click();
+			t.randomsleep.court();
+			textFieldArgile.clear();
+			t.randomsleep.court();
+			textFieldArgile.sendKeys(String.valueOf(argile));
+			t.randomsleep.court();
+		}
+
+		//ecriture dans textField fer
+		WebElement textFieldFer = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r3\"]"));
+		int ferInt = 0;
+		try {
+			ferInt = Integer.parseInt(textFieldFer.getAttribute("value"));
+		}catch(Exception e) { 
+			ferInt = 0;
+		}
+		if(fer > 0 || fer != ferInt ) {
+			textFieldFer.click();
+			t.randomsleep.court();
+			textFieldFer.clear();
+			t.randomsleep.court();
+			textFieldFer.sendKeys(String.valueOf(fer));
+			t.randomsleep.court();
+		}
+
+		//ecriture dans textField cc
+		WebElement textFieldCereales = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"r4\"]"));
+		int cerealesInt = 0;
+		try {
+			cerealesInt = Integer.parseInt(textFieldCereales.getAttribute("value"));//getText());
+		}catch(Exception e) { 
+			cerealesInt = 0;
+		}
+		if (cereales > 0 || fer != cerealesInt ) {
+			textFieldCereales.click();
+			t.randomsleep.court();
+			textFieldCereales.clear();
+			t.randomsleep.court();
+			textFieldCereales.sendKeys(String.valueOf(cereales));
+			t.randomsleep.court();
+		}
+
+
+
+		if(editer == false ) {
+
+			// Selection heure depart
+			List<WebElement> listeHeureDepart = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"userHour\"]/option"));
+			for(WebElement option : listeHeureDepart ) {
+				if (option.getText().toLowerCase().contentEquals(heureString)) {
+					option.click();
+
+					break;
+				}
 			}
-		
-		//remplir liste Temporaire
-		RouteDeCommerce tempRdc = new RouteDeCommerce();
-		tempRdc.setCible(nameV);
-		tempRdc.setHeureDepart(Integer.parseInt(heureV));
-		tempRdc.setSource(v);
-		tempRdc.setBois(boisV);
-		tempRdc.setArgile(argileV);
-		tempRdc.setFer(ferV);
-		tempRdc.setCereales(cerealesV);
-		tempRdc.setPositionDansLaListe(i);
-		tempListeRdc.add(tempRdc);
-		
-		
-		///////////////////////////////////////////////////////
+
+		}
+
+
+
+	}
+
+
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void listerRouteDeCommerce(Travian t, Village v, boolean verbose) {
+		String nameV = null;
+		String heureV = null;
+		int boisV= 0;
+		int argileV= 0;
+		int ferV= 0;
+		int cerealesV= 0;
+		int i = 0;
+		ArrayList<RouteDeCommerce> tempListeRdc = new ArrayList<RouteDeCommerce>();
+
+
+		List<WebElement> listeDeRoutesDuVillage =  t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr"));
+		for(WebElement route : listeDeRoutesDuVillage) {
+			nameV = null;
+			heureV = null;
+			boisV= 0;
+			argileV= 0;
+			ferV= 0;
+			cerealesV= 0;
+			boolean trouver = false;
+
+
+			try {
+				nameV =	route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/a")).getText();
+				heureV = route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[3]")).getText().split(":")[0];
+				boisV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[1]")).getText().trim());
+				argileV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[2]")).getText().trim());
+				ferV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[3]")).getText().trim());
+				cerealesV = Integer.parseInt(route.findElement(By.xpath("../tr["+ (i + 1) +"]/td[2]/div/div/span[4]")).getText().trim());
+			}catch(Exception e) {
+				//	if(listeDeRoutesDuVillage.size() > 0 && !(route.getText().toLowerCase().contains("aucune"))) {
+				//		t.ecrireDansConsole("Echec lecture RDC ou pas de RDC", true);
+				//		}
+			}
+
+			//remplir liste Temporaire
+			RouteDeCommerce tempRdc = new RouteDeCommerce();
+			tempRdc.setCible(nameV);
+			tempRdc.setHeureDepart(Integer.parseInt(heureV));
+			tempRdc.setSource(v);
+			tempRdc.setBois(boisV);
+			tempRdc.setArgile(argileV);
+			tempRdc.setFer(ferV);
+			tempRdc.setCereales(cerealesV);
+			tempRdc.setPositionDansLaListe(i);
+			tempListeRdc.add(tempRdc);
+
+
+			///////////////////////////////////////////////////////
+			for(RouteDeCommerce oldRdc : v.getListeRouteDeCommerce()) {
+
+				if(oldRdc.getCible().equals(nameV) && oldRdc.getHeureDepart() == Integer.parseInt(heureV) ) {
+					trouver = true;
+					if (verbose == true) {t.ecrireDansConsole("[Marché] RDC --> De : " + v.getNom() + " vers " + oldRdc.getCible() +" depart : " + oldRdc.getHeureDepart() +" h" + " --> Bois : " + boisV + " Argile : "+ argileV + " Fer : "+ ferV +" Cereales : " + cerealesV, true);}
+					//si edition, on met à jour les valeurs
+					oldRdc.setBois(boisV);
+					oldRdc.setArgile(argileV);
+					oldRdc.setFer(ferV);
+					oldRdc.setCereales(cerealesV);
+					break;
+				}
+			}
+
+
+			if(trouver  == false){
+
+				RouteDeCommerce newRdc = new RouteDeCommerce();
+				newRdc.setCible(nameV);
+				newRdc.setHeureDepart(Integer.parseInt(heureV));
+				newRdc.setSource(v);
+				newRdc.setBois(boisV);
+				newRdc.setArgile(argileV);
+				newRdc.setFer(ferV);
+				newRdc.setCereales(cerealesV);
+				newRdc.setPositionDansLaListe(i);
+				v.getListeRouteDeCommerce().add(newRdc);
+				if (verbose == true ) {t.ecrireDansConsole("[Marché] RDC --> De : " + v.getNom() + " vers " +newRdc.getCible() +" depart : " + newRdc.getHeureDepart() +" h" + " --> Bois : " + boisV + " Argile : "+ argileV + " Fer : "+ ferV +" Cereales : " + cerealesV, true);}
+
+			}	
+
+			i++;
+
+
+		}
+
+
+		//////////////////////////////////////////
+		//////////////////////////////////////////
+		//Suppression des listes non presentes 
 		for(RouteDeCommerce oldRdc : v.getListeRouteDeCommerce()) {
+			boolean trouver = false;
+			int compteurDeDoublon = 0;
+			Village memA = null;
+			int memB = -1;
 			
-			if(oldRdc.getCible().equals(nameV) && oldRdc.getHeureDepart() == Integer.parseInt(heureV) ) {
-				trouver = true;
-				t.ecrireDansConsole("[Marché] RDC --> De : " + v.getNom() + " vers " + oldRdc.getCible() +" depart : " + oldRdc.getHeureDepart() +" h" + " --> Bois : " + boisV + " Argile : "+ argileV + " Fer : "+ ferV +" Cereales : " + cerealesV, true);
-				//si edition, on met à jour les valeurs
-				oldRdc.setBois(boisV);
-				oldRdc.setArgile(argileV);
-				oldRdc.setFer(ferV);
-				oldRdc.setCereales(cerealesV);
-				break;
+			for(RouteDeCommerce tempRdc : tempListeRdc) {
+				 memA = tempRdc.getSource();
+				memB = tempRdc.getHeureDepart();
+				
+				if(oldRdc.getSource().equals(tempRdc.getSource()) &&  oldRdc.getHeureDepart() == tempRdc.getHeureDepart() ) {
+					trouver = true;	
+					compteurDeDoublon = compteurDeDoublon + 1; // mal nommée compte le nombre de routes similaires
+					if (compteurDeDoublon > 1) {
+							deleteDoublon(t, tempRdc);
+					}
+				}
+				
 			}
-		}
-		
-		
-		if(trouver  == false){
-		
-		RouteDeCommerce newRdc = new RouteDeCommerce();
-		newRdc.setCible(nameV);
-		newRdc.setHeureDepart(Integer.parseInt(heureV));
-		newRdc.setSource(v);
-		newRdc.setBois(boisV);
-		newRdc.setArgile(argileV);
-		newRdc.setFer(ferV);
-		newRdc.setCereales(cerealesV);
-		newRdc.setPositionDansLaListe(i);
-		v.getListeRouteDeCommerce().add(newRdc);
-		t.ecrireDansConsole("[Marché] RDC --> De : " + v.getNom() + " vers " +newRdc.getCible() +" depart : " + newRdc.getHeureDepart() +" h" + " --> Bois : " + boisV + " Argile : "+ argileV + " Fer : "+ ferV +" Cereales : " + cerealesV, true);
-		
-		}	
-		
-	i++;
 
-	
-	}
-	
-	
-	//////////////////////////////////////////
-	//////////////////////////////////////////
-	//Suppression des listes non presentes 
-	for(RouteDeCommerce oldRdc : v.getListeRouteDeCommerce()) {
-		boolean trouver = false;
-		
-		for(RouteDeCommerce tempRdc : tempListeRdc) {
-			if(oldRdc.getSource().equals(tempRdc.getSource()) &&  oldRdc.getHeureDepart() == tempRdc.getHeureDepart() ) {
-				trouver = true;			
-				continue;
+			if(trouver == false) {
+				v.getListeRouteDeCommerce().remove(oldRdc);
+
 			}
-		}
-		
-		if(trouver == false) {
-			v.getListeRouteDeCommerce().remove(oldRdc);
 
 		}
-		
+
+
+		tempListeRdc.clear();
+		v.setRouteDeCommerceDejaListeesAvecSucce(true);
+
 	}
-	
-	
-	tempListeRdc.clear();
-	v.setRouteDeCommerceDejaListeesAvecSucce(true);
-	
+
+
+
+
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public void	deleteDoublon(Travian t, RouteDeCommerce tempRdc) {
+	t.randomsleep.court();
+	t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr["+ (tempRdc.positionDansLaListe + 1) +"]/td[1]/a/img")).click();
+	t.randomsleep.court();
+	t.ecrireDansConsole("[Supression doublon] RDC --> De : " + tempRdc.getSource().getNom() + " vers " + tempRdc.getCible() +" depart : " +  tempRdc.getHeureDepart() +" h" + " --> Bois : " + tempRdc.getBois() + " Argile : "+ tempRdc.getArgile() + " Fer : "+  tempRdc.getFer() +" Cereales : " + tempRdc.getCereales(), true);
 }
 
 
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
