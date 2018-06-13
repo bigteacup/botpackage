@@ -88,14 +88,14 @@ import org.openqa.selenium.WebDriver;
 	boolean approUrgenceFamine = true;
 	boolean approPetitsVillages = true;
 	boolean construireBatiments = true;
-	public boolean optimiserProdHero = true;
+	public boolean optimiserProdHero = false;
 	public boolean faireAventures = true;
 	public boolean monterChampsCapitale = true;
 	public boolean monterChamps = true;
 	public boolean npc = true;
 	public boolean rotationVillage = true;
 	public boolean acheterAuMarché = true;
-	public boolean gererRouteDeCommerce = true;
+	public boolean gererRouteDeCommerce = false;
 	
 
 
@@ -106,9 +106,9 @@ import org.openqa.selenium.WebDriver;
 	public ArrayList<File> listeFichiers = new ArrayList<File>();
 	public Properties fichierTemplatesProperties;
 	
-	public String idDeLaListeDePillage = "1076";
-	public String motCleListeDePillage1 = "listedepillage1";
-	public String motCleListeDesPertes = "perte";
+	public String idDeLaListeDePillage = "605";
+	public String motCleListeDePillage1 = "liste1";
+	public String motCleListeDesPertes = "pertes";
 	
 	public ArrayList<TemplatesDeVillages> listeDeTemplates = new ArrayList<TemplatesDeVillages>();
 	public TemplatesDeVillages templateLancerBot;

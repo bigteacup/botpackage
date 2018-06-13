@@ -2125,6 +2125,7 @@ public class Marche {
 
 
 		List<WebElement> listeDeRoutesDuVillage =  t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"trading_routes\"]/tbody/tr"));
+		try {
 		for(WebElement route : listeDeRoutesDuVillage) {
 			nameV = null;
 			heureV = null;
@@ -2201,7 +2202,7 @@ public class Marche {
 
 		//////////////////////////////////////////
 		//////////////////////////////////////////
-		//Suppression des listes non presentes 
+		//Suppression des Doublon listes non presentes 
 		for(RouteDeCommerce oldRdc : v.getListeRouteDeCommerce()) {
 			boolean trouver = false;
 			int compteurDeDoublon = 0;
@@ -2212,7 +2213,7 @@ public class Marche {
 				 memA = tempRdc.getSource();
 				memB = tempRdc.getHeureDepart();
 				
-				if(oldRdc.getSource().equals(tempRdc.getSource()) &&  oldRdc.getHeureDepart() == tempRdc.getHeureDepart() ) {
+				if(oldRdc.getCible().equals(tempRdc.getCible()) &&  oldRdc.getHeureDepart() == tempRdc.getHeureDepart() ) {
 					trouver = true;	
 					compteurDeDoublon = compteurDeDoublon + 1; // mal nommée compte le nombre de routes similaires
 					if (compteurDeDoublon > 1) {
@@ -2228,10 +2229,40 @@ public class Marche {
 			}
 
 		}
+		//////////////////////////////////////////
+	/*	//////////////////////////////////////////
+		//Suppression des listes non presentes 
+		for(RouteDeCommerce tempRdc : tempListeRdc) {
+			boolean trouver = false;
+			Village memA = null;
+			int memB = -1;
+			
+			for(RouteDeCommerce rdcAcreer: v.getListeRouteDeCommerceACreer()) {
+				 memA = tempRdc.getSource();
+				memB = tempRdc.getHeureDepart();
+				
+				if(rdcAcreer.getCible().equals(tempRdc.getCible())  ) {
+					trouver = true;	
+				}
+				
+			}
+
+			if(trouver == false) {
+			//	v.getListeRouteDeCommerce().remove(rdcACreer);
+				deleteDoublon(t, tempRdc);
+
+			}
+
+		}
+		
+		*/
 
 
 		tempListeRdc.clear();
 		v.setRouteDeCommerceDejaListeesAvecSucce(true);
+		}catch (Exception e) {
+			t.ecrireDansConsole("Pas de routes commerciales ou echec lecture ", true);
+		}
 
 	}
 

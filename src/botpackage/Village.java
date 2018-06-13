@@ -1100,10 +1100,10 @@ public class Village {
 			List<WebElement> troupesDuVillage = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"troops\"]/tbody/tr"));
 			for (WebElement typeTroupe : troupesDuVillage) {
 				boolean troupesPresentes = false; 
-				String tableauTroupes[] = {"Imperians", "Equites Caesaris", "éclairs de Toutatis", "Combattants à l'épée",  "Légionnaire"  };
+				String tableauTroupes[] = {"Imperians", "Caesaris", "éclairs de Toutatis", "Combattants à l'épée",  "Légionnaire", "Légionnaires", "Imperatoris", "Gourdin", "Hache", "Teuton" };
 
 				for (int i = 0; i < tableauTroupes.length; i++){
-					if ( typeTroupe.findElement(By.className("un")).getText().contains(tableauTroupes[i])){
+					if ( typeTroupe.findElement(By.className("un")).getText().toLowerCase().contains(tableauTroupes[i].toLowerCase())){
 						
 						troupesPresentes = true;
 						int nombreTroupesPresentes = Integer.parseInt(typeTroupe.findElement(By.className("num")).getText());
@@ -1112,7 +1112,7 @@ public class Village {
 						if (troupesPresentes == true ) {
 							village.setVillagePillage(true);
 						}
-						if (troupesPresentes && nombreTroupesPresentes >= 20) {
+						if (troupesPresentes && nombreTroupesPresentes >= 4) {
 							troupesAQuai = true;
 						}
 					}
