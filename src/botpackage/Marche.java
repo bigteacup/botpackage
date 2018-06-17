@@ -220,7 +220,7 @@ public class Marche {
 		} catch (Exception e) {
 			if(token <= 6) {
 				village = t.villageEnCours();
-				changementOngletMarche(t, village, token, "Envoi");
+				village.changementOnglet(t, village, token, "Envoi");
 				quantiteMaxParMarchandInteger = updateQuantiteMaxTransporteParMarchand(t, village, token);
 			}else {
 				t.ecrireDansConsole("echec [On change d'onglet] " + token, true );
@@ -238,56 +238,6 @@ public class Marche {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-	public void changementOngletMarche(Travian t,Village village, int token, String titreOnglet) {
-		try {
-			t.ecrireDansConsole("ChangementOnglet " + token, true );
-			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
-
-			try {
-				WebElement ongletActuel = t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'container active')]")) ;
-				if(ongletActuel.getText().toLowerCase().trim().contains(titreOnglet.toLowerCase())) {
-					t.ecrireDansConsole("Nous somme deja sur le bon onglet : "  + titreOnglet, true);
-				} else {
-
-					for (WebElement tabGestion : listeDesTabs) {
-						if (tabGestion.getText().contains(titreOnglet)) { 
-
-							tabGestion.click();
-							t.randomsleep.court();
-							break;
-						}
-
-					}
-
-
-				}
-
-
-
-
-
-			}catch(Exception e3) {
-				for (WebElement tabGestion : listeDesTabs) {
-					if (tabGestion.getText().contains(titreOnglet)) { 
-
-						tabGestion.click();
-						t.randomsleep.court();
-						break;
-					}
-
-				}
-
-
-			}
-
-
-
-		}catch (Exception e1) {
-			t.ecrireDansConsole("echec changementOngletMarche  "  + token, true); 
-		}
-
-	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -345,7 +295,7 @@ public class Marche {
 			if (tropCereales){nombreDeBesoin++;}
 
 			if(nombreDeBesoin >= 1 ){
-				allerDansLeMarché(t);
+				village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
 				//maj
 				int marchandsDisponibles = updateNombreDeMarchandsDispo(t, village);
 				int quantite = updateQuantiteMaxTransporteParMarchand(t, village, 0);
@@ -908,6 +858,7 @@ public class Marche {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
 	public void allerDansLeMarché(Travian t){
 		try {// on vas sur le marché
 			WebElement titre;
@@ -954,7 +905,7 @@ public class Marche {
 
 
 	}
-
+*/
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1004,9 +955,9 @@ public class Marche {
 
 
 					t.randomsleep.court();
-					allerDansLeMarché(t);
+					village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
 					t.randomsleep.court();
-					changementOngletMarche(t, village, 0, "Envoi");
+					village.changementOnglet(t, village, 0, "Envoi");
 					t.randomsleep.court();
 					arrivageIntBois = lireArrivageMarche(t, village, 0, 15900, 0); //cereales 1h59minutes entrant 
 					arrivageIntArgile = lireArrivageMarche(t, village, 1, 15900, 0);
@@ -1041,8 +992,8 @@ public class Marche {
 									//	t.getCompte().getDriver().get(villageCandidat.getUrl());
 									t.randomsleep.court();
 									//on va sur le marché
-									allerDansLeMarché(t);
-									changementOngletMarche(t, villageCandidat, 0, "Envoi");
+									village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
+									village.changementOnglet(t, villageCandidat, 0, "Envoi");
 									t.randomsleep.court();
 
 									updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
@@ -1222,9 +1173,9 @@ public class Marche {
 						t.randomsleep.court();
 					}
 					//on va sur le marché
-					allerDansLeMarché(t);
+					village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
 					t.randomsleep.court();
-					changementOngletMarche(t, village, 0, "Envoi");
+					village.changementOnglet(t, village, 0, "Envoi");
 					t.randomsleep.court();
 					int arrivageInt = lireArrivageMarche(t, village, 3, 15900, 0); //cereales 1h59minutes entrant 
 
@@ -1256,8 +1207,8 @@ public class Marche {
 										//	t.getCompte().getDriver().get(villageCandidat.getUrl());
 										t.randomsleep.court();
 										//on va sur le marché
-										allerDansLeMarché(t);
-										changementOngletMarche(t, villageCandidat, 0, "Envoi");
+										village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
+										village.changementOnglet(t, villageCandidat, 0, "Envoi");
 										t.randomsleep.court();
 										updateQuantiteMaxTransporteParMarchand(t, villageCandidat, 0);
 										// marchands arrivants  //*[@id="merchantsOnTheWay"]/table[1]/tbody/tr[2]/td/span/text()[5]  partants : //*[@id="merchantsOnTheWay"]/table[2]/tbody/tr[2]/td/span/text()[4]
@@ -1609,7 +1560,7 @@ public class Marche {
 
 			if(autorisationAchat == true){
 				//on continue
-				allerDansLeMarché(t);
+				village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
 				t.getCompte().getDriver().findElement(By.xpath("//*[@class='tabItem' and contains(., 'Acheter')]")).click(); //onlget acheter
 				t.randomsleep.court();
 				List<WebElement> ratio = t.getCompte().getDriver().findElements(By.xpath("//*[@id='ratio_select']//button")); 
@@ -1847,7 +1798,7 @@ public class Marche {
 	private void eviterFamineSansNpc(Travian t, Village village) {
 		if(village.getCropDeath() == true) {
 			//t.donneesRessources.
-			allerDansLeMarché(t);
+			village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
 
 
 
@@ -1895,8 +1846,8 @@ public class Marche {
 
 		 */
 		if(village.routeDeCommerceDejaListeesAvecSucce == false) {
-			allerDansLeMarché(t);
-			changementOngletMarche(t, village, 0, "Gestion");
+			village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
+			village.changementOnglet(t, village, 0, "Gestion");
 			t.randomsleep.court();
 			listerRouteDeCommerce(t, village, true);
 
@@ -1945,8 +1896,8 @@ public class Marche {
 
 
 				if (trouver == false || besoinEditer == true) {
-					allerDansLeMarché(t);
-					changementOngletMarche(t, village, 0, "Gestion");
+					village.allerDansUnBatiment(t, TemplatesDeVillages.marche);
+					village.changementOnglet(t, village, 0, "Gestion");
 				//	t.randomsleep.court();
 					//listerRouteDeCommerce(t, village, false);
 					creerOuEditerRouteDeCommerce(t, rdcACreer, cibleString, rdcACreer.getBois(), rdcACreer.getArgile(), rdcACreer.getFer(), rdcACreer.getCereales(), h, besoinEditer, positionRdcAEditer);

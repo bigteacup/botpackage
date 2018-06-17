@@ -849,7 +849,7 @@ public class Travian extends Thread {
 				
 				
 				
-				
+			//	village.commanderColon(t);
 				
 				
 				

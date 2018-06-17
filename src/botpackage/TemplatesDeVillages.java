@@ -150,6 +150,7 @@ public String mur(Travian t) {
 	static String silo ="Silo de céréales";
 	static String depot ="Dépôt de ressources";
 	static String batiment_principal ="Bâtiment principal"; //Bâtiment principal Bâtiment principal
+	static String manoir ="Manoir du héros"; 
 	static String empty = "Site de construction";
 	static String marche = "Place du marché";
 	static String academie = "Académie";	
@@ -175,7 +176,7 @@ public String mur(Travian t) {
 	ArrayList<ArrayList<Batiment>> listeDesTemplatesParDefault = new ArrayList<ArrayList<Batiment>>();
 	
 
-	ArrayList<Batiment> listeDeBatiments= new ArrayList<Batiment>();
+	public ArrayList<Batiment> listeDeBatiments= new ArrayList<Batiment>();
 
 	public TemplatesDeVillages() {
 
@@ -403,6 +404,7 @@ public String mur(Travian t) {
 		listeDeBatimentDuJeu.add(new Batiment (silo, 0));
 		listeDeBatimentDuJeu.add(new Batiment (depot, 0));
 		listeDeBatimentDuJeu.add(new Batiment (batiment_principal , 0));
+		listeDeBatimentDuJeu.add(new Batiment (manoir , 0));
 		listeDeBatimentDuJeu.add(new Batiment (empty , 0));
 		listeDeBatimentDuJeu.add(new Batiment (marche , 0, batMarche));
 		listeDeBatimentDuJeu.add(new Batiment (academie , 0, batAcademie));

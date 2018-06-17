@@ -244,7 +244,29 @@ public class FxConsoleExperimentale  { //extends Thread
 					motsaTester.add(mota);
 				}
 			  }
+				 for (Batiment bat : fxFenetreController.bot.templateLancerBot.listeDeBatimentDuJeu){
+						mota = bat.getNomBatiment();
+						for(String motM : motsaTester){
+								trouver = false;
+						
+						
+							
+								if (motM.equals(mota)){
+								trouver = true;
+								break;
+								
+								} 
+						}	
+					if (trouver == false){
+						if (!mota.equals("null"))
+						motsaTester.add(mota);
+					} 
+				 }
 			}
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			
 			int textSizeBefore = ligne.getLength();
 		if (ligne.getLength() ==0){ligne.getStyleClass().remove("consoleVBox");ligne.getStyleClass().add("consoleVBox"); }
@@ -444,10 +466,17 @@ public class FxConsoleExperimentale  { //extends Thread
 			if( str.contains(v.getNom())){
 				String classeCss = "console9";
 				return classeCss;
-				}else {
-					String classeCss = "console9";
-					return classeCss;
 				}
+	
+			}
+			 
+			 for (Batiment bat : fxFenetreController.bot.templateLancerBot.listeDeBatimentDuJeu){
+			if( str.contains(bat.getNomBatiment())){
+				String classeCss = "console14";
+				return classeCss;
+				}
+			
+				
 			}
 			}
 

@@ -795,7 +795,7 @@ b.scroll-bar:horizontal b.track-background {
 .console10 {-fx-fill:#ffcc00;}
 .console11 {-fx-fill:pink;}
 .console12 {-fx-fill:#FF6A00;}
-.console14 {-fx-fill:red;}
+.console14 {-fx-fill:rgb(0,128,255)}
 .console15 {-fx-fill:red;}
 .console16 {-fx-fill:red;}
 .console17 {-fx-fill:red;}
