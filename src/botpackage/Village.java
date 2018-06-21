@@ -384,7 +384,7 @@ public class Village {
 	public void setTypeChampsEnConstruction(int typeChampsEnConstruction) {
 		this.typeChampsEnConstruction = typeChampsEnConstruction;
 	}
-	
+
 
 	// TODO maxstock de base a corriger
 	public int[] memoireMarcheDeLaRotation = { 0, 0, 0, 0 };
@@ -442,7 +442,7 @@ public class Village {
 
 	public boolean listeBatimentsVideDejaVerifiee = false; 
 	public boolean routeDeCommerceDejaListeesAvecSucce = false;
-	
+
 
 
 	private boolean besoinDeConstruction;
@@ -478,7 +478,7 @@ public class Village {
 	public boolean regimeMonterChamps = true;
 	public boolean regimeNPC = true;
 	public boolean regimeAcheterAuMarché = true;
-	
+
 
 	//fin regime
 
@@ -492,7 +492,7 @@ public class Village {
 	public int slotBatimentsLibres = 22;
 	public ArrayList<RouteDeCommerce> listeRouteDeCommerce = new ArrayList<RouteDeCommerce>();
 	public ArrayList<RouteDeCommerce> listeRouteDeCommerceACreer = new ArrayList<RouteDeCommerce>();
-	
+
 	public boolean isRouteDeCommerceDejaListeesAvecSucce() {
 		return routeDeCommerceDejaListeesAvecSucce;
 	}
@@ -980,24 +980,24 @@ public class Village {
 				village.setConstructionsEnCours(constructionEnCours);
 				try {
 					voirListeDeConstructionAnalyse(t, test);
-					}catch (Exception e2) {
-						t.ecrireDansConsole("Echec analyse precise ! ", true);
-					}
+				}catch (Exception e2) {
+					t.ecrireDansConsole("Echec analyse precise ! ", true);
+				}
 			}
 		} catch (Exception e) {
 			village.setConstructionsEnCours(constructionEnCours);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 	public void voirListeDeConstructionAnalyse(Travian t, List<WebElement> listeTest) {
-		
+
 		//////////////////////////////////////////////////////
 		// se replacer sur la bonne page si un module est reste ailleur
 		String urlTest = null;
@@ -1012,17 +1012,17 @@ public class Village {
 			t.randomsleep.court();
 		}
 		//////////////////////////////////////////////////////
-		
+
 		Village village = t.villageEnCours();
 		village.getListeDeBatimentsEnCoursDeConstruction().clear();
 		try {
-			
+
 			for (WebElement element : listeTest) {
-			String nomBat =	element.findElement(By.xpath("./*[@class=\"name\"]")).getText().split("Niveau")[0].trim(); //Batiment.determinerType(nomBat)
-			village.getListeDeBatimentsEnCoursDeConstruction().add(new Batiment(nomBat));
-				
+				String nomBat =	element.findElement(By.xpath("./*[@class=\"name\"]")).getText().split("Niveau")[0].trim(); //Batiment.determinerType(nomBat)
+				village.getListeDeBatimentsEnCoursDeConstruction().add(new Batiment(nomBat));
+
 			}
-			
+
 			analyseTypeDesConstructionsEnCours(t, village);
 
 
@@ -1041,40 +1041,40 @@ public class Village {
 		int typeBatiment = 0;
 		for (Batiment batTest : village.getListeDeBatimentsEnCoursDeConstruction()) {
 
-			
+
 			if ( 	   batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsBucheron) 
 					|| batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsCarriereDArgile) 
 					|| batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsMineDeFer) 
 					|| batTest.getNomBatiment().contains(TemplatesDeVillages.ChampsFerme)) {
 				typeChamps++;
-			
-		}else {
-			typeBatiment++;
-			
-		}
+
+			}else {
+				typeBatiment++;
+
+			}
 		}
 		village.setTypeBatimentsEnConstruction(typeBatiment) ;
 		village.setTypeChampsEnConstruction(typeChamps);
-		
+
 		t.ecrireDansConsole("Batiments en cours : "+typeBatiment, true);
 		t.ecrireDansConsole("Champs en cours : "+typeChamps, true);
-}
-	
+	}
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
+
 	public void voirTroupesDuVillage(Travian t) {
 		voirTroupesOffDuVillage(t);
 		voirTroupesCivilesDuVillage(t);
 	}
-	
-	
-	
-	
+
+
+
+
 	public void voirTroupesOffDuVillage(Travian t) {
 
 		//////////////////////////////////////////////////////
@@ -1104,7 +1104,7 @@ public class Village {
 
 				for (int i = 0; i < tableauTroupes.length; i++){
 					if ( typeTroupe.findElement(By.className("un")).getText().toLowerCase().contains(tableauTroupes[i].toLowerCase())){
-						
+
 						troupesPresentes = true;
 						int nombreTroupesPresentes = Integer.parseInt(typeTroupe.findElement(By.className("num")).getText());
 						t.ecrireDansConsole("Type : "+tableauTroupes[i] +"--> "+ nombreTroupesPresentes, true );
@@ -1169,7 +1169,7 @@ public class Village {
 
 						if(typeTroupe.findElement(By.className("un")).getText().toLowerCase().contains("colon")) {
 							village.setColons(Integer.parseInt(typeTroupe.findElement(By.className("num")).getText()));
-					
+
 						}
 
 
@@ -1195,202 +1195,59 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void commanderTroupes(Travian t, Village v) {
-	int nombreACommander;
-	String typeDUniteeACommander;
-	allerDansUnBatiment(t, "caserne");
-	allerDansUnBatiment(t, "ecurie");
-	
-	
-	
-}
-
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void commanderColon(Travian t, Village v) {
-	if(true) {
-	allerDansUnBatiment(t, TemplatesDeVillages.residence );
-	changementOnglet(t, v, 0, "Gestion");
-	}
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void allerDansUnBatiment(Travian t, String batiment){
-	try {// on vas sur le marché
-		WebElement titre;
-		String titreString = "";
-		try {
-			titre = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"content\"]/h1"));
-			titreString = titre.getText().trim();
-		}catch (Exception ea) {
-
-		}
-		if(!titreString.toLowerCase().contains(batiment.toLowerCase())) {
-			t.ecrireDansConsole("Nous ne sommes pas déja dans le "+ batiment +" --> on y va...", true);
-			//  passer par les raccourcis en cas de compte plus
-			if (batiment.toLowerCase().contains(TemplatesDeVillages.marche.toLowerCase())) {
-				t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
-				t.randomsleep.court();
-			}
-			else if (batiment.toLowerCase().contains(TemplatesDeVillages.caserne.toLowerCase())) {
-				t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'barracksWhite')]")).click();
-				t.randomsleep.court();
-			}
-			else if (batiment.toLowerCase().contains(TemplatesDeVillages.ecurie.toLowerCase())) {
-				t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'stableWhite')]")).click();
-				t.randomsleep.court();
-			}
-			else if (batiment.toLowerCase().contains(TemplatesDeVillages.atelier.toLowerCase())) {
-				t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'workshopWhite')]")).click();
-				t.randomsleep.court();
-		}
-			else if (true) {
-
-			try {//on va sur une page contenant le batiment
-				if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
-					t.randomsleep.court();
-					t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
-					t.randomsleep.court();
-				}
-				WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'"+ batiment +"')]]"));
-				boutton.click();
-				t.randomsleep.court();
-			}catch (Exception e3){
-				t.ecrireDansConsole("Pas de "+ batiment +" :(", true);
-			}
-			}
-		}else {
-			t.ecrireDansConsole("Nous sommes déja dans le " + batiment, true);
-		}
-
-
-	} catch (Exception eb) {
-		t.ecrireDansConsole("Pas de compte + ou pas de " + batiment +" Passage en force", true);
-
-		try{
-			t.getCompte().getDriver().findElement(By.xpath("//*[@id='dialogCancelButton']")).click();	//*[@id="dialogCancelButton"]
-
-		}catch (Exception e1) {t.ecrireDansConsole("echec evitement de la pub Travian+ ---> normal code mort  mais laisser pour garder le code pour autre chose", true);}
-
-		try {//bon bah on va sur une page contenant le batiment
-			if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
-				t.randomsleep.court();
-				t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
-				t.randomsleep.court();
-			}
-			WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'"+ batiment +"')]]"));
-			boutton.click();
-			t.randomsleep.court();
-		}catch (Exception e3){
-			t.ecrireDansConsole("Pas de "+ batiment +" :(", true);
-		}
-	}	
+	public void commanderTroupes(Travian t, Village v) {
+		int nombreACommander;
+		String typeDUniteeACommander;
+		allerDansUnBatiment(t, "caserne");
+		allerDansUnBatiment(t, "ecurie");
 
 
 
-
-
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-public void changementOnglet(Travian t,Village village, int token, String titreOnglet) {
-	try {
-		t.ecrireDansConsole("ChangementOnglet " + token, true );
-		List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
-
-		try {
-			WebElement ongletActuel = t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'container active')]")) ;
-			if(ongletActuel.getText().toLowerCase().trim().contains(titreOnglet.toLowerCase())) {
-				t.ecrireDansConsole("Nous somme deja sur le bon onglet : "  + titreOnglet, true);
-			} else {
-
-				for (WebElement tabGestion : listeDesTabs) {
-					if (tabGestion.getText().contains(titreOnglet)) { 
-
-						tabGestion.click();
-						t.randomsleep.court();
-						break;
-					}
-
-				}
-
-
-			}
-
-
-
-
-
-		}catch(Exception e3) {
-			for (WebElement tabGestion : listeDesTabs) {
-				if (tabGestion.getText().contains(titreOnglet)) { 
-
-					tabGestion.click();
-					t.randomsleep.court();
-					break;
-				}
-
-			}
-
-
-		}
-
-
-
-	}catch (Exception e1) {
-		t.ecrireDansConsole("echec changementOnglet  "  + token, true); 
 	}
 
-}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void commanderColon(Travian t, Village v) {
+		if(true) {
+			allerDansUnBatiment(t, TemplatesDeVillages.residence );
+			changementOnglet(t, v, 0, "Gestion");
+		}
+	}
 
-	
-	
-	
-	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
-	
-	
-	
-	
+
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1493,7 +1350,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 	public void chargerBatiments(Travian t) {
 		int slotTemp = 0;
 		t.ecrireDansConsole("Debut chargerBatiment", true);
-		
+
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 			t.randomsleep.court();
 			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
@@ -1501,7 +1358,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 		}
 
 		Village village = t.villageEnCours();
-	//	village.setSlotBatimentsLibres(22);// remise à zero
+		//	village.setSlotBatimentsLibres(22);// remise à zero
 		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
 		List<Batiment> listeDesBatimentsVillage = new ArrayList<Batiment>();
@@ -1527,7 +1384,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
 				// si un slot est vide : on le nomme
 			} catch (Exception e) {
-				
+
 				slotTemp++; 
 				nomBatiment = webBatiment.getAttribute("alt");
 				levelBatiment = 0;
@@ -1581,17 +1438,17 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public int monterChamps(Travian t, int g) {
 		try {
-		t.ecrireDansConsole("Debut monterChamps", true);
-		
-		Village village = t.villageEnCours();
-		int valchampMinBaf = champMin;
-		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
-		List<WebElement> listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
-		//*[@id="village_map"]/div
-		int construEnCours = village.getConstructionsEnCours();
+			t.ecrireDansConsole("Debut monterChamps", true);
 
-		if (construEnCours < t.limiteDeConstruction && village.getTypeChampsEnConstruction() < 2) {
-			//try { // secu anti rechargement
+			Village village = t.villageEnCours();
+			int valchampMinBaf = champMin;
+			List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
+			List<WebElement> listeWebelementChampsBis = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));
+			//*[@id="village_map"]/div
+			int construEnCours = village.getConstructionsEnCours();
+
+			if (construEnCours < t.limiteDeConstruction && village.getTypeChampsEnConstruction() < 2) {
+				//try { // secu anti rechargement
 				// Lancer construction champs
 				// trouver lien du premier plus petit
 				//int g = 0;
@@ -1623,36 +1480,36 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 								//t.bot.decalageCereales == true
 
 								//TODO Decalage faire un systeme plus clair et parametrable
-							
-									ArrayList<Integer> baf = new ArrayList<Integer>();
-									baf.addAll(village.getListeLevelsChampsBois() ); // 
-									baf.addAll(village.getListeLevelsChampsArgile() );
-									baf.addAll(village.getListeLevelsChampsFer() );
-									valchampMinBaf = Collections.min(baf);
 
-									int a = Collections.max(village.getListeLevelsChampsBois());
-									if (a >= 10) {a = 0;
-									}
-									int b = Collections.max(village.getListeLevelsChampsFer());
-									if (b >= 10) {b = 0;
-									}
-									int c = Collections.max(village.getListeLevelsChampsArgile());
-									if (c >= 10) {c = 0;
-									}
-									int d = Collections.max(village.getListeLevelsChampsCereales());
-								
+								ArrayList<Integer> baf = new ArrayList<Integer>();
+								baf.addAll(village.getListeLevelsChampsBois() ); // 
+								baf.addAll(village.getListeLevelsChampsArgile() );
+								baf.addAll(village.getListeLevelsChampsFer() );
+								valchampMinBaf = Collections.min(baf);
 
-									int e = a + b + c;
+								int a = Collections.max(village.getListeLevelsChampsBois());
+								if (a >= 10) {a = 0;
+								}
+								int b = Collections.max(village.getListeLevelsChampsFer());
+								if (b >= 10) {b = 0;
+								}
+								int c = Collections.max(village.getListeLevelsChampsArgile());
+								if (c >= 10) {c = 0;
+								}
+								int d = Collections.max(village.getListeLevelsChampsCereales());
 
 
-									if(lien >= decalageCerealesLevelDebut && valchampMinBaf < decalageCerealesLevelFin && valchampMinBaf >= decalageCerealesLevelDebut && (e > 0)) { // decalage
-										t.ecrireDansConsole("Decalage Cereales actif", true);
-										decalageToken = true;
-										
+								int e = a + b + c;
 
-									}
 
-								
+								if(lien >= decalageCerealesLevelDebut && valchampMinBaf < decalageCerealesLevelFin && valchampMinBaf >= decalageCerealesLevelDebut && (e > 0)) { // decalage
+									t.ecrireDansConsole("Decalage Cereales actif", true);
+									decalageToken = true;
+
+
+								}
+
+
 								if(type.toLowerCase().contains("ferme")) {
 									if(lien >= decalageCerealesLevelDebut && valchampMinBaf < decalageCerealesLevelFin && valchampMinBaf >= decalageCerealesLevelDebut && (e > 0)) { // decalage
 										t.ecrireDansConsole("Decalage Cereales effectué", true);
@@ -1662,12 +1519,12 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 									}
 
 								}
-								
+
 							}
 						}
 						/// test
 						/// ressources///////////////////////////////////////////////////////////////////////
-					
+
 						WebElement tagUnderConstruction = null;
 						try {
 							tagUnderConstruction = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div[" + (g + 1)+ "][contains(@class, 'underConstruction')]"));
@@ -1741,7 +1598,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 								// go la page si //*[@id="stockBarFreeCrop"]
 
 								listeWebelementChamps.get(g).click();
-						
+
 								t.randomsleep.court();
 								// trouver le bouton vert
 								WebElement bouttonvert = null;
@@ -1769,7 +1626,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 							}
 						} // fin if lien== champMin
 						g++;
-						
+
 					} // fin if token de verification
 					else {
 						t.ecrireDansConsole(construEnCours +"construction en cours dont "+village.getTypeChampsEnConstruction()+ " champs", true);
@@ -1778,12 +1635,12 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 					}
 					decalageToken = false;
 				} // fin while g <18
-		//	} catch (Exception e) {
-		//		t.ecrireDansConsole("echec monterChamps");
-		//		return g;
-		//	}
-		} // fin if token <2
-		village.voirListeDeConstruction(t);
+				//	} catch (Exception e) {
+				//		t.ecrireDansConsole("echec monterChamps");
+				//		return g;
+				//	}
+			} // fin if token <2
+			village.voirListeDeConstruction(t);
 		}catch (Exception e) {
 			t.ecrireDansConsole("Erreur", true);
 			return g;
@@ -1805,29 +1662,173 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	public boolean trouverBatiment(Travian t, Village village, String nomBatiment) {
-	
-	boolean estPresent = false;
-	for	(Batiment bat : village.getBatiments()) {
-	if (bat.getNomBatiment().toLowerCase().equals(nomBatiment.toLowerCase()) ) {
-	estPresent = true;
-	break;
-}
 
-}
-	return estPresent;
+		boolean estPresent = false;
+		for	(Batiment bat : village.getBatiments()) {
+			if (bat.getNomBatiment().toLowerCase().equals(nomBatiment.toLowerCase()) ) {
+				estPresent = true;
+				break;
+			}
+
+		}
+		return estPresent;
 	}
-	
-	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
-	
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void allerDansUnBatiment(Travian t, String batiment){
+		try {// on vas sur le marché
+			WebElement titre;
+			String titreString = "";
+			try {
+				titre = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"content\"]/h1"));
+				titreString = titre.getText().trim();
+			}catch (Exception ea) {
+
+			}
+			if(!titreString.toLowerCase().contains(batiment.toLowerCase())) {
+				t.ecrireDansConsole("Nous ne sommes pas déja dans le "+ batiment +" --> on y va...", true);
+				//  passer par les raccourcis en cas de compte plus
+				if (batiment.toLowerCase().contains(TemplatesDeVillages.marche.toLowerCase())) {
+					t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'marketWhite')]")).click();
+					t.randomsleep.court();
+				}
+				else if (batiment.toLowerCase().contains(TemplatesDeVillages.caserne.toLowerCase())) {
+					t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'barracksWhite')]")).click();
+					t.randomsleep.court();
+				}
+				else if (batiment.toLowerCase().contains(TemplatesDeVillages.ecurie.toLowerCase())) {
+					t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'stableWhite')]")).click();
+					t.randomsleep.court();
+				}
+				else if (batiment.toLowerCase().contains(TemplatesDeVillages.atelier.toLowerCase())) {
+					t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'workshopWhite')]")).click();
+					t.randomsleep.court();
+				}
+				else if (true) {
+
+					try {//on va sur une page contenant le batiment
+						if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
+							t.randomsleep.court();
+							t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
+							t.randomsleep.court();
+						}
+						WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'"+ batiment +"')]]"));
+						boutton.click();
+						t.randomsleep.court();
+					}catch (Exception e3){
+						t.ecrireDansConsole("Pas de "+ batiment +" :(", true);
+					}
+				}
+			}else {
+				t.ecrireDansConsole("Nous sommes déja dans le " + batiment, true);
+			}
+
+
+		} catch (Exception eb) {
+			t.ecrireDansConsole("Pas de compte + ou pas de " + batiment +" Passage en force", true);
+
+			try{
+				t.getCompte().getDriver().findElement(By.xpath("//*[@id='dialogCancelButton']")).click();	//*[@id="dialogCancelButton"]
+
+			}catch (Exception e1) {t.ecrireDansConsole("echec evitement de la pub Travian+ ---> normal code mort  mais laisser pour garder le code pour autre chose", true);}
+
+			try {//bon bah on va sur une page contenant le batiment
+				if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
+					t.randomsleep.court();
+					t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
+					t.randomsleep.court();
+				}
+				WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'"+ batiment +"')]]"));
+				boutton.click();
+				t.randomsleep.court();
+			}catch (Exception e3){
+				t.ecrireDansConsole("Pas de "+ batiment +" :(", true);
+			}
+		}	
+
+
+
+
+
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	public void changementOnglet(Travian t,Village village, int token, String titreOnglet) {
+		try {
+			t.ecrireDansConsole("ChangementOnglet " + token, true );
+			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
+
+			try {
+				WebElement ongletActuel = t.getCompte().getDriver().findElement(By.xpath("//*[contains(@class, 'container active')]")) ;
+				if(ongletActuel.getText().toLowerCase().trim().contains(titreOnglet.toLowerCase())) {
+					t.ecrireDansConsole("Nous somme deja sur le bon onglet : "  + titreOnglet, true);
+				} else {
+
+					for (WebElement tabGestion : listeDesTabs) {
+						if (tabGestion.getText().contains(titreOnglet)) { 
+
+							tabGestion.click();
+							t.randomsleep.court();
+							break;
+						}
+
+					}
+
+
+				}
+
+
+
+
+
+			}catch(Exception e3) {
+				for (WebElement tabGestion : listeDesTabs) {
+					if (tabGestion.getText().contains(titreOnglet)) { 
+
+						tabGestion.click();
+						t.randomsleep.court();
+						break;
+					}
+
+				}
+
+
+			}
+
+
+
+		}catch (Exception e1) {
+			t.ecrireDansConsole("echec changementOnglet  "  + token, true); 
+		}
+
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 	public boolean construireBatiments(String batimentAConstruire, int levelVoulu, Travian t, boolean besoinMiseAJour) {
 		t.ecrireDansConsole("debut construireBatiments", true);
 		//t.randomsleep.court();
@@ -1886,7 +1887,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 				int level = construire1.getLevelBatiment();
 
 				if (level < levelVoulu && village.getConstructionsEnCours() < t.limiteDeConstruction) {
-		
+
 					// Parse
 					try {
 
@@ -1914,9 +1915,9 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 
 								// on fais la comparaison des ressources avec le
 								// stock du village en cours
-							if(besoinMiseAJour== true) {
-								updateRessources(t);
-							}
+								if(besoinMiseAJour== true) {
+									updateRessources(t);
+								}
 								int stockBois = village.getBois();
 								int stockArgile = village.getArgile();
 								int stockFer = village.getFer();
@@ -1932,13 +1933,13 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 										//as.getAttribute("href");;
 									}	
 									else {
-										
+
 										as.click();
 										t.randomsleep.court();
 									}
 
 
-								//	t.randomsleep.court();
+									//	t.randomsleep.court();
 
 									//TODO  en faire un Objet          
 									// si cest un marche ou autre cliquer le bon                         //*[contains(@class, 'subNavi')]//div[contains(@class, 'container')]
@@ -2119,7 +2120,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 					while( g >= 0 && erreurChamps < 30) {
 						g = monterChamps(t, g);
 						erreurChamps++;
-						
+
 					}
 					t.ecrireDansConsole("erreurChamps : " + erreurChamps + " g : " + g, true);
 				}else {
@@ -2136,7 +2137,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 		if ( t.bot.construireBatiments == true ) {
 			if ( village.getRegimeConstruction() == true ) {
 
-			/*	if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.getChampMin() <= 10
+				/*	if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.getChampMin() <= 10
 						|| village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.getVillageCapitale() == true) {*/
 				if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2) {
 					chargerBatiments(t);
@@ -2168,8 +2169,8 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 							for (Batiment batimentDuVillage : village.getBatiments()) {
 								if (batimentDuVillage.getNomBatiment().equals(batimentDuTemplate.getNomBatiment())) {
 									trouver = true;
-								if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.bloquerConstructionBatiment  == false) {
-									
+									if (village.getConstructionsEnCours() < t.limiteDeConstruction && village.getTypeBatimentsEnConstruction() < 2 && village.bloquerConstructionBatiment  == false) {
+
 										if (batimentDuVillage.getLevelBatiment() < batimentDuTemplate.getLevelBatiment()) {
 											if(construireBatiments(batimentDuTemplate.getNomBatiment(), batimentDuTemplate.getLevelBatiment(), t, besoinMiseAJour)) {
 												besoinMiseAJour = true;
@@ -2180,8 +2181,8 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 											}
 
 										}
-									
-								}else {	t.ecrireDansConsole("Upgrade batiment impossible... "+village.getConstructionsEnCours()  + " constructions en cours dont " +village.getTypeBatimentsEnConstruction()+ " batiments", true);}
+
+									}else {	t.ecrireDansConsole("Upgrade batiment impossible... "+village.getConstructionsEnCours()  + " constructions en cours dont " +village.getTypeBatimentsEnConstruction()+ " batiments", true);}
 								}
 							}
 
@@ -2221,7 +2222,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private void creationBatiment(Travian t, Village village) {
-	//	chargerBatiments(t);
+		//	chargerBatiments(t);
 		int tokenDeChangement = 0;
 		if(village.getConstructionsEnCours() < t.limiteDeConstruction){
 			t.ecrireDansConsole("Essai de création de batiments :", true);
@@ -2268,10 +2269,10 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 
 
 			// on regarde la necessité d'essayer de contruire un nouveau batiment
-		
+
 			boolean possibleDePoserUnBatiment = false;
 			for(Batiment batimentDuTemplate :  batimentsDuTemplateDuVillage){
-				
+
 
 				nomBat = batimentDuTemplate.getNomBatiment() ;
 				// on test les cas problematique
@@ -2283,7 +2284,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 
 
 						if( (batimentDuTemplate.getNeedCapitale() == true && village.getVillageCapitale() == true) || (batimentDuTemplate.getNeedArtefact() == true &&  t.getCompte().getPossedeUnArtefactGDGS() == true) ) {
-							
+
 						}
 
 
@@ -2302,22 +2303,22 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 						//test pour les champs
 						for(Batiment batRequis : batimentDuTemplate.prerequisBatiment) {
 							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsArgile) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsCarriereDArgile)) {
-									nombreConditionsRemplies++;		
-									}
+								nombreConditionsRemplies++;		
+							}
 							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsFer) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsMineDeFer)) {
 								nombreConditionsRemplies++;		
-								}
+							}
 							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsBois) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsBucheron)) {
 								nombreConditionsRemplies++;		
-								}
+							}
 							if(batRequis.getLevelBatiment() <=  Collections.max(village.listeLevelsChampsCereales) && batRequis.getNomBatiment().contains(TemplatesDeVillages.ChampsFerme)) {
 								nombreConditionsRemplies++;		
-								}
+							}
 						}
 						if(nombreConditionsRemplies == nombreConditionsRequises) {
 							t.ecrireDansConsole(nomBat+" Conditions remplies : " +nombreConditionsRemplies+" sur "+ nombreConditionsRequises, true);	
-						
-							 possibleDePoserUnBatiment = true;
+
+							possibleDePoserUnBatiment = true;
 						}else {
 							t.ecrireDansConsole(nomBat+" Conditions non remplies : " +nombreConditionsRemplies+" sur "+ nombreConditionsRequises, true);
 						}
@@ -2357,7 +2358,7 @@ public void changementOnglet(Travian t,Village village, int token, String titreO
 
 
 
-			boolean	batimentPosé = false;
+				boolean	batimentPosé = false;
 				// on va chercher si un batiment peut etre construit 
 				List<WebElement> listOngletsBats = t.getCompte().getDriver().findElements(By.xpath("//*[@class=\"tabItem\"]"));
 				int i2 = 1;
