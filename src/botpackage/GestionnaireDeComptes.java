@@ -32,28 +32,51 @@ public class GestionnaireDeComptes {
 
 	// constructeur
 	public GestionnaireDeComptes() {
+		
+
+		
+		
 
 		creerDossier();
 		listeFichiers = listerFichiers("comptes", "comptetravian");
-		File chrome = new File(System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
 		
-         URL url;
-         
-         
-		try {
-			url = new URL("https://chromedriver.storage.googleapis.com/2.37/chromedriver_win32.zip");
-	         String fileName = System.getProperty("user.home") + "\\botpackage\\chromedriver_win32.zip";
-	         try {
-	        	if(!chrome.exists()) { 
-				telechargeChromeDriver(url,fileName);
-				extractZip(System.getProperty("user.home") + "\\botpackage\\chromedriver_win32.zip");
-	        	}
-	         } catch (IOException e) {e.printStackTrace();}
-		} catch (MalformedURLException e) {e.printStackTrace();}
+		
+
 		
 		creerDossierTemplates();
 		listeFichiers = listerFichiers("templates", "templates");
 		
+		
+        URL url;
+        String versionOs = "chromedriver_win32.zip";
+        String osClient = System.getProperty("os.name");
+        File chrome = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver.exe");
+   
+        if(osClient.toLowerCase().contains("window")) {
+   	  versionOs = "chromedriver_win32.zip";
+   	  chrome = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver.exe");
+      }
+      if(osClient.toLowerCase().contains("Mac")) {
+   	   versionOs = "chromedriver_mac64.zip";
+   	   chrome = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver");
+      }
+      if(osClient.toLowerCase().contains("unix") || osClient.toLowerCase().contains("linux")) {
+   	   versionOs = "chromedriver_linux64.zip";
+   	   chrome = new File(System.getProperty("user.home") + System.getProperty("file.separator") +"botpackage"+ System.getProperty("file.separator") +"chromedriver");
+      }
+      
+      
+      
+		try {
+			url = new URL("https://chromedriver.storage.googleapis.com/2.40/" + versionOs );
+	         String fileName = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") + versionOs;
+	         try {
+	        	if(!chrome.exists()) { 
+				telechargeChromeDriver(url,fileName);
+				extractZip(System.getProperty("user.home") + System.getProperty("file.separator") +"botpackage"+ System.getProperty("file.separator") + versionOs);
+	        	}
+	         } catch (IOException e) {e.printStackTrace();}
+		} catch (MalformedURLException e) {e.printStackTrace();}
 
 	}
 
@@ -93,7 +116,7 @@ public class GestionnaireDeComptes {
 	/////////////////////////////////////////////////////////////////////////////////////
 	// charger les configs des comptes
 	public void creerDossier() {
-		String userPath = System.getProperty("user.home") + "\\botpackage\\comptes";
+		String userPath = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"comptes";
 		File dossierComptes = new File(userPath);
 		boolean isCreated = dossierComptes.mkdirs();
 		System.out.println("Création du dossier" + userPath + " : " + isCreated);
@@ -102,7 +125,7 @@ public class GestionnaireDeComptes {
 	////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 public void creerDossierTemplates() {
-String userPath = System.getProperty("user.home") + "\\botpackage\\templates";
+String userPath = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"templates";
 File dossierComptes = new File(userPath);
 boolean isCreated = dossierComptes.mkdirs();
 System.out.println("Création du dossier" + userPath + " : " + isCreated);
@@ -110,7 +133,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 }
 	/////////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<File> listerFichiers(String dossier, String extention) {
-		String userPath = System.getProperty("user.home") + "\\botpackage\\" + dossier; // \\comptes
+		String userPath = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator")  + dossier; // \\comptes
 		File chemin = new File(userPath);
 		File[] list = chemin.listFiles();
 		try {
@@ -130,7 +153,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 	/////////////////////////////////////////////////////////////////////////////////////
 	public void creerFichier(String nomDefichier, String dossier, String extention) {
 		
-		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier +"\\"+ nomDefichier + extention;
+		String userPath = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage" + dossier + System.getProperty("file.separator") + nomDefichier + extention;
 		File newFichierCompte = new File(userPath);
 		boolean trouver=false;
 	//	newFichierCompte.
@@ -164,7 +187,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 	}
 	/////////////////////////////////////////////////////////////////////////////////////
 	public void suprimerFichier(String nomDefichier, String dossier, String extention) {
-		String userPath = System.getProperty("user.home") + "\\botpackage" + dossier + nomDefichier + extention;
+		String userPath = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage" + dossier + nomDefichier + extention;
 		File newFichierCompte = new File(userPath);
 
 		boolean isCreated = newFichierCompte.delete();
@@ -178,7 +201,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 		
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter(System.getProperty("user.home") + "\\botpackage\\" + dossier+"\\" + nomFichier);
+			writer = new PrintWriter(System.getProperty("user.home")+ System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") + dossier + System.getProperty("file.separator") + nomFichier);
 
 			writer.println("server="+ server);
 			writer.println("login="+ userName);
@@ -201,7 +224,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 		//	OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(PROPERTIES_FILE), StandardCharsets.UTF_8);
 			// PrintWriter writer = new PrintWriter(new File("C:\\abc.xml"), "UTF-8");
 			try {
-				writer = new PrintWriter(new File (System.getProperty("user.home") + "\\botpackage\\" + dossier+"\\" + nomFichier), "UTF-8");
+				writer = new PrintWriter(new File (System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage" + System.getProperty("file.separator") + dossier + System.getProperty("file.separator") + nomFichier), "UTF-8");
 
 			for(Batiment bat : templateDeVillage.getListeDeBatiments()) {
 		//	writer.println(encoding(bat.getNomBatiment().replaceAll("\\s", "\\\\ ")+ "="+ bat.getLevelBatiment()));
@@ -246,7 +269,7 @@ System.out.println("Création du dossier" + userPath + " : " + isCreated);
 	    int BUFFER = 2048;
 
 	    ZipFile zip = new ZipFile(fichierZip);
-	    String dossierDeDestination =System.getProperty("user.home") + "\\botpackage\\";
+	    String dossierDeDestination =System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage" + System.getProperty("file.separator") ;
 
 	   
 	    Enumeration zipFileEntries = zip.entries();

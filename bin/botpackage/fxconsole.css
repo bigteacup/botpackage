@@ -774,6 +774,18 @@ b.scroll-bar:horizontal b.track-background {
 /* 
 .ligne .scroll-bar:vertical:disabled {
     -fx-opacity: 0;
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * image/default_border.png
+    * 
+    
+    
 }*/
 
 .consoleVBox {-fx-fill:red; -fx-background-color: black; -fx-vbar-policy: always;    }

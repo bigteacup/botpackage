@@ -109,13 +109,36 @@ public class Travian extends Thread {
 		t.fxFenetreController.boutonOn.getStyleClass().removeAll("onc"); 
 		t.fxFenetreController.boutonOn.getStyleClass().add("onb");
 		
+	////////////////////////////////////////////////////////////////////////
+      
+        String osClient = System.getProperty("os.name");
+        ecrireDansConsole("OS : " + osClient, true);
+      if(osClient.toLowerCase().contains("window")) {
+        	System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver.exe");  
+        	ecrireDansConsole(osClient + " Validé", true);
+      }
+      else if(osClient.toLowerCase().contains("Mac")) {
+    	  System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver");
+    	  ecrireDansConsole(osClient + " Validé", true);
+      }
+      else if(osClient.toLowerCase().contains("unix") || osClient.toLowerCase().contains("linux")) {
+    	  System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver");
+    	  ecrireDansConsole(osClient + " Validé", true);
+      }
+      else {
+    	  ecrireDansConsole (osClient + " echec setProperty", true);
+    	  // on met windows par default
+    	  System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"chromedriver.exe");
+      }
+	////////////////////////////////////////////////////////////////////////////////////////////	
+		
 	      ChromeOptions chromeOptions = new ChromeOptions();
 	  //    chromeOptions.addArguments("--headless");
 	   //   chromeOptions.addArguments("start-maximized");
 	      chromeOptions.addArguments("--disable-gpu");
 	      chromeOptions.addArguments("--disable-extensions");
 	      
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home") + "\\botpackage\\chromedriver.exe");
+		
 		driver = new ChromeDriver(chromeOptions);
 		
 		compte.setDriver(driver);
@@ -1449,7 +1472,30 @@ public class Travian extends Thread {
 
 
 	}
-
+	/////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
+	boolean surLaPage = false;
+	if(!compte.getDriver().getCurrentUrl().contains("dorf3")) {
+	try {
+		compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(1).click();  // si dans une alliance
+		t.ecrireDansConsole("Via comptePlus", true);
+	}catch (Exception e){
+		compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(0).click(); 
+		t.ecrireDansConsole("Via b", true);
+	}
+	}else {
+		t.ecrireDansConsole("Nous sommes déjà sur la page", true);
+	} //sans alliance
+	
+	//test de confirmation
+	if(compte.getDriver().getCurrentUrl().contains("dorf3")) {
+		surLaPage = true;
+	} else {
+		t.ecrireDansConsole("Echec AllerDansLesStatistiquesDuComptePlus ", true);
+	}
+	return surLaPage;
+}
 	/////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1458,17 +1504,17 @@ public class Travian extends Thread {
 		Village village = villageEnCours();
 
 
-		//randomsleep.court();
-
-		//donnees globlales
-		// compte.getDriver().get("http://ts4.travian.fr/dorf3.php");
-		try {
-			compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(1).click();  // si dans une alliance
-		}catch (Exception e){compte.getDriver().findElements(By.xpath("//button[contains(@class, 'layoutButton overviewWhite green')]")).get(0).click(); } //sans alliance
 		randomsleep.court();
+			allerDansLesStatistiquesDuComptePlus(t);
+		randomsleep.court();
+		
 		donneesGlobales = compte.getDriver().findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr"));
 	//	randomsleep.court();
-		try{determinerBesoinDeConstructions();}catch(Exception e) {t.ecrireDansConsole("Echec determinerBesoinDeConstructions", true);}
+		try{
+			determinerBesoinDeConstructions();
+		}catch(Exception e) {
+			t.ecrireDansConsole("Echec determinerBesoinDeConstructions", true);
+			}
 		try{updateMarchandSansComptePlus(t);//pour redonder en fonction de la possession du compte + ou non
 		}catch(Exception e){
 			t.ecrireDansConsole("Echec updateMarchandSansComptePlus => Estimation nombre Marchands par level de marche", true); 
@@ -1610,6 +1656,7 @@ public class Travian extends Thread {
 				}catch(Exception e) {
 					i = 0;
 					failCompte++;
+					t.ecrireDansConsole("FailCompte", true);
 				}
 			}
 		}
@@ -1713,6 +1760,7 @@ public class Travian extends Thread {
 				}catch(Exception e) {
 					i = 0;
 					failCompte++;
+					t.ecrireDansConsole("FailCompte", true);
 				}
 					
 				
@@ -1769,6 +1817,7 @@ public class Travian extends Thread {
 				}catch(Exception e) {
 					i = 0;
 					failCompte++;
+					t.ecrireDansConsole("FailCompte", true);
 					//i++;
 					//donneesPointsDeCulture = compte.getDriver().findElements(By.xpath("//*[@id=\"culture_points\"]/tbody/tr"));
 				}
@@ -1782,11 +1831,16 @@ public class Travian extends Thread {
 
 	private void determinerBesoinDeConstructions() {
 		int i = 0;
-
+		int failCompte = 0;
+		
 		for (Village village : listeDeVillages) {
 			boolean trouver = false;
 			while(trouver == false){
+				if (failCompte > listeDeVillages.size() * 2 ) {
+					break;
+				}
 				try {
+					 
 				if (village.getUrl().contains(donneesGlobales.get(i).findElement(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[1]/a")).getAttribute("href").split("php")[1])){
 					village.setConstructionsEnCours(donneesGlobales.get(i).findElements(By.xpath("//*[@id=\"overview\"]/tbody/tr["+ (i+1) +"]/td[3]/a/img")).size());
 					village.getListeDeBatimentsEnCoursDeConstruction().clear();
@@ -1804,6 +1858,8 @@ public class Travian extends Thread {
 				}
 				}catch(Exception e) {
 					i = 0;
+					failCompte++;
+					t.ecrireDansConsole("FailCompte", true);
 				}
 
 			}
@@ -2080,7 +2136,7 @@ public class Travian extends Thread {
 	private void prendrePhoto(String nom) {
 		numeroDePhoto++;
 		
-		String userPath = System.getProperty("user.home") + "\\botpackage\\photos";
+		String userPath = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") +"photos";
 		File dossierPhotos = new File(userPath);
 		boolean isCreated = dossierPhotos.mkdirs();
 		try {
@@ -2121,7 +2177,7 @@ public class Travian extends Thread {
 		////////////
 		try {
 			File scrFile = ((TakesScreenshot)compte.getDriver()).getScreenshotAs(OutputType.FILE); 
-			FileUtils.copyFile(scrFile, new File(userPath + "\\"  +nom+"-"+numeroDePhoto+".jpg"));
+			FileUtils.copyFile(scrFile, new File(userPath + System.getProperty("file.separator") + nom +"-"+numeroDePhoto+".jpg"));
 		}catch (Exception e) {
 			ecrireDansConsole("Photo ratee", true);
 		}

@@ -88,7 +88,7 @@ public void creerCompteManuellement() {
 //charger les configs précédentes
 public Properties loadConfigComptes(String nomDeCompte){
 this.nomDeCompte = nomDeCompte;
-String path = System.getProperty("user.home")+"\\botpackage\\comptes\\"+ nomDeCompte ;		//System.getProperty("user.home") + "\\botpackage\\comptes"; +\".properties"
+String path = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage" + System.getProperty("file.separator") +"comptes" + System.getProperty("file.separator") + nomDeCompte ;		//System.getProperty("user.home") + "\\botpackage\\comptes"; +\".properties"
 Properties properties = new Properties();
 FileInputStream input = null;
 

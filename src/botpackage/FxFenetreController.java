@@ -641,7 +641,7 @@ public class FxFenetreController extends ScrollPane {
 				Button buttonDelete = new Button("Supr'");
 				buttonDelete.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
-						bot.gestionnaireDeComptes.suprimerFichier(compte.getName(), "\\comptes\\", "");
+						bot.gestionnaireDeComptes.suprimerFichier(compte.getName(),  System.getProperty("file.separator") +"comptes" + System.getProperty("file.separator") , "");
 						fxChargerComptes();
 					}
 
@@ -727,7 +727,7 @@ public class FxFenetreController extends ScrollPane {
 				button1.setOnAction(new EventHandler<ActionEvent>() {
 					@Override public void handle(ActionEvent e) {
 						button1.setText("En cours");
-						bot.gestionnaireDeComptes.creerFichier(troisChampsDeSaisieController.userName.getText(), "\\comptes",".comptetravian");
+						bot.gestionnaireDeComptes.creerFichier(troisChampsDeSaisieController.userName.getText(),  System.getProperty("file.separator") + "comptes",".comptetravian");
 						bot.gestionnaireDeComptes.ecrireDansFichier(
 								"comptes",
 								troisChampsDeSaisieController.userName.getText()+".comptetravian",
@@ -2431,8 +2431,8 @@ button.setOnMouseClicked((e) -> {
 				String stringNomDuTemplate1 = nomDuTemplate1.getText().trim();
 					if(flowb.getChildren().size() > 0 && (!stringNomDuTemplate1.isEmpty()) && templateSelectione.getListeDeBatiments().size() > 0) {
 						//listeDeroulanteData.clear();
-					bot.gestionnaireDeComptes.creerFichier(stringNomDuTemplate1, "\\templates", ".template");
-					bot.gestionnaireDeComptes.ecrireDansFichierTemplate("\\templates", "\\"+stringNomDuTemplate1+".template", templateSelectione);
+					bot.gestionnaireDeComptes.creerFichier(stringNomDuTemplate1,  System.getProperty("file.separator") + "templates", ".template");
+					bot.gestionnaireDeComptes.ecrireDansFichierTemplate( System.getProperty("file.separator") +"templates",  System.getProperty("file.separator") +stringNomDuTemplate1+".template", templateSelectione);
 					bot.chargerTemplate();
 					vbv.getChildren().clear();
 					//		vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(nomDuTemplate1.getText())));
@@ -2441,8 +2441,8 @@ button.setOnMouseClicked((e) -> {
 						String nameParListeDeroulante = listeDeroulante.getSelectionModel().getSelectedItem().getNomDuTemplate().split(".template")[0];
 						if(flowb.getChildren().size() > 0 && (!nameParListeDeroulante.isEmpty()) && templateSelectione.getListeDeBatiments().size() > 0) {
 							//listeDeroulanteData.clear();
-						bot.gestionnaireDeComptes.creerFichier(nameParListeDeroulante, "\\templates", ".template");
-						bot.gestionnaireDeComptes.ecrireDansFichierTemplate("\\templates", "\\"+nameParListeDeroulante+".template", templateSelectione);
+						bot.gestionnaireDeComptes.creerFichier(nameParListeDeroulante,  System.getProperty("file.separator") +"templates", ".template");
+						bot.gestionnaireDeComptes.ecrireDansFichierTemplate(System.getProperty("file.separator") +"templates",  System.getProperty("file.separator") +nameParListeDeroulante+".template", templateSelectione);
 						bot.chargerTemplate();
 						vbv.getChildren().clear();
 						
