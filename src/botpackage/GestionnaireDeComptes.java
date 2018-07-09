@@ -74,6 +74,12 @@ public class GestionnaireDeComptes {
 	        	if(!chrome.exists()) { 
 				telechargeChromeDriver(url,fileName);
 				extractZip(System.getProperty("user.home") + System.getProperty("file.separator") +"botpackage"+ System.getProperty("file.separator") + versionOs);
+				
+				if(osClient.toLowerCase().contains("linux") || osClient.toLowerCase().contains("unix")) {
+					listeFichiers.clear();
+					listeFichiers = listerFichiers("", "chromedriver");
+					listeFichiers.get(0).setExecutable(true);
+				}
 	        	}
 	         } catch (IOException e) {e.printStackTrace();}
 		} catch (MalformedURLException e) {e.printStackTrace();}
