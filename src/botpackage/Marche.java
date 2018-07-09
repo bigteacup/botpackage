@@ -1326,7 +1326,9 @@ public class Marche {
 	//0 PourArrivage 
 	//1 PourEnSortie
 	public int lireArrivageMarche(Travian t, Village village, int typeRessourceALire, int dureeRestanteAvantArriveeLimite, int sens) {
+	
 		String ressourceString="Aucun arrivage";
+	
 		String sensString = "";
 		String EnArrivage = "Transport vers";
 		String EnSortie = "Transport de";
@@ -1335,12 +1337,12 @@ public class Marche {
 		}else {
 			sensString = EnSortie;
 		}
-
+		int arrivageInt = 0;
+		try {
 		// typeRessourceALire : 0 bois 1 argile 2 Fer 3 cereale
 		// lire arrivage
 		List<WebElement> listeMarchandsArrivants = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"merchantsOnTheWay\"]/table"));
-
-		int arrivageInt = 0;
+	
 		for(WebElement arrivage : listeMarchandsArrivants) {
 			int dureeRestanteAvantArrivage  = Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[1]/td/div[1]/span")).getText().replaceAll(":", ""));
 			if(!arrivage.getText().contains(sensString)  && dureeRestanteAvantArrivage < dureeRestanteAvantArriveeLimite) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
@@ -1356,7 +1358,12 @@ public class Marche {
 
 		}	
 		t.ecrireDansConsole("[Marché] lire marché :   " + ressourceString + "  : "+ arrivageInt +"" , true);
+	} catch(Exception e) { t.ecrireDansConsole("[Marché] echec lireArrivageMarche" , true);
+	
+	}
 		return arrivageInt;
+		
+	
 	}
 
 
