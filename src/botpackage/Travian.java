@@ -2284,7 +2284,7 @@ public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
 			
 			t.getCompte().getDriver().findElement(By.xpath("//*[contains(@href, 'karte.php')]")).click();
 			randomsleep.court();
-			t.getCompte().getDriver().get("https://ts1.travian.fr/position_details.php?x="+ x +"&y="+ y +"");
+			t.getCompte().getDriver().get(t.getCompte().getServer() +"position_details.php?x="+ x +"&y="+ y +"");
 			randomsleep.court();
 			WebElement btn = t.getCompte().getDriver().findElement(By.xpath("//a[contains(., 'fonder') or contains(., 'Fonder')] "));
 			randomsleep.court();
