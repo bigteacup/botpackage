@@ -1358,7 +1358,8 @@ public class Marche {
 
 		}	
 		t.ecrireDansConsole("[Marché] lire marché :   " + ressourceString + "  : "+ arrivageInt +"" , true);
-	} catch(Exception e) { t.ecrireDansConsole("[Marché] echec lireArrivageMarche" , true);
+	} catch(Exception e) {
+		t.ecrireDansConsole("[Marché] echec lireArrivageMarche" , true);
 	
 	}
 		return arrivageInt;

@@ -1046,6 +1046,7 @@ public class FxFenetreController extends ScrollPane {
 				console.flux.envoyer(fxFenetreController, "faireOngletTemplate sortie", true);
 			} catch (IOException e) {}
 			fxTemplate.getChildren().clear();
+			
 			tokenSpecial = 0;
 			
 		}
@@ -2125,7 +2126,17 @@ System.out.println("The button did it!");
 						contextMenuItem.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent e) {
 								tem.listeDeBatiments.add(bataj);
-
+								
+							int index =	vbv2Creation.getChildren().indexOf(vbv2);	
+								vbv2Creation.getChildren().remove(vbv2);
+								VBox listeDesBatimentsDuStade = stade(village, vbv2Creation, i, tem);
+								vbv2Creation.getChildren().add(index, listeDesBatimentsDuStade );
+								
+						
+				
+								
+								
+					
 							}
 						});
 					}
@@ -2569,7 +2580,7 @@ button.setOnMouseClicked((e) -> {
 
 
 		stackP.getChildren().addAll(ta,tf); 
-		stackP.setMaxWidth(170);
+		stackP.setMaxWidth(180);
 		stackP.setMaxHeight(19);
 		stackP.setMinHeight(19);
 
@@ -2595,6 +2606,7 @@ button.setOnMouseClicked((e) -> {
 						public void handle(ActionEvent e) {
 							templateSelectione.listeDeBatiments.remove(bat);
 							fta.getChildren().remove(stackP);
+							
 						}
 					});
 
