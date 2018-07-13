@@ -1804,7 +1804,7 @@ public class FxFenetreController extends ScrollPane {
 				if (!tem.getNomDuTemplate().equals("")) {
 					VBox s = stade(village, vbv2Creation, i, tem);
 					vbv2Creation.getChildren().add(s);
-					faireOngletTemplate();
+				
 				}
 			}
 			}
