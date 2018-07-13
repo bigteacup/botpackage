@@ -1764,9 +1764,14 @@ public class FxFenetreController extends ScrollPane {
 		/////////////////////////////////////////////////////////////////////////////////////////// Liste Deroulante
 
 		final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
+		TemplatesDeVillages empty = new TemplatesDeVillages();
+		listeDeroulanteData.add(empty); 
+		listeDeroulante.setValue(empty);
+		
 		for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
 			listeDeroulanteData.add(t);
 		}	
+		
 		listeDeroulante.setItems(listeDeroulanteData);
 		//listeDeroulante.getSelectionModel().select(tem);
 		listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
@@ -2373,11 +2378,14 @@ System.out.println("The button did it!");
 			listeDeroulante.getSelectionModel().select(templateSelectione);
 			final ObservableList<TemplatesDeVillages> listeDeroulanteData = FXCollections.observableArrayList();
 			listeDeroulanteData.clear();
+			TemplatesDeVillages empty = new TemplatesDeVillages();
+			listeDeroulanteData.add(empty); 
 			for(TemplatesDeVillages t :  bot.listeDeTemplates) {	
 				listeDeroulanteData.add(t);
 
 
 			}
+			listeDeroulante.setValue(empty);
 			listeDeroulante.setItems(listeDeroulanteData);
 			listeDeroulante.getSelectionModel().select(templateSelectione);
 			listeDeroulante.setConverter(new StringConverter<TemplatesDeVillages>() {
