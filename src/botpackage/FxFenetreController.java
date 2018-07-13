@@ -2457,7 +2457,7 @@ button.setOnMouseClicked((e) -> {
 						bot.chargerTemplate();
 						vbv.getChildren().clear();
 						
-							faireOngletTemplate();
+						//	faireOngletTemplate();
 						
 						}
 					}
