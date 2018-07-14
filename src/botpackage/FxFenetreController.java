@@ -2319,8 +2319,9 @@ System.out.println("The button did it!");
 
 		}
 
+		
 		VBox e = editeur(vbv , templateSelectione);
-		fxTemplate.getChildren().add(e);
+		vbv.getChildren().add(e);
 
 		return vbv;
 	}
@@ -2411,13 +2412,19 @@ System.out.println("The button did it!");
 				bot.getTemplateLancerBot().getListeDeBatiments().clear();
 				for(Batiment b : selectedTemplatesDeVillages.listeDeBatiments){
 					bot.getTemplateLancerBot().listeDeBatiments.add(b);
-
 				}
-				bot.getTemplateLancerBot().getListeDeBatiments().clear();
+				
+				bot.getTemplateLancerBot().getListeDeBatiments().clear(); //TODO ????? a corriger on suprime une liste créée et non utilisée???
 				vbv.getChildren().clear();
-
-
+				
 				vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(selectedTemplatesDeVillages.nomDuTemplate)));
+			//	fxTemplate.getChildren().remove(0);
+		/*		
+				vbv2Creation.getChildren().remove(templateChooser);
+				vbv2Creation.getChildren().remove(flowb);
+				vbv2Creation.getChildren().add(templateChooser);
+				vbv2Creation.getChildren().add(flowb);
+				*/
 			});
 			/*
 
@@ -2453,7 +2460,7 @@ button.setOnMouseClicked((e) -> {
 					bot.gestionnaireDeComptes.creerFichier(stringNomDuTemplate1,  System.getProperty("file.separator") + "templates", ".template");
 					bot.gestionnaireDeComptes.ecrireDansFichierTemplate( System.getProperty("file.separator") +"templates",  System.getProperty("file.separator") +stringNomDuTemplate1+".template", templateSelectione);
 					bot.chargerTemplate();
-					vbv.getChildren().clear();
+				//	vbv.getChildren().clear();
 					//		vbv.getChildren().add(editeur(vbv,bot.trouverTemplate(nomDuTemplate1.getText())));
 						faireOngletTemplate();
 					}else {
@@ -2463,7 +2470,7 @@ button.setOnMouseClicked((e) -> {
 						bot.gestionnaireDeComptes.creerFichier(nameParListeDeroulante,  System.getProperty("file.separator") +"templates", ".template");
 						bot.gestionnaireDeComptes.ecrireDansFichierTemplate(System.getProperty("file.separator") +"templates",  System.getProperty("file.separator") +nameParListeDeroulante+".template", templateSelectione);
 						bot.chargerTemplate();
-						vbv.getChildren().clear();
+					//	vbv.getChildren().clear();
 						
 						//	faireOngletTemplate();
 						

@@ -240,6 +240,7 @@ public void faireUnTemplateDeCompte(int i) {
 	
 	
 	public TemplatesDeVillages trouverTemplate(String nom) {
+		TemplatesDeVillages empty = new TemplatesDeVillages();
 		for(TemplatesDeVillages temT : listeDeTemplates ) {
 		
 			try {
@@ -250,7 +251,7 @@ public void faireUnTemplateDeCompte(int i) {
 				
 			}
 		}
-		return null;
+		return empty;
 	}
 
 
