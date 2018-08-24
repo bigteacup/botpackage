@@ -1273,8 +1273,7 @@ public class Village {
 		}
 		//////////////////////////////////////////////////////
 
-		List<WebElement> listeWebelementChamps = t.getCompte().getDriver()
-				.findElements(By.xpath("//*[@id=\"rx\"]/area"));
+		List<WebElement> listeWebelementChamps = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"rx\"]/area"));
 		ArrayList<Integer> listeLevelsChamps = new ArrayList<Integer>();
 		ArrayList<Integer> listeLevelsChampsBois = new ArrayList<Integer>();
 		ArrayList<Integer> listeLevelsChampsArgile = new ArrayList<Integer>();
@@ -1348,6 +1347,7 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void chargerBatiments(Travian t) {
+		//ancienne version
 		int slotTemp = 0;
 		t.ecrireDansConsole("Debut chargerBatiment", true);
 
@@ -1429,6 +1429,145 @@ public class Village {
 		}
 		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
 		t.ecrireDansConsole("Fin chargerBatiment", true);
+		
+		 chargerBatiments2(t);
+	}
+	
+	
+	
+	public void chargerBatiments2(Travian t) {
+		int slotTemp = 0;
+		t.ecrireDansConsole("Debut chargerBatiment2", true);
+
+		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
+			t.randomsleep.court();
+			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
+			t.randomsleep.court();
+		}
+
+		Village village = t.villageEnCours();
+		//	village.setSlotBatimentsLibres(22);// remise à zero
+		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));  //*[@id="village_map"]/div
+		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
+		List<Batiment> listeDesBatimentsVillage = new ArrayList<Batiment>();
+		int g =0;
+		for (WebElement webBatiment : listeDesBatiments) {
+			// on intialise les variables
+			String nomBatiment = null;
+			int levelBatiment = 0;
+			String slotBatiment = null;
+			boolean trouver = false;	
+			
+			
+			while (g < 18) {
+			Actions builder = new Actions(t.getCompte().getDriver());
+			try {
+				//builder.moveToElement(listeWebelementChampsBis.get(g+1));
+				builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+
+			}catch (Exception e1){
+				 builder.moveToElement(listeDesBatiments.get(g+17));
+				 }
+
+			builder.perform();
+			
+			t.randomsleep.tcourt(); 
+			List<WebElement> donnees = listeDesBatiments.get(g+18).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); // /div[1]
+		
+				
+			try {
+				String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
+			 nomBatiment = listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
+			 levelBatiment = Integer.parseInt(listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
+			slotBatiment = String.valueOf(g);
+			
+			}catch(Exception e) {
+				//TODO charger les slots, ça beug
+				Actions builder2 = new Actions(t.getCompte().getDriver());
+				try {
+					//builder.moveToElement(listeWebelementChampsBis.get(g+1));
+					builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+
+				}catch (Exception e1){
+					 builder.moveToElement(listeDesBatiments.get(g+17));
+					 }
+
+				builder.perform();
+				
+				t.randomsleep.tcourt(); 
+				
+				 nomBatiment = listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[2]")).getText().toString().trim() ;//   /div[1]
+				 levelBatiment = 0 ;
+				 slotBatiment = String.valueOf(g);
+			}
+			
+		/*	
+			// on les rempli
+			try {
+				nomBatiment = webBatiment.getAttribute("alt").split(" <span")[0].replace("&#39;", "'"); //&#39;
+
+				levelBatiment = Integer.parseInt(webBatiment.getAttribute("alt").split("<span class=\"level\">Niveau ")[1].split("</span>")[0]);
+				// reperer conctructions en cours
+				if (webBatiment.getAttribute("alt").contains("Amélioration en cours")) {
+					int enCoursVersLevel = Integer.parseInt(webBatiment.getAttribute("alt").split("Amélioration en cours vers le niveau ")[1].split("</span>")[0]);
+					levelBatiment = enCoursVersLevel;
+
+				}
+				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
+				// si un slot est vide : on le nomme
+			} catch (Exception e) {
+
+				slotTemp++; 
+				nomBatiment = webBatiment.getAttribute("alt");
+				levelBatiment = 0;
+				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
+			}
+		*/	
+
+			// pour chaque batiment du village on regarde si le batiment y est.
+			// Sil y est on ne fait rien et on passe au suivant
+			try {
+
+				for (Batiment batiment : village.getBatiments()) {
+
+					if (batiment.getNomBatiment().equals(nomBatiment) && batiment.getSlotBatiment().equals(slotBatiment)) {
+						trouver = true;
+						batiment.setLevelBatiment(levelBatiment);
+						break;
+
+					}
+				}
+
+			} catch (Exception e) {
+				trouver = false;
+			}
+			// si le batiment ny est pas on le met dans la liste temporaire
+			if (trouver == false) {
+				Batiment newBatiment = new Batiment();
+				newBatiment.setNomBatiment(nomBatiment);
+				newBatiment.setSlotBatiment(slotBatiment);
+				newBatiment.setLevelBatiment(levelBatiment);
+				listeDesBatimentsVillage.add(newBatiment);
+
+				// on envois la liste terminee au village concerne
+				village.setBatiments(listeDesBatimentsVillage);
+
+			}
+			
+			g++;
+		}
+		village.setSlotBatimentsLibres( slotTemp);
+		if(village.getBatiments().isEmpty()) {
+			village.setListeBatimentsVideDejaVerifiee(true);
+		}else {
+			village.setListeBatimentsVideDejaVerifiee(false);
+		}
+		
+		
+		}
+		
+		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
+		t.ecrireDansConsole("Fin chargerBatiment2", true);
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1688,6 +1827,9 @@ public class Village {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void allerDansUnBatiment(Travian t, String batiment){
+		//ancienne version
+		
+	
 		try {// on vas sur le marché
 			WebElement titre;
 			String titreString = "";
@@ -1724,11 +1866,16 @@ public class Village {
 							t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 							t.randomsleep.court();
 						}
+						
+						
 						WebElement boutton = t.getCompte().getDriver().findElement(By.xpath("//area[@alt[contains(.,'"+ batiment +"')]]"));
 						boutton.click();
 						t.randomsleep.court();
 					}catch (Exception e3){
-						t.ecrireDansConsole("Pas de "+ batiment +" :(", true);
+						t.ecrireDansConsole("Pas de "+ batiment +" :(", true); // Ancienne version
+						
+						allerDansUnBatiment2(t,  batiment); // nouvelle version
+						
 					}
 				}
 			}else {
@@ -1754,11 +1901,86 @@ public class Village {
 				boutton.click();
 				t.randomsleep.court();
 			}catch (Exception e3){
-				t.ecrireDansConsole("Pas de "+ batiment +" :(", true);
+				t.ecrireDansConsole("Pas de "+ batiment +" :(", true); // Ancienne version
+				allerDansUnBatiment2(t,  batiment); //nouvelle version
 			}
 		}	
 
 
+		
+		
+
+		
+
+	}
+	
+	
+	
+	public void allerDansUnBatiment2(Travian t, String batiment){
+		
+			WebElement titre;
+			String titreString = "";
+
+
+					try {//on va sur une page contenant le batiment
+						if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
+							t.randomsleep.court();
+							t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
+							t.randomsleep.court();
+						}
+						
+						
+						
+						Village village = t.villageEnCours();
+						//	village.setSlotBatimentsLibres(22);// remise à zero
+						List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div")); 
+						// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
+						
+						int g =0;
+						
+						
+						
+						
+						for (WebElement webBatiment : listeDesBatiments) {
+							// on intialise les variables
+							String nomBatiment = null;
+							int levelBatiment = 0;
+							String slotBatiment = null;
+							boolean trouver = false;	
+							
+							
+	
+						while (g < 18) {
+							Actions builder = new Actions(t.getCompte().getDriver());
+							try {
+								//builder.moveToElement(listeWebelementChampsBis.get(g+1));
+								builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+
+							}catch (Exception e1){
+								 builder.moveToElement(listeDesBatiments.get(g+17));
+								 }
+
+							builder.perform();
+							
+							t.randomsleep.tcourt();
+							List<WebElement> donnees = listeDesBatiments.get(g+18).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); // /div[1]
+							String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
+							 nomBatiment = listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
+						
+							 if(nomBatiment.toLowerCase().contains(batiment.toLowerCase())) {
+						WebElement boutton = listeDesBatiments.get(g+18);
+						boutton.click();
+						t.randomsleep.court();
+							 }
+							 g++;
+						}
+						
+						}
+						
+					}catch(Exception e) {
+						
+					}
+						
 
 
 
@@ -1844,12 +2066,57 @@ public class Village {
 		int ferNecessaire = 0;
 		int cerealesNecessaire = 0;
 		boolean reussite = false;
+		
+		if(true) {
+		allerDansUnBatiment2(t,  batimentAConstruire); //TODO mettre slot pour construire les doublon
+		//TODO  en faire un Objet          
+		// si cest un marche ou autre cliquer le bon                         //*[contains(@class, 'subNavi')]//div[contains(@class, 'container')]
+		// tab			                                                     //*[contains(@class, 'favorActive')] //*[contains(@class, 'tabItem')]
+		try {
+			List<WebElement> listeDesTabs = t.getCompte().getDriver().findElements(By.xpath("//*[contains(@class, 'container')] //*[not(contains(@class,'favorActive'))] //*[contains(@class, 'tabItem')]"));  //*[@class=\"tabItem\"]
+			for (WebElement tabGestion : listeDesTabs) {
+
+				if (tabGestion.getText().contains("Gestion")) {      
+					tabGestion.click();
+					t.randomsleep.court();
+					break;
+				}
+
+			}
+		} catch (Exception e) {
+			t.ecrireDansConsole("bug :)", true);
+		}
+
+		// cliquer sur le bouton vert
+		WebElement bouttonvert = null;
+		try {
+			bouttonvert = t.getCompte().getDriver().findElement(By.xpath("//button[@class=\"green build\"]"));
+		} catch (Exception e) {
+			t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable => WorkAround Construction Bloquée pour ce tour", true); //=> WORKAROUND on ajoute des token
+			//village.setConstructionsEnCours(t.limiteDeConstruction); //WORKAROUND on ajoute des token
+			village.bloquerConstructionBatiment = true;
+			reussite = false;
+			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
+			t.randomsleep.classic();
+		//	break;
+		}
+
+		if (bouttonvert != null) {
+			bouttonvert.click();
+			t.ecrireDansConsole("[construireBatiment] Lancement " + batimentAConstruire, true);
+			reussite = true;
+			t.randomsleep.court();
+			
+		}
+		}else {
+			//ancienne version//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 
 		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 		List<Batiment> batimentsDeLaPage = new ArrayList<Batiment>(); //TODO verifier que ca n'add pas des villages sur la meme liste au court des rotation et session
 
 		// WebElement areaBatiment;
-
+//TODO a corriger pour la nouvelle version
 		for (WebElement webBatiment : listeDesBatiments) {
 			try {
 				String nom = webBatiment.getAttribute("alt").split(" <span")[0].replace("&#39;", "'");
@@ -2000,6 +2267,7 @@ public class Village {
 			}
 
 		}
+		}
 		//voirListeDeConstruction(t);
 		t.ecrireDansConsole("fin construireBatiments", true);
 		return reussite;
@@ -2020,15 +2288,29 @@ public class Village {
 		t.randomsleep.court();
 
 		try {
-			List<WebElement> listeDesBatiments = t.getCompte().getDriver()
-					.findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
+			/*
+			while (g < 18) {
+				Actions builder = new Actions(t.getCompte().getDriver());
+				try {
+					//builder.moveToElement(listeWebelementChampsBis.get(g+1));
+					builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+
+				}catch (Exception e1){
+					 builder.moveToElement(listeDesBatiments.get(g+17));
+					 }
+
+				builder.perform();
+				
+				t.randomsleep.tcourt();
+				List<WebElement> donnees = listeDesBatiments.get(g+18).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); // /div[1]
+				String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
+				nomBatiment = listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
+		*/
+			List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"clickareas\"]/area"));
 			int hotelNonPresent = 1;
 
-			for (WebElement batiment : listeDesBatiments) {
+			allerDansUnBatiment2(t, TemplatesDeVillages.hotel_de_ville);
 				t.bot.getTemplateLancerBot();
-				if (batiment.getAttribute("alt").contains(TemplatesDeVillages.hotel_de_ville)) {
-					hotelNonPresent = 0;
-					batiment.click();
 
 					t.randomsleep.court();
 
@@ -2066,13 +2348,14 @@ public class Village {
 						t.ecrireDansConsole("[Fete] Une Fete Est Deja en cours", true);
 					}
 
-					break;
-				}
+					
+				
 
-			}
+		/*
 			if (hotelNonPresent == 1) {
 				t.ecrireDansConsole("[Fete] Pas D'hotel de ville", true);
 			}
+			*/
 		} catch (Exception e) {
 			t.ecrireDansConsole("[Fete] echec lancer fete interne", true);
 		}
