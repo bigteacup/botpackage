@@ -1435,6 +1435,28 @@ public class Village {
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void chargerBatiments2(Travian t) {
 		int slotTemp = 0;
 		t.ecrireDansConsole("Debut chargerBatiment2", true);
@@ -1459,11 +1481,13 @@ public class Village {
 			boolean trouver = false;	
 			
 			
-			while (g < 18) {
+			while (g < 23) {
 			Actions builder = new Actions(t.getCompte().getDriver());
 			try {
-				//builder.moveToElement(listeWebelementChampsBis.get(g+1));
-				builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+				//builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+				WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+18) +"]/div"));
+				builder.moveToElement(wb); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+				
 
 			}catch (Exception e1){
 				
@@ -1485,8 +1509,9 @@ public class Village {
 				//seconde tentative
 				Actions builder2 = new Actions(t.getCompte().getDriver()); //*[@id="village_map"]/div[20]
 				try {
-					//builder.moveToElement(listeWebelementChampsBis.get(g+1));
-					builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
+					//builder.moveToElement(listeWebelementChampsBis.get(g+1)); //*[@id=\"village_map\"]/div["+ (g+18) +"]/div
+					WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+18) +"]/div"));
+					builder.moveToElement(wb); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
 
 				}catch (Exception e1){
 					
@@ -2659,12 +2684,14 @@ public class Village {
 					}
 
 				}
-
+				try {
 				// on clique sur le slot libre 
 				WebElement leBat = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+  leSlot.getSlotBatiment() +"]//*[name()='g']//*[name()='g']")); //*[@id=\"village_map\"]/div["+ (g+19) +"]//*[name()='g']//*[name()='g']                      //*[@href=\"build.php?id=" + leSlot.getSlotBatiment() + "\"]
 				leBat.click();
 				t.randomsleep.court();
-
+					}catch(Exception e) {
+					t.ecrireDansConsole(" Echec :  clic sur Slot libre numero : " + leSlot.getSlotBatiment() + "", true);
+				}
 
 
 

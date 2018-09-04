@@ -132,7 +132,7 @@ public String mur(Travian t) {
 	static String comptoir = "Comptoir de commerce";
 	static String grande_caserne= "Grande caserne";
 	static String place_tournoi= "Place du tournoi";
-	static String place_rassemblement= "Place de rassemblement";
+	static String place_rassemblement= "Place de rassemblement"; //Place de rassemblement
 	static String boulangerie= "Boulangerie";
 	static String moulin= "Moulin";
 	static String scierie= "Scierie";
@@ -142,7 +142,7 @@ public String mur(Travian t) {
 	static String pieges = "Fabricant de piéges";
 	static String residence = "Résidence";
 	static String atelier= "Atelier";
-	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville Hôtel de ville
+	static String hotel_de_ville= "Hôtel de ville";//Hôtel de Ville Hôtel de ville Hôtel de ville  
 	static String ambassade = "Ambassade";
 	static String murGaulois = "Palissade";
 	
