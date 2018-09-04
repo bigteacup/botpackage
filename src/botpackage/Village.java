@@ -2005,7 +2005,7 @@ public class Village {
 							
 							
 	
-						while (g < 18) {
+						while (g < 23) {
 							Actions builder = new Actions(t.getCompte().getDriver());
 							try {
 								//builder.moveToElement(listeWebelementChampsBis.get(g+1));
