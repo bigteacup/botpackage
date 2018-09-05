@@ -1503,7 +1503,7 @@ public class Village {
 				String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
 			 nomBatiment = listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
 			 levelBatiment = Integer.parseInt(listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
-			slotBatiment = String.valueOf(g+19);
+			slotBatiment = String.valueOf(g+18);
 			
 			}catch(Exception e) {
 				//seconde tentative
@@ -1524,7 +1524,7 @@ public class Village {
 				try {
 				 nomBatiment = listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
 				 levelBatiment = Integer.parseInt(listeDesBatiments.get(g+18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
-				slotBatiment = String.valueOf(g+19);
+				slotBatiment = String.valueOf(g+18);
 				}catch(Exception e2) {
 					
 
@@ -1550,7 +1550,7 @@ public class Village {
 			
 					 nomBatiment = listeDesBatiments.get(g+19).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")).getText().toString().trim() ;//   /div[1]
 					 levelBatiment = 0;
-					slotBatiment = String.valueOf(g+19);
+					slotBatiment = String.valueOf(g+18);
 					slotTemp++; 
 				}
 			}
@@ -2147,10 +2147,22 @@ public class Village {
 		try {
 			bouttonvert = t.getCompte().getDriver().findElement(By.xpath("//button[@class=\"green build\"]"));
 		} catch (Exception e) {
+			WebElement errorMessage = null;
+			String errorMessageString = "";
+			try {
+				errorMessage= t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"contract\"]/div/div/div/div[1]/div[1]"));
+				errorMessageString = errorMessage.getText().toLowerCase();
+			}catch(Exception e1){
+
+			}
+			if(errorMessageString.contains("ameliorez") || errorMessageString.contains("améliorez") || errorMessageString.contains("abord")){
+				t.ecrireDansConsole("[construireBatiment] Bouton vert non present => prérequis manquant / silo / depot", true);
+			}else {
 			t.ecrireDansConsole("[construireBatiment] Bouton vert non present => Champ en cour probable => WorkAround Construction Bloquée pour ce tour", true); //=> WORKAROUND on ajoute des token
 			//village.setConstructionsEnCours(t.limiteDeConstruction); //WORKAROUND on ajoute des token
 			village.bloquerConstructionBatiment = true;
 			reussite = false;
+			}
 			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 			t.randomsleep.classic();
 		//	break;
@@ -2690,7 +2702,14 @@ public class Village {
 				leBat.click();
 				t.randomsleep.court();
 					}catch(Exception e) {
+						try {
+						//second essai
+						WebElement leBat = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+  leSlot.getSlotBatiment() +"]//*[name()='g']")); //*[@id=\"village_map\"]/div["+ (g+19) +"]//*[name()='g']//*[name()='g']                      //*[@href=\"build.php?id=" + leSlot.getSlotBatiment() + "\"]
+						leBat.click();
+						t.randomsleep.court();
+						}catch(Exception e1) {
 					t.ecrireDansConsole(" Echec :  clic sur Slot libre numero : " + leSlot.getSlotBatiment() + "", true);
+						}
 				}
 
 
