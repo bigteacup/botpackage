@@ -926,7 +926,8 @@ public class Marche {
 				totalRessourcesEnvoyees = 0; // TODO attention bug par default pour pas reprendre l'ancienne valeur sil y a eu un echec
 				int pourcentageApproPetitVillage = t.bot.pourcentageApproPetitVillageFx;
 				int ressourcesMiniSurVillageSource = t.bot.ressourcesMiniSurVillageSourceFx;
-				int DepotMiniPourAider = t.bot.DepotMiniPourAiderFx;
+				int depotMiniPourAider = t.bot.DepotMiniPourAiderFx;
+				int champMinFxVillageCandidat =  t.bot.champMinFxVillageCandidat;
 				//en cas de negatif : parametres
 				int pourcentageSiloMiniPourAutoriserAAider = t.bot.pourcentageSiloMiniPourAutoriserAAider; // doit avoir au moins 50% de remplissage
 				int pourcentageSiloMaxPonctionnable = t.bot.pourcentageSiloMaxPonctionnable ; // prend 10% de ressources
@@ -967,7 +968,13 @@ public class Marche {
 					//	} 
 
 					for (Village villageCandidat : listeDeVillages) {
-						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider))  ) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
+						if(villageCandidat.getNom().equals(village.getNom()) || (villageCandidat.getEnNegatif() == true && (villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentageSiloMiniPourAutoriserAAider)) 
+								|| villageCandidat.getChampMin() < champMinFxVillageCandidat
+								|| villageCandidat.getExclureVillage() == true 
+								|| villageCandidat.getArgile() <= villageCandidat.getMaxStockDepot()/100*villageCandidat.regimeMarcheArgileMin
+								|| villageCandidat.getBois() <= villageCandidat.getMaxStockDepot()/100*villageCandidat.regimeMarcheBoisMin
+								|| villageCandidat.getFer() <= villageCandidat.getMaxStockDepot()/100*villageCandidat.regimeMarcheFerMin
+								|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*villageCandidat.regimeMarcheCerealesMin) { //|| villageCandidat.getCereales() <= villageCandidat.getMaxStockSilo()/100*pourcentage
 							continue;
 						}
 
@@ -976,7 +983,7 @@ public class Marche {
 						double	distanceMax = t.bot.distanceMaxPourMarchands; //en cases
 						if(distance < distanceMax ){
 
-							if (villageCandidat.getMaxStockDepot() > DepotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4 ){ 
+							if (villageCandidat.getMaxStockDepot() > depotMiniPourAider && villageCandidat.getNombreDeMarchands() > 4 ){ 
 
 								if(villageCandidat.getBois() > ressourcesMiniSurVillageSource 
 										&& villageCandidat.getArgile() > ressourcesMiniSurVillageSource 

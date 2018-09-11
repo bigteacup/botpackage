@@ -46,6 +46,7 @@ import org.openqa.selenium.WebDriver;
 	public int pourcentageNePasLaisserLeVillageSourceEnDessousDe = 20;
 	public int pourcentageDepotSiloMaxPonctionnable = 25;
 	public int champMinFx = 9;
+	public int champMinFxVillageCandidat = 10;
 	
 	public int pourcentageApproPetitVillageFx = 30;
 	public int ressourcesMiniSurVillageSourceFx = 5000;

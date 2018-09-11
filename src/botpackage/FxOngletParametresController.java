@@ -36,10 +36,13 @@ public class FxOngletParametresController {
     
     
     
-    
+ 
 
     @FXML
     private TextField champMinFx;
+    
+    @FXML
+    private TextField champMinFxVillageCandidat;
 
     @FXML
     private TextField pourcentageApproPetitVillageFx;
@@ -178,7 +181,8 @@ public class FxOngletParametresController {
 		pourcentageNePasLaisserLeVillageSourceEnDessousDe.setText(String.valueOf(bot.pourcentageNePasLaisserLeVillageSourceEnDessousDe));
 		pourcentageDepotSiloMaxPonctionnableFx.setText(String.valueOf(bot.pourcentageDepotSiloMaxPonctionnable)); 
 		
-		
+		champMinFx.setText(String.valueOf(bot.champMinFx)); 
+		champMinFxVillageCandidat.setText(String.valueOf(bot.champMinFxVillageCandidat)); 
 		pourcentageApproPetitVillageFx.setText(String.valueOf(bot.pourcentageApproPetitVillageFx)); 
 		ressourcesMiniSurVillageSourceFx.setText(String.valueOf(bot.ressourcesMiniSurVillageSourceFx)); 
 		pourcentageSiloMiniPourAutoriserAAiderFx.setText(String.valueOf(bot.pourcentageSiloMiniPourAutoriserAAider)); 
@@ -250,7 +254,11 @@ public class FxOngletParametresController {
     	bot.champMinFx = Integer.parseInt(champMinFx.getText()) ; 
     }
     
-    
+    @FXML
+    private void champMinFxVillageCandidat(ActionEvent event) {
+    	bot.champMinFxVillageCandidat = Integer.parseInt(champMinFxVillageCandidat.getText()) ; 
+    }
+     
     
 
     
