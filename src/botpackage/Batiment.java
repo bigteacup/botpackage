@@ -21,6 +21,46 @@ public boolean needCapitale = false;
 public boolean needArtefact = false;
 public int race = 0; //01234 race romains gaulois germains huns egyptien 
 
+
+//cout niveau suivant
+
+int boisPourNiveauSuivant = 0;
+int argilePourNiveauSuivant = 0;
+int ferPourNiveauSuivant = 0;
+int cerealePourNiveauSuivant = 0;
+
+
+
+public int getBoisPourNiveauSuivant() {
+	return boisPourNiveauSuivant;
+}
+public void setBoisPourNiveauSuivant(int boisPourNiveauSuivant) {
+	this.boisPourNiveauSuivant = boisPourNiveauSuivant;
+}
+public int getArgilePourNiveauSuivant() {
+	return argilePourNiveauSuivant;
+}
+public void setArgilePourNiveauSuivant(int argilePourNiveauSuivant) {
+	this.argilePourNiveauSuivant = argilePourNiveauSuivant;
+}
+public int getFerPourNiveauSuivant() {
+	return ferPourNiveauSuivant;
+}
+public void setFerPourNiveauSuivant(int ferPourNiveauSuivant) {
+	this.ferPourNiveauSuivant = ferPourNiveauSuivant;
+}
+public int getCerealePourNiveauSuivant() {
+	return cerealePourNiveauSuivant;
+}
+public void setCerealePourNiveauSuivant(int cerealePourNiveauSuivant) {
+	this.cerealePourNiveauSuivant = cerealePourNiveauSuivant;
+}
+
+
+
+
+
+
 public boolean getNeedCapitale() {
 	return needCapitale;
 }
@@ -39,6 +79,10 @@ public int getTypeChampsOuBatiment() {
 public void setTypeChampsOuBatiment(int typeChampsOuBatiment) {
 	this.typeChampsOuBatiment = typeChampsOuBatiment;
 }
+
+
+
+
 
 
 public ArrayList<Batiment> getPrerequisBatiment() {
@@ -74,6 +118,10 @@ public void setNomBatiment(String nomBatiment) {
 
 
 
+
+
+
+
 public int getLevelBatiment() {
 	return levelBatiment;
 }
@@ -98,12 +146,18 @@ public void setAlt(String alt) {
 
 
 
+
+
+
+
 public String getLienBatiment() {
 	return lienBatiment;
 }
 public void setLienBatiment(String lienBatiment) {
 	this.lienBatiment = lienBatiment;
 }
+
+
 
 
 
@@ -118,6 +172,12 @@ public Batiment (String nomBatiment){
 	this.setTypeChampsOuBatiment(determinerType(nomBatiment));
 	
 }
+
+
+
+
+
+
 
 public Batiment(String nomBatiment, int levelBatiment, String slotBatiment, String alt) {
 	this.nomBatiment = nomBatiment;
