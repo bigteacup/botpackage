@@ -1606,7 +1606,7 @@ public class Village {
 				 levelBatiment = 0;
 				slotBatiment = String.valueOf(g+1);
 				slotTemp++; 
-			}else {
+			}
 
 			// pour chaque batiment du village on regarde si le batiment y est.
 			// Sil y est on ne fait rien et on passe au suivant
@@ -1648,7 +1648,7 @@ public class Village {
 				village.setBatiments(listeDesBatimentsVillage);
 
 			}
-			}
+			
 			g++;
 			trouver = false;
 			builder.moveByOffset(5000, 0);
@@ -2584,6 +2584,7 @@ public class Village {
 
 							//on regarde dans le template si le batiment est present  et on le lance si cest le cas.
 							for (Batiment batimentDuTemplate : village.getTemplateDuVillage()) {
+								
 						//	for (Batiment batimentDuVillage : village.getBatiments()) {
 								if (batimentDuVillage.getNomBatiment().equals(batimentDuTemplate.getNomBatiment())) {
 									trouver = true;
@@ -2599,15 +2600,17 @@ public class Village {
 												t.ecrireDansConsole("[construireBatiment] "+ batimentDuVillage.getNomBatiment() +" Ressources ok", true);
 												ressourceOk = true;
 											}
-										if(ressourceOk == true) {
+											
+										if(ressourceOk == true && village.getTypeBatimentsEnConstruction() < 2) {
 											// on lance la construction
 											if(construireBatiments(batimentDuTemplate.getNomBatiment(), batimentDuTemplate.getLevelBatiment(), t, besoinMiseAJour, Integer.parseInt(batimentDuVillage.getSlotBatiment()))) {
 												besoinMiseAJour = true;
 												if(besoinMiseAJour== true) {
 													updateRessources(t);
-													voirListeDeConstruction(t);
+												//	voirListeDeConstruction(t);
 												}
 											}
+											voirListeDeConstruction(t);
 										}else {
 											t.ecrireDansConsole("[construireBatiment] "+ batimentDuVillage.getNomBatiment() +" Slot : " +batimentDuVillage.getSlotBatiment() + " Ressources insuffisantes", true);
 										}
