@@ -2065,31 +2065,50 @@ public class Village {
 							
 							
 	
-						while (g < 41) {
+						while (g < 41) {//*[@id="village_map"]/div[40]/div
 							Actions builder = new Actions(t.getCompte().getDriver());
-							try {
-								//builder.moveToElement(listeWebelementChampsBis.get(g+1));
+							
+							//methode 1
+							try {//builder.moveToElement(listeWebelementChampsBis.get(g+1));
 								builder.moveToElement(listeDesBatiments.get(g)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
-
 							}catch (Exception e1){
 								// builder.moveToElement(listeDesBatiments.get(g-1));
 								 }
-
 							builder.perform();
-							
 							t.randomsleep.tcourt();
 							List<WebElement> donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); // /div[1]
 							String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
 							 nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
-						
 							 if(nomBatiment.toLowerCase().contains(batiment.toLowerCase())) {
-						WebElement boutton = listeDesBatiments.get(g);
-						boutton.click();
-						trouver = true;
-						t.randomsleep.court();
-						
-						break;
-							 }
+									WebElement boutton = listeDesBatiments.get(g);
+									boutton.click();
+									trouver = true;
+									t.randomsleep.court();
+									break;
+										 }
+							 
+							 try { 
+							 //methode 2
+							 //en cas de mur ou de batiment de soucis de clickage
+							 if(nomBatiment.isEmpty() || nomBatiment == null) {
+							     WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+1) +"]/div"));
+								 builder.moveToElement(wb);
+								 builder.perform();
+									donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); 
+									donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
+									nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;
+									 if(nomBatiment.toLowerCase().contains(batiment.toLowerCase())) {
+											//WebElement boutton = listeDesBatiments.get(g);
+											 builder.click(wb);
+											 builder.perform();
+											trouver = true;
+											t.randomsleep.court();
+											break;
+												 }
+						}
+							 }catch (Exception e1){} 
+	
+							 
 							 g++;
 						}
 							
