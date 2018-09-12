@@ -1473,19 +1473,23 @@ public class Village {
 		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
 		List<Batiment> listeDesBatimentsVillage = new ArrayList<Batiment>();
 		int g = 18;
-		for (WebElement webBatiment : listeDesBatiments) {
-			// on intialise les variables
-			String nomBatiment = null;
-			int levelBatiment = 0;
-			String slotBatiment = null;
-			int boisPourNiveauSuivant = 0;
-			int argilePourNiveauSuivant = 0;
-			int ferPourNiveauSuivant = 0;
-			int cerealePourNiveauSuivant = 0;
-			boolean trouver = false;	
+	//	for (WebElement webBatiment : listeDesBatiments) {
+
+				
 			
 			
 			while (g < 41) {
+				// on intialise les variables
+				String nomBatiment = null;
+				int levelBatiment = 0;
+				String slotBatiment = null;
+				int boisPourNiveauSuivant = 0;
+				int argilePourNiveauSuivant = 0;
+				int ferPourNiveauSuivant = 0;
+				int cerealePourNiveauSuivant = 0;
+				boolean trouver = false;
+				
+				
 			Actions builder = new Actions(t.getCompte().getDriver());
 			try {
 				//builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
@@ -1522,9 +1526,10 @@ public class Village {
 			}catch(Exception e) {
 				//seconde tentative
 				//Actions builder2 = new Actions(t.getCompte().getDriver()); //*[@id="village_map"]/div[20]
+				
 				try {
 					//builder.moveToElement(listeWebelementChampsBis.get(g+1)); //*[@id=\"village_map\"]/div["+ (g+18) +"]/div
-					WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g-17) +"]/div"));
+					WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+1) +"]/div"));
 					builder.moveToElement(wb); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
 				}catch (Exception e1){}
 
@@ -1540,9 +1545,9 @@ public class Village {
 					ferPourNiveauSuivant = 0;
 					cerealePourNiveauSuivant = 0;
 					String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
-				 nomBatiment = listeDesBatiments.get(g-18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
-				 levelBatiment = Integer.parseInt(listeDesBatiments.get(g-18).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
-				slotBatiment = String.valueOf(g-17);
+				 nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
+				 levelBatiment = Integer.parseInt(listeDesBatiments.get(g+1).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
+				slotBatiment = String.valueOf(g+1);
 				try { // on chope les cout du niveau suivant si possible
 					boisPourNiveauSuivant = Integer.parseInt(donneeComplete.split("/n")[1].split("/n")[0]);
 					argilePourNiveauSuivant = Integer.parseInt(donneeComplete.split("/n")[1].split("/n")[1].split("/n")[0]);
@@ -1650,10 +1655,16 @@ public class Village {
 			}
 			
 			g++;
-			trouver = false;
+		//	trouver = false;
 			builder.moveByOffset(5000, 0);
 			builder.perform();
-		}
+		//	t.randomsleep.tcourt(); 
+		}//fin while
+			
+			
+			
+			
+			
 		village.setSlotBatimentsLibres( slotTemp);
 		if(village.getBatiments().isEmpty()) {
 			village.setListeBatimentsVideDejaVerifiee(true);
@@ -1662,7 +1673,7 @@ public class Village {
 		}
 		
 		
-		}
+	//	}
 		
 		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
 		t.ecrireDansConsole("Fin chargerBatiment2", true);
@@ -2035,7 +2046,7 @@ public class Village {
 						List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div")); 
 						// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
 						
-						int g =18 -1;
+						int g = 18 -1;
 						if (slotBatimentATrouver > 0) {
 							g = slotBatimentATrouver -1 ;
 						}
@@ -2061,7 +2072,7 @@ public class Village {
 								builder.moveToElement(listeDesBatiments.get(g)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
 
 							}catch (Exception e1){
-								 builder.moveToElement(listeDesBatiments.get(g-1));
+								// builder.moveToElement(listeDesBatiments.get(g-1));
 								 }
 
 							builder.perform();
