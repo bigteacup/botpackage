@@ -907,6 +907,9 @@ public class Village {
 		try {
 			village = t.villageEnCours();
 			maxDepot = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarWarehouse\"]")).getText().replaceAll("[\\u202D\\u202C.]", ""); // code correspondant au whitespace causé par left to right \\u202D \\u202C
+			maxDepot = maxDepot.replace(" ", "");
+			maxDepot = maxDepot.replaceAll("\\W", "");
+			maxDepot = maxDepot.trim();
 			maxStockDepot = Integer.parseInt(maxDepot);
 		}catch(Exception e) {
 			village = t.villageEnCours();
@@ -921,6 +924,9 @@ public class Village {
 		try {
 			village = t.villageEnCours();
 			maxSilo = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"stockBarGranary\"]")).getText().replaceAll("[\\u202D\\u202C.]", "");
+			maxSilo = maxSilo.replace(" ", "");
+			maxSilo = maxSilo.replaceAll("\\W", "");
+			maxSilo = maxSilo.trim();
 			maxStockSilo = Integer.parseInt(maxSilo);
 		}catch (Exception e) {
 			village = t.villageEnCours();
@@ -1488,20 +1494,32 @@ public class Village {
 				int ferPourNiveauSuivant = 0;
 				int cerealePourNiveauSuivant = 0;
 				boolean trouver = false;
+				List<WebElement> donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]")); // /div[1] //*[@id="mainLayout"]/body/div[3]/div/div/div[10]/div[2]/div
+				String donneeComplete =  donnees.get(0).getText().toString();
+				Actions builder = new Actions(t.getCompte().getDriver());
 				
-				
-			Actions builder = new Actions(t.getCompte().getDriver());
+				if(listeDesBatiments.get(g).getAttribute("class").contains("g0")) {
+					 nomBatiment = "Site de construction";
+					 levelBatiment = 0;
+					 slotBatiment = String.valueOf(g+1);
+					 slotTemp++; 
+					
+				}
+				else {
+			
+			
 			try {
 				//builder.moveToElement(listeDesBatiments.get(g+18)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
-				WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+1) +"]/div"));
+				WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div[" + (g+1) + "]"));
 				builder.moveToElement(wb); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
-				}catch (Exception e1){}
+				}catch (Exception e1){
+					
+				}
 
 			builder.perform();
 			
 			t.randomsleep.tcourt(); 
-			List<WebElement> donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); // /div[1]
-		
+
 				//Passage 1
 			try {
 				//reset de secu
@@ -1509,109 +1527,43 @@ public class Village {
 				argilePourNiveauSuivant = 0;
 				ferPourNiveauSuivant = 0;
 				cerealePourNiveauSuivant = 0;
-				String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
-			 nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
-			 levelBatiment = Integer.parseInt(listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
-			slotBatiment = String.valueOf(g+1);
+			
+				try {
+					nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
+				 levelBatiment = Integer.parseInt(listeDesBatiments.get(g+1).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
+				 slotBatiment = String.valueOf(g+1);
+				}catch(Exception e1) {
+		
+					}
+				
+				
+			
 			try { // on chope les cout du niveau suivant si possible
-				boisPourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[1].trim());
-				argilePourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[2].trim());
-				ferPourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[3].trim());
-				cerealePourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[4].trim());
-			}catch(Exception e3) {}
+				boisPourNiveauSuivant = Integer.parseInt(donneeComplete.split("\n")[0].trim());
+				argilePourNiveauSuivant = Integer.parseInt(donneeComplete.split("\n")[1].trim());
+				ferPourNiveauSuivant = Integer.parseInt(donneeComplete.split("\n")[2].trim());
+				cerealePourNiveauSuivant = Integer.parseInt(donneeComplete.split("\n")[3].trim());
+			}catch(Exception e2) {
+				
+			}
 			
-			
+			//	boisPourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[1].trim());
+			//	argilePourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[2].trim());
+			//	ferPourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[3].trim());
+			//	cerealePourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[4].trim());
 			
 			
 			}catch(Exception e) {
 				//seconde tentative
-				//Actions builder2 = new Actions(t.getCompte().getDriver()); //*[@id="village_map"]/div[20]
-				
-				try {
-					//builder.moveToElement(listeWebelementChampsBis.get(g+1)); //*[@id=\"village_map\"]/div["+ (g+18) +"]/div
-					WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+1) +"]/div"));
-					builder.moveToElement(wb); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
-				}catch (Exception e1){}
-
-				builder.perform();
-				
-				t.randomsleep.tcourt(); 
-				
-				//Passage 2 en cas d'echec
-				try {
-					//reset de secu
-					boisPourNiveauSuivant = 0;
-					argilePourNiveauSuivant = 0;
-					ferPourNiveauSuivant = 0;
-					cerealePourNiveauSuivant = 0;
-					String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
-				 nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
-				 levelBatiment = Integer.parseInt(listeDesBatiments.get(g+1).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[1].toString().trim());
-				slotBatiment = String.valueOf(g+1);
-				try { // on chope les cout du niveau suivant si possible
-					boisPourNiveauSuivant = Integer.parseInt(donneeComplete.split("/n")[1].split("/n")[0]);
-					argilePourNiveauSuivant = Integer.parseInt(donneeComplete.split("/n")[1].split("/n")[1].split("/n")[0]);
-					ferPourNiveauSuivant = Integer.parseInt(donneeComplete.split("/n")[1].split("/n")[1].split("/n")[1].split("/n")[0]);
-					cerealePourNiveauSuivant = Integer.parseInt(donneeComplete.split("/n")[1].split("/n")[1].split("/n")[1].split("/n")[1]);	
-				}catch(Exception e3) {}
-				
-				}catch(Exception e2) {
-					
-
-				}
-				
-			}
-			
-			
-
-		/*	
-			// on les rempli
-			try {
-				nomBatiment = webBatiment.getAttribute("alt").split(" <span")[0].replace("&#39;", "'"); //&#39;
-
-				levelBatiment = Integer.parseInt(webBatiment.getAttribute("alt").split("<span class=\"level\">Niveau ")[1].split("</span>")[0]);
-				// reperer conctructions en cours
-				if (webBatiment.getAttribute("alt").contains("Amélioration en cours")) {
-					int enCoursVersLevel = Integer.parseInt(webBatiment.getAttribute("alt").split("Amélioration en cours vers le niveau ")[1].split("</span>")[0]);
-					levelBatiment = enCoursVersLevel;
-
-				}
-				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
-				// si un slot est vide : on le nomme
-			} catch (Exception e) {
-
-				slotTemp++; 
-				nomBatiment = webBatiment.getAttribute("alt");
-				levelBatiment = 0;
-				slotBatiment = webBatiment.getAttribute("href").split("id=")[1];
-			}
-		*/	
-			
-			
-			// charger les slots         //////////////////////////////////////////////////////////////////////////////////////////////
-			//TODO corriger le cliquage au centre de la shape principale qui fait cliquer sur le mur ou un autre batiment 
-			if(nomBatiment.isEmpty() || nomBatiment.length()==0 || nomBatiment.toLowerCase().trim().contains("site")) {
-				
-				//Actions builder3 = new Actions(t.getCompte().getDriver()); //*[@id="village_map"]/div[20]
-				try {
-					//builder.moveToElement(listeWebelementChampsBis.get(g+1));
-					WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+1) +"]//*[name()='g']//*[name()='g']"));
-					builder.moveToElement(wb); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
-
-				}catch (Exception e1){
-					
-					 }
-
-				builder.perform();
-				
-				t.randomsleep.tcourt(); 
-				
 		
-				 nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")).getText().toString().trim() ;//   /div[1]
-				 levelBatiment = 0;
-				slotBatiment = String.valueOf(g+1);
-				slotTemp++; 
+		
+				
 			}
+			
+			
+
+			}
+
 
 			// pour chaque batiment du village on regarde si le batiment y est.
 			// Sil y est on ne fait rien et on passe au suivant
@@ -1794,7 +1746,8 @@ public class Village {
 								builder.moveToElement(listeWebelementChampsBis.get(g)); //g+1  	WebElement cible =  t.getCompte().getDriver().findElement(By.xpath("//area[@*[contains(., \"id="+ (g + 1) +"\")]]"));
 
 							}catch (Exception e1){
-								builder.moveToElement(listeWebelementChamps.get(g+1));}
+								builder.moveToElement(listeWebelementChamps.get(g+1));
+								}
 
 							builder.perform();
 
@@ -1803,12 +1756,20 @@ public class Village {
 
 							// choper le tableau des ressources necessaires pour
 							// le champs en cours
-							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")); ////*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span
-
+							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")); ////*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span   //*[@id="mainLayout"]/body/div[3]/div/div/div[10]/div[2]/div
+						
+								if (ressourcesNecessaires.size() == 0) {   // if (ressourcesNecessaires.size()==0)
+									ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]/div/div"));
+								}
+							
+							
 							// correction bug de MouseHover REVISION 2017 deconne, à surveiller
+							
 							if (ressourcesNecessaires.get(0).getText().isEmpty() || ressourcesNecessaires.size()==0) {   // if (ressourcesNecessaires.size()==0)
 								retrytoken = true;
 							}
+						
+							
 							if (retrytoken == true) {
 								t.ecrireDansConsole("Retry hover", true);
 
@@ -1818,7 +1779,7 @@ public class Village {
 
 								t.randomsleep.court();
 
-								//ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@class='showCosts']/span"));
+								
 
 								retrytoken = false;
 							}
@@ -2076,9 +2037,9 @@ public class Village {
 								 }
 							builder.perform();
 							t.randomsleep.tcourt();
-							List<WebElement> donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); // /div[1]
+							List<WebElement> donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]")); // /div[1] //*[@id="mainLayout"]/body/div[3]/div/div/div[10]
 							String donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
-							 nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;//   /div[1]
+							 nomBatiment = donneeComplete.split("Niveau")[0].toString().trim() ;//   /div[1]
 							 if(nomBatiment.toLowerCase().contains(batiment.toLowerCase())) {
 									WebElement boutton = listeDesBatiments.get(g);
 									boutton.click();
@@ -2094,9 +2055,10 @@ public class Village {
 							     WebElement wb = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+ (g+1) +"]/div"));
 								 builder.moveToElement(wb);
 								 builder.perform();
-									donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]")); 
+								 t.randomsleep.court();
+									donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]")); 
 									donneeComplete =  donnees.get(0).getText().toString();//   /div[1]
-									nomBatiment = listeDesBatiments.get(g).findElement(By.xpath("//*[@id=\"mainLayout\"]/body/div[2]/div/div/div[10]/div[1]")).getText().split("Niveau")[0].toString().trim() ;
+									nomBatiment = donneeComplete.split("Niveau")[0].toString().trim() ;
 									 if(nomBatiment.toLowerCase().contains(batiment.toLowerCase())) {
 											//WebElement boutton = listeDesBatiments.get(g);
 											 builder.click(wb);

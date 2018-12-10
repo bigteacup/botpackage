@@ -48,5 +48,7 @@ Temporary Items
 .class
 
 *.class
+bin/botpackage
 bin/botpackage/*.class
-
+bin
+*.class

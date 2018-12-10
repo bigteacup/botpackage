@@ -280,7 +280,7 @@ public String mur(Travian t) {
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandSilo, 20 , false, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(grandDepot, 20, false, true));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(forge, 20, batForge));
-		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 20, batPlaceDeTournoi));
+		// listeDeBatimentsDuTemplateParDefault4.add(new Batiment(place_tournoi, 20, batPlaceDeTournoi));
 		// listeDeBatimentsDuTemplateParDefault4.add(new Batiment(cdt, 1));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(ecurie, 20, batEcurie));
 		 listeDeBatimentsDuTemplateParDefault4.add(new Batiment(comptoir, 14, batComptoir));
