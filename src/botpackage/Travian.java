@@ -311,8 +311,7 @@ public class Travian extends Thread {
 				}}
 			///////////////////////////////////////////////////
 
-
-
+				Village.nettoyerListeDeBatiments(t);
 
 				if (allume == false){break;}
 				randomsleep.court();
@@ -824,7 +823,7 @@ public class Travian extends Thread {
 					randomsleep.classic();
 				}
 				
-				
+
 				if (allume == false){break;}
 				
 				
@@ -1208,7 +1207,7 @@ public class Travian extends Thread {
 						if (h2 <= aventureTempsRestant) {
 							compte.getDriver().findElement(By.xpath("//*[@class=\"gotoAdventure arrow\"]")).click();
 							randomsleep.court();
-							compte.getDriver().findElement(By.xpath("//*[@class=\"green \"]")).click();
+							compte.getDriver().findElement(By.xpath("//*[@class=\"green \"][contains(., 'aventure')]")).click();
 							ecrireDansConsole("[Aventure] Quete lance : dead line dans moins de " + h + " heures", true );
 							randomsleep.court();
 						}
@@ -1868,9 +1867,10 @@ public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
 		for (Village village : listeDeVillages){
 			resteAConstruire = 0;
 			// village.setBesoinDeConstruction(true);// premiere connection pas de liste de batiment chargee... donc on autorise
+			for (Batiment tempBat : village.getTemplateDuVillage()){
 			for (Batiment batiment : village.getBatiments()){
 
-				for (Batiment tempBat : village.getTemplateDuVillage()){
+				
 					if (batiment.getNomBatiment().equals(tempBat.getNomBatiment())){
 						if(batiment.getLevelBatiment() < tempBat.getLevelBatiment()){
 							resteAConstruire++;
@@ -1878,6 +1878,9 @@ public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
 					}
 				}
 
+			}
+			if(village.getTemplateDuVillage().size() > village.getBatiments().size()) {
+				resteAConstruire++;
 			}
 			
 		//	if(village.getTemplateDuVillage().toString().equals("listeDeBatimentsDuTeamplate4") ){}

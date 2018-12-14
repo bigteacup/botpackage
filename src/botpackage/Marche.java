@@ -1353,7 +1353,7 @@ public class Marche {
 		for(WebElement arrivage : listeMarchandsArrivants) {
 			int dureeRestanteAvantArrivage  = Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[1]/td/div[1]/span")).getText().replaceAll(":", ""));
 			if(!arrivage.getText().contains(sensString)  && dureeRestanteAvantArrivage < dureeRestanteAvantArriveeLimite) { //TODO trouver un meilleur systeme 4500 = 45 minutes 0 seconde 
-				arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split(" ")[typeRessourceALire].trim()); 
+				arrivageInt = arrivageInt + Integer.parseInt(arrivage.findElement(By.xpath("./tbody/tr[2]/td/span[1]")).getText().split("\\n")[typeRessourceALire].trim()); 
 			}
 
 			//./tbody/tr[2]/td/span/text()[5]

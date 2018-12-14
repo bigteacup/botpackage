@@ -3,6 +3,7 @@ package botpackage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -482,7 +483,21 @@ public class Village {
 
 	//fin regime
 
+    public static String xpathVillage1 = "" ;
+    public static String xpathVillage2 = "" ;
+    public static String xpathVillage3 = "" ;
+    public static String xpathVillage4 = "" ;
+    public static String xpathVillage5 = "" ;
+    public static String xpathVillage6 = "" ;
+    public static String xpathVillage7 = "" ;
+    public static String xpathVillage8 = "" ;
+    public static String xpathVillage9 = "" ;
+    public static String xpathVillage10 = "" ;
+    public static String xpathVillage11 = "" ;
+    public static String xpathVillage12 = "" ;
+    public static String xpathVillage13 = "" ;
 
+    
 
 	public Date marchéLastDate;
 	public int marchédureeDuDernierAchat=0;
@@ -1610,7 +1625,7 @@ public class Village {
 		//	trouver = false;
 			builder.moveByOffset(5000, 0);
 			builder.perform();
-		//	t.randomsleep.tcourt(); 
+			t.randomsleep.tcourt(); 
 		}//fin while
 			
 			
@@ -1626,7 +1641,7 @@ public class Village {
 		
 		
 	//	}
-		
+		Village.nettoyerListeDeBatiments(t);
 		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
 		t.ecrireDansConsole("Fin chargerBatiment2", true);
 	}
@@ -2937,6 +2952,23 @@ public class Village {
 
 	public void setListeOrdresMarcheDeLaRotation(ArrayList<Ordre> listeOrdresMarcheDeLaRotation) {
 		this.listeOrdresMarcheDeLaRotation = listeOrdresMarcheDeLaRotation;
+	}
+
+	public static void nettoyerListeDeBatiments(Travian t) {
+		//netoyage de liste de batiments.
+		for(Village village : t.getListeDeVillages()) {
+		Iterator<Batiment> liste = village.getBatiments().iterator();
+				while (liste.hasNext()) {
+				Batiment bat =	liste.next();	
+					if(bat.getNomBatiment().length() == 0) {
+						liste.remove();
+					}
+			
+			
+		
+		}
+		}
+		
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
