@@ -1593,6 +1593,7 @@ public class Village {
 						batiment.setFerPourNiveauSuivant(ferPourNiveauSuivant);
 						batiment.setCerealePourNiveauSuivant(cerealePourNiveauSuivant);
 						batiment.setLevelBatiment(levelBatiment);
+						listeDesBatimentsVillage.add(batiment);
 						break;
 
 					}
@@ -1602,7 +1603,7 @@ public class Village {
 				trouver = false;
 			}
 			// si le batiment ny est pas on le met dans la liste temporaire
-			if (trouver == false) {
+			if (trouver == false && nomBatiment.length() > 0) {
 				Batiment newBatiment = new Batiment();
 				newBatiment.setNomBatiment(nomBatiment);
 				newBatiment.setSlotBatiment(slotBatiment);
@@ -1616,11 +1617,12 @@ public class Village {
 				
 				listeDesBatimentsVillage.add(newBatiment);
 
-				// on envois la liste terminee au village concerne
-				village.setBatiments(listeDesBatimentsVillage);
 
 			}
 			
+			// on envois la liste terminee au village concerne
+			village.setBatiments(listeDesBatimentsVillage);
+
 			g++;
 		//	trouver = false;
 			builder.moveByOffset(5000, 0);
@@ -1641,7 +1643,11 @@ public class Village {
 		
 		
 	//	}
-		Village.nettoyerListeDeBatiments(t);
+		village.nettoyerListeDeBatiments(t);
+		for(Batiment bat : village.getBatiments()) {
+			t.ecrireDansConsole("-> " + bat.getNomBatiment() , true);
+		}
+		
 		t.ecrireDansConsole("Slot libre : " + slotTemp, true);
 		t.ecrireDansConsole("Fin chargerBatiment2", true);
 	}
@@ -2954,7 +2960,7 @@ public class Village {
 		this.listeOrdresMarcheDeLaRotation = listeOrdresMarcheDeLaRotation;
 	}
 
-	public static void nettoyerListeDeBatiments(Travian t) {
+	public void nettoyerListeDeBatiments(Travian t) {
 		//netoyage de liste de batiments.
 		for(Village village : t.getListeDeVillages()) {
 		Iterator<Batiment> liste = village.getBatiments().iterator();

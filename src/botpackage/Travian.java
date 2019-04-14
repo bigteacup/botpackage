@@ -311,7 +311,7 @@ public class Travian extends Thread {
 				}}
 			///////////////////////////////////////////////////
 
-				Village.nettoyerListeDeBatiments(t);
+			
 
 				if (allume == false){break;}
 				randomsleep.court();
@@ -410,8 +410,7 @@ public class Travian extends Thread {
 				Date lastDate = randomsleep.date(true);
 				long milliEcartDate = lastDate.getTime() - memDate.getTime();
 				
-				t.ecrireDansConsole("Durée de la session :" + milliEcartDate / 1000 / 60 + "minutes "
-						+ (milliEcartDate / 1000 - (milliEcartDate / 1000 / 60) * 60)
+				t.ecrireDansConsole("Durée de la session :" + milliEcartDate / 1000 / 60 + "minutes "+ (milliEcartDate / 1000 - (milliEcartDate / 1000 / 60) * 60)
 						+ "sec. et le chiffre de base en milliseconde " + milliEcartDate, true);
 				
 				fxFenetreController.console.ligne.getUndoManager().forgetHistory(); // on efface l'historique à la fin de la rotation
