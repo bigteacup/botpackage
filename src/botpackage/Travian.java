@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 
@@ -35,6 +35,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.io.FileHandler;
 
 
 public class Travian extends Thread {
@@ -1666,7 +1667,10 @@ public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
 
 	private void detectionTribut(){
 		try {
-			String tribut = compte.getDriver().findElement(By.xpath("//*[@id=\"sidebarBoxHero\"]/div[2]/div[1]/div/a[1]/img")).getAttribute("alt");
+			String tribut = compte.getDriver().findElement(By.xpath("//*[@id=\"sidebarBoxHero\"]/div[2]/div[1]/div[1]/a[1]/i")).getAttribute("class");
+			if (tribut.contains("tribe3_medium")){
+				tribut = "gaulois";
+			}
 			compte.setTribut(tribut);
 			t.ecrireDansConsole("Tribut : " + tribut, true);
 		}catch (Exception e){t.ecrireDansConsole("echec detection tribut", true);}
@@ -2179,7 +2183,7 @@ public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
 		////////////
 		try {
 			File scrFile = ((TakesScreenshot)compte.getDriver()).getScreenshotAs(OutputType.FILE); 
-			FileUtils.copyFile(scrFile, new File(userPath + System.getProperty("file.separator") + nom +"-"+numeroDePhoto+".jpg"));
+			FileHandler.copy(scrFile, new File(userPath + System.getProperty("file.separator") + nom +"-"+numeroDePhoto+".jpg"));
 		}catch (Exception e) {
 			ecrireDansConsole("Photo ratee", true);
 		}

@@ -2807,8 +2807,11 @@ public class Village {
 				}
 				try {
 				// on clique sur le slot libre 
-				WebElement leBat = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+  leSlot.getSlotBatiment() +"]//*[name()='g']//*[name()='g']")); //*[@id=\"village_map\"]/div["+ (g+19) +"]//*[name()='g']//*[name()='g']                      //*[@href=\"build.php?id=" + leSlot.getSlotBatiment() + "\"]
-				leBat.click();
+				WebElement leBat = t.getCompte().getDriver().findElement(By.xpath("//*[@id=\"village_map\"]/div["+  leSlot.getSlotBatiment() +"]//*[name()='g']")); //*[@id=\"village_map\"]/div["+ (g+19) +"]//*[name()='g']//*[name()='g']                      //*[@href=\"build.php?id=" + leSlot.getSlotBatiment() + "\"]
+				Actions builder = new Actions(t.getCompte().getDriver());
+				builder.click(leBat).build().perform();
+			//	leBat.click();
+				
 				t.randomsleep.court();
 					}catch(Exception e) {
 						try {
@@ -2863,7 +2866,7 @@ public class Village {
 											if (titre.toLowerCase().contains(nomBat.toLowerCase())) {
 												t.ecrireDansConsole(nomBat+" ////////// tentative pour contruction", true); 
 												try {
-													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire') and contains(., \""+ titre +"\")]//div[@class='button-content']")); // //*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ titre +"\")]//div[@class='button-content']"
+													WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire') and contains(., \""+ titre +"\")]//div[@class='contractLink']//button")); // //div[@class='button-content'] //*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ titre +"\")]//div[@class='button-content']"
 
 													if (boutton.getText().contains("Construire")) {
 														t.randomsleep.court();
@@ -2876,7 +2879,7 @@ public class Village {
 												}catch (Exception e) {
 													t.ecrireDansConsole("Echec par Titre", true);
 													try {
-														WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire') and contains(., \""+ nomBat +"\")]//div[@class='button-content']"));// //*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ nomBat +"\")]//div[@class='button-content']"
+														WebElement boutton = webBat.findElement(By.xpath("//*[@class='buildingWrapper' and contains(., 'Construire') and contains(., \""+ nomBat +"\")]//div[@class='contractLink']"));// //*[@class='buildingWrapper' and contains(., 'Construire le bâtiment.') and contains(., \""+ nomBat +"\")]//div[@class='button-content']"
 														if (boutton.getText().contains("Construire")) {
 															t.randomsleep.court();
 															boutton.click();
