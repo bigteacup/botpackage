@@ -68,7 +68,7 @@ public class GestionnaireDeComptes {
       
       
 		try {
-			url = new URL("https://chromedriver.storage.googleapis.com/74.0.3729.6/" + versionOs );
+			url = new URL("https://chromedriver.storage.googleapis.com/78.0.3904.70/" + versionOs );
 	         String fileName = System.getProperty("user.home") + System.getProperty("file.separator") + "botpackage"+ System.getProperty("file.separator") + versionOs;
 	         try {
 	        	if(!chrome.exists()) { 

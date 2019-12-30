@@ -1480,23 +1480,30 @@ public class Village {
 	
 	public void chargerBatiments2(Travian t) {
 		int slotTemp = 0;
+		List<WebElement> listeDesBatiments = null;
+		List<Batiment> listeDesBatimentsVillage = null;
+		Village village = null;
+		int g = 18;
+		
 		t.ecrireDansConsole("Debut chargerBatiment2", true);
-
+try {
 		if (!t.getCompte().getDriver().getCurrentUrl().contains("dorf2.php")) {
 			t.randomsleep.court();
 			t.getCompte().getDriver().get(t.getCompte().getServer() + "dorf2.php");
 			t.randomsleep.court();
 		}
 
-		Village village = t.villageEnCours();
+		village = t.villageEnCours();
 		//	village.setSlotBatimentsLibres(22);// remise à zero
-		List<WebElement> listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));  //*[@id="village_map"]/div //*[@id="village_map"]/div[23]
+		listeDesBatiments = t.getCompte().getDriver().findElements(By.xpath("//*[@id=\"village_map\"]/div"));  //*[@id="village_map"]/div //*[@id="village_map"]/div[23]
 		// on cree une liste temporaire pour l envoyer au village une fois la liste complete.
-		List<Batiment> listeDesBatimentsVillage = new ArrayList<Batiment>();
-		int g = 18;
+		listeDesBatimentsVillage = new ArrayList<Batiment>();
+		
 	//	for (WebElement webBatiment : listeDesBatiments) {
 
-				
+}catch(Exception e) {
+	t.ecrireDansConsole("Echec chargerBatiment2 partie 1", true);
+	}				
 			
 			
 			while (g < 41) {
@@ -1509,8 +1516,19 @@ public class Village {
 				int ferPourNiveauSuivant = 0;
 				int cerealePourNiveauSuivant = 0;
 				boolean trouver = false;
-				List<WebElement> donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]")); // /div[1] //*[@id="mainLayout"]/body/div[3]/div/div/div[10]/div[2]/div
-				String donneeComplete =  donnees.get(0).getText().toString();
+				List<WebElement> donnees = null;
+				String donneeComplete = null;
+				
+				try {
+				donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]")); // /div[1] //*[@id="mainLayout"]/body/div[3]/div/div/div[10]/div[2]/div
+				donneeComplete =  donnees.get(0).getText().toString();
+				}catch(Exception e) {
+					donnees = listeDesBatiments.get(g).findElements(By.xpath("//*[@id=\"village_map\"]/div")); //*[@id="village_map"]/div; //*[@id="village_map"]/div
+					donneeComplete =  donnees.get(0).getText().toString();
+					t.ecrireDansConsole("Echec chargerBatiment2 While partie 1 g = " + g , true);
+					}	
+				
+				
 				Actions builder = new Actions(t.getCompte().getDriver());
 				
 				if(listeDesBatiments.get(g).getAttribute("class").contains("g0")) {
@@ -1559,7 +1577,7 @@ public class Village {
 				ferPourNiveauSuivant = Integer.parseInt(donneeComplete.split("\n")[2].trim());
 				cerealePourNiveauSuivant = Integer.parseInt(donneeComplete.split("\n")[3].trim());
 			}catch(Exception e2) {
-				
+				t.ecrireDansConsole("Echec chargerBatiment2 ParseInt", true);	
 			}
 			
 			//	boisPourNiveauSuivant = Integer.parseInt(donneeComplete.split(":")[1].split("\n")[1].trim());
@@ -1625,7 +1643,7 @@ public class Village {
 
 			g++;
 		//	trouver = false;
-			builder.moveByOffset(5000, 0);
+			builder.moveByOffset(0, 0);
 			builder.perform();
 			t.randomsleep.tcourt(); 
 		}//fin while
@@ -1773,20 +1791,20 @@ public class Village {
 							builder.perform();
 
 
-							t.randomsleep.tcourt();
+							t.randomsleep.court();
 
 							// choper le tableau des ressources necessaires pour
 							// le champs en cours
-							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(g + 1).findElements(By.xpath("//*[@class='showCosts']/span")); ////*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span   //*[@id="mainLayout"]/body/div[3]/div/div/div[10]/div[2]/div
-						
+							List<WebElement> ressourcesNecessaires = listeWebelementChamps.get(1).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]/div/div/span")); // //*[@class='showCosts']/span    //*[@id="mainLayout"]/body/div[2]   ////*[@class='showCosts']/span   //*[@id="mainLayout"]/body/div[3]/div/div/div[10]/div[2]/div
+							//List<WebElement> ressourcesNecessaires2 = listeWebelementChamps.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]/div"));
 								if (ressourcesNecessaires.size() == 0) {   // if (ressourcesNecessaires.size()==0)
-									ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]/div/div"));
+									ressourcesNecessaires = listeWebelementChamps.get(g).findElements(By.xpath("//*[@id=\"mainLayout\"]/body/div[3]/div/div/div[10]/div[2]/div/div/span"));
 								}
 							
 							
 							// correction bug de MouseHover REVISION 2017 deconne, à surveiller
 							
-							if (ressourcesNecessaires.get(0).getText().isEmpty() || ressourcesNecessaires.size()==0) {   // if (ressourcesNecessaires.size()==0)
+							if ( ressourcesNecessaires.size()==0 || ressourcesNecessaires.get(0).getText().isEmpty()) {   // if (ressourcesNecessaires.size()==0)
 								retrytoken = true;
 							}
 						
@@ -1811,7 +1829,7 @@ public class Village {
 								argileNecessaire = Integer.parseInt(ressourcesNecessaires.get(1).getText());
 								ferNecessaire = Integer.parseInt(ressourcesNecessaires.get(2).getText());
 								cerealesNecessaire = Integer.parseInt(ressourcesNecessaires.get(3).getText());
-								t.ecrireDansConsole("parse ok", true);
+								t.ecrireDansConsole("parse ok : "+ boisNecessaire +" "+ argileNecessaire +" "+ferNecessaire +" "+ cerealesNecessaire, true);
 							}
 							// On fait la comparaison des ressources avec le
 							// stock du village en cours

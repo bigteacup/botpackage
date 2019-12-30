@@ -1569,6 +1569,8 @@ public boolean allerDansLesStatistiquesDuComptePlus(Travian t) {
 		//pour finir, fermer la fenetre de pub travian
 		fermerFenetre();
 		t.ecrireDansConsole("Conclusion pas de compte + ou bug", true);
+		limiteDeConstruction = limiteDeConstruction - 1;
+		t.ecrireDansConsole("Abaissement de la limite de construction simultanée : " + limiteDeConstruction, true);
 		}
 
 		ecrireDansConsole("MajVillagePlus fin :", true);
